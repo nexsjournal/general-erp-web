@@ -74,7 +74,7 @@ fi
 # ---------- 3. Redis ----------
 brew services list 2>/dev/null | awk '$1=="redis" && $2!="started"{exit 10}' || { log "启动 redis"; brew services start redis; }
 
-# ---------- 4. MariaDB（ERP 专用实例，端口 $DB_PORT） ----------
+# ---------- 4. MariaDB（ERP 专用实例，端口 ${DB_PORT}） ----------
 port_listen() { lsof -iTCP:"$1" -sTCP:LISTEN -n -P >/dev/null 2>&1; }
 if ! port_listen "$DB_PORT"; then
   [ -f "$MARIADB_CNF" ] || {
@@ -124,7 +124,7 @@ fi
 
 db_ok() { mariadb -h "$DB_HOST" -P "$DB_PORT" -u"$DB_ROOT_USER" -p"$DB_ROOT_PASSWORD" -e "SELECT 1" >/dev/null 2>&1; }
 if ! db_ok; then
-  log "创建数据库账号 $DB_ROOT_USER（首次，用临时实例修授权表）"
+  log "创建数据库账号 ${DB_ROOT_USER}（首次，用临时实例修授权表）"
   launchctl unload "$LAUNCH_AGENT" 2>/dev/null || true
   sleep 2
   /opt/homebrew/opt/mariadb/bin/mariadbd --defaults-file="$MARIADB_CNF" --skip-grant-tables --skip-networking &
@@ -167,6 +167,14 @@ if [ ! -e "apps/$CUSTOM_APP" ]; then
   ln -sfn ../../apps/$CUSTOM_APP "apps/$CUSTOM_APP"
 fi
 grep -qx "$CUSTOM_APP" apps.txt 2>/dev/null || echo "$CUSTOM_APP" >> apps.txt
+
+# bench 要求每个 app 目录本身是 git 仓库（App.setup_details 会 git.Repo 检查）；
+# 从 GitHub 克隆整个项目后 app 只是普通文件，这里自动补一个本地仓库（幂等）
+if [ ! -d "apps/$CUSTOM_APP/.git" ]; then
+  log "为 $CUSTOM_APP 初始化本地 git（bench 要求）"
+  ( cd "apps/$CUSTOM_APP" && git init -q && git add -A \
+    && git -c user.name="${USER:-bench}" -c user.email="bench@local" commit -q -m "${CUSTOM_APP} app (local git repo required by bench)" )
+fi
 
 # ---------- 6. 依赖（venv 被复制/换机后此步会重建） ----------
 if ! "$BENCH_DIR/env/bin/python" --version >/dev/null 2>&1; then
@@ -219,7 +227,7 @@ cat << DONE
 ============================================================
 ✅ 初始化完成
   启动服务:  ./scripts/start_dev.sh
-  访问:      http://localhost:8002   登录 Administrator / $ADMIN_PASSWORD（实际端口以 bench/sites/common_site_config.json 为准）
+  访问:      http://localhost:8002   登录 Administrator / ${ADMIN_PASSWORD}（实际端口以 bench/sites/common_site_config.json 为准）
   登录说明:   frappe 按用户名(docname)匹配，必须用 Administrator，邮箱不行
   站点:      $SITE_NAME
   数据库:    127.0.0.1:$DB_PORT (账号 $DB_ROOT_USER)
