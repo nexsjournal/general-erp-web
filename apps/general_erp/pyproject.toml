@@ -1,0 +1,13 @@
+[project]
+name = "general_erp"
+description = "general-erp-web 自定义 ERP 功能（基于 ERPNext，所有新功能都加在这个 app 里）"
+authors = [
+    { name = "general-erp-web", email = "dev@local" }
+]
+requires-python = ">=3.11"
+readme = "README.md"
+dynamic = ["version"]
+
+[build-system]
+requires = ["flit_core >= 3.4, < 4"]
+build-backend = "flit_core.buildapi"
