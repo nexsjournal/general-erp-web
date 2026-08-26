@@ -8,3 +8,129 @@ Please check your email.,请查看您的邮件。
 Resend,重新发送
 Login with password,使用密码登录
 Invalid login credentials,用户名或密码错误
+Accounts Payable Ageing,应付账款账龄
+Accounts Receivable Ageing,应收账款账龄
+Background Job Activity,后台任务活动
+Budget Variance,预算差异
+Category-wise Asset Value,按资产类别价值
+Completed Projects,已完成项目
+Delivery Trends,销售出库趋势
+Email Activity,邮件活动
+Incoming Bills (Purchase Invoice),待收账单（采购发票）
+Incoming Leads,新线索
+Item Shortage Summary,缺料汇总
+Item-wise Annual Sales,按物料年度销售
+Location-wise Asset Value,按资产地点价值
+Material Request Analysis,物料需求分析
+Notifications By Type,按类型通知
+Oldest Items,库龄最久物料
+Opportunities via Campaigns,按营销活动商机
+Opportunity Trends,商机趋势
+Outgoing Bills (Sales Invoice),待付账单（销售发票）
+Quality Inspections,质检单
+Stock Value by Item Group,按物料组库存价值
+Territory Wise Opportunity Count,按区域商机数
+Territory Wise Sales,按区域销售
+Top Customers,主要客户
+Top Suppliers,主要供应商
+Warehouse wise Stock Value,按仓库库存价值
+Webpage Views,网页浏览量
+Active Customers,活跃客户
+Active RQ Worker,活跃保留配额工人
+Active Subcontracted Items,活跃委外物料
+Active Suppliers,活跃供应商
+Annual Purchase,年度采购
+Annual Sales,年度销售
+Average Order Values,平均订单金额
+Average Sales Order Value,平均销售订单金额
+Manufactured Items Value,自制物料价值
+New Assets (This Year),新增资产（本年）
+Non Completed Tasks,未完成任务
+Open Opportunity,未关闭商机
+Purchase Orders Count,采购订单数
+Sales Orders Count,销售订单数
+Scheduled Jobs,计划任务
+Subcontracting Inward Order Count,委外入库订单数
+Subcontracting Outward Order Count,委外出库订单数
+Timesheet Working Hours,工时表工时
+Total Assets,资产总额
+Total Incoming Bills,待收账单总额
+Total Incoming Payment,收款总额
+Total Outgoing Bills,待付账单总额
+Total Outgoing Payment,付款总额
+Total Website Users,网站用户总数
+Total System Users,系统用户总数
+WIP Work Orders,在制生产工单
+Incoming Payment,收款
+Incoming Bills,待收账单
+Outgoing Bills,待付账单
+Outgoing Payment,付款
+Average Order Value,平均订单金额
+Accounting Onboarding,会计初始化
+Assets Setup,资产初始化
+Buying Setup,采购初始化
+Manufacturing Setup,制造初始化
+Setup Organization,组织初始化
+Projects Setup,项目初始化
+Selling Setup,销售初始化
+Stock Setup,库存初始化
+Subcontracting Setup,委外初始化
+Review Chart of Accounts,检查科目表
+Create Asset Category,创建资产类别
+Create Asset Item,创建资产
+Create Asset Location,创建资产地点
+Create Bill of Materials,创建物料清单
+Create Customer,创建客户
+Create Existing Asset,创建已有资产
+Create Finished Goods,创建成品
+Create Item,创建物料
+Create Operations,创建工序
+Create Project,创建项目
+Create Purchase Invoice,创建采购发票
+Create Purchase Receipt,创建采购入库
+Create Raw Materials,创建原材料
+Create Service Item,创建服务物料
+Create Subcontracted Item,创建委外物料
+Create Subcontracting Order,创建委外订单
+Create Subcontracting PO,创建委外采购订单
+Create Supplier,创建供应商
+Create Tasks,创建任务
+Create Transfer Entry,创建调拨单
+Create Work Order,创建生产工单
+Invite Users,邀请用户
+Learn Asset,了解资产
+Learn Subcontracting,了解委外
+Review Accounts Settings,检查会计设置
+Review Buying Settings,检查采购设置
+Review Manufacturing Settings,检查制造设置
+Review Selling Settings,检查销售设置
+Review Stock Settings,检查库存设置
+Review System Settings,检查系统设置
+Setup Company,设置公司
+Setup Email Account,设置邮件账户
+Setup Role Permissions,设置角色权限
+Setup Sales taxes,设置销售税
+Setup Warehouse,设置仓库
+View Balance Sheet,查看资产负债表
+View Project Summary,查看项目汇总
+View Purchase Order Analysis,查看采购订单分析
+View Sales Order Analysis,查看销售订单分析
+View Stock Balance Report,查看库存余额报表
+View Work Order Summary Report,查看生产工单汇总报表
+Configure Chart of Accounts,配置科目表
+Create Finished Good,创建成品
+Create Operation,创建工序
+Create Raw Material,创建原材料
+Create Subcontracting Purchase Order,创建委外采购订单
+Create supplier,创建供应商
+Setup Sales Taxes,设置销售税
+Create Warehouses,创建仓库
+View Stock Balance,查看库存余额
+View Work Order Summary,查看生产工单汇总
+Item Wise Consumption,按物料消耗
+Subcontracting Outward Order,委外出库订单
+Accounts Setup,会计初始化
+"<span class=""h4""><b>Reports &amp; Masters</b></span>","<span class=""h4""><b>报表 &amp; 主数据</b></span>"
+"<span class=""h4""><b>Subcontracting Inward and Outward</b></span>","<span class=""h4""><b>委外收发货</b></span>"
+"<span class=""h2"">Hi,</span>","<span class=""h2"">你好，</span>"
+"This module is scheduled for deprecation and will be completely removed in version 17, please use <a href=""https://frappe.io/helpdesk"">Frappe Helpdesk</a> instead.","此模块计划弃用，将在版本 17 中完全移除，请改用 <a href=""https://frappe.io/helpdesk"">Frappe Helpdesk</a>。"

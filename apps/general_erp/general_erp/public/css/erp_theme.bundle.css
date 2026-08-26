@@ -217,3 +217,11 @@ a.desktop-icon {
 a.desktop-icon:hover {
 	color: var(--erp-text-1);
 }
+
+/* ---------- 4. 布局：workspace（Desk Page）通栏 ---------- */
+/* frappe v16 对 [data-page-route=Workspaces] 的 .layout-main 限宽
+   var(--page-max-width)=900px，导致各板块工作区只占中间一列；
+   数据面板（Dashboard）无此限制。这里统一去掉限宽，与数据面板保持一致。 */
+body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
+	max-width: none;
+}
