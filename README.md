@@ -4,7 +4,11 @@
 
 - 基座：frappe `version-16` + erpnext `version-16`（固定分支，升级走专门流程，见下文）
 - 自定义功能：`apps/general_erp/`（唯一允许写代码的地方）
-- 调研报告：[docs/open-source-erp-research.md](docs/open-source-erp-research.md)
+## 文档
+
+- [首次访问指南：登录页与初始配置](docs/first-run-guide.md)
+- [设计系统规范](docs/design-system/README.md)（色彩/字体/图标/组件/表单/交互/动效/图表）
+- [开源 ERP 调研报告](docs/open-source-erp-research.md)
 
 ## 目录结构
 
