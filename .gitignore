@@ -16,3 +16,6 @@ __pycache__/
 
 # ===== bench build 产物（由 bench build 生成，可重建） =====
 apps/general_erp/general_erp/public/dist/
+
+# ===== playwright-cli 会话产物 =====
+.playwright-cli/

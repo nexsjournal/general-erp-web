@@ -1,0 +1,832 @@
+{
+ "app": "general_erp",
+ "charts": [
+  {
+   "chart_name": "Sales Order Trends",
+   "label": "\u9500\u552e\u8ba2\u5355\u8d8b\u52bf"
+  },
+  {
+   "chart_name": "Purchase Order Trends",
+   "label": "\u91c7\u8d2d\u8ba2\u5355\u8d8b\u52bf"
+  }
+ ],
+ "content": "[{\"id\": \"9nt08bckjb\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>\u4e1a\u52a1\u603b\u89c8</b></span>\", \"col\": 12}}, {\"id\": \"vfr1hulyg7\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u9500\u552e\u8ba2\u5355\", \"col\": 3}}, {\"id\": \"qva2emdz8o\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u9500\u552e\u989d\", \"col\": 3}}, {\"id\": \"uzlwftrbr1\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u5f85\u529e\", \"col\": 3}}, {\"id\": \"q34j3g4nmu\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"\u5e94\u6536\u8d26\u6b3e\", \"col\": 3}}, {\"id\": \"oeggkhsy5c\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u9500\u552e\u8ba2\u5355\u8d8b\u52bf\", \"col\": 6}}, {\"id\": \"r25v36xaj7\", \"type\": \"chart\", \"data\": {\"chart_name\": \"\u91c7\u8d2d\u8ba2\u5355\u8d8b\u52bf\", \"col\": 6}}, {\"id\": \"szpfn7o6iz\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>\u6a21\u5757\u5bfc\u822a</b></span>\", \"col\": 12}}, {\"id\": \"rrxzbmyn3q\", \"type\": \"card\", \"data\": {\"card_name\": \"\u5de5\u4f5c\u53f0\", \"col\": 4}}, {\"id\": \"fft05nyui1\", \"type\": \"card\", \"data\": {\"card_name\": \"\u7ebf\u7d22\", \"col\": 4}}, {\"id\": \"cx88g6sxxp\", \"type\": \"card\", \"data\": {\"card_name\": \"\u90ae\u4ef6\", \"col\": 4}}, {\"id\": \"yszie58fp7\", \"type\": \"card\", \"data\": {\"card_name\": \"\u5ba2\u6237\", \"col\": 4}}, {\"id\": \"oa2z5va13h\", \"type\": \"card\", \"data\": {\"card_name\": \"\u8425\u9500\", \"col\": 4}}, {\"id\": \"4b0hg6o274\", \"type\": \"card\", \"data\": {\"card_name\": \"\u5546\u673a\", \"col\": 4}}, {\"id\": \"6y23m9uabk\", \"type\": \"card\", \"data\": {\"card_name\": \"\u4ea7\u54c1\", \"col\": 4}}, {\"id\": \"53jepy4abc\", \"type\": \"card\", \"data\": {\"card_name\": \"\u9500\u552e\u7ba1\u7406\", \"col\": 4}}, {\"id\": \"u75gig3jqi\", \"type\": \"card\", \"data\": {\"card_name\": \"\u91c7\u8d2d\", \"col\": 4}}, {\"id\": \"sh2srvx6ep\", \"type\": \"card\", \"data\": {\"card_name\": \"\u751f\u4ea7\", \"col\": 4}}, {\"id\": \"m8tvqv3std\", \"type\": \"card\", \"data\": {\"card_name\": \"\u8d22\u52a1\", \"col\": 4}}, {\"id\": \"1y6ssy23bk\", \"type\": \"card\", \"data\": {\"card_name\": \"\u5e93\u5b58\", \"col\": 4}}, {\"id\": \"qaavp3qons\", \"type\": \"card\", \"data\": {\"card_name\": \"OA\", \"col\": 4}}, {\"id\": \"6ssrtux175\", \"type\": \"card\", \"data\": {\"card_name\": \"\u7edf\u8ba1\", \"col\": 4}}, {\"id\": \"m3tmd2g2ho\", \"type\": \"card\", \"data\": {\"card_name\": \"\u8bbe\u7f6e\", \"col\": 4}}]",
+ "creation": "2026-08-26 23:45:34.263128",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "home",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "\u5916\u8d38\u5de5\u4f5c\u53f0",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5de5\u4f5c\u53f0",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5f85\u529e",
+   "link_count": 0,
+   "link_to": "ToDo",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u901a\u77e5",
+   "link_count": 0,
+   "link_to": "Notification",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u6c47\u7387",
+   "link_count": 0,
+   "link_to": "Currency Exchange",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8282\u5047\u65e5",
+   "link_count": 0,
+   "link_to": "Holiday",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u767b\u5f55\u65e5\u5fd7",
+   "link_count": 0,
+   "link_to": "Login Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u7ebf\u7d22",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u7ebf\u7d22",
+   "link_count": 0,
+   "link_to": "Lead",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u90ae\u4ef6",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u90ae\u4ef6\u961f\u5217",
+   "link_count": 0,
+   "link_to": "Email Queue",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5ba2\u6237",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5ba2\u6237",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8054\u7cfb\u4eba",
+   "link_count": 0,
+   "link_to": "Contact",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8425\u9500",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u81ea\u52a8\u90ae\u4ef6\u62a5\u544a",
+   "link_count": 0,
+   "link_to": "Auto Email Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5546\u673a",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5546\u673a",
+   "link_count": 0,
+   "link_to": "Opportunity",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u4ea7\u54c1",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5546\u54c1",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5546\u54c1\u7ec4",
+   "link_count": 0,
+   "link_to": "Item Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5355\u4f4d",
+   "link_count": 0,
+   "link_to": "UOM",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u9500\u552e\u7ba1\u7406",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u62a5\u4ef7\u5355",
+   "link_count": 0,
+   "link_to": "Quotation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u51fa\u8fd0\u660e\u7ec6\u5355",
+   "link_count": 0,
+   "link_to": "Shipment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u9500\u552e\u8ba2\u5355",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5916\u8d38\u5355\u8bc1",
+   "link_count": 0,
+   "link_to": "Trade Document",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u51fa\u8fd0",
+   "link_count": 0,
+   "link_to": "Shipment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u4ea4\u8d27\u5355",
+   "link_count": 0,
+   "link_to": "Delivery Note",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u91c7\u8d2d",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u4f9b\u5e94\u5546",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u91c7\u8d2d\u8ba2\u5355",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u91c7\u8d2d\u6536\u8d27",
+   "link_count": 0,
+   "link_to": "Purchase Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u6765\u6599\u9a8c\u8d27\u5355",
+   "link_count": 0,
+   "link_to": "Inspection Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8d28\u68c0",
+   "link_count": 0,
+   "link_to": "Quality Inspection",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u751f\u4ea7",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u751f\u4ea7\u8ba1\u5212",
+   "link_count": 0,
+   "link_to": "Production Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5de5\u5355",
+   "link_count": 0,
+   "link_to": "Work Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "BOM \u7269\u6599\u6e05\u5355",
+   "link_count": 0,
+   "link_to": "BOM",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8d22\u52a1",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u6536\u4ed8\u6b3e",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u9500\u552e\u53d1\u7968",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u91c7\u8d2d\u53d1\u7968",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u65e5\u8bb0\u8d26",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8d39\u7528\u62a5\u9500",
+   "link_count": 0,
+   "link_to": "Expense Reimbursement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5e93\u5b58",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u51fa\u5165\u5e93",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u76d8\u70b9",
+   "link_count": 0,
+   "link_to": "Stock Reconciliation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u4ed3\u5e93",
+   "link_count": 0,
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "OA",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u6587\u4ef6",
+   "link_count": 0,
+   "link_to": "File",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u7edf\u8ba1",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u9500\u552e\u5206\u6790",
+   "link_count": 0,
+   "link_to": "Sales Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u91c7\u8d2d\u5206\u6790",
+   "link_count": 0,
+   "link_to": "Purchase Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u5e94\u6536\u6b3e",
+   "link_count": 0,
+   "link_to": "Accounts Receivable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u5e94\u4ed8\u6b3e",
+   "link_count": 0,
+   "link_to": "Accounts Payable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u5e93\u5b58\u4f59\u989d",
+   "link_count": 0,
+   "link_to": "Stock Balance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u5916\u9500\u7edf\u8ba1",
+   "link_count": 0,
+   "link_to": "\u5916\u9500\u7edf\u8ba1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u5e93\u5b58\u6d41\u6c34",
+   "link_count": 0,
+   "link_to": "Stock Ledger",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u8ba2\u5355\u5229\u6da6",
+   "link_count": 0,
+   "link_to": "\u8ba2\u5355\u5229\u6da6",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u8bbe\u7f6e",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u4ea7\u54c1\u7edf\u8ba1",
+   "link_count": 0,
+   "link_to": "\u4ea7\u54c1\u7edf\u8ba1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u516c\u53f8",
+   "link_count": 0,
+   "link_to": "Company",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u6536\u6b3e\u7edf\u8ba1",
+   "link_count": 0,
+   "link_to": "\u6536\u6b3e\u7edf\u8ba1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5458\u5de5",
+   "link_count": 0,
+   "link_to": "Employee",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u4ed8\u6b3e\u7edf\u8ba1",
+   "link_count": 0,
+   "link_to": "\u4ed8\u6b3e\u7edf\u8ba1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u90e8\u95e8",
+   "link_count": 0,
+   "link_to": "Department",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u8d39\u7528\u7edf\u8ba1",
+   "link_count": 0,
+   "link_to": "\u8d39\u7528\u7edf\u8ba1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u89d2\u8272",
+   "link_count": 0,
+   "link_to": "Role",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "\u91c7\u8d2d\u7edf\u8ba1",
+   "link_count": 0,
+   "link_to": "\u91c7\u8d2d\u7edf\u8ba1",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5de5\u4f5c\u6d41",
+   "link_count": 0,
+   "link_to": "Workflow",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u6761\u6b3e",
+   "link_count": 0,
+   "link_to": "Terms and Conditions",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u5e01\u79cd",
+   "link_count": 0,
+   "link_to": "Currency",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "\u6253\u5370\u683c\u5f0f",
+   "link_count": 0,
+   "link_to": "Print Format",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-27 00:50:28.856842",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "\u5916\u8d38\u5de5\u4f5c\u53f0",
+ "number_cards": [
+  {
+   "label": "\u9500\u552e\u8ba2\u5355",
+   "number_card_name": "\u9500\u552e\u8ba2\u5355"
+  },
+  {
+   "label": "\u9500\u552e\u989d",
+   "number_card_name": "\u9500\u552e\u989d"
+  },
+  {
+   "label": "\u5f85\u529e",
+   "number_card_name": "\u5f85\u529e"
+  },
+  {
+   "label": "\u5e94\u6536\u8d26\u6b3e",
+   "number_card_name": "\u5e94\u6536\u8d26\u6b3e"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 0.0,
+ "shortcuts": [],
+ "title": "\u5916\u8d38\u5de5\u4f5c\u53f0",
+ "type": "Workspace"
+}

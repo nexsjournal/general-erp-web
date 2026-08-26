@@ -17,7 +17,7 @@ required_apps = []
 
 # 自定义 app 的全局 CSS/JS（会被注入到每个页面）
 app_include_css = ["erp_theme.bundle.css"]
-app_include_js = ""
+app_include_js = "erp_fixes.bundle.js"
 
 # 数据库 fixtures（预置数据，migrate 时自动同步）
 # fixtures = []
@@ -40,3 +40,15 @@ app_include_js = ""
 
 # 工作台入口（在 Desk 首页展示自定义页面，可选）
 # workspace_items = ...
+
+# 基础数据初始化（安装后自动播种，幂等）
+after_install = "general_erp.seed_data.after_install"
+
+# Jinja 模板扩展方法（打印格式等模板中可直接调用 money_in_words_cn(金额, 币种)）
+jinja = {
+    "methods": ["general_erp.api.money_in_words_cn"],
+}
+
+# 登录/登出日志（安全审计，docs/feature-requirements.md 第 9 章）
+on_login = "general_erp.general_erp.doctype.login_log.login_log.on_login"
+on_logout = "general_erp.general_erp.doctype.login_log.login_log.on_logout"

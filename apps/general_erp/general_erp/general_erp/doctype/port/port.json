@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "hash",
+ "creation": "2026-08-26 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "code",
+  "port_name",
+  "english_name",
+  "country",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "代码",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "port_name",
+   "fieldtype": "Data",
+   "label": "港口名称",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "english_name",
+   "fieldtype": "Data",
+   "label": "英文名称",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Data",
+   "label": "国家/地区",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "备注"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-08-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Port",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 0,
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "ASC",
+ "states": [],
+ "naming_field": "code",
+ "naming_rule": "By fieldname"
+}

@@ -22,7 +22,7 @@
 | `--erp-text-2` | `#4E5969` | 正文、表单 label、表格内容 |
 | `--erp-text-3` | `#86909C` | 次要说明、表头、占位符 |
 | `--erp-text-disabled` | `#C9CDD4` | 禁用文本 |
-| `--erp-bg-page` | `#F5F6F8` | 页面底 |
+| `--erp-bg-page` | `#F2F4F9` | 页面底（疏朗版：更浅冷灰，拉开与卡片对比） |
 | `--erp-bg-card` | `#FFFFFF` | 卡片/面板底 |
 | `--erp-bg-hover` | `#F2F3F5` | 行/项 hover |
 | `--erp-bg-muted` | `#F7F8FA` | 次级区域底（表头、代码块） |
@@ -114,8 +114,8 @@
 |---|---|---|
 | `--erp-radius-sm` | 4px | 徽章、chip |
 | `--erp-radius` | 6px | 按钮、输入框、下拉 |
-| `--erp-radius-lg` | 10px | 卡片 |
-| `--erp-radius-xl` | 12px | 图标磁贴、弹窗 |
+| `--erp-radius-lg` | 16px | 卡片（疏朗版） |
+| `--erp-radius-xl` | 20px | 图标磁贴、弹窗（疏朗版） |
 | `--erp-radius-full` | 999px | 胶囊按钮、头像 |
 
 ## 5. 阴影（Shadow）
@@ -124,9 +124,9 @@
 
 | Token | 值 | 用途 |
 |---|---|---|
-| `--erp-shadow-1` | `0 1px 2px rgba(29,33,41,0.06)` | 卡片常态（配合 1px 边框） |
-| `--erp-shadow-2` | `0 4px 12px rgba(29,33,41,0.08)` | 卡片 hover、浮动层 |
-| `--erp-shadow-3` | `0 12px 32px rgba(29,33,41,0.12)` | 弹窗、下拉、抽屉 |
+| `--erp-shadow-1` | `0 1px 2px rgba(29,33,41,0.05)` | 卡片常态（配合 1px 边框） |
+| `--erp-shadow-2` | `0 6px 16px rgba(29,33,41,0.07)` | 卡片 hover、浮动层 |
+| `--erp-shadow-3` | `0 12px 32px rgba(29,33,41,0.10)` | 弹窗、下拉、抽屉 |
 
 规则：阴影只用于「层级上浮」，不用阴影区分内容块（内容块用边框）。
 
@@ -135,9 +135,9 @@
 | 项 | 值 |
 |---|---|
 | 顶栏高度 | 56px，`--erp-bg-card` 底 + 底部 1px `--erp-border-light` |
-| 内容区 | 左右 padding 24px（≥1440px）/ 16px（<1440px）；max-width 不限（表格可满宽） |
-| 看板网格 | 24px gutter 栅格；KPI 行 4 列（窄屏 2 列）；图表区 3:2 或 2:1 分栏 |
-| 列表行高 | 40px（紧凑）/ 48px（常规） |
+| 内容区 | 左右 padding 32px（≥1440px）/ 24px（<1440px）；max-width 不限（表格可满宽） |
+| 看板网格 | workspace 栅格 gap 20px（疏朗版）；KPI 行 4 列（窄屏 2 列）；图表区 3:2 或 2:1 分栏 |
+| 列表行高 | 48px（常规，默认）/ 40px（紧凑，超高密度场景显式指定） |
 | 表单 label | 置于输入框上方（不做左侧 label 两栏，ERP 单据列多时纵向更稳） |
 
 ## 7. 暗色模式（预留）

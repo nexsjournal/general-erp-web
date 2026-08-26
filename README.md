@@ -9,6 +9,7 @@
 - [首次访问指南：登录页与初始配置](docs/first-run-guide.md)
 - [设计系统规范](docs/design-system/README.md)（色彩/字体/图标/组件/表单/交互/动效/图表）
 - [开源 ERP 调研报告](docs/open-source-erp-research.md)
+- [外贸 ERP 功能需求规格说明书](docs/feature-requirements.md)（基于客户功能清单整理，含红字 P0 重点与实施路线）
 
 ## 目录结构
 

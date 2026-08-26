@@ -11,7 +11,7 @@
 | Tertiary/Text | 无边框、`--erp-text-2` 字、hover 底 `--erp-bg-hover` | 次要操作、行内操作 |
 | Danger | 底 `--erp-error` 白字（或 text-danger 行内红字） | 删除、取消审批等不可逆操作 |
 
-- 高度：32px（紧凑，表格/表单内）/ 40px（页面级）；内边距 12-16px；圆角 `--erp-radius`；
+- 高度：36px（紧凑，表格/表单内，`--btn-height`）/ 44px（页面级）；内边距 14-18px；圆角 `--erp-radius`（8px，疏朗版）；
 - 字号 14px/500；图标+文字间距 6px；
 - 状态：hover（primary→hover 色 / secondary→边框加深）；active（active 色，scale 0.98）；disabled（50% 透明 + `--erp-text-disabled`）；loading（内嵌 spinner 替代图标，宽度锁定防跳动）；
 - 按钮组顺序：主操作在右（中文习惯「取消 / 确定」左到右，确定在右）。
@@ -30,18 +30,18 @@
 ### 2.3 模块内导航（左侧列表）
 
 - 分组标题：12px `--erp-text-3`，组间距 16px（参考图 MAIN / OTHERS 式分组）；
-- 导航项：高 40px，左图标 20px + 14px 文本；常态 `--erp-text-2`，hover 底 `--erp-bg-hover`，**选中**：底 `--erp-primary-lighter` + 文本 `--erp-primary` + 左 3px 圆角指示条；
+- 导航项：高 44px，左图标 20px + 14px 文本；常态 `--erp-text-2`，hover 底 `--erp-bg-hover`，**选中**：底 `--erp-primary-lighter` + 文本 `--erp-primary` + 左 3px 圆角指示条；
 - 角标（未读/数量）：12px 圆角 pill，`--erp-primary-light` 底蓝字；告警用 error 浅底。
 
 ## 3. 卡片（Card）
 
 - 结构：`--erp-bg-card` 底 + 1px `--erp-border-1` + `--erp-radius-lg` + `--erp-shadow-1`；
-- 内边距 20px（看板）/ 16px（列表型）；
+- 内边距 24px（看板，疏朗版）/ 18px（列表型）；
 - 卡头：标题 16px/500 + 右侧操作区（图标按钮或下拉），标题行高 24px，与内容间距 16px；
 - 卡头可带 16px 图标（`--erp-text-3` 色，或模块主色）；
 - **KPI 卡**（数据展示核心单元，详见 07）：
   - 上行：13px `--erp-text-3` 标签（可带 16px 图标/来源平台徽标）；
-  - 中行：数字 24-32px/600 tabular-nums `--erp-text-1`；
+  - 中行：数字 28-32px/600 tabular-nums `--erp-text-1`（疏朗版基准 28px）；
   - 下行：涨跌徽章（见下）+ 「vs 上期」12px 说明；
   - 点击整卡可下钻（hover 边框变 `--erp-border-2` + `--erp-shadow-2`）。
 
@@ -53,7 +53,7 @@
 ## 4. 表格（Table / List View）
 
 - 表头：高 40px，12px `--erp-text-3`，底 `--erp-bg-muted`，可排序列带 12px 排序图标（激活 `--erp-primary`）；
-- 行：高 40px（紧凑）/ 48px（常规，含多行内容）；文本 13px `--erp-text-2`；
+- 行：高 48px（常规，默认，`--list-row-height`）/ 40px（紧凑）；文本 13px `--erp-text-2`；
 - 边框：行分隔 1px `--erp-border-light`（不要竖线）；hover `--erp-bg-hover`；选中底 `--erp-primary-lighter`；
 - 数字列右对齐 + tabular-nums；金额带货币前缀；
 - 状态列用标签（下节）；

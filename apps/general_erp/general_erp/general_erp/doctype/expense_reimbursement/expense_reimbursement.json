@@ -1,0 +1,151 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:naming_series",
+ "creation": "2026-08-27 00:39:50.009824",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "section_main",
+  "expense_date",
+  "applicant",
+  "expense_type",
+  "amount",
+  "sales_order",
+  "project",
+  "description",
+  "attachment",
+  "workflow_state",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": "EXP-.YYYY.-.###",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "\u7cfb\u5217",
+   "options": "EXP-.YYYY.-.###",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_main",
+   "fieldtype": "Section Break",
+   "label": "\u62a5\u9500\u4fe1\u606f"
+  },
+  {
+   "fieldname": "expense_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "\u8d39\u7528\u65e5\u671f",
+   "reqd": 1
+  },
+  {
+   "default": "{{ session.user }}",
+   "fieldname": "applicant",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u7533\u8bf7\u4eba",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expense_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u8d39\u7528\u7c7b\u578b",
+   "options": "\u5dee\u65c5\n\u62db\u5f85\n\u8fd0\u8d39\n\u6d77\u8fd0\u8d39\u53ca\u6e2f\u6742\n\u62a5\u5173\u62a5\u68c0\n\u901a\u8baf\n\u529e\u516c\n\u5176\u4ed6",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "\u91d1\u989d",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "\u5f52\u96c6\u8ba2\u5355",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "\u5f52\u96c6\u9879\u76ee",
+   "options": "Project"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "\u8bf4\u660e",
+   "reqd": 1
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "\u53d1\u7968/\u51ed\u8bc1"
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u5ba1\u6279\u72b6\u6001",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Expense Reimbursement",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-08-27 00:57:08.762239",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Expense Reimbursement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

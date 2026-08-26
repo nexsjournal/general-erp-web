@@ -3,6 +3,8 @@
    规范文档: docs/design-system/（本文件是其代码化落地）
    结构: 1) --erp-* 设计变量  2) frappe 16 根变量重映射  3) 组件级精修
    原则: 只重映射 token + 少量高针对性规则，不 fork 官方组件样式
+   风格: 疏朗（2026-08 起）—— 参考 Boltshift/Symptira/Elementor 三图：
+         大圆角卡片、宽松间距、更浅页面底、KPI 大数字、pill 化徽标
    ============================================================ */
 
 /* ---------- 1. 设计变量（docs/design-system/01-design-tokens.md） ---------- */
@@ -19,13 +21,13 @@
 	--erp-text-2: #4e5969;
 	--erp-text-3: #86909c;
 	--erp-text-disabled: #c9cdd4;
-	--erp-bg-page: #f5f6f8;
+	--erp-bg-page: #f2f4f9;
 	--erp-bg-card: #ffffff;
-	--erp-bg-hover: #f2f3f5;
-	--erp-bg-muted: #f7f8fa;
-	--erp-border-1: #e4e7ec;
+	--erp-bg-hover: #f4f5f9;
+	--erp-bg-muted: #f7f8fb;
+	--erp-border-1: #e6e8f0;
 	--erp-border-2: #c9cdd4;
-	--erp-border-light: #edeff2;
+	--erp-border-light: #edeff4;
 
 	/* 功能色 */
 	--erp-success: #00b42a;
@@ -56,17 +58,17 @@
 	--erp-space-6: 32px;
 	--erp-space-8: 48px;
 
-	/* 圆角 */
+	/* 圆角（疏朗：卡片 16 / 容器 20） */
 	--erp-radius-sm: 4px;
-	--erp-radius: 6px;
-	--erp-radius-lg: 10px;
-	--erp-radius-xl: 12px;
+	--erp-radius: 8px;
+	--erp-radius-lg: 16px;
+	--erp-radius-xl: 20px;
 	--erp-radius-full: 999px;
 
-	/* 阴影 */
-	--erp-shadow-1: 0 1px 2px rgba(29, 33, 41, 0.06);
-	--erp-shadow-2: 0 4px 12px rgba(29, 33, 41, 0.08);
-	--erp-shadow-3: 0 12px 32px rgba(29, 33, 41, 0.12);
+	/* 阴影（比原主题更轻，靠边框分层） */
+	--erp-shadow-1: 0 1px 2px rgba(29, 33, 41, 0.05);
+	--erp-shadow-2: 0 6px 16px rgba(29, 33, 41, 0.07);
+	--erp-shadow-3: 0 12px 32px rgba(29, 33, 41, 0.1);
 }
 
 /* ---------- 2. frappe 16 根变量重映射（本文件后于官方 bundle 加载，同特异性覆盖生效） ---------- */
@@ -74,12 +76,12 @@
 	/* 品牌 */
 	--primary: var(--erp-primary);
 	--btn-primary: var(--erp-primary);
-	--btn-height: 32px;
+	--btn-height: 36px;
 
 	/* 中性灰阶（整表替换为项目中性色） */
-	--gray-50: #fafbfc;
-	--gray-100: #f2f3f5;
-	--gray-200: #e4e7ec;
+	--gray-50: #fafbfd;
+	--gray-100: #f4f5f9;
+	--gray-200: #e6e8f0;
 	--gray-300: #d9dde3;
 	--gray-400: #c9cdd4;
 	--gray-500: #86909c;
@@ -128,29 +130,29 @@
 	--shadow-xl: var(--erp-shadow-3);
 	--shadow-2xl: var(--erp-shadow-3);
 
-	/* 间距栅格（4px 基线） */
+	/* 间距栅格（4px 基线；疏朗版上调 lg 及以上档位） */
 	--padding-xs: 4px;
 	--padding-sm: 8px;
 	--padding-md: 12px;
-	--padding-lg: 16px;
-	--padding-xl: 24px;
-	--padding-2xl: 32px;
+	--padding-lg: 18px;
+	--padding-xl: 28px;
+	--padding-2xl: 40px;
 	--margin-xs: 4px;
 	--margin-sm: 8px;
 	--margin-md: 12px;
-	--margin-lg: 16px;
-	--margin-xl: 24px;
-	--margin-2xl: 32px;
+	--margin-lg: 20px;
+	--margin-xl: 28px;
+	--margin-2xl: 40px;
 
 	/* 字体栈（含 CJK） */
 	--font-family-sans-serif: var(--erp-font-family);
 	--font-family-monospace: var(--erp-font-family-mono);
 
-	/* 列表行高（03-components: 紧凑 40px） */
-	--list-row-height: 40px;
+	/* 列表行高（03-components: 常规 48px，参考图疏朗行距） */
+	--list-row-height: 48px;
 
-	/* 圆角（官方默认 8px 与规范一致，显式声明便于追溯） */
-	--border-radius: 8px;
+	/* 圆角（疏朗版：10px 基础，卡片经 --erp-radius-lg 提到 16px） */
+	--border-radius: 10px;
 }
 
 /* ---------- 3. 组件级精修 ---------- */
@@ -193,7 +195,7 @@ body {
 	background: var(--erp-bg-card);
 }
 
-/* 卡片：细边框 + 极浅阴影（03-components 3） */
+/* 卡片：细边框 + 极浅阴影 + 大圆角（03-components 3，疏朗 16px） */
 .frappe-card,
 .card {
 	border: 1px solid var(--erp-border-1);
@@ -210,12 +212,56 @@ body {
 	color: var(--erp-primary-hover);
 }
 
-/* 首页磁贴标签：深灰文本（03-components 2.2），不用链接蓝 */
-a.desktop-icon {
+/* 首页磁贴：白卡片 + 大圆角 + 宽松内边距（参考图磁贴网格）
+   实际 DOM：.desktop-wrapper > .desktop-container > .icons-container > a.desktop-icon */
+.desktop-wrapper .icons-container a.desktop-icon {
+	padding: 22px 20px;
+	border-radius: var(--erp-radius-lg);
+	border: 1px solid var(--erp-border-1);
+	background: var(--erp-bg-card);
+	box-shadow: var(--erp-shadow-1);
 	color: var(--erp-text-2);
 }
-a.desktop-icon:hover {
+.desktop-wrapper .icons-container a.desktop-icon:hover {
+	border-color: var(--erp-border-2);
+	box-shadow: var(--erp-shadow-2);
 	color: var(--erp-text-1);
+}
+/* 磁贴图标芯片放大（参考图 48px 圆形图标） */
+.desktop-wrapper .icons-container a.desktop-icon .icon-container {
+	width: 52px;
+	height: 52px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.desktop-wrapper .icons-container a.desktop-icon .icon-container img,
+.desktop-wrapper .icons-container a.desktop-icon .icon-container svg {
+	width: 40px;
+	height: 40px;
+}
+.desktop-wrapper .icons-container a.desktop-icon .icon-title {
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+/* workspace 网格：间距 15px → 20px（疏朗版） */
+.desk .grid-col-1,
+.desk .grid-col-2,
+.desk .grid-col-3 {
+	column-gap: 20px;
+	row-gap: 20px;
+}
+
+/* KPI 数字卡：大数字（07-data-viz 2.1，疏朗 28px） */
+.dashboard-content .number-card .number {
+	font-size: 28px;
+	line-height: 36px;
+}
+
+/* 徽标/标签：pill 化（参考图状态胶囊） */
+.indicator-pill {
+	border-radius: var(--erp-radius-full);
 }
 
 /* ---------- 4. 布局：workspace（Desk Page）通栏 ---------- */

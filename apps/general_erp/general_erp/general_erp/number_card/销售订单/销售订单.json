@@ -1,0 +1,22 @@
+{
+ "creation": "2026-08-26 07:32:16.373279",
+ "currency": "CNY",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "document_type": "Sales Order",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 0,
+ "label": "\u9500\u552e\u8ba2\u5355",
+ "modified": "2026-08-26 07:32:16.373279",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "\u9500\u552e\u8ba2\u5355",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_full_number": 0,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Document Type"
+}

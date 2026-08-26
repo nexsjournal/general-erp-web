@@ -1,0 +1,179 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:naming_series",
+ "creation": "2026-08-27 00:39:49.587516",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "section_main",
+  "customer",
+  "sales_order",
+  "incoterms",
+  "port_of_loading",
+  "port_of_discharge",
+  "transport_mode",
+  "vessel_voyage",
+  "container_no",
+  "bl_no",
+  "etd",
+  "eta",
+  "status",
+  "remark_sb",
+  "remark",
+  "items_sb",
+  "items"
+ ],
+ "fields": [
+  {
+   "default": "SH-.YYYY.-.###",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "\u7cfb\u5217",
+   "options": "SH-.YYYY.-.###",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_main",
+   "fieldtype": "Section Break",
+   "label": "\u51fa\u8fd0\u4fe1\u606f"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u5ba2\u6237",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u5916\u9500\u8ba2\u5355",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "incoterms",
+   "fieldtype": "Link",
+   "label": "\u8d38\u6613\u672f\u8bed",
+   "options": "Incoterms"
+  },
+  {
+   "fieldname": "port_of_loading",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u88c5\u8fd0\u6e2f",
+   "options": "Port"
+  },
+  {
+   "fieldname": "port_of_discharge",
+   "fieldtype": "Link",
+   "label": "\u76ee\u7684\u6e2f",
+   "options": "Port"
+  },
+  {
+   "fieldname": "transport_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u8fd0\u8f93\u65b9\u5f0f",
+   "options": "\u6d77\u8fd0\n\u7a7a\u8fd0\n\u94c1\u8def\n\u516c\u8def\n\u5feb\u9012"
+  },
+  {
+   "fieldname": "vessel_voyage",
+   "fieldtype": "Data",
+   "label": "\u8239\u540d\u822a\u6b21"
+  },
+  {
+   "fieldname": "container_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u67dc\u53f7"
+  },
+  {
+   "fieldname": "bl_no",
+   "fieldtype": "Data",
+   "label": "\u63d0\u5355\u53f7"
+  },
+  {
+   "fieldname": "etd",
+   "fieldtype": "Date",
+   "label": "\u9884\u8ba1\u5f00\u8239"
+  },
+  {
+   "fieldname": "eta",
+   "fieldtype": "Date",
+   "label": "\u9884\u8ba1\u5230\u6e2f"
+  },
+  {
+   "default": "\u8349\u7a3f",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u72b6\u6001",
+   "options": "\u8349\u7a3f\n\u5df2\u8ba2\u8231\n\u5df2\u51fa\u8fd0\n\u5df2\u6e05\u5173\n\u5df2\u4ea4\u4ed8"
+  },
+  {
+   "fieldname": "remark_sb",
+   "fieldtype": "Section Break",
+   "label": "\u5907\u6ce8"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "\u5907\u6ce8"
+  },
+  {
+   "fieldname": "items_sb",
+   "fieldtype": "Section Break",
+   "label": "\u51fa\u8fd0\u660e\u7ec6"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "\u660e\u7ec6",
+   "options": "Shipment Item",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-27 00:57:08.500742",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Shipment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

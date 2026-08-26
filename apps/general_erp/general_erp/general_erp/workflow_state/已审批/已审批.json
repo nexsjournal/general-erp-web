@@ -1,0 +1,13 @@
+{
+ "creation": "2026-08-27 00:42:42.358133",
+ "docstatus": 0,
+ "doctype": "Workflow State",
+ "icon": "ok-circle",
+ "idx": 0,
+ "modified": "2026-08-27 00:42:42.358133",
+ "modified_by": "Administrator",
+ "name": "\u5df2\u5ba1\u6279",
+ "owner": "Administrator",
+ "style": "Success",
+ "workflow_state_name": "\u5df2\u5ba1\u6279"
+}

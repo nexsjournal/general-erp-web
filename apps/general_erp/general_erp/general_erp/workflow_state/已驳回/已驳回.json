@@ -1,0 +1,13 @@
+{
+ "creation": "2026-08-27 00:42:42.358914",
+ "docstatus": 0,
+ "doctype": "Workflow State",
+ "icon": "remove-circle",
+ "idx": 0,
+ "modified": "2026-08-27 00:42:42.358914",
+ "modified_by": "Administrator",
+ "name": "\u5df2\u9a73\u56de",
+ "owner": "Administrator",
+ "style": "Danger",
+ "workflow_state_name": "\u5df2\u9a73\u56de"
+}

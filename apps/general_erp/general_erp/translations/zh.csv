@@ -134,3 +134,13 @@ Accounts Setup,会计初始化
 "<span class=""h4""><b>Subcontracting Inward and Outward</b></span>","<span class=""h4""><b>委外收发货</b></span>"
 "<span class=""h2"">Hi,</span>","<span class=""h2"">你好，</span>"
 "This module is scheduled for deprecation and will be completely removed in version 17, please use <a href=""https://frappe.io/helpdesk"">Frappe Helpdesk</a> instead.","此模块计划弃用，将在版本 17 中完全移除，请改用 <a href=""https://frappe.io/helpdesk"">Frappe Helpdesk</a>。"
+Login Log,登录日志
+Shipment,出运明细单
+Trade Document,外贸单证
+Inspection Order,来料验货单
+Expense Reimbursement,费用报销
+Shipment Item,出运明细行
+Inspection Item,验货明细行
+Port,港口
+Incoterms,贸易术语
+HS Code,HS 编码

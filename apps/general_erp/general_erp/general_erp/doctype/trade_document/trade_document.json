@@ -1,0 +1,137 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:naming_series",
+ "creation": "2026-08-27 00:39:49.812314",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "section_main",
+  "doc_type",
+  "document_no",
+  "customer",
+  "sales_order",
+  "shipment",
+  "status",
+  "generated_on",
+  "attachment",
+  "remark_sb",
+  "remark"
+ ],
+ "fields": [
+  {
+   "default": "DOC-.YYYY.-.###",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "\u7cfb\u5217",
+   "options": "DOC-.YYYY.-.###",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_main",
+   "fieldtype": "Section Break",
+   "label": "\u5355\u8bc1\u4fe1\u606f"
+  },
+  {
+   "fieldname": "doc_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u5355\u8bc1\u7c7b\u578b",
+   "options": "PI \u5f62\u5f0f\u53d1\u7968\nCI \u5546\u4e1a\u53d1\u7968\nPL \u88c5\u7bb1\u5355\nBL \u63d0\u5355\nCO \u539f\u4ea7\u5730\u8bc1\n\u5176\u4ed6",
+   "reqd": 1
+  },
+  {
+   "fieldname": "document_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "\u5355\u8bc1\u53f7"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "\u5ba2\u6237",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "\u5173\u8054\u8ba2\u5355",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "shipment",
+   "fieldtype": "Link",
+   "label": "\u5173\u8054\u51fa\u8fd0",
+   "options": "Shipment"
+  },
+  {
+   "default": "\u8349\u7a3f",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "\u72b6\u6001",
+   "options": "\u8349\u7a3f\n\u5df2\u751f\u6210\n\u5df2\u6253\u5370\n\u5df2\u5bc4\u51fa"
+  },
+  {
+   "fieldname": "generated_on",
+   "fieldtype": "Date",
+   "label": "\u751f\u6210\u65e5\u671f"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "\u5355\u8bc1\u6587\u4ef6"
+  },
+  {
+   "fieldname": "remark_sb",
+   "fieldtype": "Section Break",
+   "label": "\u5907\u6ce8"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "\u5907\u6ce8"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-27 00:57:08.627147",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Trade Document",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

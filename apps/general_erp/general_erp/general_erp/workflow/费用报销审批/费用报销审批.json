@@ -1,0 +1,89 @@
+{
+ "creation": "2026-08-27 00:42:42.370112",
+ "docstatus": 0,
+ "doctype": "Workflow",
+ "document_type": "Expense Reimbursement",
+ "enable_action_confirmation": 0,
+ "idx": 0,
+ "is_active": 1,
+ "modified": "2026-08-27 00:56:01.727837",
+ "modified_by": "Administrator",
+ "name": "\u8d39\u7528\u62a5\u9500\u5ba1\u6279",
+ "override_status": 0,
+ "owner": "Administrator",
+ "send_email_alert": 0,
+ "states": [
+  {
+   "allow_edit": "System Manager",
+   "avoid_status_override": 0,
+   "doc_status": "0",
+   "evaluate_as_expression": 0,
+   "is_optional_state": 0,
+   "send_email": 1,
+   "state": "\u8349\u7a3f"
+  },
+  {
+   "allow_edit": "System Manager",
+   "avoid_status_override": 0,
+   "doc_status": "0",
+   "evaluate_as_expression": 0,
+   "is_optional_state": 0,
+   "send_email": 1,
+   "state": "\u5ba1\u6279\u4e2d"
+  },
+  {
+   "allow_edit": "System Manager",
+   "avoid_status_override": 0,
+   "doc_status": "1",
+   "evaluate_as_expression": 0,
+   "is_optional_state": 0,
+   "send_email": 1,
+   "state": "\u5df2\u5ba1\u6279"
+  },
+  {
+   "allow_edit": "System Manager",
+   "avoid_status_override": 0,
+   "doc_status": "0",
+   "evaluate_as_expression": 0,
+   "is_optional_state": 0,
+   "send_email": 1,
+   "state": "\u5df2\u9a73\u56de"
+  }
+ ],
+ "transitions": [
+  {
+   "action": "\u63d0\u4ea4\u5ba1\u6279",
+   "allow_self_approval": 1,
+   "allowed": "System Manager",
+   "next_state": "\u5ba1\u6279\u4e2d",
+   "send_email_to_creator": 0,
+   "state": "\u8349\u7a3f"
+  },
+  {
+   "action": "\u5ba1\u6279",
+   "allow_self_approval": 1,
+   "allowed": "System Manager",
+   "next_state": "\u5df2\u5ba1\u6279",
+   "send_email_to_creator": 0,
+   "state": "\u5ba1\u6279\u4e2d"
+  },
+  {
+   "action": "\u9a73\u56de",
+   "allow_self_approval": 1,
+   "allowed": "System Manager",
+   "next_state": "\u5df2\u9a73\u56de",
+   "send_email_to_creator": 0,
+   "state": "\u5ba1\u6279\u4e2d"
+  },
+  {
+   "action": "\u91cd\u65b0\u63d0\u4ea4",
+   "allow_self_approval": 1,
+   "allowed": "System Manager",
+   "next_state": "\u5ba1\u6279\u4e2d",
+   "send_email_to_creator": 0,
+   "state": "\u5df2\u9a73\u56de"
+  }
+ ],
+ "workflow_name": "\u8d39\u7528\u62a5\u9500\u5ba1\u6279",
+ "workflow_state_field": "workflow_state"
+}
