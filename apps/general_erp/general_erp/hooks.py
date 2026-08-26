@@ -16,7 +16,7 @@ app_license = "GPL-3.0"
 required_apps = []
 
 # 自定义 app 的全局 CSS/JS（会被注入到每个页面）
-app_include_css = ""
+app_include_css = ["erp_theme.bundle.css"]
 app_include_js = ""
 
 # 数据库 fixtures（预置数据，migrate 时自动同步）

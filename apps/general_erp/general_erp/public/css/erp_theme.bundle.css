@@ -1,0 +1,219 @@
+/* ============================================================
+   general-erp-web 设计主题
+   规范文档: docs/design-system/（本文件是其代码化落地）
+   结构: 1) --erp-* 设计变量  2) frappe 16 根变量重映射  3) 组件级精修
+   原则: 只重映射 token + 少量高针对性规则，不 fork 官方组件样式
+   ============================================================ */
+
+/* ---------- 1. 设计变量（docs/design-system/01-design-tokens.md） ---------- */
+:root {
+	/* 品牌色 */
+	--erp-primary: #2563eb;
+	--erp-primary-hover: #1d4ed8;
+	--erp-primary-active: #1e40af;
+	--erp-primary-light: #dbeafe;
+	--erp-primary-lighter: #eff6ff;
+
+	/* 中性色（Semi 灰阶参考） */
+	--erp-text-1: #1d2129;
+	--erp-text-2: #4e5969;
+	--erp-text-3: #86909c;
+	--erp-text-disabled: #c9cdd4;
+	--erp-bg-page: #f5f6f8;
+	--erp-bg-card: #ffffff;
+	--erp-bg-hover: #f2f3f5;
+	--erp-bg-muted: #f7f8fa;
+	--erp-border-1: #e4e7ec;
+	--erp-border-2: #c9cdd4;
+	--erp-border-light: #edeff2;
+
+	/* 功能色 */
+	--erp-success: #00b42a;
+	--erp-success-light: #e8ffea;
+	--erp-success-text: #009a29;
+	--erp-warning: #ff9f0a;
+	--erp-warning-light: #fff3e0;
+	--erp-warning-text: #cc7a00;
+	--erp-error: #f53f3f;
+	--erp-error-light: #ffece8;
+	--erp-error-text: #cb2634;
+	--erp-info: #2563eb;
+	--erp-info-light: #e8f3ff;
+	--erp-info-text: #1d4ed8;
+
+	/* 字体 */
+	--erp-font-family:
+		Inter, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+		"Microsoft YaHei", "Noto Sans SC", sans-serif;
+	--erp-font-family-mono: "SF Mono", "JetBrains Mono", Consolas, monospace;
+
+	/* 间距（4px 栅格） */
+	--erp-space-1: 4px;
+	--erp-space-2: 8px;
+	--erp-space-3: 12px;
+	--erp-space-4: 16px;
+	--erp-space-5: 24px;
+	--erp-space-6: 32px;
+	--erp-space-8: 48px;
+
+	/* 圆角 */
+	--erp-radius-sm: 4px;
+	--erp-radius: 6px;
+	--erp-radius-lg: 10px;
+	--erp-radius-xl: 12px;
+	--erp-radius-full: 999px;
+
+	/* 阴影 */
+	--erp-shadow-1: 0 1px 2px rgba(29, 33, 41, 0.06);
+	--erp-shadow-2: 0 4px 12px rgba(29, 33, 41, 0.08);
+	--erp-shadow-3: 0 12px 32px rgba(29, 33, 41, 0.12);
+}
+
+/* ---------- 2. frappe 16 根变量重映射（本文件后于官方 bundle 加载，同特异性覆盖生效） ---------- */
+:root {
+	/* 品牌 */
+	--primary: var(--erp-primary);
+	--btn-primary: var(--erp-primary);
+	--btn-height: 32px;
+
+	/* 中性灰阶（整表替换为项目中性色） */
+	--gray-50: #fafbfc;
+	--gray-100: #f2f3f5;
+	--gray-200: #e4e7ec;
+	--gray-300: #d9dde3;
+	--gray-400: #c9cdd4;
+	--gray-500: #86909c;
+	--gray-600: #6b7280;
+	--gray-700: #4e5969;
+	--gray-800: #1d2129;
+	--gray-900: #14151a;
+
+	/* 表面与文本 */
+	--bg-color: var(--erp-bg-page);
+	--fg-color: var(--erp-bg-card);
+	--fg-hover-color: var(--erp-bg-hover);
+	--subtle-fg: var(--erp-bg-muted);
+	--highlight-color: var(--erp-primary-lighter);
+	--text-color: var(--erp-text-1);
+	--text-muted: var(--erp-text-2);
+	--text-light: var(--erp-text-3);
+	--border-color: var(--erp-border-1);
+	--table-border-color: var(--erp-border-1);
+	--divider-color: var(--erp-border-light);
+
+	/* 功能色 */
+	--success: var(--erp-success);
+	--warning: var(--erp-warning);
+	--danger: var(--erp-error);
+	--info: var(--erp-info);
+	--alert-text-success: var(--erp-success-text);
+	--alert-bg-success: var(--erp-success-light);
+	--alert-text-warning: var(--erp-warning-text);
+	--alert-bg-warning: var(--erp-warning-light);
+	--alert-text-danger: var(--erp-error-text);
+	--alert-bg-danger: var(--erp-error-light);
+	--alert-text-info: var(--erp-info-text);
+	--alert-bg-info: var(--erp-info-light);
+
+	/* 焦点环（05-interaction: 键盘可聚焦，primary 色） */
+	--focus-default: 0 0 0 2px var(--erp-primary);
+	--focus-blue: 0 0 0 2px var(--erp-primary);
+
+	/* 阴影（项目更轻） */
+	--shadow-xs: var(--erp-shadow-1);
+	--shadow-sm: var(--erp-shadow-1);
+	--shadow-base: var(--erp-shadow-1);
+	--shadow-md: var(--erp-shadow-2);
+	--shadow-lg: var(--erp-shadow-2);
+	--shadow-xl: var(--erp-shadow-3);
+	--shadow-2xl: var(--erp-shadow-3);
+
+	/* 间距栅格（4px 基线） */
+	--padding-xs: 4px;
+	--padding-sm: 8px;
+	--padding-md: 12px;
+	--padding-lg: 16px;
+	--padding-xl: 24px;
+	--padding-2xl: 32px;
+	--margin-xs: 4px;
+	--margin-sm: 8px;
+	--margin-md: 12px;
+	--margin-lg: 16px;
+	--margin-xl: 24px;
+	--margin-2xl: 32px;
+
+	/* 字体栈（含 CJK） */
+	--font-family-sans-serif: var(--erp-font-family);
+	--font-family-monospace: var(--erp-font-family-mono);
+
+	/* 列表行高（03-components: 紧凑 40px） */
+	--list-row-height: 40px;
+
+	/* 圆角（官方默认 8px 与规范一致，显式声明便于追溯） */
+	--border-radius: 8px;
+}
+
+/* ---------- 3. 组件级精修 ---------- */
+
+/* 数字表格化对齐（KPI / 金额 / 数量） */
+body {
+	font-variant-numeric: tabular-nums;
+}
+
+/* 主按钮（官方存在硬编码 #171717 的规则，用等/更高特异性覆盖） */
+.btn-primary {
+	background-color: var(--erp-primary);
+	border-color: var(--erp-primary);
+}
+.btn.btn-primary {
+	background-color: var(--erp-primary);
+	border-color: var(--erp-primary);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn.btn-primary:hover,
+.btn.btn-primary:focus {
+	background-color: var(--erp-primary-hover);
+	border-color: var(--erp-primary-hover);
+}
+.btn-primary:active,
+.btn.btn-primary:active {
+	background-color: var(--erp-primary-active);
+	border-color: var(--erp-primary-active);
+}
+.btn-primary:disabled,
+.btn.btn-primary:disabled {
+	background-color: var(--erp-primary);
+	border-color: var(--erp-primary);
+	opacity: 0.5;
+}
+
+/* 页内吸顶页头：白底 + 底部分割线（03-components 2.1） */
+.page-head {
+	background: var(--erp-bg-card);
+}
+
+/* 卡片：细边框 + 极浅阴影（03-components 3） */
+.frappe-card,
+.card {
+	border: 1px solid var(--erp-border-1);
+	box-shadow: var(--erp-shadow-1);
+	border-radius: var(--erp-radius-lg);
+}
+
+/* 链接统一品牌色 */
+.desk a:not(.btn):not(.no-hover):not(.list-link):not(.desktop-icon),
+.page-content a {
+	color: var(--erp-primary);
+}
+.desk a:not(.btn):hover {
+	color: var(--erp-primary-hover);
+}
+
+/* 首页磁贴标签：深灰文本（03-components 2.2），不用链接蓝 */
+a.desktop-icon {
+	color: var(--erp-text-2);
+}
+a.desktop-icon:hover {
+	color: var(--erp-text-1);
+}

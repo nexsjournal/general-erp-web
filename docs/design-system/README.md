@@ -25,7 +25,7 @@
 
 | 挂载点 | 用途 |
 |---|---|
-| `app_include_css` | 全站 CSS：定义 `--erp-*` 设计变量（色彩/间距/圆角/阴影），覆盖 frappe 主题变量 |
+| `app_include_css` | 全站 CSS：定义 `--erp-*` 设计变量（色彩/间距/圆角/阴影），覆盖 frappe 主题变量。**已落地**：`apps/general_erp/general_erp/public/css/erp_theme.bundle.css`（token 定义 + frappe 16 根变量重映射 + 组件精修），改完跑 `bench build --app general_erp` 生效 |
 | `app_include_js` | 全局 JS：增强列表视图行高、KPI 卡渲染等 |
 | Desk Theme（系统设置 → Desk 主题） | 主色/字体等官方可配项，优先用它，能少写 CSS 就少写 |
 | 自定义 Workspace / 报表 / 仪表盘 | 按 07-data-viz.md 的图表与 KPI 规范编排 |
