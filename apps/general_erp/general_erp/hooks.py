@@ -51,7 +51,10 @@ scheduler_events = {
 # workspace_items = ...
 
 # 基础数据初始化（安装后自动播种，幂等）
-after_install = "general_erp.seed_data.after_install"
+after_install = "general_erp.general_erp.site_setup.after_install"
+
+# 每次 migrate 后同步自定义字段/Web Form（代码引用的结构随代码走，不靠手工加库）
+after_migrate = "general_erp.general_erp.site_setup.after_migrate"
 
 # Jinja 模板扩展方法（打印格式等模板中可直接调用 money_in_words_cn(金额, 币种)）
 jinja = {
