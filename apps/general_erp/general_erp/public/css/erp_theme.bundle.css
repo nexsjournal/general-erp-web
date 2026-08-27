@@ -283,19 +283,25 @@ body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
 }
 .list-row-head {
 	background: var(--erp-bg-card);
-	border-bottom: 1px solid var(--erp-border-1);
+	border-bottom: 0.5px solid var(--erp-border-1);
 	/* 官方表头自带 8px 内缩，会与数据列错位，清零对齐 */
 	padding-inline: 0;
+	/* 官方 10px 圆角会在四角露出背后底色（hover 时呈灰角），清零 */
+	border-radius: 0;
 }
 /* 行与行之间用浅色细线区分：去掉官方行的圆角/内缩（hover 呈「浮起卡片」感），
    悬停改为整行平铺淡色条；右侧 sticky 区域随行同底，去掉其专属灰底与蓝色分隔线 */
 .list-row-container {
-	border-bottom: 1px solid var(--erp-border-light);
+	border-bottom: 0.5px solid var(--erp-border-light);
 	border-radius: 0;
 	padding-inline: 0;
 }
 .list-row-container:hover {
 	background: var(--erp-bg-hover);
+}
+/* 表头行不参与悬停淡色条（官方 cursor 亦为 default），避免圆角残留的灰角 */
+.list-row-container:has(> .list-row-head):hover {
+	background: transparent;
 }
 .list-row .level-right,
 .list-row-head .level-right {
