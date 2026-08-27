@@ -56,7 +56,22 @@ def main():
             fy.append("companies", {"company": c["name"]})
         fy.insert(ignore_permissions=True)
 
-    # 4) 标记 setup wizard 完成（否则每次登录被拉进 /desk/setup-wizard）
+    # 4) 语言/地区默认（否则界面英文）
+    ss = frappe.get_doc("System Settings")
+    if not ss.language:
+        ss.update({"language": "zh", "country": "China",
+                   "time_zone": "Asia/Shanghai", "currency": "CNY"})
+        ss.save(ignore_permissions=True)
+    admin = frappe.get_doc("User", "Administrator")
+    if not admin.language:
+        admin.language = "zh"
+    if not admin.default_app:
+        admin.default_app = "erpnext"
+    if not admin.default_workspace:
+        admin.default_workspace = "外贸工作台"
+    admin.save(ignore_permissions=True)
+
+    # 5) 标记 setup wizard 完成（否则每次登录被拉进 /desk/setup-wizard）
     #    v16 的 is_setup_complete() 要求 frappe+erpnext 两个 app 的 is_setup_complete=1
     for _app in ("frappe", "erpnext"):
         frappe.db.set_value("Installed Application", {"app_name": _app}, "is_setup_complete", 1)
