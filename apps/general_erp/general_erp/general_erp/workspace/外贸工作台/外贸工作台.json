@@ -384,7 +384,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "生产",
-   "link_count": 0,
+   "link_count": 1,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -420,6 +420,17 @@
    "link_to": "BOM",
    "link_type": "DocType",
    "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "onboard": 0,
+   "dependencies": "",
+   "label": "生产任务单",
+   "link_to": "Work Order",
+   "link_type": "DocType",
    "type": "Link"
   },
   {
@@ -532,7 +543,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "OA",
-   "link_count": 0,
+   "link_count": 1,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -546,6 +557,17 @@
    "link_to": "File",
    "link_type": "DocType",
    "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "onboard": 0,
+   "dependencies": "",
+   "label": "文件管理",
+   "link_to": "File",
+   "link_type": "DocType",
    "type": "Link"
   },
   {
@@ -649,7 +671,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "设置",
-   "link_count": 0,
+   "link_count": 1,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -796,6 +818,17 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "onboard": 0,
+   "dependencies": "",
+   "label": "用户参数",
+   "link_to": "User",
+   "link_type": "DocType",
+   "type": "Link"
   }
  ],
  "modified": "2026-08-27 18:30:00.000000",
@@ -877,20 +910,22 @@
    "idx": 5
   },
   {
-   "type": "Page",
-   "link_to": "customer-follow-up",
+   "type": "DocType",
+   "link_to": "Customer Follow Up",
    "label": "客户跟进",
    "icon": "clock",
    "color": "#059669",
-   "idx": 6
+   "idx": 6,
+   "link_type": "DocType"
   },
   {
-   "type": "Page",
-   "link_to": "announcement",
+   "type": "DocType",
+   "link_to": "Announcement",
    "label": "公告",
    "icon": "bell",
    "color": "#d97706",
-   "idx": 7
+   "idx": 7,
+   "link_type": "DocType"
   },
   {
    "type": "Report",
