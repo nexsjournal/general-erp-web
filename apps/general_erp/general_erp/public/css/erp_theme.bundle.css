@@ -284,6 +284,8 @@ body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
 .list-row-head {
 	background: var(--erp-bg-card);
 	border-bottom: 1px solid var(--erp-border-1);
+	/* 官方表头自带 8px 内缩，会与数据列错位，清零对齐 */
+	padding-inline: 0;
 }
 /* 行与行之间用浅色细线区分：去掉官方行的圆角/内缩（hover 呈「浮起卡片」感），
    悬停改为整行平铺淡色条；右侧 sticky 区域随行同底，去掉其专属灰底与蓝色分隔线 */
@@ -317,6 +319,15 @@ body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
 }
 .layout-main:has(.form-page) .layout-side-section {
 	border-left: 1px solid var(--erp-border-light);
+}
+/* 表单页分割线：统一最浅 1px 线（白底上降对比，视觉更细） */
+.form-tabs-list,
+.form-section.card-section,
+.form-dashboard-section {
+	border-bottom-color: var(--erp-border-light);
+}
+.layout-side-section .border-bottom {
+	border-bottom-color: var(--erp-border-light) !important;
 }
 
 /* 首页文件夹磁贴（如「会计」）：渲染为标准蓝底白文件夹图标，
