@@ -153,9 +153,6 @@
 
 	/* 圆角（疏朗版：10px 基础，卡片经 --erp-radius-lg 提到 16px） */
 	--border-radius: 10px;
-
-	/* 侧边栏宽度：官方 220px 对中文菜单偏窄，加宽到 260px（疏朗） */
-	--sidebar-width: 260px;
 }
 
 /* ---------- 3. 组件级精修 ---------- */
@@ -265,6 +262,14 @@ body {
 /* 徽标/标签：pill 化（参考图状态胶囊） */
 .indicator-pill {
 	border-radius: var(--erp-radius-full);
+}
+
+/* 侧边栏菜单疏朗化：单项高度 28 → 34px，组与组之间拉开间距 */
+.body-sidebar .standard-sidebar-item .item-anchor {
+	height: 34px;
+}
+.body-sidebar .sidebar-item-container.section-item {
+	margin-top: 10px;
 }
 
 /* ---------- 4. 布局：workspace（Desk Page）通栏 ---------- */
