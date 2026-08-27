@@ -24,8 +24,14 @@ const MC = {
 		const out = [];
 		if (m.folder === '收件箱' || m.folder === '草稿箱') {
 			if (m.status === '待处理') out.push(btn(__('待审批'), 'pending'));
+if (m.status === '待审批') out.push(btn(__('审批通过'), 'approve'));
+out.push(btn(__('分发'), 'distribute'));
+out.push(btn(__('建档'), 'file'));
+out.push(btn(__('归档'), 'archive'));
 			out.push(btn(__('删除'), 'trash'));
 		} else if (m.folder === '已发送') {
+			out.push(btn(__('分发'), 'distribute'));
+			out.push(btn(__('归档'), 'archive'));
 			out.push(btn(__('删除'), 'trash'));
 		} else if (m.folder === '已删除') {
 			out.push(btn(__('恢复'), 'restore'));
@@ -102,6 +108,10 @@ const MC = {
 			const m = this.all.find((x) => x.name === name);
 			if (act === 'done') this.update(name, { status: '已处理' });
 			else if (act === 'pending') this.update(name, { status: '待审批' });
+			else if (act === 'approve') this.approve(name);
+			else if (act === 'distribute') this.distribute(name);
+			else if (act === 'file') this.fileToCustomer(name);
+			else if (act === 'archive') this.archive(name);
 			else if (act === 'trash') this.update(name, { folder: '已删除', status: '已处理' });
 			else if (act === 'restore') {
 				const folder = (m && m.restore_folder) || (m && m.sender === frappe.session.user ? '已发送' : '收件箱');
@@ -120,6 +130,64 @@ const MC = {
 			.then(() => this.refresh());
 	},
 
+
+	approve(name) {
+		frappe.xcall('general_erp.general_erp.mail_ops.approve_mail', { name }).then(() => this.refresh());
+	},
+
+	distribute(name) {
+		const d = new frappe.ui.Dialog({
+			title: __('分发邮件'),
+			fields: [{ fieldname: 'to_user', label: __('分发给'), fieldtype: 'Link', options: 'User', reqd: 1 }],
+			primary_action: (v) => {
+				frappe.xcall('general_erp.general_erp.mail_ops.distribute_mail', { name, to_user: v.to_user })
+					.then(() => { d.hide(); this.refresh(); })
+					.catch(() => frappe.msgprint(__('分发失败')));
+			},
+			primary_action_label: __('分发'),
+		});
+		d.show();
+	},
+
+	fileToCustomer(name) {
+		const d = new frappe.ui.Dialog({
+			title: __('邮件建档到客户'),
+			fields: [{ fieldname: 'customer', label: __('客户'), fieldtype: 'Link', options: 'Customer', reqd: 1 }],
+			primary_action: (v) => {
+				frappe.xcall('general_erp.general_erp.mail_ops.file_mail_to_customer', { name, customer: v.customer })
+					.then(() => { d.hide(); this.refresh(); })
+					.catch(() => frappe.msgprint(__('建档失败')));
+			},
+			primary_action_label: __('建档'),
+		});
+		d.show();
+	},
+
+	archive(name) {
+		frappe.xcall('general_erp.general_erp.mail_ops.archive_mail', { name }).then(() => this.refresh());
+	},
+
+	exportMails() {
+		frappe.xcall('general_erp.general_erp.mail_ops.export_mails', { limit: 500 })
+			.then((url) => { if (url) window.open(url, '_blank'); })
+			.catch(() => frappe.msgprint(__('导出失败')));
+	},
+
+	showSubordinate() {
+		frappe.xcall('general_erp.general_erp.mail_ops.get_subordinate_mails', { limit: 100 }).then((rows) => {
+			const d = new frappe.ui.Dialog({
+				title: __('下属邮件（本部门，只读）'),
+				width: '70%',
+				fields: [{ fieldname: 'sub_view', fieldtype: 'HTML', reqd: 0 }],
+			});
+			const items = (rows || []).map((r) =>
+				"<div class='mc-sub-row'><b>" + (r.subject || '') + "</b> · " + (r.sender_name || r.sender || '') + " [" + __(r.folder || '') + '/' + __(r.status || '') + "]</div>"
+				).join('') || "<div class='mc-empty'>" + __("部门暂无邮件") + "</div>";
+			d.show();
+			$(d.fields_dict.sub_view.wrapper).html(items);
+		});
+	},
+
 	openCompose() {
 		const d = new frappe.ui.Dialog({
 			title: __('新邮件'),
@@ -134,7 +202,10 @@ const MC = {
 						method: 'general_erp.general_erp.doctype.mail.mail.create_mail',
 						args: { ...values, folder: '已发送', sender: frappe.session.user, status: '已处理' },
 					})
-					.then(() => {
+					.then((res) => {
+						if (res && res.message && res.message.name) {
+							frappe.xcall('general_erp.general_erp.mail_ops.auto_approval_check', { name: res.message.name }).catch(() => {});
+						}
 						d.hide();
 						this.tab = '已发送';
 						this.refresh();
@@ -175,7 +246,7 @@ function make(wrapper) {
 				<div class="mail-center-title">${__("邮件中心")}</div>
 				<div class="mail-center-sub">${__("内部协作邮件 · 待处理 / 收件箱 / 已发送 / 草稿箱 / 待审批 / 已删除")}</div>
 			</div>
-			<button class="btn btn-primary btn-sm mc-compose">${__("新邮件")}</button>
+			<div class="mc-toolbar"><button class="btn btn-primary btn-sm mc-compose">${__("新邮件")}</button><button class="btn btn-sm mc-export">${__("导出")}</button><button class="btn btn-sm mc-subordinate">${__("下属邮件")}</button></div>
 		</div>
 		<div class="mc-tabs">${tabsHtml}</div>
 		<div class="mc-card">
@@ -190,6 +261,10 @@ function make(wrapper) {
 	wrapper.append(wrap);
 	MC.bindEvents(wrapper);
 	wrap.querySelector('.mc-compose').addEventListener('click', () => MC.openCompose());
+	const exBtn = wrap.querySelector('.mc-export');
+	if (exBtn) exBtn.addEventListener('click', () => MC.exportMails());
+	const subBtn = wrap.querySelector('.mc-subordinate');
+	if (subBtn) subBtn.addEventListener('click', () => MC.showSubordinate());
 	MC.refresh();
 }
 

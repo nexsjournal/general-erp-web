@@ -1,5 +1,7 @@
 # ===== bench 全部为生成物（换机后由 scripts/setup_bench.sh 重建；基座 frappe/erpnext 由其拉取） =====
 bench/
+bench.broken.*/
+bench.partial*/
 
 # ===== apps 下只跟踪我们的自定义 app =====
 apps/*

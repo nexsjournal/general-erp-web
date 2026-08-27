@@ -125,6 +125,142 @@ def sync_company_fields():
     frappe.db.commit()
 
 
+# ============================================================
+# 采购订单审批 Workflow（T03，P0 采购模块）
+# ============================================================
+PO_WORKFLOW_STATES = [
+    ("草稿", "0", "Sales"),
+    ("审批中", "0", "Sales Manager"),
+    ("已审批", "1", "System Manager"),
+    ("已驳回", "0", "Sales"),
+]
+PO_WORKFLOW_TRANSITIONS = [
+    ("草稿", "提交审批", "审批中", "Sales"),
+    ("审批中", "审批", "已审批", "Sales Manager"),
+    ("审批中", "驳回", "已驳回", "Sales Manager"),
+    ("已驳回", "重新提交", "审批中", "Sales"),
+]
+
+
+def _ensure_workflow_states(states):
+    """v16: Workflow State 是独立 DocType，Link 引用需先存在。"""
+    for state_name, doc_status, role in states:
+        if not frappe.db.exists("Workflow State", state_name):
+            st = frappe.new_doc("Workflow State")
+            st.workflow_state_name = state_name
+            st.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+def _ensure_workflow_actions(actions):
+    """v16: Workflow Action Master 独立 DocType。"""
+    for a in set(actions):
+        if not frappe.db.exists("Workflow Action Master", a):
+            am = frappe.new_doc("Workflow Action Master")
+            am.workflow_action_name = a
+            am.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+def sync_po_workflow():
+    """采购订单审批流（v16 语义：独立 State/Action Master + 单角色 Link）。"""
+    wf_name = "采购订单审批"
+    if frappe.db.exists("Workflow", wf_name):
+        return
+    _ensure_workflow_states(PO_WORKFLOW_STATES)
+    _ensure_workflow_actions([t[1] for t in PO_WORKFLOW_TRANSITIONS])
+    wf = frappe.new_doc("Workflow")
+    wf.workflow_name = wf_name
+    wf.document_type = "Purchase Order"
+    wf.workflow_state_field = "workflow_state"
+    wf.is_active = 1
+    wf.override_status = 0
+    wf.send_email_alert = 0
+    for state_name, doc_status, role in PO_WORKFLOW_STATES:
+        wf.append("states", {
+            "state": state_name, "doc_status": doc_status,
+            "allow_edit": role, "avoid_status_override": 0, "send_email": 0,
+            "is_optional_state": 0, "evaluate_as_expression": 0,
+        })
+    for state_name, action, next_state, allowed in PO_WORKFLOW_TRANSITIONS:
+        wf.append("transitions", {
+            "state": state_name, "action": action, "next_state": next_state,
+            "allowed": allowed, "allow_self_approval": 1, "send_email_to_creator": 0,
+        })
+    wf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+# ============================================================
+# 商机批复视图 + 状态切换（T03）
+# ============================================================
+OPP_QUICK_LISTS = [
+    ("商机 - 待批复", "待批复"),
+    ("商机 - 已批复", "已批复"),
+    ("商机 - 待回复", "待回复"),
+]
+
+
+def sync_opportunity_quick_lists():
+    """商机三状态筛选视图（v16 无 Quick List doctype，用 List Filter 保存筛选替代，全局可见）。"""
+    for title, value in OPP_QUICK_LISTS:
+        if frappe.db.exists(
+            "List Filter", {"filter_name": title, "reference_doctype": "Opportunity"}
+        ):
+            continue
+        lf = frappe.new_doc("List Filter")
+        lf.filter_name = title
+        lf.reference_doctype = "Opportunity"
+        lf.for_user = ""
+        lf.filters = frappe.as_json(
+            [{"fieldname": "approval_status", "operator": "=", "value": value}]
+        )
+        lf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+@frappe.whitelist()
+def set_opportunity_approval_status(name, status):
+    """商机批复状态切换（待批复→已批复→待回复），留痕。"""
+    if status not in ("待批复", "已批复", "待回复"):
+        frappe.throw("无效的批复状态")
+    doc = frappe.get_doc("Opportunity", name)
+    old = doc.approval_status
+    doc.approval_status = status
+    from frappe.desk.form.utils import add_comment
+    add_comment(
+        "Opportunity", name,
+        "批复状态：{} → {}".format(old or "（空）", status),
+        comment_email=frappe.session.user, comment_by=frappe.session.user,
+    )
+    doc.save(ignore_permissions=True)
+    frappe.db.commit()
+    return True
+
+
+def sync_mail_fields():
+    """Mail 增强字段：分发/归档客户/审批规则（T04）。"""
+    specs = [
+        ("distributed_to", "已分发给", "Link", "User", 0),
+        ("archive_customer", "归档客户", "Link", "Customer", 0),
+        ("approval_rule", "审批规则命中", "Data", None, 0),
+    ]
+    for name, label, ftype, options, in_list in specs:
+        if frappe.db.get_value("Custom Field", {"dt": "Mail", "fieldname": name}):
+            continue
+        cf = frappe.new_doc("Custom Field")
+        cf.dt = "Mail"
+        cf.fieldname = name
+        cf.label = label
+        cf.fieldtype = ftype
+        cf.options = options
+        cf.in_list_view = in_list
+        cf.reqd = 0
+        cf.translatable = 1
+        cf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
 def sync_site_setup(with_seed=False):
     """总入口：after_install 与 after_migrate 调用，幂等。"""
     sync_customer_fields()
@@ -132,6 +268,9 @@ def sync_site_setup(with_seed=False):
     sync_website_lead_form()
     sync_opportunity_fields()
     sync_company_fields()
+    sync_po_workflow()
+    sync_opportunity_quick_lists()
+    sync_mail_fields()
     if with_seed:
         from general_erp.general_erp.seed_data import seed_base_data
         if frappe.db.exists("DocType", "Port"):
