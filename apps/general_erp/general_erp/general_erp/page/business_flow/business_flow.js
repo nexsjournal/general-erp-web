@@ -1,4 +1,5 @@
 /* 业务流程展示页（演示用）：按功能清单梳理核心业务流程，串联现有单据 */
+/* BF_PAGE_V2 */
 
 const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 

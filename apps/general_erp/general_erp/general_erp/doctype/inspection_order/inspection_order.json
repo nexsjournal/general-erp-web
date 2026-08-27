@@ -27,27 +27,27 @@
    "default": "QC-.YYYY.-.###",
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "label": "\u7cfb\u5217",
+   "label": "系列",
    "options": "QC-.YYYY.-.###",
    "reqd": 1
   },
   {
    "fieldname": "section_main",
    "fieldtype": "Section Break",
-   "label": "\u9a8c\u8d27\u4fe1\u606f"
+   "label": "验货信息"
   },
   {
    "fieldname": "purchase_order",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "\u91c7\u8d2d\u8ba2\u5355",
+   "label": "采购订单",
    "options": "Purchase Order",
    "reqd": 1
   },
   {
    "fieldname": "purchase_receipt",
    "fieldtype": "Link",
-   "label": "\u91c7\u8d2d\u6536\u8d27\u5355",
+   "label": "采购收货单",
    "options": "Purchase Receipt"
   },
   {
@@ -55,54 +55,54 @@
    "fieldname": "supplier",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "\u4f9b\u5e94\u5546",
+   "label": "供应商",
    "options": "Supplier"
   },
   {
    "fieldname": "inspection_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "\u9a8c\u8d27\u65e5\u671f",
+   "label": "验货日期",
    "reqd": 1
   },
   {
    "fieldname": "inspector",
    "fieldtype": "Link",
-   "label": "\u9a8c\u8d27\u4eba",
+   "label": "验货人",
    "options": "User"
   },
   {
    "fieldname": "conclusion",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "\u68c0\u9a8c\u7ed3\u8bba",
-   "options": "\u5408\u683c\n\u4e0d\u5408\u683c\n\u8ba9\u6b65\u63a5\u6536"
+   "label": "检验结论",
+   "options": "合格\n不合格\n让步接收"
   },
   {
    "fieldname": "exception_handling",
    "fieldtype": "Select",
-   "label": "\u5f02\u5e38\u5904\u7406",
-   "options": "\u65e0\n\u9000\u8d27\n\u8fd4\u5de5\n\u8ba9\u6b65\u63a5\u6536"
+   "label": "异常处理",
+   "options": "无\n退货\n返工\n让步接收"
   },
   {
    "fieldname": "result_details",
    "fieldtype": "Small Text",
-   "label": "\u7ed3\u8bba\u8bf4\u660e"
+   "label": "结论说明"
   },
   {
    "fieldname": "attachment",
    "fieldtype": "Attach",
-   "label": "\u9644\u4ef6"
+   "label": "附件"
   },
   {
    "fieldname": "items_sb",
    "fieldtype": "Section Break",
-   "label": "\u68c0\u9a8c\u9879\u76ee"
+   "label": "检验项目"
   },
   {
    "fieldname": "items",
    "fieldtype": "Table",
-   "label": "\u68c0\u9a8c\u9879\u76ee",
+   "label": "检验项目",
    "options": "Inspection Item",
    "reqd": 1
   }
@@ -110,7 +110,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-27 00:57:08.698359",
+ "modified": "2026-08-27 14:30:00.000000",
  "modified_by": "Administrator",
  "module": "General ERP",
  "name": "Inspection Order",
@@ -136,6 +136,38 @@
    "read": 1,
    "report": 1,
    "role": "All"
+  },
+  {
+   "create": 1,
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase User",
+   "share": 0,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 0
   }
  ],
  "row_format": "Dynamic",

@@ -26,20 +26,20 @@
    "default": "EXP-.YYYY.-.###",
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "label": "\u7cfb\u5217",
+   "label": "系列",
    "options": "EXP-.YYYY.-.###",
    "reqd": 1
   },
   {
    "fieldname": "section_main",
    "fieldtype": "Section Break",
-   "label": "\u62a5\u9500\u4fe1\u606f"
+   "label": "报销信息"
   },
   {
    "fieldname": "expense_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "\u8d39\u7528\u65e5\u671f",
+   "label": "费用日期",
    "reqd": 1
   },
   {
@@ -47,7 +47,7 @@
    "fieldname": "applicant",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "\u7533\u8bf7\u4eba",
+   "label": "申请人",
    "options": "User",
    "reqd": 1
   },
@@ -55,45 +55,45 @@
    "fieldname": "expense_type",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "\u8d39\u7528\u7c7b\u578b",
-   "options": "\u5dee\u65c5\n\u62db\u5f85\n\u8fd0\u8d39\n\u6d77\u8fd0\u8d39\u53ca\u6e2f\u6742\n\u62a5\u5173\u62a5\u68c0\n\u901a\u8baf\n\u529e\u516c\n\u5176\u4ed6",
+   "label": "费用类型",
+   "options": "差旅\n招待\n运费\n海运费及港杂\n报关报检\n通讯\n办公\n其他",
    "reqd": 1
   },
   {
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "\u91d1\u989d",
+   "label": "金额",
    "reqd": 1
   },
   {
    "fieldname": "sales_order",
    "fieldtype": "Link",
-   "label": "\u5f52\u96c6\u8ba2\u5355",
+   "label": "归集订单",
    "options": "Sales Order"
   },
   {
    "fieldname": "project",
    "fieldtype": "Link",
-   "label": "\u5f52\u96c6\u9879\u76ee",
+   "label": "归集项目",
    "options": "Project"
   },
   {
    "fieldname": "description",
    "fieldtype": "Small Text",
-   "label": "\u8bf4\u660e",
+   "label": "说明",
    "reqd": 1
   },
   {
    "fieldname": "attachment",
    "fieldtype": "Attach",
-   "label": "\u53d1\u7968/\u51ed\u8bc1"
+   "label": "发票/凭证"
   },
   {
    "fieldname": "workflow_state",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "\u5ba1\u6279\u72b6\u6001",
+   "label": "审批状态",
    "read_only": 1
   },
   {
@@ -111,7 +111,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-08-27 00:57:08.762239",
+ "modified": "2026-08-27 14:30:00.000000",
  "modified_by": "Administrator",
  "module": "General ERP",
  "name": "Expense Reimbursement",
@@ -140,6 +140,24 @@
    "read": 1,
    "report": 1,
    "role": "All"
+  },
+  {
+   "create": 1,
+   "email": 0,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Employee",
+   "share": 0,
+   "submit": 1
+  },
+  {
+   "email": 0,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 0
   }
  ],
  "row_format": "Dynamic",

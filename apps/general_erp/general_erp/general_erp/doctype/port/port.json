@@ -49,7 +49,7 @@
  "index_web_pages_for_search": 1,
  "istable": 0,
  "links": [],
- "modified": "2026-08-26 00:00:00.000000",
+ "modified": "2026-08-27 14:30:00.000000",
  "modified_by": "Administrator",
  "module": "General ERP",
  "name": "Port",
@@ -76,6 +76,27 @@
    "role": "All",
    "share": 0,
    "write": 0
+  },
+  {
+   "email": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 0
+  },
+  {
+   "email": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase User",
+   "share": 0
+  },
+  {
+   "email": 0,
+   "read": 1,
+   "report": 1,
+   "role": "Stock User",
+   "share": 0
   }
  ],
  "sort_field": "modified",

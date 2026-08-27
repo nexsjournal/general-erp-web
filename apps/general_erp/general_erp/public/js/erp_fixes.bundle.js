@@ -27,3 +27,39 @@
 		return typeof __ === "function" && t ? __(t) : t;
 	};
 })();
+
+// frappe 的 doctype 路由表按小写 slug 注册（setup() 内 this.routes[slug]），
+// 大写/含空格路由（/desk/Customer、set_route(['desk','Sales Order'])）匹配不到，
+// 会回退到"页面"查找并报"页面 xxx 未找到"。这里在路由解析前统一归一化为 slug。
+(function () {
+	if (!frappe.router || !frappe.router.convert_to_standard_route) return;
+	const _orig = frappe.router.convert_to_standard_route;
+	frappe.router.convert_to_standard_route = function (route) {
+		try {
+			if (route && route.length && this.routes) {
+				const seg = route[0];
+				if (typeof seg === "string" && !this.routes[seg]) {
+					const slug = seg.toLowerCase().replace(/ /g, "-");
+					if (slug !== seg && this.routes[slug]) {
+						route[0] = slug;
+					}
+				}
+			}
+		} catch (e) {
+			// 补丁异常不影响主路由流程
+		}
+		return _orig.call(this, route);
+	};
+})();
+
+// frappe desk 将页面脚本缓存于 localStorage（_page:<page>）且无版本校验，
+// 页面脚本更新后旧缓存会一直生效。检测到无新版本标记的旧缓存时删除，强制拉取最新。
+(function () {
+	try {
+		const key = "_page:business-flow";
+		const cached = localStorage.getItem(key);
+		if (cached && cached.indexOf("BF_PAGE_V2") === -1) {
+			localStorage.removeItem(key);
+		}
+	} catch (e) {}
+})();
