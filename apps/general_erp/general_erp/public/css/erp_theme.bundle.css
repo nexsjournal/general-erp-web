@@ -271,3 +271,61 @@ body {
 body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
 	max-width: none;
 }
+
+/* ---------- 5. 页面底色统一（2026-08 二轮：消除白/灰硬切） ---------- */
+
+/* 列表页：整块白画布，与顶部工具栏连成一体，表头用分割线而不是色块 */
+.layout-main:has(.frappe-list) {
+	background: var(--erp-bg-card);
+}
+.frappe-list {
+	background: var(--erp-bg-card);
+}
+.list-row-head {
+	background: transparent;
+	border-bottom: 1px solid var(--erp-border-1);
+}
+.list-row-container {
+	border-bottom: 1px solid var(--erp-border-light);
+}
+.list-row-container:hover {
+	background: var(--erp-bg-hover);
+}
+
+/* 表单页：整页白画布（表单/评论/活动/右侧栏统一底色，右侧栏用分割线分层） */
+.layout-main:has(.form-page) {
+	background: var(--erp-bg-card);
+}
+.layout-main:has(.form-page) .layout-side-section {
+	border-left: 1px solid var(--erp-border-light);
+}
+
+/* 首页文件夹磁贴（如「会计」）：渲染为标准蓝底白文件夹图标，
+   官方 folder-icon 是空 div + 浅灰底，视觉上是缺失的扁块 */
+.desktop-wrapper .icons-container a.desktop-icon > .icon-container.folder-icon {
+	height: 52px !important;
+	min-height: 52px;
+	width: 52px;
+	background-color: #0289f7 !important;
+	border-radius: 14px;
+	padding: 0 !important;
+	overflow: hidden;
+}
+.desktop-wrapper .icons-container a.desktop-icon > .icon-container.folder-icon::before {
+	content: "";
+	display: block;
+	width: 26px;
+	height: 26px;
+	margin: auto;
+	background: center/contain no-repeat
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z'/%3E%3C/svg%3E");
+}
+.desktop-wrapper .icons-container a.desktop-icon > .icon-container.folder-icon .icons-container {
+	display: none;
+}
+
+/* 磁贴图标芯片保持正方形（避免栅格压缩成扁块） */
+.desktop-wrapper .icons-container a.desktop-icon > .icon-container {
+	aspect-ratio: 1 / 1;
+	flex-shrink: 0;
+}

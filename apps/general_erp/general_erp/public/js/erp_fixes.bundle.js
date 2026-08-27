@@ -17,3 +17,13 @@
 		return r;
 	};
 })();
+
+// 表单右侧栏标题走 get_doc_title → String(doc.name)，不经翻译，
+// 导致单例 DocType（如 Global Defaults）标题显示英文。返回值统一走 __()。
+(function () {
+	const _orig = frappe.model.get_doc_title;
+	frappe.model.get_doc_title = function (doc) {
+		const t = _orig(doc);
+		return typeof __ === "function" && t ? __(t) : t;
+	};
+})();

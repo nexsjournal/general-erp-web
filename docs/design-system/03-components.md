@@ -95,3 +95,12 @@
 - Tabs（页级切换）：下划线式，20px 容器高，选中 14px/500 `--erp-primary` + 2px 底条（宽随文字，200ms 滑移）；
 - Segmented（卡内小范围切换，如参考图 Top Location / Age Range / Gender）：`--erp-bg-muted` 底圆角 8px 容器，选中项白底 + `--erp-shadow-1` + `--erp-text-1`，13px/500，切换 150ms；
 - 同层级 Tabs 与 Segmented 不混用。
+
+## 9. 页面底色与分型（2026-08 二轮）
+
+- 原则：同一页面内**一种画布色**，分层靠边框/分割线，不靠底色硬切（对齐 NetSuite/Salesforce/Ant Design 风格）；
+- **列表页**（`.frappe-list`）：整块白画布，与顶部工具栏连成一体；表头透明 + 1px 分割线（`--erp-border-1`），行分隔 `--erp-border-light`，行 hover `--erp-bg-hover`；禁止出现彩色底带（早期 `--erp-bg-page` 直铺列表区的做法已废弃）；
+- **表单页**（`.form-page`）：整页白画布（表单/评论/活动区同底），右侧栏用 1px 左分割线分层（`.layout-side-section` border-left），不再白块+灰底拼贴；
+- **Workspace / 数据面板**：保持灰底画布（`--erp-bg-page`）+ 白卡片，与列表/表单页区分场景；
+- **首页文件夹磁贴**（如「会计」，`icon_type=Folder`）：官方渲染是浅灰底空盒 + 5px 微缩图标（视觉缺失），覆盖为 52px 蓝底（#0289f7，与其他 solid 磁贴同色）白文件夹图标，隐藏内部微缩网格；官方 `.folder-icon` 的 `!important` 底色用更高特异性 + `!important` 对抗；
+- 实现：`public/css/erp_theme.bundle.css` 第 5 节（`:has()` 定位分型）；JS 侧 `erp_fixes.bundle.js` 补丁 `get_doc_title` 返回值走 `__()`（单例 DocType 右侧栏标题本地化）。

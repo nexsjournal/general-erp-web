@@ -144,3 +144,16 @@ Inspection Item,验货明细行
 Port,港口
 Incoterms,贸易术语
 HS Code,HS 编码
+Global Defaults,全局默认值
+Last Edited By You,最后由你编辑
+Use Posting Datetime for Naming Documents,使用过账日期命名单据
+"When checked, the system will use the posting datetime of the document for naming the document instead of the creation datetime of the document.",勾选后，系统将使用单据的过账日期（而非创建日期）命名单据。
+Add Sidebar Item,添加侧边栏项
+Discard,放弃
+Save,保存
+Save Current Filter,保存当前筛选器
+Begin typing for results.,开始输入以查看结果。
+Tax Template,税模板
+Freeze,冻结
+Unfreeze,取消冻结
+Sales & Purchase,销售与采购
