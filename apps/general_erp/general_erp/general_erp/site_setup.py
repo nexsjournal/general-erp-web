@@ -238,6 +238,27 @@ def set_opportunity_approval_status(name, status):
     return True
 
 
+def sync_mail_account_rate_limits():
+    """营销账号频率限制：日发送上限、单收件人上限（T06）。0=不限制。"""
+    specs = [
+        ("daily_send_limit", "日发送上限", "Int", 0),
+        ("per_recipient_limit", "单收件人上限", "Int", 0),
+    ]
+    for fieldname, label, ftype, in_list in specs:
+        if frappe.db.get_value("Custom Field", {"dt": "Mail Account", "fieldname": fieldname}):
+            continue
+        cf = frappe.new_doc("Custom Field")
+        cf.dt = "Mail Account"
+        cf.fieldname = fieldname
+        cf.label = label
+        cf.fieldtype = ftype
+        cf.in_list_view = in_list
+        cf.reqd = 0
+        cf.translatable = 0
+        cf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
 def sync_mail_fields():
     """Mail 增强字段：分发/归档客户/审批规则（T04）。"""
     specs = [
@@ -270,6 +291,7 @@ def sync_site_setup(with_seed=False):
     sync_company_fields()
     sync_po_workflow()
     sync_opportunity_quick_lists()
+    sync_mail_account_rate_limits()
     sync_mail_fields()
     if with_seed:
         from general_erp.general_erp.seed_data import seed_base_data
