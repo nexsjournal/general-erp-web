@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("员工业绩排行")
 	"""按客户负责人排名：客户数、跟进数、订单数、订单额（已提交销售订单）。"""
 	rows = frappe.db.sql(
 		"""SELECT coalesce(c.sales_owner, '（未分配）') AS owner,

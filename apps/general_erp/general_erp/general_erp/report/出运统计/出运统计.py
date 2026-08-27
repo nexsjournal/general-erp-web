@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("出运统计")
 	filters = frappe._dict(filters or {})
 	if not filters.get("from_date"):
 		filters["from_date"] = frappe.utils.add_years(frappe.utils.nowdate(), -1)

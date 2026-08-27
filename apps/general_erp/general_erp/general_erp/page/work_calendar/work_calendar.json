@@ -1,0 +1,19 @@
+{
+ "doctype": "Page",
+ "name": "work-calendar",
+ "owner": "Administrator",
+ "creation": "2026-08-27 18:00:00.000000",
+ "modified": "2026-08-27 18:00:00.000000",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "system_page": 0,
+ "page_name": "work-calendar",
+ "title": "工作日历",
+ "icon": "calendar",
+ "module": "General ERP",
+ "standard": "Yes",
+ "page_html": null,
+ "restrict_to_domain": null,
+ "roles": []
+}

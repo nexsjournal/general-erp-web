@@ -30,8 +30,9 @@ def auto_pool_customers(days=None):
 	"""公海自动回收：N 天无跟进的私有客户移入公海（调度器每日执行）。"""
 	from frappe.utils import nowdate, add_days
 	from frappe.desk.form.utils import add_comment
+	from general_erp.general_erp.doctype.statistics_settings.statistics_settings import get_pool_days
 	if days is None:
-		days = 30
+		days = get_pool_days()
 	rows = frappe.db.sql("""
 		SELECT c.name
 		FROM `tabCustomer` c

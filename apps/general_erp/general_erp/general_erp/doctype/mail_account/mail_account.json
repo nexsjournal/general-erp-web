@@ -1,0 +1,152 @@
+{
+ "name": "Mail Account",
+ "autoname": "naming_series:",
+ "title_field": "email_id",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "__py__": "import frappe\n\nfrom frappe.model.document import Document\n\n\nclass MailAccount(Document):\n\t\"\"\"邮箱账号：员工 IMAP/SMTP 邮箱配置，密码加密存储。\"\"\"\n",
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "options": "MA-.####",
+   "reqd": 1,
+   "default": "MA-.####"
+  },
+  {
+   "fieldname": "acct_sb",
+   "fieldtype": "Section Break",
+   "label": "账号信息"
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "邮箱地址",
+   "reqd": 1,
+   "in_list_view": 1,
+   "options": "Email"
+  },
+  {
+   "fieldname": "owner_user",
+   "fieldtype": "Link",
+   "label": "归属员工",
+   "reqd": 1,
+   "options": "User",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Small Text",
+   "label": "签名"
+  },
+  {
+   "fieldname": "imap_sb",
+   "fieldtype": "Section Break",
+   "label": "IMAP 收件"
+  },
+  {
+   "fieldname": "imap_host",
+   "fieldtype": "Data",
+   "label": "IMAP 服务器",
+   "description": "如 imap.example.com，留空则不同步"
+  },
+  {
+   "fieldname": "imap_port",
+   "fieldtype": "Int",
+   "label": "端口",
+   "default": "993"
+  },
+  {
+   "fieldname": "imap_user",
+   "fieldtype": "Data",
+   "label": "IMAP 用户名",
+   "description": "留空则使用邮箱地址"
+  },
+  {
+   "fieldname": "imap_password",
+   "fieldtype": "Password",
+   "label": "IMAP 密码",
+   "description": "加密存储"
+  },
+  {
+   "fieldname": "use_ssl",
+   "fieldtype": "Check",
+   "label": "使用 SSL",
+   "default": "1"
+  },
+  {
+   "fieldname": "sync_sb",
+   "fieldtype": "Section Break",
+   "label": "同步与状态"
+  },
+  {
+   "fieldname": "sync_minutes",
+   "fieldtype": "Int",
+   "label": "同步间隔（分钟）",
+   "default": "5"
+  },
+  {
+   "fieldname": "last_sync_at",
+   "fieldtype": "Datetime",
+   "label": "上次同步时间",
+   "read_only": 1
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "启用同步",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "doctype": "DocType",
+ "module": "General ERP",
+ "owner": "Administrator",
+ "creation": "2026-08-27 18:00:00",
+ "modified": "2026-08-27 18:00:00",
+ "modified_by": "Administrator",
+ "engine": "InnoDB",
+ "istable": 0,
+ "editable_grid": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "field_order": [
+  "naming_series",
+  "acct_sb",
+  "email_id",
+  "owner_user",
+  "signature",
+  "imap_sb",
+  "imap_host",
+  "imap_port",
+  "imap_user",
+  "imap_password",
+  "use_ssl",
+  "sync_sb",
+  "sync_minutes",
+  "last_sync_at",
+  "enabled"
+ ]
+}

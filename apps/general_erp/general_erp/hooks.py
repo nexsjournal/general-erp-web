@@ -27,7 +27,17 @@ scheduler_events = {
     "daily": [
         # 公海自动回收：N 天无跟进的私有客户移入公海（docs/feature-requirements.md 4.4）
         "general_erp.general_erp.doctype.customer_follow_up.customer_follow_up.auto_pool_customers",
-    ]
+        # 工作检查提醒：检查日当天待检查任务发待办（4.1）
+        "general_erp.general_erp.doctype.work_check.work_check.remind_work_checks",
+        # 报表订阅推送：按频率/星期发送报表 CSV 邮件（4.11 统计设置）
+        "general_erp.general_erp.doctype.statistics_settings.statistics_settings.send_report_subscriptions",
+    ],
+    "cron": {
+        # IMAP 收件同步：每 5 分钟拉取启用邮箱的未读邮件（4.3 邮箱设置）
+        "*/5 * * * *": [
+            "general_erp.general_erp.mail_sync.fetch_incoming_mails",
+        ]
+    }
 }
 
 # 监听官方 DocType 事件（扩展 ERPNext 单据行为的标准方式，不改官方代码）

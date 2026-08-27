@@ -1,0 +1,13 @@
+.rs-wrap { padding: 20px 24px; max-width: 1100px; margin: 0 auto; }
+.rs-title { font-size: 20px; font-weight: 700; }
+.rs-subtitle { color: #8a94a6; font-size: 13px; margin-top: 4px; }
+.rs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.rs-grid .card { background: #fff; border: 1px solid #e8ebf1; border-radius: 10px; padding: 16px; }
+.rs-grid .card:last-child { grid-column: 1 / -1; }
+.rs-sec { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.rs-field { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; }
+.rs-field label { width: 90px; color: #555; flex: none; }
+.rs-select { flex: 1; max-width: 260px; padding: 6px 10px; border: 1px solid #e5e8ee; border-radius: 8px; font-size: 13px; }
+.rs-val { font-weight: 600; }
+.rs-quick { margin-top: 12px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
+@media (max-width: 900px) { .rs-grid { grid-template-columns: 1fr; } }

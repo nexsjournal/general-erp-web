@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("线索统计")
 	"""线索按被分发人统计：数量、已转化、转化率。"""
 	filters = frappe._dict(filters or {})
 	status_filter = "AND l.status = %(status)s" if filters.get("status") else ""

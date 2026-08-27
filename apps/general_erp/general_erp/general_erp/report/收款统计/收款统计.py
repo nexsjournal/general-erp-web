@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("收款统计")
 	filters = frappe._dict(filters or {})
 	if not filters.get("from_date"):
 		filters["from_date"] = frappe.utils.get_first_day(frappe.utils.nowdate())

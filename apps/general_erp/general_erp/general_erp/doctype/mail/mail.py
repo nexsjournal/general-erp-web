@@ -10,8 +10,13 @@ class Mail(Document):
 
 @frappe.whitelist()
 def create_mail(subject, folder, sender, recipient=None, body=None, status="已处理",
-		related_doctype=None, related_name=None):
-	"""创建邮件；folder=已发送 且指定收件人时，自动为收件人生成一条待处理收件。"""
+		related_doctype=None, related_name=None, track=0, from_address=None):
+	"""创建邮件；folder=已发送 且指定收件人时，自动为收件人生成一条待处理收件；track=1 时注入发送跟踪。"""
+	from general_erp.general_erp.mail_tracking import inject_tracking, make_tracking_id
+	tracking_id = None
+	if folder == "已发送" and track:
+		tracking_id = make_tracking_id("mail-" + subject + "-" + str(frappe.utils.now_datetime()))
+		body = inject_tracking(frappe.utils.get_url(), tracking_id, body)
 	m = frappe.new_doc("Mail")
 	m.update({
 		"subject": subject,
@@ -23,6 +28,9 @@ def create_mail(subject, folder, sender, recipient=None, body=None, status="已�
 		"related_doctype": related_doctype or None,
 		"related_name": related_name or None,
 		"sent_at": now_datetime() if folder == "已发送" else None,
+		"track": 1 if (folder == "已发送" and track) else 0,
+		"tracking_id": tracking_id,
+		"from_address": from_address or None,
 	})
 	m.insert(ignore_permissions=True)
 	if folder == "已发送" and recipient and recipient != sender:
@@ -53,7 +61,7 @@ def get_mails(folder=None, status=None, limit=100):
 	rows = frappe.get_all(
 		"Mail",
 		filters=filters,
-		fields=["name", "subject", "folder", "status", "sender", "recipient", "sent_at", "creation", "related_doctype", "related_name", "restore_folder", "restore_status"],
+		fields=["name", "subject", "folder", "status", "sender", "recipient", "sent_at", "creation", "related_doctype", "related_name", "restore_folder", "restore_status", "track", "opened", "clicked", "from_address"],
 		order_by="modified desc",
 		limit_page_length=int(limit or 100),
 	)

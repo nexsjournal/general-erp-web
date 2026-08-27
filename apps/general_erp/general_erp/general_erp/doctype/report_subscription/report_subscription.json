@@ -1,0 +1,55 @@
+{
+ "name": "Report Subscription",
+ "istable": 1,
+ "permissions": [],
+ "fields": [
+  {
+   "fieldname": "report",
+   "fieldtype": "Link",
+   "label": "报表",
+   "reqd": 1,
+   "options": "Report",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Link",
+   "label": "收件人",
+   "reqd": 1,
+   "options": "User",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "frequency",
+   "fieldtype": "Select",
+   "label": "频率",
+   "options": "每日\n每周\n每月",
+   "default": "每周",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "day_of_week",
+   "fieldtype": "Select",
+   "label": "星期",
+   "options": "Monday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday",
+   "default": "Monday",
+   "in_list_view": 1
+  }
+ ],
+ "doctype": "DocType",
+ "module": "General ERP",
+ "owner": "Administrator",
+ "creation": "2026-08-27 18:00:00",
+ "modified": "2026-08-27 18:00:00",
+ "modified_by": "Administrator",
+ "engine": "InnoDB",
+ "editable_grid": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "field_order": [
+  "report",
+  "recipient",
+  "frequency",
+  "day_of_week"
+ ]
+}

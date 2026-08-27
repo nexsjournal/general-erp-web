@@ -58,7 +58,7 @@
 	try {
 		const key = "_page:business-flow";
 		const cached = localStorage.getItem(key);
-		if (cached && cached.indexOf("BF_PAGE_V5") === -1) {
+		if (cached && cached.indexOf("BF_PAGE_V6") === -1) {
 			localStorage.removeItem(key);
 		}
 	} catch (e) {}
@@ -119,6 +119,19 @@
 					},
 				});
 				d.show();
+			});
+		},
+	});
+})();
+
+// 客户表单"360 视图"按钮：跳转客户 360 聚合页（跟进/商机/报价/订单/邮件）。
+(function () {
+	frappe.ui.form.on("Customer", {
+		refresh(frm) {
+			if (frm.doc.__islocal || !frm.doc.name) return;
+			frm.add_custom_button(__("360 视图"), () => {
+				frappe.route_options = { customer: frm.doc.name };
+				frappe.set_route("desk", "customer-360");
 			});
 		},
 	});

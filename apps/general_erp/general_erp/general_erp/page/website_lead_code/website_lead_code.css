@@ -1,0 +1,11 @@
+.wlc-wrap { padding: 20px 24px; max-width: 1200px; margin: 0 auto; }
+.wlc-title { font-size: 20px; font-weight: 700; }
+.wlc-subtitle { color: #8a94a6; font-size: 13px; margin-top: 4px; max-width: 720px; line-height: 1.6; }
+.wlc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.wlc-grid .card { background: #fff; border: 1px solid #e8ebf1; border-radius: 10px; padding: 14px; }
+.wlc-sec { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.wlc-frame { width: 100%; height: 520px; border: 1px solid #f0f2f6; border-radius: 8px; background: #fff; }
+.wlc-codes { display: flex; flex-direction: column; gap: 12px; }
+.wlc-pre { background: #0f172a; color: #d7e2f4; border-radius: 8px; padding: 12px; font-size: 12px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; margin: 0; }
+.wlc-note-body { font-size: 13px; color: #555; line-height: 1.7; }
+@media (max-width: 1000px) { .wlc-grid { grid-template-columns: 1fr; } }

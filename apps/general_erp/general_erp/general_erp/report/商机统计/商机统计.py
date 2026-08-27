@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("商机统计")
 	"""商机按批复状态统计：数量、金额、赢单率。"""
 	rows = frappe.db.sql(
 		"SELECT coalesce(o.review_status, '（未设置）') AS stage, count(*) AS total, "

@@ -16,22 +16,22 @@ const MC = {
 
 	statusBadge(s) {
 		const cls = { '待处理': 'st-warn', '待审批': 'st-info', '已处理': 'st-ok', '已删除': 'st-muted' }[s] || 'st-muted';
-		return `<span class="mc-badge ${cls}">${s}</span>`;
+		return `<span class="mc-badge ${cls}">${__(s)}</span>`;
 	},
 
 	actions(m) {
 		const btn = (label, act) => `<span class="mc-act" data-act="${act}" data-name="${m.name}">${label}</span>`;
 		const out = [];
 		if (m.folder === '收件箱' || m.folder === '草稿箱') {
-			if (m.status === '待处理') out.push(btn('待审批', 'pending'));
-			out.push(btn('删除', 'trash'));
+			if (m.status === '待处理') out.push(btn(__('待审批'), 'pending'));
+			out.push(btn(__('删除'), 'trash'));
 		} else if (m.folder === '已发送') {
-			out.push(btn('删除', 'trash'));
+			out.push(btn(__('删除'), 'trash'));
 		} else if (m.folder === '已删除') {
-			out.push(btn('恢复', 'restore'));
+			out.push(btn(__('恢复'), 'restore'));
 		}
-		if (m.status === '待处理' && m.folder === '收件箱') out.push(btn('已处理', 'done'));
-		if (m.status === '待审批') out.push(btn('已处理', 'done'));
+		if (m.status === '待处理' && m.folder === '收件箱') out.push(btn(__('已处理'), 'done'));
+		if (m.status === '待审批') out.push(btn(__('已处理'), 'done'));
 		return out.join('');
 	},
 
@@ -45,7 +45,7 @@ const MC = {
 			<tr>
 				<td class="mc-subject"><div>${m.subject} ${related}</div></td>
 				<td>${who}</td>
-				<td><span class="mc-badge st-folder">${m.folder}</span> ${this.statusBadge(m.status)}</td>
+				<td><span class="mc-badge st-folder">${__(m.folder)}</span> ${this.statusBadge(m.status)}</td>
 				<td class="mc-time">${time}</td>
 				<td class="mc-actions">${this.actions(m)}</td>
 			</tr>`;
@@ -69,7 +69,7 @@ const MC = {
 		const rows = this.all.filter((m) => this.match(m));
 		body.innerHTML = rows.length
 			? rows.map((m) => this.row(m)).join('')
-			: `<tr><td colspan="5" class="mc-empty">暂无邮件</td></tr>`;
+			: `<tr><td colspan="5" class="mc-empty">${__("暂无邮件")}</td></tr>`;
 		this.tabs.forEach((t) => {
 			const count = this.all.filter((m) => {
 				if (!t.folder && !t.status) return true;
@@ -122,11 +122,11 @@ const MC = {
 
 	openCompose() {
 		const d = new frappe.ui.Dialog({
-			title: '新邮件',
+			title: __('新邮件'),
 			fields: [
-				{ fieldname: 'recipient', label: '收件人', fieldtype: 'Link', options: 'User', reqd: 1 },
-				{ fieldname: 'subject', label: '主题', fieldtype: 'Data', reqd: 1 },
-				{ fieldname: 'body', label: '正文', fieldtype: 'Text Editor' },
+				{ fieldname: 'recipient', label: __('收件人'), fieldtype: 'Link', options: 'User', reqd: 1 },
+				{ fieldname: 'subject', label: __('主题'), fieldtype: 'Data', reqd: 1 },
+				{ fieldname: 'body', label: __('正文'), fieldtype: 'Text Editor' },
 			],
 			primary_action: (values) => {
 				frappe
@@ -140,7 +140,7 @@ const MC = {
 						this.refresh();
 					});
 			},
-			primary_action_label: '发送',
+			primary_action_label: __('发送'),
 			secondary_action: () => {
 				const values = d.get_values();
 				if (!values) return;
@@ -155,7 +155,7 @@ const MC = {
 						this.refresh();
 					});
 			},
-			secondary_action_label: '存草稿',
+			secondary_action_label: __('存草稿'),
 		});
 		d.show();
 	},
@@ -166,22 +166,22 @@ function make(wrapper) {
 	wrap.className = 'mail-center-wrap';
 
 	const tabsHtml = MC.tabs.map((t, i) =>
-		`<span class="mc-tab${i === 0 ? ' is-active' : ''}" data-tab="${t.key}">${t.key}<span class="mc-count">0</span></span>`
+		`<span class="mc-tab${i === 0 ? ' is-active' : ''}" data-tab="${t.key}">${__(t.key)}<span class="mc-count">0</span></span>`
 	).join('');
 
 	wrap.innerHTML = `
 		<div class="mail-center-head">
 			<div>
-				<div class="mail-center-title">邮件中心</div>
-				<div class="mail-center-sub">内部协作邮件 · 待处理 / 收件箱 / 已发送 / 草稿箱 / 待审批 / 已删除</div>
+				<div class="mail-center-title">${__("邮件中心")}</div>
+				<div class="mail-center-sub">${__("内部协作邮件 · 待处理 / 收件箱 / 已发送 / 草稿箱 / 待审批 / 已删除")}</div>
 			</div>
-			<button class="btn btn-primary btn-sm mc-compose">新邮件</button>
+			<button class="btn btn-primary btn-sm mc-compose">${__("新邮件")}</button>
 		</div>
 		<div class="mc-tabs">${tabsHtml}</div>
 		<div class="mc-card">
 			<table class="mc-table">
 				<thead>
-					<tr><th>主题</th><th>发件人 / 收件人</th><th>文件夹 / 状态</th><th>时间</th><th>操作</th></tr>
+					<tr><th>${__("主题")}</th><th>${__("发件人 / 收件人")}</th><th>${__("文件夹 / 状态")}</th><th>${__("时间")}</th><th>${__("操作")}</th></tr>
 				</thead>
 				<tbody></tbody>
 			</table>

@@ -4,6 +4,8 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import now_datetime
 
+from general_erp.general_erp.mail_tracking import inject_tracking
+
 
 class BulkEmail(Document):
 	"""邮件群发：向客户批量发送邮件，并记录发送统计（营销效果分析）。"""
@@ -33,6 +35,10 @@ def send_bulk_email(name):
 			message = message.replace("{{customer_name}}", customer_name).replace("{{company_name}}", company)
 		else:
 			subject = subject.replace("{{customer_name}}", customer_name).replace("{{company_name}}", company)
+		if doc.track:
+			tid = "BULK:%s:%s" % (doc.name, row.name)
+			subject = subject  # 主题不注入
+			message = inject_tracking(frappe.utils.get_url(), tid, message)
 		try:
 			frappe.sendmail(recipients=[email], subject=subject, message=message)
 			ok += 1
@@ -41,6 +47,8 @@ def send_bulk_email(name):
 	doc.total_count = len(doc.customers)
 	doc.success_count = ok
 	doc.fail_count = fail
+	doc.opened_count = 0
+	doc.clicked_count = 0
 	doc.send_status = "已发送" if fail == 0 else "部分失败"
 	doc.sent_at = now_datetime()
 	doc.save(ignore_permissions=True)

@@ -1,0 +1,42 @@
+{
+ "name": "Work Check Item",
+ "istable": 1,
+ "permissions": [],
+ "fields": [
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "检查项",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "done",
+   "fieldtype": "Check",
+   "label": "已完成",
+   "in_list_view": 1,
+   "default": "0"
+  },
+  {
+   "fieldname": "feedback",
+   "fieldtype": "Small Text",
+   "label": "完成反馈",
+   "in_list_view": 1
+  }
+ ],
+ "doctype": "DocType",
+ "module": "General ERP",
+ "owner": "Administrator",
+ "creation": "2026-08-27 18:00:00",
+ "modified": "2026-08-27 18:00:00",
+ "modified_by": "Administrator",
+ "engine": "InnoDB",
+ "editable_grid": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "field_order": [
+  "item_name",
+  "done",
+  "feedback"
+ ]
+}

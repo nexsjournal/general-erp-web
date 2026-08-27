@@ -1,0 +1,140 @@
+{
+ "name": "Work Check",
+ "autoname": "naming_series:",
+ "title_field": "title",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "options": "WC-.YYYY.-.####",
+   "reqd": 1,
+   "default": "WC-.YYYY.-.####"
+  },
+  {
+   "fieldname": "base_sb",
+   "fieldtype": "Section Break",
+   "label": "检查信息"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "检查主题",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "check_date",
+   "fieldtype": "Date",
+   "label": "检查日期",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "frequency",
+   "fieldtype": "Select",
+   "label": "周期",
+   "options": "每日\n每周\n每月",
+   "default": "每周"
+  },
+  {
+   "fieldname": "assignee",
+   "fieldtype": "Link",
+   "label": "被检查人",
+   "reqd": 1,
+   "options": "User",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "checker",
+   "fieldtype": "Link",
+   "label": "检查人（主管）",
+   "options": "User"
+  },
+  {
+   "fieldname": "items_sb",
+   "fieldtype": "Section Break",
+   "label": "检查项"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "检查项",
+   "options": "Work Check Item"
+  },
+  {
+   "fieldname": "result_sb",
+   "fieldtype": "Section Break",
+   "label": "结果"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "状态",
+   "options": "待检查\n已完成",
+   "default": "待检查",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "result_note",
+   "fieldtype": "Small Text",
+   "label": "检查反馈"
+  },
+  {
+   "fieldname": "completed_at",
+   "fieldtype": "Datetime",
+   "label": "完成时间",
+   "read_only": 1
+  }
+ ],
+ "doctype": "DocType",
+ "module": "General ERP",
+ "owner": "Administrator",
+ "creation": "2026-08-27 18:00:00",
+ "modified": "2026-08-27 18:00:00",
+ "modified_by": "Administrator",
+ "engine": "InnoDB",
+ "istable": 0,
+ "editable_grid": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "field_order": [
+  "naming_series",
+  "base_sb",
+  "title",
+  "check_date",
+  "frequency",
+  "assignee",
+  "checker",
+  "items_sb",
+  "items",
+  "result_sb",
+  "status",
+  "result_note",
+  "completed_at"
+ ]
+}

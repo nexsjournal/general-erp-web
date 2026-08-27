@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("邮件统计")
 	"""邮件中心运营指标：按文件夹/状态分布 + 本月发送量。"""
 	from frappe.utils import nowdate
 	month_start = nowdate()[:8] + "01"

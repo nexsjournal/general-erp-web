@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("客户统计")
 	"""客户域核心指标 + 按区域分布（公海/热点/跟进/新增）。"""
 	from frappe.utils import nowdate
 	month_start = nowdate()[:8] + "01"

@@ -4,6 +4,8 @@ from frappe import _
 
 
 def execute(filters=None):
+	from general_erp.general_erp.report_utils import check_report_access
+	check_report_access("库存预警")
 	"""可用库存低于再订货点的物料（按仓库维度），用于库存预警。"""
 	sql = (
 		"SELECT i.item_code, i.item_name, b.warehouse, b.projected_qty, "

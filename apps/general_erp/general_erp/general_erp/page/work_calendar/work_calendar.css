@@ -1,0 +1,26 @@
+.cal-wrap { padding: 20px 24px; max-width: 1100px; margin: 0 auto; }
+.cal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.cal-title { font-size: 20px; font-weight: 700; }
+.cal-subtitle { color: #8a94a6; font-size: 13px; margin-top: 2px; }
+.cal-ctrl { display: flex; gap: 6px; align-items: center; }
+.cal-views { margin-left: 8px; display: inline-flex; gap: 4px; }
+.cal-legend { display: flex; gap: 14px; margin-bottom: 10px; font-size: 12px; color: #555; flex-wrap: wrap; }
+.cal-lg { display: inline-flex; align-items: center; gap: 4px; }
+.cal-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.cal-main { background: #fff; border: 1px solid #e8ebf1; border-radius: 10px; padding: 14px; min-height: 380px; }
+.cal-loading, .cal-none { color: #8a94a6; padding: 20px; text-align: center; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-weekdays { margin-bottom: 6px; }
+.cal-weekdays div { text-align: center; font-size: 12px; color: #8a94a6; padding: 4px 0; }
+.cal-cell { min-height: 76px; border: 1px solid #f0f2f6; border-radius: 8px; padding: 6px; cursor: pointer; }
+.cal-cell:hover { border-color: #c9d4e5; }
+.cal-cell.is-today { border-color: #2563eb; background: #f5f8ff; }
+.cal-cell.cal-other { background: transparent; border: none; cursor: default; }
+.cal-daynum { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+.cal-ev { font-size: 11px; padding: 2px 5px; border-left: 3px solid; background: #f7f9fc; border-radius: 4px; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-week-row { display: flex; gap: 12px; padding: 10px 8px; border-bottom: 1px solid #f0f2f6; }
+.cal-week-row:last-child { border-bottom: none; }
+.cal-week-row.is-today { background: #f5f8ff; border-radius: 6px; }
+.cal-week-date { width: 90px; flex: none; font-size: 13px; font-weight: 600; }
+.cal-week-evs { display: flex; flex-direction: column; gap: 4px; }
+.cal-week-evs .cal-ev { margin-bottom: 0; white-space: normal; }

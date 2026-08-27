@@ -1,0 +1,567 @@
+BL 提单,BL Bill of Lading
+CI 商业发票,CI Commercial Invoice
+CO 原产地证,CO Certificate of Origin
+Campaign · 营销计划,Campaign · marketing plan
+Delivery Note · 销售出库,Delivery Note · sales outbound
+Desk 首页 · 业务数据,Desk home · business data
+HR 模块未启用 · 规划中,HR module not enabled · planned
+HS 编码,HS Code
+IMAP 密码,IMAP Password
+IMAP 接入 · 定时收信 · 打开/点击跟踪,IMAP · auto-sync · open/click tracking
+IMAP 收件,IMAP Inbox
+IMAP 服务器,IMAP Server
+IMAP 用户名,IMAP User
+IP 地址,IP Address
+Incoterms · 订单/出运用,Incoterms · for orders/shipments
+OA 与系统设置,OA & System Settings
+OA 文档,OA Documents
+PI 形式发票,PI Proforma Invoice
+PL 装箱单,PL Packing List
+Payment Entry · 收款/付款管理,Payment Entry · receipts/payments
+Stock Balance 报表,Stock Balance report
+Stock Entry · 其他入库,Stock Entry · other receipt
+{0} 已合并到 {1}，不能重复合并,"{0} has already been merged into {1}, cannot merge again"
+一,Mon
+三,Wed
+上次同步时间,Last Sync
+下次跟进日期,Next Follow-up Date
+下次：,Next: 
+下达 PO,Raise PO
+不合格,Rejected
+不适用,N/A
+业务员,Salesperson
+业务数据以主记录为准,business data follows the master record
+业务流程,Business Flow
+业务规则,Business Rules
+个人偏好,Personal Preferences
+个人偏好已保存,Personal preferences saved
+主客户不能出现在待合并列表中,The master customer cannot appear in the merge list
+主题,Subject
+事件,Event
+二,Tue
+五,Fri
+产品库 · HS 编码,Item master · HS code
+产品统计,Product Statistics
+产品维度,By product
+仅系统管理员或客户负责人可执行此操作,Only System Manager or the customer owner can do this
+今天,Today
+今日汇率 · 工作台数字卡,Today's rate · workbench card
+仓库,Warehouse
+付款统计,Payment Statistics
+付款维度,By payment
+代码,Code
+企业信息,Company Info
+低于再订货点 · 库存预警报表,Below reorder point · stock alert report
+体积(CBM),Volume (CBM)
+使用 SSL,Use SSL
+供应商,Supplier
+供应商 → 采购 → 入库 → 来料检验,Supplier → purchase → receipt → inspection
+供应商主数据,Supplier master data
+保存个人偏好,Save Personal Preferences
+保存系统设置,Save System Settings
+入库,Receipt
+入库 → 库存余额 → 出库 → 统计 / 预警,Receipt → stock balance → delivery → stats / alerts
+全局搜索,Global Search
+全局行为参数,Global behavior parameters
+全景视图 · 共享 · 合并 · 移交,360 view · share · merge · handover
+公司默认,Company Defaults
+公告,Announcement
+公海,Public Pool
+公海 · 热点 · 跟进,Public pool · hot · follow-ups
+公海回收天数,Public pool recall days
+公海天数 · 报表订阅 · 权限矩阵,Pool days · report subscriptions · role matrix
+公路,Road
+六,Sat
+共享,Share
+共享客户：{0},Share customer: {0}
+共享给,Share with
+共同负责（可编辑）,Co-owner (editable)
+关联出运,Related Shipment
+关联单据,Related Document
+关联单据类型,Related DocType
+关联订单,Related Order
+其他,Other
+内容,Content
+内置,Built-in
+内置 · ⌘K 快捷键,Built-in · ⌘K shortcut
+内部协作邮件 · 待处理 / 收件箱 / 已发送 / 草稿箱 / 待审批 / 已删除,Internal mail · pending / inbox / sent / drafts / pending approval / deleted
+再订货点,Reorder Point
+净重(KG),Net Wt (KG)
+出口销售,Export Sales
+出库,Delivery
+出运信息,Shipment Info
+出运单数,Shipments
+出运明细,Shipment Details
+出运明细单,Shipment
+出运明细单 · 装运港/卸货港,Shipment · loading/discharge port
+出运统计,Shipment Statistics
+出运维度 · 港口/柜量,By shipment · port/container
+出运计划,Shipment Plan
+分发 · 转化率,Distribution · conversion
+分发人,Distributed By
+分发时间,Distributed At
+分发记录 · 留痕追溯,Distribution log · audit trail
+删除,Delete
+删除前文件夹,Previous Folder
+删除前状态,Previous Status
+制单人,Created By
+办公,Office
+功能清单 → 核心业务流程地图 · 点击任意节点/卡片跳转到对应单据（虚线为报表/内置）,Feature checklist → core business flow map · click any node/card to open the document (dashed = report/built-in)
+加载中…,Loading…
+包装规格,Packing Specs
+区域设置,Regional Settings
+单位,Unit
+单据提交后进入,After submission the document moves to
+单证信息,Document Info
+单证制作 · 出口报关,Doc production · export customs
+单证号,Document No.
+单证文件,Document File
+单证类型,Document Type
+原因/备注,Reason / Remarks
+参数值,Value
+参数键,Key
+发件人,From
+发件人 / 收件人,From / To
+发出邮件,Mails Sent
+发布日期,Publish Date
+发票/凭证,Invoice / Voucher
+发票管理,Invoices
+发送,Send
+发送时间,Sent At
+发送状态,Send Status
+发送统计,Send Statistics
+只读,Read Only
+可用库存,Available Stock
+可见,Visible
+合并,Merge
+合并完成,Merge complete
+合并客户到「{0}」,Merge customer into “{0}”
+合格,Passed
+同步与状态,Sync & Status
+同步间隔（分钟）,Sync Interval (minutes)
+名称,Name
+启用同步,Enable Sync
+员工,Employee
+员工业绩排行,Employee Performance
+员工工作情况表,Employee Workload Report
+员工工作量 · 跟进/邮件/检查,Workload · follows/mails/checks
+周,Week
+周期,Frequency
+周视图,Week View
+商品名称,Item Name
+商品编码,Item Code
+商机,Opportunity
+商机培育 · 邮件营销,Opportunity nurture · e-mail marketing
+商机成交,Deal Won
+商机数,Opportunities
+商机统计,Opportunity Statistics
+商机统计 · 丢失商机,Opportunities · lost deals
+商机金额,Amount
+四,Thu
+回到审批中,Back to Pending
+国家/地区,Country/Region
+地址,Address
+基础数据支撑,Master Data
+备注,Remarks
+复制,Copy
+外贸业务流程总览,Foreign Trade Business Flow Overview
+外贸单证,Trade Document
+外贸订单,Sales Order
+外贸销售主链路,Foreign Trade Sales Pipeline
+外销统计,Export Sales Report
+外销订单,Export Order
+失败,Failed
+姓名,Full Name
+存草稿,Save Draft
+安全说明,Security Notes
+完成反馈,Feedback
+完成时间,Completed At
+完成检查项,Items Completed
+官网表单 → 线索 · 嵌入代码,Website form → lead · embed code
+审批,Approve
+审批中,Pending Approval
+审批操作：提交审批 / 审批 / 驳回 / 重新提交。,Approval actions: submit / approve / reject / resubmit.
+审批流,Approvals
+审批状态,Approval Status
+审批通过则,passes to
+客户,Customer
+客户 360,Customer 360
+客户 · 订单 · 跟进排名,customers · orders · follows ranking
+客户不存在或无权查看,Customer not found or no access
+客户名称,Customer Name
+客户数,Customers
+客户端,Client
+客户统计,Customer Statistics
+客户群发 · 模板变量 · 发送统计,Bulk e-mail · variables · stats
+客户获取 → 商机 → 报价 → 订单 → 出运 → 单证 → 收款 → 利润,Lead → opportunity → quotation → order → shipment → docs → payment → profit
+客户详情聚合：跟进时间线 · 商机 · 报价 · 订单 · 邮件,Customer 360: follow-ups · opportunities · quotations · orders · mails
+客户跟进,Customer Follow-up
+将 {0} 个客户并入「{1}」，源客户将停用并标记。确定？,Merge {0} customer(s) into “{1}”; source records will be disabled and marked. Continue?
+岗位,Designation
+岗位与权限,Roles & Permissions
+岗位管理,Designations
+嵌入方式一：iframe 代码,Embed Option 1: iframe
+嵌入方式二：JS 动态注入,Embed Option 2: JS injection
+工作台,Workbench
+工作台 · 搜索 · 沟通 · 邮箱,Home · search · comms · mailbox
+工作日历,Work Calendar
+工作检查,Work Check
+差旅,Travel
+已交付,Delivered
+已共享,Shared
+已出运,Shipped
+已删除,Deleted
+已发送,Sent
+已处理,Processed
+已复制到剪贴板,Copied to clipboard
+已完成,Completed
+已审批,Approved
+已寄出,Dispatched
+已成交,Closed Won
+已打印,Printed
+已清关,Cleared
+已生成,Generated
+已订舱,Booked
+已转化,Converted
+已驳回,Rejected
+币种汇率,Exchange Rate
+平台与协作,Platform & Collaboration
+年,year
+库存,Stock
+库存余额,Stock Balance
+库存汇总 · Stock Summary,Stock Summary
+库存管理链路,Stock Management Pipeline
+库存统计,Stock Statistics
+库存预警,Stock Alert
+异常处理,Exception Handling
+归属员工,Owner User
+归集订单,Consolidated Order
+归集项目,Consolidation Item
+待处理,Pending
+待处理 · 收件箱 · 草稿箱,Pending · inbox · drafts
+待处理任务,ToDos
+待审批,Pending Approval
+待批复 · 已批复 · 待回复 · 商机统计,Pending review · reviewed · awaiting reply · stats
+待检查,To Check
+微信,WeChat
+快递,Courier
+快速切换：,Quick switch: 
+恢复,Restore
+成功,Success
+成本,Cost
+我的客户 · 公海 · 热点 · 移交,My customers · pool · hot · handover
+打开全局默认值,Open Global Defaults
+打开表单,Open Form
+批复状态,Review Status
+批复状态 · 赢单率,Review status · win rate
+把下方代码嵌入官网任意位置；访客提交询盘后自动生成「线索」（来源：网站留言），可在线索列表分发跟进。,Embed the code below anywhere on your website; visitor inquiries become “Leads” (source: Website) that you can distribute and follow up.
+报价,Quotation
+报价单,Quotation
+报价数,Quotations
+报价管理,Quotations
+报关报检,Customs Clearance
+报关行,Customs Broker
+报表,Report
+报表中心,Report Center
+报表可见角色,Allowed Roles
+报表角色,Report Roles
+报表订阅,Report Subscription
+报表订阅（定时邮件推送）,Report subscriptions (scheduled e-mail)
+报销信息,Expense Info
+招待,Entertainment
+拜访,Visit
+指标,Metric
+提交审批,Submit
+提单号,B/L No.
+操作,Actions
+支撑数据,Supporting Data
+收付款,Payments
+收付款 · 费用 · 发票 · 订单利润,Payments · expenses · invoices · profit
+收件人,To
+收件客户,Recipient Customer
+收件数,Recipients
+收件箱,Inbox
+收入,Income
+收到邮件,Mails Received
+收款,Receipts
+收款管理 · Payment Entry,Receipts · Payment Entry
+收款统计,Receipt Statistics
+收款维度,By receipts
+数值,Number
+数量,Qty
+文件夹,Folder
+文件夹 / 状态,Folder / Status
+文件夹 · 群发成功率,Folders · bulk send success
+文件管理,Files
+文档 · 组织 · 权限 · 检查 · 日历,Docs · org · roles · checks · calendar
+新商机,New Opportunities
+新邮件,New Mail
+无,None
+无权限查看该报表（报表角色限制）,No access to this report (role restricted)
+日,Sun
+日期,Date
+日期格式,Date Format
+时区,Time Zone
+时区 · 语言 · 日期格式 · 区域显示 —— 系统级与个人级配置（中英文配置）,Time zone · language · date format · region — system & personal settings (zh/en)
+时间,Time
+明细,Items
+星期,Weekday
+暂无商机,No opportunities
+暂无报价,No quotations
+暂无相关邮件,No related mails
+暂无订单,No orders
+暂无跟进记录,No follow-ups yet
+暂无邮件,No mails
+月,month
+有效期至,Valid Until
+服务商,Service Provider
+服务商信息,Provider Info
+服务商名称,Provider Name
+期间,Period
+未分组,Ungrouped
+未发送,Not Sent
+未设置区域,No territory
+本位币,Base Currency
+来料验货单,Inspection Order
+来源币种,Source Currency
+柜号,Container No.
+查看,View
+标题,Title
+检查主题,Title
+检查人（主管）,Checker (Manager)
+检查信息,Check Info
+检查反馈,Feedback
+检查日期,Check Date
+检查项,Check Item
+检验人 · 验货明细 · 结论,Inspector · items · conclusion
+检验数量,Inspected Qty
+检验机构,Agency
+检验标准,Standard
+检验结论,Conclusion
+检验项目,Inspection Item
+模板,Template
+模板名称,Template Name
+正文,Body
+正文（可用变量 {{customer_name}} {{company_name}}）,Body (variables: {{customer_name}} {{company_name}})
+每周,Weekly
+每日,Daily
+每日/每周自检 · 待办提醒,Daily/weekly self-check · ToDo reminders
+每月,Monthly
+毛利,Gross Profit
+毛利率 %,Gross Margin %
+毛重(KG),Gross Wt (KG)
+汇率,Rate
+沟通记录,Communications
+没有可合并的客户,No customers to merge
+海运,Sea
+海运费及港杂,Freight & Port Charges
+港口,Port
+港口名称,Port Name
+热点,Hot
+物料,Item
+物料名称,Item Name
+物料报关编码 · 海关商品,HS code · customs item
+状态,Status
+生产,Production
+生产任务单,Production Plan
+生产任务单 → 生产进度,Production Plan → progress
+生产汇总,Production Summary
+生产链路,Production Pipeline
+生成日期,Generated On
+用户,User
+用户参数,Users
+申报要素,Declaration Elements
+申请人,Applicant
+电话,Phone
+电话/邮件/拜访 · 公海回收依据,phone/email/visit · pool recall basis
+界面语言,Language
+登出,Log out
+登录,Log in
+目标币种,Target Currency
+目的港,Destination Port
+相关邮件,Related Mails
+移交,Handover
+移交客户,Handover Customer
+移交成功,Handover complete
+移交至,Handover To
+税率,Tax Rate
+空运,Air
+端口,Port
+笔数,Count
+签名,Signature
+类型,Type
+系列,Series
+系统区域,System Region
+系统区域设置已保存（刷新页面生效）,System settings saved (reload to apply)
+系统参数,System Parameters
+线索,Lead
+线索分发,Lead Distribution
+线索名称,Lead Name
+线索数,Leads
+线索统计,Lead Statistics
+经营结果分析,Business analytics
+结果,Result
+结论说明,Notes
+统计设置,Statistics Settings
+编码,Code
+缺口,Gap
+网站留言,Website Message
+网站留言代码,Website Lead Code
+网站询盘 · 分发跟踪 · 转客户,Website inquiry · distribution · convert
+置顶,Pinned
+联系人,Contact
+船公司,Carrier
+船名航次,Vessel / Voyage
+节假日,Holiday
+节假日 · 跟进 · 出运 · 检查,Holidays · follows · shipments · checks
+节假日 · 跟进提醒 · 出运计划 · 商机成交 · 工作检查,Holidays · follow-ups · shipments · deals · checks
+英文名称,English Name
+草稿,Draft
+草稿箱,Drafts
+营销与获客,Marketing & Acquisition
+营销主题 · {{customer_name}} 变量,Subject · {{customer_name}} variable
+营销活动,Campaigns
+表单仅暴露提交入口（Web Form 发布页），不暴露任何列表查询接口；字段白名单固定（姓名/公司/邮箱/电话/留言），提交自动生成线索并标记来源。,The form only exposes the public submit page (Web Form); no list/query API is exposed. Fields are whitelisted (name/company/email/phone/message); submissions create a Lead with source marked.
+表单预览,Form Preview
+被分发人,Assigned To
+被检查人,Assignee
+装运港,Port of Loading
+装运港/卸货港 · 贸易术语 · 出运明细,Loading/discharge port · incoterms · details
+规划中,Planned
+角色,Role
+角色权限,Roles
+订单,Order
+订单利润,Order Profit
+订单利润报表,Order Profit report
+订单数,Orders
+订单维度利润,Profit by order
+订单维度利润分析,Profit analysis by order
+订单额,Order Value
+让步接收,Accepted w/ Concession
+该客户已合并至,This customer was merged into
+该群发任务已发送,This bulk task has already been sent
+语言,Language
+语言/时区/日期 · 中英文切换,language/timezone/date · zh/en switch
+说明,Description
+请先添加收件客户,Add recipients first
+请指定主客户与待合并客户,Specify the master and the customers to merge
+请至少选择一个待合并客户,Select at least one customer to merge
+请选择一个客户查看 360 视图,Pick a customer to see its 360 view
+负责人,Owner
+负责人：,Owner: 
+财务,Finance
+财务结算链路,Finance & Settlement Pipeline
+账号信息,Account Info
+货代,Freight Forwarder
+货代 · 船公司 · 报关行,forwarder · carrier · customs broker
+贸易术语,Incoterms
+费用,Expense
+费用报销,Expense Reimbursement
+费用报销单的状态机（Workflow：费用报销审批）,Expense Reimbursement state machine (Workflow: Expense Approval)
+费用报销审批流,Expense Approval Workflow
+费用日期,Expense Date
+费用管理 · 审批受控,Expenses · approval controlled
+费用类型,Expense Type
+费用统计,Expense Statistics
+费用维度,By expense
+赢单率,Win Rate
+起,from
+跟进,Follow-up
+跟进人,Followed By
+跟进内容,Follow-up Content
+跟进提醒,Follow-up
+跟进数,Follow-ups
+跟进方式,Method
+跟进日期,Follow-up Date
+跟进时间线,Follow-up Timeline
+转化率,Conversion
+运费,Freight
+运输方式,Transport Mode
+返工,Rework
+退货,Return
+选择客户…,Select a customer…
+通知公告 · 置顶/有效期,notices · pin/expiry
+通讯,Communication
+邮件,Mail
+邮件中心,Mail Center
+邮件主题,Subject
+邮件模板,Email Template
+邮件正文,Body
+邮件统计,Mail Statistics
+邮件群发,Bulk Email
+邮箱,Email
+邮箱地址,Email Address
+邮箱账号,Mail Account
+部分失败,Partially Failed
+部门,Department
+采购与来料检验,Purchasing & Inspection
+采购入库,Purchase Receipt
+采购收货单,Purchase Receipt
+采购检验,Purchasing & Inspection
+采购统计,Purchase Statistics
+采购维度,By purchase
+采购订单,Purchase Order
+重新提交,Resubmit
+金额,Amount
+铁路,Rail
+销售,Sales
+销售/采购链路共用的主数据,master data shared by sales & purchasing
+销售订单,Sales Order
+附件,Attachment
+预计到港,ETA
+预计开船,ETD
+频率,Frequency
+驳回,Reject
+驳回后可修改并,; rejected documents can be edited and
+验货人,Inspector
+验货信息,Inspection Info
+验货日期,Inspection Date
+默认公司,Default Company
+业务总览,Business Overview
+销售额,Sales
+待办,ToDos
+应收账款,Receivables
+今日汇率,Today's Exchange Rate
+销售订单趋势,Sales Order Trend
+采购订单趋势,Purchase Order Trend
+模块导航,Module Navigation
+快捷入口,Quick Links
+通知,Notifications
+登录日志,Login Log
+邮件队列,Email Queue
+营销,Marketing
+自动邮件报告,Auto Email Report
+产品,Products
+商品,Items
+商品组,Item Groups
+销售管理,Sales Management
+出运,Shipments
+交货单,Delivery Note
+采购,Purchasing
+采购收货,Purchase Receipt
+质检,Quality Inspection
+生产计划,Production Plan
+工单,Work Order
+物料清单,BOM
+销售发票,Sales Invoice
+采购发票,Purchase Invoice
+日记账,Journal Entry
+出入库,Stock Transfers
+盘点,Stock Reconciliation
+文件,Files
+统计,Analytics
+销售分析,Sales Analytics
+采购分析,Purchase Analytics
+应收款,Receivables
+应付款,Payables
+库存流水,Stock Ledger
+设置,Settings
+公司,Company
+工作流,Workflow
+条款,Terms
+币种,Currencies
+打印格式,Print Format
+采购与库存,Purchasing & Inventory
+外贸基础数据,Foreign Trade Master Data
+审核设置,Workflow Settings
+外贸工作台,Foreign Trade Workbench

@@ -1,0 +1,45 @@
+{
+ "name": "Report Role",
+ "istable": 1,
+ "permissions": [],
+ "fields": [
+  {
+   "fieldname": "report",
+   "fieldtype": "Link",
+   "label": "报表",
+   "reqd": 1,
+   "options": "Report",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "role",
+   "fieldtype": "Link",
+   "label": "角色",
+   "reqd": 1,
+   "options": "Role",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "可见",
+   "default": "1",
+   "in_list_view": 1
+  }
+ ],
+ "doctype": "DocType",
+ "module": "General ERP",
+ "owner": "Administrator",
+ "creation": "2026-08-27 18:00:00",
+ "modified": "2026-08-27 18:00:00",
+ "modified_by": "Administrator",
+ "engine": "InnoDB",
+ "editable_grid": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "field_order": [
+  "report",
+  "role",
+  "enabled"
+ ]
+}
