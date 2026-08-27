@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 16:30:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 16:30:00",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Announcement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "autoname": "hash",
+ "title_field": "title",
+ "fields": [
+  {
+   "fieldname": "title_sb",
+   "fieldtype": "Section Break",
+   "label": "公告"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "标题",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_pinned",
+   "fieldtype": "Check",
+   "label": "置顶"
+  },
+  {
+   "fieldname": "publish_date",
+   "fieldtype": "Date",
+   "label": "发布日期",
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "有效期至"
+  },
+  {
+   "fieldname": "content_sb",
+   "fieldtype": "Section Break",
+   "label": "内容"
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Text Editor",
+   "label": "内容"
+  }
+ ],
+ "field_order": [
+  "title_sb",
+  "title",
+  "is_pinned",
+  "publish_date",
+  "valid_until",
+  "content_sb",
+  "content"
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 16:30:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 16:30:00",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Email Template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "autoname": "field:template_name",
+ "title_field": "template_name",
+ "fields": [
+  {
+   "fieldname": "template_sb",
+   "fieldtype": "Section Break",
+   "label": "模板"
+  },
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "label": "模板名称",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "邮件主题",
+   "reqd": 1
+  },
+  {
+   "fieldname": "body_sb",
+   "fieldtype": "Section Break",
+   "label": "邮件正文"
+  },
+  {
+   "fieldname": "body",
+   "fieldtype": "Text Editor",
+   "label": "正文（可用变量 {{customer_name}} {{company_name}}）",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "说明"
+  }
+ ],
+ "field_order": [
+  "template_sb",
+  "template_name",
+  "subject",
+  "body_sb",
+  "body",
+  "description"
+ ]
+}

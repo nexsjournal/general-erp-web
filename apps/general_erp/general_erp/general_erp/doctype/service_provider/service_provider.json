@@ -1,0 +1,111 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 16:30:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 16:30:00",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Service Provider",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "autoname": "naming_series:",
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "系列",
+   "options": "SP-.####",
+   "reqd": 1,
+   "default": "SP-.####"
+  },
+  {
+   "fieldname": "info_sb",
+   "fieldtype": "Section Break",
+   "label": "服务商信息"
+  },
+  {
+   "fieldname": "provider_name",
+   "fieldtype": "Data",
+   "label": "服务商名称",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "provider_type",
+   "fieldtype": "Select",
+   "label": "类型",
+   "options": "货代\n船公司\n检验机构\n报关行\n其他",
+   "reqd": 1,
+   "default": "货代",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "联系人",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "电话"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "邮箱",
+   "options": "Email"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "地址"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "备注"
+  }
+ ],
+ "field_order": [
+  "naming_series",
+  "info_sb",
+  "provider_name",
+  "provider_type",
+  "contact_person",
+  "phone",
+  "email",
+  "address",
+  "remarks"
+ ]
+}

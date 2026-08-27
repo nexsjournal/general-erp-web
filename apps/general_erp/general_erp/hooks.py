@@ -23,13 +23,12 @@ app_include_js = "erp_fixes.bundle.js"
 # fixtures = []
 
 # 定时任务（scheduler）
-# scheduler_events = {
-#     "general_erp": {
-#         "cron": {
-#             "*/10 * * * *": ["general_erp.general_erp.doctype.demo_note.demo_note.run_scheduled"],
-#         }
-#     }
-# }
+scheduler_events = {
+    "daily": [
+        # 公海自动回收：N 天无跟进的私有客户移入公海（docs/feature-requirements.md 4.4）
+        "general_erp.general_erp.doctype.customer_follow_up.customer_follow_up.auto_pool_customers",
+    ]
+}
 
 # 监听官方 DocType 事件（扩展 ERPNext 单据行为的标准方式，不改官方代码）
 # doc_events = {

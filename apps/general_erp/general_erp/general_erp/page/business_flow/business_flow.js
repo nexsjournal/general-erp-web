@@ -1,5 +1,5 @@
 /* 业务流程展示页（演示用）：按功能清单梳理核心业务流程，串联现有单据 */
-/* BF_PAGE_V3 */
+/* BF_PAGE_V5 */
 
 const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 
@@ -47,8 +47,10 @@ const LANES = [
 		color: 'var(--erp-info)',
 		light: 'var(--erp-info-light)',
 		steps: [
-			{ icon: 'user', label: '客户', sub: '我的客户 · 公海 · 转移/共享', route: ['desk', 'Customer'] },
-			{ icon: 'target', label: '商机', sub: '新建商机 · 商机统计', route: ['desk', 'Opportunity'] },
+			{ icon: 'user', label: '线索', sub: '网站询盘 · 分发跟踪 · 转客户', route: ['desk', 'Lead'] },
+		{ icon: 'user', label: '客户', sub: '我的客户 · 公海 · 热点 · 移交', route: ['desk', 'Customer'] },
+		{ icon: 'phone', label: '客户跟进', sub: '电话/邮件/拜访 · 公海回收依据', route: ['desk', 'customer-follow-up'], badge: 'General ERP' },
+			{ icon: 'target', label: '商机', sub: '待批复 · 已批复 · 待回复 · 商机统计', route: ['desk', 'Opportunity'] },
 			{ icon: 'file', label: '报价单', sub: '报价管理', route: ['desk', 'Quotation'] },
 			{ icon: 'clipboard', label: '销售订单', sub: '外贸订单', route: ['desk', 'Sales Order'] },
 			{ icon: 'anchor', label: '出运明细单', sub: '装运港/卸货港 · 贸易术语 · 出运明细', route: ['desk', 'Shipment'], badge: 'General ERP' },
@@ -113,17 +115,21 @@ const MASTER = [
 	{ icon: 'hash', label: 'HS 编码', note: '物料报关编码 · 海关商品', route: ['desk', 'HS Code'], badge: 'General ERP' },
 	{ icon: 'sliders', label: '系统参数', note: '全局行为参数', route: ['desk', 'System Parameter'], badge: 'General ERP' },
 	{ icon: 'banknote', label: '币种汇率', note: '今日汇率 · 工作台数字卡', route: ['desk', 'currency-exchange-rate'], badge: 'General ERP' },
+	{ icon: 'truck', label: '服务商', note: '货代 · 船公司 · 报关行', route: ['desk', 'service-provider'], badge: 'General ERP' },
 ];
 
 const MARKETING = [
 	{ icon: 'target', label: '商机', note: '商机统计 · 丢失商机', route: ['desk', 'Opportunity'] },
 	{ icon: 'megaphone', label: '营销活动', note: 'Campaign · 营销计划', route: ['desk', 'Campaign'] },
-	{ icon: 'megaphone', label: '邮件群发', note: '客户群发 · 发送统计', route: ['desk', 'bulk-email'] },
+	{ icon: 'megaphone', label: '邮件群发', note: '客户群发 · 模板变量 · 发送统计', route: ['desk', 'bulk-email'] },
+	{ icon: 'file', label: '邮件模板', note: '营销主题 · {{customer_name}} 变量', route: ['desk', 'email-template'], badge: 'General ERP' },
+	{ icon: 'share', label: '线索分发', note: '分发记录 · 留痕追溯', route: ['desk', 'lead-distribution-log'], badge: 'General ERP' },
 ];
 
 const OA = [
 	{ icon: 'doc', label: '文件管理', note: 'OA 文档', route: ['desk', 'Note'] },
-	{ icon: 'building', label: '部门', note: '部门管理', route: ['desk', 'HR Department'] },
+	{ icon: 'bell', label: '公告', note: '通知公告 · 置顶/有效期', route: ['desk', 'announcement'], badge: 'General ERP' },
+	{ icon: 'building', label: '部门', note: 'HR 模块未启用 · 规划中', noroute: true, badge: '规划中' },
 	{ icon: 'building', label: '岗位', note: '岗位管理', route: ['desk', 'Designation'] },
 	{ icon: 'shield', label: '角色权限', note: '岗位与权限', route: ['desk', 'Role'] },
 	{ icon: 'user', label: '用户参数', note: 'User', route: ['desk', 'User'] },
@@ -139,10 +145,15 @@ const REPORTS = [
 	{ label: '收款统计', note: '收款维度', route: ['desk', 'query-report', '收款统计'] },
 	{ label: '付款统计', note: '付款维度', route: ['desk', 'query-report', '付款统计'] },
 	{ label: '费用统计', note: '费用维度', route: ['desk', 'query-report', '费用统计'] },
+	{ label: '客户统计', note: '公海 · 热点 · 跟进', route: ['desk', 'query-report', '客户统计'] },
+	{ label: '线索统计', note: '分发 · 转化率', route: ['desk', 'query-report', '线索统计'] },
+	{ label: '商机统计', note: '批复状态 · 赢单率', route: ['desk', 'query-report', '商机统计'] },
+	{ label: '员工业绩排行', note: '客户 · 订单 · 跟进排名', route: ['desk', 'query-report', '员工业绩排行'] },
+	{ label: '邮件统计', note: '文件夹 · 群发成功率', route: ['desk', 'query-report', '邮件统计'] },
 ];
 
 const PLATFORM = [
-	{ icon: 'home', label: '工作台', note: 'Desk 首页 · 业务数据', route: ['desk'] },
+	{ icon: 'home', label: '工作台', note: 'Desk 首页 · 业务数据', route: ['desk', '外贸工作台'] },
 	{ icon: 'clock', label: '待处理任务', note: 'ToDo', route: ['desk', 'ToDo'] },
 	{ icon: 'search', label: '全局搜索', note: '内置 · ⌘K 快捷键', noroute: true, badge: '内置' },
 	{ icon: 'mail', label: '沟通记录', note: 'Communication', route: ['desk', 'Communication'] },

@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 16:30:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 16:30:00",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Lead Distribution Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "autoname": "hash",
+ "fields": [
+  {
+   "fieldname": "lead_sb",
+   "fieldtype": "Section Break",
+   "label": "线索"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "label": "线索",
+   "options": "Lead",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "lead_name",
+   "fieldtype": "Data",
+   "label": "线索名称",
+   "fetch_from": "lead.lead_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "from_user",
+   "fieldtype": "Link",
+   "label": "分发人",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "to_user",
+   "fieldtype": "Link",
+   "label": "被分发人",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "distributed_at",
+   "fieldtype": "Datetime",
+   "label": "分发时间",
+   "default": "Now",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "备注"
+  }
+ ],
+ "field_order": [
+  "lead_sb",
+  "lead",
+  "lead_name",
+  "from_user",
+  "to_user",
+  "distributed_at",
+  "remark"
+ ]
+}

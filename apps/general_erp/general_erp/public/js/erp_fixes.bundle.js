@@ -58,8 +58,68 @@
 	try {
 		const key = "_page:business-flow";
 		const cached = localStorage.getItem(key);
-		if (cached && cached.indexOf("BF_PAGE_V3") === -1) {
+		if (cached && cached.indexOf("BF_PAGE_V5") === -1) {
 			localStorage.removeItem(key);
 		}
 	} catch (e) {}
+})();
+
+// 客户表单"移交"按钮：变更负责人并留痕（Customer Follow Up 模块 whitelisted 方法）。
+(function () {
+	frappe.ui.form.on("Customer", {
+		refresh(frm) {
+			if (frm.doc.__islocal || !frm.doc.name) return;
+			frm.add_custom_button(__("移交"), () => {
+				const d = new frappe.ui.Dialog({
+					title: __("移交客户"),
+					fields: [
+						{ fieldname: "to_user", fieldtype: "Link", label: __("移交至"), options: "User", reqd: 1 },
+						{ fieldname: "remark", fieldtype: "Small Text", label: __("原因/备注") },
+					],
+					primary_action(values) {
+						frappe.call({
+							method: "general_erp.general_erp.doctype.customer_follow_up.customer_follow_up.handover_customer",
+							args: { name: frm.doc.name, to_user: values.to_user, remark: values.remark },
+							callback() {
+								frappe.msgprint(__("移交成功，已留痕。"));
+								d.hide();
+								frm.reload_doc();
+							},
+						});
+					},
+				});
+				d.show();
+			});
+		},
+	});
+})();
+
+// 线索表单"分发"按钮：分派被分发人并写入 Lead Distribution Log。
+(function () {
+	frappe.ui.form.on("Lead", {
+		refresh(frm) {
+			if (frm.doc.__islocal || !frm.doc.name) return;
+			frm.add_custom_button(__("分发"), () => {
+				const d = new frappe.ui.Dialog({
+					title: __("分发线索"),
+					fields: [
+						{ fieldname: "to_user", fieldtype: "Link", label: __("分发给"), options: "User", reqd: 1 },
+						{ fieldname: "remark", fieldtype: "Small Text", label: __("备注") },
+					],
+					primary_action(values) {
+						frappe.call({
+							method: "general_erp.general_erp.doctype.lead_distribution_log.lead_distribution_log.assign_lead",
+							args: { name: frm.doc.name, to_user: values.to_user, remark: values.remark },
+							callback() {
+								frappe.msgprint(__("分发成功，已写入分发记录。"));
+								d.hide();
+								frm.reload_doc();
+							},
+						});
+					},
+				});
+				d.show();
+			});
+		},
+	});
 })();

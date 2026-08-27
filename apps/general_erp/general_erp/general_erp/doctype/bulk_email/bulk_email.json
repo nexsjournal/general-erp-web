@@ -7,7 +7,7 @@
  "engine": "InnoDB",
  "index_web_pages_for_search": 1,
  "istable": 0,
- "modified": "2026-08-27 15:00:00.000000",
+ "modified": "2026-08-27 16:30:00",
  "modified_by": "Administrator",
  "module": "General ERP",
  "name": "Bulk Email",
@@ -64,6 +64,12 @@
    "fieldname": "subject_sb",
    "fieldtype": "Section Break",
    "label": "邮件"
+  },
+  {
+   "fieldname": "template",
+   "fieldtype": "Link",
+   "label": "邮件模板",
+   "options": "Email Template"
   },
   {
    "fieldname": "subject",
@@ -147,6 +153,7 @@
  "field_order": [
   "naming_series",
   "subject_sb",
+  "template",
   "subject",
   "body",
   "customers_sb",

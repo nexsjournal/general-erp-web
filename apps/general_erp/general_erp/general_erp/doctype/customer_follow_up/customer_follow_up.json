@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 16:30:00",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 16:30:00",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Customer Follow Up",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "autoname": "naming_series:",
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "系列",
+   "options": "CF-.YYYY.-.####",
+   "reqd": 1,
+   "default": "CF-.YYYY.-.####"
+  },
+  {
+   "fieldname": "customer_sb",
+   "fieldtype": "Section Break",
+   "label": "客户"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "客户",
+   "options": "Customer",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "follow_type",
+   "fieldtype": "Select",
+   "label": "跟进方式",
+   "options": "电话\n邮件\n微信\n拜访\n其他",
+   "reqd": 1,
+   "default": "电话",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "follow_date",
+   "fieldtype": "Date",
+   "label": "跟进日期",
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "followed_by",
+   "fieldtype": "Link",
+   "label": "跟进人",
+   "options": "User",
+   "default": ":User",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "next_follow_date",
+   "fieldtype": "Date",
+   "label": "下次跟进日期"
+  },
+  {
+   "fieldname": "content_sb",
+   "fieldtype": "Section Break",
+   "label": "跟进内容"
+  },
+  {
+   "fieldname": "content",
+   "fieldtype": "Small Text",
+   "label": "内容",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "备注"
+  }
+ ],
+ "field_order": [
+  "naming_series",
+  "customer_sb",
+  "customer",
+  "follow_type",
+  "follow_date",
+  "followed_by",
+  "next_follow_date",
+  "content_sb",
+  "content",
+  "remark"
+ ]
+}

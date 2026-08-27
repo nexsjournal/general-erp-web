@@ -18,13 +18,23 @@ def send_bulk_email(name):
 	if not doc.customers:
 		frappe.throw(_("请先添加收件客户"))
 	ok = fail = 0
+	tpl = frappe.get_doc("Email Template", doc.template) if doc.template else None
+	company = frappe.db.get_single_value("Global Defaults", "company") or ""
 	for row in doc.customers:
 		email = frappe.db.get_value("Customer", row.customer, "email_id")
 		if not email:
 			fail += 1
 			continue
+		customer_name = row.customer_name or row.customer
+		subject = (tpl.subject if tpl else doc.subject) or doc.subject
+		message = (tpl.body if tpl else (doc.body or "")) or (doc.body or "")
+		if tpl:
+			subject = subject.replace("{{customer_name}}", customer_name).replace("{{company_name}}", company)
+			message = message.replace("{{customer_name}}", customer_name).replace("{{company_name}}", company)
+		else:
+			subject = subject.replace("{{customer_name}}", customer_name).replace("{{company_name}}", company)
 		try:
-			frappe.sendmail(recipients=[email], subject=doc.subject, message=doc.body or "")
+			frappe.sendmail(recipients=[email], subject=subject, message=message)
 			ok += 1
 		except Exception:
 			fail += 1
