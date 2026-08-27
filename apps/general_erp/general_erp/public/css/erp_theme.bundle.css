@@ -329,3 +329,68 @@ body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
 	aspect-ratio: 1 / 1;
 	flex-shrink: 0;
 }
+
+/* ---------- 6. 弹窗 / 抽屉 / 筛选行精修（2026-08 三轮） ---------- */
+
+/* 列表筛选行：输入框与 ≈ 操作符按钮统一 36px 高并纵向对齐（原 28px 顶对齐导致错位） */
+.standard-filter-section .form-control {
+	height: 36px;
+}
+.standard-filter-section .input-group {
+	display: flex;
+	align-items: stretch;
+}
+
+/* 通知抽屉 / 顶栏通知弹层：官方取 --bg-color（被主题重映射为页面灰），
+   改为卡片白底 + 细边框，与页面自然分层（双主题通用） */
+.notifications-list {
+	background: var(--erp-bg-card);
+	border: 1px solid var(--erp-border-light);
+	box-shadow: var(--erp-shadow-3);
+}
+
+/* ---------- 7. 夜间模式 token（2026-08 三轮；规范见 docs/design-system/08-dark-mode.md） ---------- */
+/* 机制：官方 [data-theme=dark] 与本块同特异性，后加载者胜（本 app CSS 后于官方 bundle）。
+   所有 frappe 遗留变量在第 2 节经 var(--erp-*) 间接引用，故此处只需重定义 --erp-* 即可整体翻转；
+   官方未映射到新 token 的组件（如 --surface-*、--ink-*）由官方 dark 块负责，不重复定义。
+   色值对齐官方 dark 标度（#0f0f0f / #1c1c1c / #232323 / #343434 / #f8f8f8 / #d4d4d4 / #afafaf）。 */
+[data-theme="dark"] {
+	/* 品牌（夜间提亮保证对比度） */
+	--erp-primary: #3b82f6;
+	--erp-primary-hover: #2f6fe0;
+	--erp-primary-active: #2a5fc4;
+	--erp-primary-light: rgba(59, 130, 246, 0.22);
+	--erp-primary-lighter: rgba(59, 130, 246, 0.12);
+
+	/* 中性（对齐官方 surface/ink 标度） */
+	--erp-text-1: #f8f8f8;
+	--erp-text-2: #d4d4d4;
+	--erp-text-3: #afafaf;
+	--erp-text-disabled: #717171;
+	--erp-bg-page: #0f0f0f;
+	--erp-bg-card: #1c1c1c;
+	--erp-bg-hover: #2b2b2b;
+	--erp-bg-muted: #232323;
+	--erp-border-1: #343434;
+	--erp-border-2: #424242;
+	--erp-border-light: #2b2b2b;
+
+	/* 功能色（对齐官方 dark ink 标度，浅底改深色半透明） */
+	--erp-success: #1ba964;
+	--erp-success-light: rgba(27, 169, 100, 0.16);
+	--erp-success-text: #58c08e;
+	--erp-warning: #e37d00;
+	--erp-warning-light: rgba(227, 125, 0, 0.16);
+	--erp-warning-text: #e79913;
+	--erp-error: #e43838;
+	--erp-error-light: rgba(228, 56, 56, 0.16);
+	--erp-error-text: #fc7474;
+	--erp-info: #3294e3;
+	--erp-info-light: rgba(50, 148, 227, 0.16);
+	--erp-info-text: #5aaef2;
+
+	/* 阴影（深色下加深，轮廓感靠边框） */
+	--erp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--erp-shadow-2: 0 6px 16px rgba(0, 0, 0, 0.5);
+	--erp-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.55);
+}

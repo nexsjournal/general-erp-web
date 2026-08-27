@@ -20,6 +20,7 @@
 | [05-interaction.md](05-interaction.md) | 交互系统：反馈层级、状态机、键盘、错误处理 |
 | [06-motion.md](06-motion.md) | 动效系统：时长、缓动、微交互、图表动效 |
 | [07-data-viz.md](07-data-viz.md) | 图表与数据展示：KPI 卡、线/柱/环图、坐标轴、Tooltip |
+| [08-dark-mode.md](08-dark-mode.md) | 夜间模式：设计原则、token 映射表、实现机制、验收清单 |
 
 ## 落地方式（在 ERPNext 上怎么用这套规范）
 
