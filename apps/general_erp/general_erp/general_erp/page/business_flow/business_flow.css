@@ -315,6 +315,40 @@
 	background: var(--lane-color, var(--erp-primary));
 	vertical-align: 1px;
 }
+
+/* 报表节点：虚线边框 */
+.flow-node.is-report {
+	border-style: dashed;
+}
+.node-badge.rep {
+	background: var(--erp-text-3);
+}
+
+/* 规划中 / 内置 chip */
+.flow-chip.is-plan,
+.flow-chip.is-static {
+	border-style: dashed;
+	background: var(--erp-bg-page);
+	cursor: default;
+}
+.flow-chip.is-plan:hover,
+.flow-chip.is-static:hover {
+	border-color: var(--erp-border-2);
+	box-shadow: none;
+	transform: none;
+}
+.flow-chip.is-plan .chip-icon,
+.flow-chip.is-static .chip-icon {
+	background: var(--erp-bg-muted);
+	color: var(--erp-text-3);
+}
+.flow-chip.is-plan .chip-label {
+	color: var(--erp-text-3);
+}
+.chip-badge.plan {
+	background: var(--erp-text-3);
+}
+
 /* 窄屏：箭头改指向下 */
 @media (max-width: 900px) {
 	.wf-grid {
