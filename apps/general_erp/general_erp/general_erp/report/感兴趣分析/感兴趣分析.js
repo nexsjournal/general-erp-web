@@ -1,0 +1,1 @@
+frappe.query_reports["感兴趣分析"] = {};

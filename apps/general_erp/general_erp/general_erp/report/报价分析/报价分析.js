@@ -1,0 +1,1 @@
+frappe.query_reports["报价分析"] = {};

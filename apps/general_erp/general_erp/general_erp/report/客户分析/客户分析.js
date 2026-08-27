@@ -1,0 +1,1 @@
+frappe.query_reports["客户分析"] = {};
