@@ -218,6 +218,10 @@ fi
 bench --site "$SITE_NAME" list-apps 2>/dev/null | grep -qx "$CUSTOM_APP" \
   || { log "安装自定义 app $CUSTOM_APP"; bench --site "$SITE_NAME" install-app "$CUSTOM_APP"; }
 
+# ---------- 7.5 站点业务初始化（基础主数据 + 公司 + 财年，幂等） ----------
+log "站点业务初始化（ERPNext 基础数据/公司/财年）"
+( cd "$BENCH_DIR" && ./env/bin/python "$ROOT/scripts/init_site_data.py" "$SITE_NAME" )
+
 # ---------- 8. 前端资源 ----------
 log "构建前端资源 bench build（约 2-5 分钟）"
 bench build
