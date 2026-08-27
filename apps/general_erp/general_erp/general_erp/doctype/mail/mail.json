@@ -66,7 +66,7 @@
    "fieldname": "folder",
    "fieldtype": "Select",
    "label": "文件夹",
-   "options": "收件箱\n已发送\n草稿箱\n已删除",
+   "options": "收件箱\n已发送\n草稿箱\n已删除\n已归档",
    "default": "收件箱",
    "reqd": 1,
    "in_list_view": 1

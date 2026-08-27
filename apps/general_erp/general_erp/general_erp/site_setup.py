@@ -49,6 +49,27 @@ ROLES = [
 ]
 
 
+SALES_STAGES = [
+    ("Prospecting", "初步接触"),
+    ("Qualification", "资质确认"),
+    ("Proposal", "方案/报价"),
+    ("Negotiation", "商务谈判"),
+    ("Won", "赢单"),
+    ("Lost", "丢单"),
+]
+
+
+def sync_sales_stages():
+    """CRM 商机阶段种子数据：Opportunity.sales_stage 默认值 Prospecting 必须存在，否则商机无法创建（真实 P1）。"""
+    for name, desc in SALES_STAGES:
+        if not frappe.db.exists("Sales Stage", name):
+            ss = frappe.new_doc("Sales Stage")
+            ss.stage_name = name
+            ss.description = desc
+            ss.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
 def sync_roles():
     for name, desc in ROLES:
         if not frappe.db.exists("Role", name):
@@ -285,6 +306,7 @@ def sync_mail_fields():
 def sync_site_setup(with_seed=False):
     """总入口：after_install 与 after_migrate 调用，幂等。"""
     sync_customer_fields()
+    sync_sales_stages()
     sync_roles()
     sync_website_lead_form()
     sync_opportunity_fields()
