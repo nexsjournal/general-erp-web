@@ -1,0 +1,154 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 15:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 16:10:00",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Mail",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "autoname": "naming_series:",
+ "title_field": "subject",
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "系列",
+   "options": "EM-.YYYY.-.####",
+   "reqd": 1,
+   "default": "EM-.YYYY.-.####"
+  },
+  {
+   "fieldname": "subject_sb",
+   "fieldtype": "Section Break",
+   "label": "邮件"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "主题",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "folder",
+   "fieldtype": "Select",
+   "label": "文件夹",
+   "options": "收件箱\n已发送\n草稿箱\n已删除",
+   "default": "收件箱",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "状态",
+   "options": "待处理\n已处理\n待审批",
+   "default": "已处理",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sender",
+   "fieldtype": "Link",
+   "label": "发件人",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Link",
+   "label": "收件人",
+   "options": "User",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "related_doctype",
+   "fieldtype": "Link",
+   "label": "关联单据类型",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "related_name",
+   "fieldtype": "Data",
+   "label": "关联单据"
+  },
+  {
+   "fieldname": "body_sb",
+   "fieldtype": "Section Break",
+   "label": "内容"
+  },
+  {
+   "fieldname": "body",
+   "fieldtype": "Text Editor",
+   "label": "正文"
+  },
+  {
+   "fieldname": "sent_at",
+   "fieldtype": "Datetime",
+   "label": "发送时间"
+  },
+  {
+   "fieldname": "restore_folder",
+   "fieldtype": "Data",
+   "label": "删除前文件夹",
+   "hidden": 1,
+   "print_hide": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "restore_status",
+   "fieldtype": "Data",
+   "label": "删除前状态",
+   "hidden": 1,
+   "print_hide": 1,
+   "no_copy": 1
+  }
+ ],
+ "field_order": [
+  "naming_series",
+  "subject_sb",
+  "subject",
+  "folder",
+  "status",
+  "sender",
+  "recipient",
+  "related_doctype",
+  "related_name",
+  "body_sb",
+  "body",
+  "sent_at"
+ ]
+}

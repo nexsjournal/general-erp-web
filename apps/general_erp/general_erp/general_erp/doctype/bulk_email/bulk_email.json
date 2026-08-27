@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 15:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "modified": "2026-08-27 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Bulk Email",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "Sales User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1
+  },
+  {
+   "role": "Sales Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "autoname": "naming_series:",
+ "title_field": "subject",
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "系列",
+   "options": "BM-.YYYY.-.####",
+   "reqd": 1,
+   "default": "BM-.YYYY.-.####"
+  },
+  {
+   "fieldname": "subject_sb",
+   "fieldtype": "Section Break",
+   "label": "邮件"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "主题",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "body",
+   "fieldtype": "Text Editor",
+   "label": "正文"
+  },
+  {
+   "fieldname": "customers_sb",
+   "fieldtype": "Section Break",
+   "label": "收件客户"
+  },
+  {
+   "fieldname": "customers",
+   "fieldtype": "Table",
+   "label": "收件客户",
+   "options": "Bulk Email Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "stats_sb",
+   "fieldtype": "Section Break",
+   "label": "发送统计"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "send_status",
+   "fieldtype": "Select",
+   "label": "发送状态",
+   "options": "未发送\n已发送\n部分失败",
+   "default": "未发送",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "total_count",
+   "fieldtype": "Int",
+   "label": "收件数",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "success_count",
+   "fieldtype": "Int",
+   "label": "成功",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fail_count",
+   "fieldtype": "Int",
+   "label": "失败",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sent_at",
+   "fieldtype": "Datetime",
+   "label": "发送时间",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "备注"
+  }
+ ],
+ "field_order": [
+  "naming_series",
+  "subject_sb",
+  "subject",
+  "body",
+  "customers_sb",
+  "customers",
+  "stats_sb",
+  "cb1",
+  "send_status",
+  "total_count",
+  "success_count",
+  "cb2",
+  "fail_count",
+  "sent_at",
+  "remark"
+ ]
+}

@@ -1,5 +1,5 @@
 /* 业务流程展示页（演示用）：按功能清单梳理核心业务流程，串联现有单据 */
-/* BF_PAGE_V2 */
+/* BF_PAGE_V3 */
 
 const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 
@@ -80,7 +80,7 @@ const LANES = [
 			{ icon: 'archive', label: '库存余额', sub: '库存汇总 · Stock Summary', route: ['desk', 'stock-balance'] },
 			{ icon: 'box', label: '出库', sub: 'Delivery Note · 销售出库', route: ['desk', 'Delivery Note'] },
 			{ icon: 'chart', label: '库存统计', sub: 'Stock Balance 报表', route: ['desk', 'query-report', 'Stock Balance'], report: true },
-			{ icon: 'box', label: '库存预警', sub: '最小/最大 · 再订货点', route: ['desk', 'Item'] },
+			{ icon: 'chart', label: '库存预警', sub: '低于再订货点 · 库存预警报表', route: ['desk', 'query-report', '库存预警'], report: true },
 		],
 	},
 	{
@@ -112,12 +112,13 @@ const MASTER = [
 	{ icon: 'globe', label: '贸易术语', note: 'Incoterms · 订单/出运用', route: ['desk', 'Incoterms'], badge: 'General ERP' },
 	{ icon: 'hash', label: 'HS 编码', note: '物料报关编码 · 海关商品', route: ['desk', 'HS Code'], badge: 'General ERP' },
 	{ icon: 'sliders', label: '系统参数', note: '全局行为参数', route: ['desk', 'System Parameter'], badge: 'General ERP' },
+	{ icon: 'banknote', label: '币种汇率', note: '今日汇率 · 工作台数字卡', route: ['desk', 'currency-exchange-rate'], badge: 'General ERP' },
 ];
 
 const MARKETING = [
 	{ icon: 'target', label: '商机', note: '商机统计 · 丢失商机', route: ['desk', 'Opportunity'] },
 	{ icon: 'megaphone', label: '营销活动', note: 'Campaign · 营销计划', route: ['desk', 'Campaign'] },
-	{ icon: 'mail', label: '邮件群发', note: '群发邮件 · 效果分析', plan: true, badge: '规划中' },
+	{ icon: 'megaphone', label: '邮件群发', note: '客户群发 · 发送统计', route: ['desk', 'bulk-email'] },
 ];
 
 const OA = [
@@ -131,6 +132,7 @@ const OA = [
 
 const REPORTS = [
 	{ label: '外销统计', note: '出口销售', route: ['desk', 'query-report', '外销统计'] },
+	{ label: '出运统计', note: '出运维度 · 港口/柜量', route: ['desk', 'query-report', '出运统计'] },
 	{ label: '订单利润', note: '订单维度利润', route: ['desk', 'query-report', '订单利润'] },
 	{ label: '产品统计', note: '产品维度', route: ['desk', 'query-report', '产品统计'] },
 	{ label: '采购统计', note: '采购维度', route: ['desk', 'query-report', '采购统计'] },
@@ -144,7 +146,7 @@ const PLATFORM = [
 	{ icon: 'clock', label: '待处理任务', note: 'ToDo', route: ['desk', 'ToDo'] },
 	{ icon: 'search', label: '全局搜索', note: '内置 · ⌘K 快捷键', noroute: true, badge: '内置' },
 	{ icon: 'mail', label: '沟通记录', note: 'Communication', route: ['desk', 'Communication'] },
-	{ icon: 'mail', label: '邮件', note: '邮箱 · 收发/审批邮件', plan: true, badge: '规划中' },
+	{ icon: 'mail', label: '邮件中心', note: '待处理 · 收件箱 · 草稿箱', route: ['desk', 'mail-center'] },
 ];
 
 
@@ -163,7 +165,7 @@ function makeHead() {
 	el.innerHTML = `
 		<div>
 			<div class="business-flow-title">外贸业务流程总览</div>
-			<div class="business-flow-sub">功能清单 → 核心业务流程地图 · 点击任意节点/卡片跳转到对应单据（虚线为报表/规划中）</div>
+			<div class="business-flow-sub">功能清单 → 核心业务流程地图 · 点击任意节点/卡片跳转到对应单据（虚线为报表/内置）</div>
 		</div>
 		<div class="business-flow-legend">
 			<span class="lg"><span class="dot" style="background: var(--erp-info)"></span>销售</span>

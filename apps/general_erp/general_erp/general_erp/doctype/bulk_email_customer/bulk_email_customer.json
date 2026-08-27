@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-08-27 15:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2026-08-27 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Bulk Email Customer",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 0,
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "客户",
+   "options": "Customer",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "客户名称",
+   "fetch_from": "customer.customer_name",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "邮箱",
+   "fetch_from": "customer.email_id",
+   "in_list_view": 1,
+   "read_only": 1
+  }
+ ],
+ "field_order": [
+  "customer",
+  "customer_name",
+  "email_id"
+ ]
+}

@@ -1,0 +1,201 @@
+/* ============================================================
+   邮件中心页
+   颜色全部走 --erp-* token，双主题自动适配（08-dark-mode.md）
+   ============================================================ */
+
+.layout-main:has(.mail-center-wrap) {
+	background: var(--erp-bg-card);
+}
+
+.mail-center-wrap {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 28px 32px 56px;
+}
+
+/* ---------- 页头 ---------- */
+.mail-center-head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--erp-space-4);
+	margin-bottom: var(--erp-space-4);
+}
+.mail-center-title {
+	font-size: 22px;
+	font-weight: 650;
+	letter-spacing: -0.01em;
+	color: var(--erp-text-1);
+}
+.mail-center-sub {
+	margin-top: 6px;
+	font-size: 13px;
+	color: var(--erp-text-3);
+}
+
+/* ---------- 文件夹 tab ---------- */
+.mc-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: var(--erp-space-4);
+}
+.mc-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--erp-text-2);
+	background: var(--erp-bg-card);
+	border: 1px solid var(--erp-border-1);
+	border-radius: var(--erp-radius-full);
+	cursor: pointer;
+	user-select: none;
+	transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.mc-tab:hover {
+	border-color: var(--erp-primary);
+	color: var(--erp-primary);
+}
+.mc-tab.is-active {
+	background: var(--erp-primary);
+	border-color: var(--erp-primary);
+	color: #fff;
+}
+.mc-tab .mc-count {
+	min-width: 18px;
+	padding: 0 5px;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 16px;
+	border-radius: var(--erp-radius-full);
+	background: var(--erp-bg-muted);
+	color: var(--erp-text-2);
+}
+.mc-tab.is-active .mc-count {
+	background: rgba(255, 255, 255, 0.25);
+	color: #fff;
+}
+
+/* ---------- 列表 ---------- */
+.mc-card {
+	background: var(--erp-bg-card);
+	border: 1px solid var(--erp-border-light);
+	border-radius: var(--erp-radius-lg);
+	box-shadow: var(--erp-shadow-1);
+	overflow: hidden;
+}
+.mc-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+.mc-table thead th {
+	padding: 10px 16px;
+	text-align: left;
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--erp-text-3);
+	background: var(--erp-bg-page);
+	border-bottom: 0.5px solid var(--erp-border-1);
+	white-space: nowrap;
+}
+.mc-table tbody td {
+	padding: 12px 16px;
+	color: var(--erp-text-1);
+	border-bottom: 0.5px solid var(--erp-border-light);
+	vertical-align: middle;
+}
+.mc-table tbody tr:last-child td {
+	border-bottom: none;
+}
+.mc-table tbody tr:hover td {
+	background: var(--erp-bg-page);
+}
+.mc-subject {
+	font-weight: 600;
+}
+.mc-subject .mc-rel {
+	margin-left: 8px;
+	padding: 1px 8px;
+	font-size: 11px;
+	font-weight: 500;
+	border-radius: var(--erp-radius-full);
+	background: var(--erp-bg-muted);
+	color: var(--erp-text-3);
+}
+.mc-time {
+	white-space: nowrap;
+	color: var(--erp-text-3);
+	font-size: 12px;
+}
+
+/* ---------- 状态徽章 ---------- */
+.mc-badge {
+	display: inline-block;
+	padding: 1px 8px;
+	font-size: 11px;
+	font-weight: 500;
+	border-radius: var(--erp-radius-full);
+	white-space: nowrap;
+}
+.mc-badge.st-warn {
+	background: var(--erp-warning-light);
+	color: var(--erp-warning-text);
+}
+.mc-badge.st-info {
+	background: var(--erp-info-light);
+	color: var(--erp-info);
+}
+.mc-badge.st-ok {
+	background: var(--erp-success-light);
+	color: var(--erp-success-text);
+}
+.mc-badge.st-muted {
+	background: var(--erp-bg-muted);
+	color: var(--erp-text-3);
+}
+.mc-badge.st-folder {
+	background: var(--erp-bg-muted);
+	color: var(--erp-text-2);
+}
+
+/* ---------- 行操作 ---------- */
+.mc-actions {
+	white-space: nowrap;
+}
+.mc-act {
+	cursor: pointer;
+	font-size: 12px;
+	color: var(--erp-primary);
+	margin-right: 12px;
+}
+.mc-act:hover {
+	text-decoration: underline;
+}
+.mc-act[data-act="trash"] {
+	color: var(--erp-text-3);
+}
+.mc-act[data-act="restore"] {
+	color: var(--erp-success);
+}
+
+/* ---------- 空态 ---------- */
+.mc-empty {
+	text-align: center;
+	padding: 48px 0 !important;
+	color: var(--erp-text-3);
+}
+
+@media (max-width: 900px) {
+	.mail-center-wrap {
+		padding: 20px 16px 40px;
+	}
+	.mc-table thead th:nth-child(4),
+	.mc-table tbody td:nth-child(4) {
+		display: none;
+	}
+}

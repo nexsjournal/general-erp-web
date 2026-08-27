@@ -58,7 +58,7 @@
 	try {
 		const key = "_page:business-flow";
 		const cached = localStorage.getItem(key);
-		if (cached && cached.indexOf("BF_PAGE_V2") === -1) {
+		if (cached && cached.indexOf("BF_PAGE_V3") === -1) {
 			localStorage.removeItem(key);
 		}
 	} catch (e) {}
