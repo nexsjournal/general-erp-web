@@ -282,14 +282,33 @@ body:not(.full-width) [data-page-route="Workspaces"] .layout-main {
 	background: var(--erp-bg-card);
 }
 .list-row-head {
-	background: transparent;
+	background: var(--erp-bg-card);
 	border-bottom: 1px solid var(--erp-border-1);
 }
+/* 行与行之间用浅色细线区分：去掉官方行的圆角/内缩（hover 呈「浮起卡片」感），
+   悬停改为整行平铺淡色条；右侧 sticky 区域随行同底，去掉其专属灰底与蓝色分隔线 */
 .list-row-container {
 	border-bottom: 1px solid var(--erp-border-light);
+	border-radius: 0;
+	padding-inline: 0;
 }
 .list-row-container:hover {
 	background: var(--erp-bg-hover);
+}
+.list-row .level-right,
+.list-row-head .level-right {
+	background-color: var(--erp-bg-card);
+	border-left: none;
+}
+.list-row-container:hover .level-right {
+	background-color: var(--erp-bg-hover);
+	box-shadow: none;
+}
+.list-row:hover:not(.list-row-head) .level-right {
+	box-shadow: none;
+}
+.list-row-container:focus .list-row .level-right {
+	background-color: var(--highlight-color);
 }
 
 /* 表单页：整页白画布（表单/评论/活动/右侧栏统一底色，右侧栏用分割线分层） */
