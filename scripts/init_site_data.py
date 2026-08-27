@@ -56,6 +56,12 @@ def main():
             fy.append("companies", {"company": c["name"]})
         fy.insert(ignore_permissions=True)
 
+    # 4) 标记 setup wizard 完成（否则每次登录被拉进 /desk/setup-wizard）
+    #    v16 的 is_setup_complete() 要求 frappe+erpnext 两个 app 的 is_setup_complete=1
+    for _app in ("frappe", "erpnext"):
+        frappe.db.set_value("Installed Application", {"app_name": _app}, "is_setup_complete", 1)
+    frappe.db.set_single_value("System Settings", "setup_complete", 1)
+
     frappe.db.commit()
     print("站点业务初始化完成:", frappe.db.get_single_value("Global Defaults", "default_company"))
     frappe.destroy()
