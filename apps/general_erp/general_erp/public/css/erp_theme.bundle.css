@@ -271,6 +271,29 @@ body {
 .body-sidebar .sidebar-item-container.section-item {
 	margin-top: 10px;
 }
+/* 侧边栏滚动条：容器贴到侧边栏右缘（负边距抵消 8px 内边距，内容留白不变），
+   滚动条不再悬在菜单与边缘中间；并用细浅滚动条替代原生粗条 */
+.body-sidebar .body-sidebar-top {
+	margin-right: -7px;
+	padding-right: 8px;
+}
+.body-sidebar .body-sidebar-top::-webkit-scrollbar {
+	width: 6px;
+}
+.body-sidebar .body-sidebar-top::-webkit-scrollbar-track {
+	background: transparent;
+}
+.body-sidebar .body-sidebar-top::-webkit-scrollbar-thumb {
+	background: var(--erp-border-2);
+	border-radius: var(--erp-radius-full);
+}
+.body-sidebar .body-sidebar-top::-webkit-scrollbar-thumb:hover {
+	background: var(--erp-text-3);
+}
+.body-sidebar .body-sidebar-top {
+	scrollbar-width: thin;
+	scrollbar-color: var(--erp-border-2) transparent;
+}
 
 /* ---------- 4. 布局：workspace（Desk Page）通栏 ---------- */
 /* frappe v16 对 [data-page-route=Workspaces] 的 .layout-main 限宽
