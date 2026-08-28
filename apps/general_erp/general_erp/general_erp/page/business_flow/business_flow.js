@@ -59,7 +59,7 @@ const LANES = [
 			{ icon: 'target', label: __('商机'), sub: __('待批复 · 已批复 · 待回复 · 商机统计'), route: ['desk', 'Opportunity'] },
 			{ icon: 'file', label: __('报价单'), sub: __('报价管理'), route: ['desk', 'Quotation'] },
 			{ icon: 'clipboard', label: __('销售订单'), sub: __('外贸订单'), route: ['desk', 'Sales Order'] },
-			{ icon: 'anchor', label: __('出运明细单'), sub: __('装运港/卸货港 · 贸易术语 · 出运明细'), route: ['desk', 'Shipment'], badge: 'General ERP' },
+			{ icon: 'anchor', label: __('出运明细单'), sub: __('装运港/卸货港 · 贸易术语 · 出运明细'), route: ['desk', 'Export Shipment'], badge: 'General ERP' },
 			{ icon: 'filecheck', label: __('外贸单证'), sub: __('单证制作 · 出口报关'), route: ['desk', 'Trade Document'], badge: 'General ERP' },
 			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · Payment Entry'), route: ['desk', 'Payment Entry'] },
 			{ icon: 'trend', label: __('订单利润'), sub: __('订单维度利润分析'), route: ['desk', 'query-report', '订单利润'], report: true },
@@ -165,7 +165,7 @@ const REPORTS = [
 ];
 
 const PLATFORM = [
-	{ icon: 'home', label: __('工作台'), note: __('Desk 首页 · 业务数据'), route: ['desk', '外贸工作台'] },
+	{ icon: 'home', label: __('工作台'), note: __('Desk 首页 · 业务数据'), route: ['desk', 'ERP工作台'] },
 	{ icon: 'clock', label: __('待处理任务'), note: 'ToDo', route: ['desk', 'ToDo'] },
 	{ icon: 'search', label: __('全局搜索'), note: __('内置 · ⌘K 快捷键'), noroute: true, badge: __('内置') },
 	{ icon: 'mail', label: __('沟通记录'), note: 'Communication', route: ['desk', 'Communication'] },

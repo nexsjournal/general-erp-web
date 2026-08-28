@@ -68,7 +68,7 @@ def main():
     if not admin.default_app:
         admin.default_app = "erpnext"
     if not admin.default_workspace:
-        admin.default_workspace = "外贸工作台"
+        admin.default_workspace = "ERP工作台"
     admin.save(ignore_permissions=True)
 
     # 5) 标记 setup wizard 完成（否则每次登录被拉进 /desk/setup-wizard）

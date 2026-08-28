@@ -21,7 +21,7 @@
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "外贸工作台",
+ "label": "ERP工作台",
  "link_type": "DocType",
  "links": [
   {
@@ -267,7 +267,7 @@
    "is_query_report": 0,
    "label": "出运明细单",
    "link_count": 0,
-   "link_to": "Shipment",
+   "link_to": "Export Shipment",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -300,7 +300,7 @@
    "is_query_report": 0,
    "label": "出运",
    "link_count": 0,
-   "link_to": "Shipment",
+   "link_to": "Export Shipment",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -834,7 +834,7 @@
  "modified": "2026-08-27 18:30:00.000000",
  "modified_by": "Administrator",
  "module": "General ERP",
- "name": "外贸工作台",
+ "name": "ERP工作台",
  "number_cards": [
   {
    "label": "销售订单",
@@ -968,6 +968,6 @@
    "idx": 12
   }
  ],
- "title": "外贸工作台",
+ "title": "ERP工作台",
  "type": "Workspace"
 }
