@@ -85,4 +85,4 @@
 | 公司 | Qiyuan |
 | 默认货币 | CNY |
 | 界面语言 | 中文（System Settings 全局默认 + Administrator 用户语言均为 zh） |
-| 登录账号 | `Administrator` / `admin123`（本地开发默认，见 scripts/setup_bench.sh） |
+| 登录账号 | `Administrator`（或 `admin@example.com`）/ `Erp@Demo-2026` |

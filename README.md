@@ -40,7 +40,7 @@ general-erp-web/
 ```bash
 ./scripts/setup_bench.sh    # 首次约 15-30 分钟（装依赖 + 下载基座 + 建站点 + 编译）
 ./scripts/start_dev.sh      # 启动服务（前台运行，Ctrl+C 停止）
-# 浏览器打开 http://localhost:8005，登录 **Administrator / admin123**
+# 浏览器打开 http://localhost:8002，登录 **Administrator（或 admin@example.com）/ Erp@Demo-2026**
 # 说明：frappe 登录框标注「邮件」，实际按用户名匹配（普通用户用户名即邮箱）；
 # 已开启 allow_login_using_user_name 并把 Administrator 的 username 设为邮箱，两种写法均可
 ```
