@@ -199,3 +199,19 @@
 		},
 	});
 })();
+
+// 消音 Chart.js 空串颜色告警（P2-3，2026-08-29）：
+// 工作区 chart 块（销售订单趋势/采购订单趋势，存量配置）颜色为空串时，
+// frappe 打包的 Chart.js validateColors 触发 Blink 打印
+// '"" is not a valid color.'（console 噪音，不影响渲染）。
+// 精确匹配该告警串过滤，不影响其他 console 警告。
+(function () {
+	const TARGET = '"" is not a valid color.';
+	const _origWarn = console.warn;
+	console.warn = function () {
+		try {
+			if (arguments.length === 1 && String(arguments[0]) === TARGET) return;
+		} catch (e) {}
+		return _origWarn.apply(console, arguments);
+	};
+})();
