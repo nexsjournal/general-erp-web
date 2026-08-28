@@ -72,10 +72,18 @@ def main():
     admin.save(ignore_permissions=True)
 
     # 5) 标记 setup wizard 完成（否则每次登录被拉进 /desk/setup-wizard）
-    #    v16 的 is_setup_complete() 要求 frappe+erpnext 两个 app 的 is_setup_complete=1
-    for _app in ("frappe", "erpnext"):
+    #    必须覆盖【所有】已安装 app：general_erp=0 时 is_setup_complete() 间歇为 false，
+    #    web 多 worker 各自缓存 boot.setup_complete，/desk 与 setup-wizard 互相跳转
+    #    造成主页"狂闪"（2026-08-28 线上根因，T-flash 修复）
+    for _app in frappe.get_installed_apps():
         frappe.db.set_value("Installed Application", {"app_name": _app}, "is_setup_complete", 1)
     frappe.db.set_single_value("System Settings", "setup_complete", 1)
+    # 6) 修正残留的 desktop:home_page 默认值（狂闪第二根因，2026-08-29 T-home-flash）：
+    #    frappe 装站时把 desktop:home_page 设为 "setup-wizard"，只有 wizard 正式跑完才切走。
+    #    本站走脚本式 setup，wizard 从未跑完，导致 /desk 加载后 SPA 直接实例化 setup-wizard 页，
+    #    其 on_page_load 又整页跳回 /desk —— 死循环（与 is_setup_complete 无关的独立根因）。
+    if frappe.db.get_default("desktop:home_page") == "setup-wizard":
+        frappe.db.set_default("desktop:home_page", "workspace")
 
     frappe.db.commit()
     print("站点业务初始化完成:", frappe.db.get_single_value("Global Defaults", "default_company"))

@@ -10,7 +10,7 @@
 (function () {
 	const _orig = frappe.utils.shorten_number;
 	frappe.utils.shorten_number = function (number, country, precision) {
-		const r = _orig(number, country, precision);
+		const r = _orig.call(frappe.utils, number, country, precision);
 		if (r === "" && (number === 0 || number === "0")) {
 			return "0";
 		}
@@ -62,6 +62,69 @@
 			localStorage.removeItem(key);
 		}
 	} catch (e) {}
+})();
+
+// 修复主页"狂闪"（/desk ↔ /desk/setup-wizard 死循环，2026-08-29 T-home-flash 根因）：
+//   浏览器 localStorage 残留 session_last_route 指向 setup-wizard（frappe setup 流程写入）。
+//   /desk 加载时 desk.js 把它 set_route 过去；setup-wizard 页的构造函数
+//   (setup_wizard.js:103) 又无条件 set_route("setup-wizard/0")，on_page_load 又因
+//   setup 已完成用 location.href 整页跳回 /desk——反复导航/整页重载 = 白屏狂闪。
+//   本补丁（仅 setup 已完成时生效，全新站点不受影响）：
+//     ① 加载即清掉指向 setup-wizard 的脏 session_last_route（掐掉种子）；
+//     ② 包装 frappe.set_route：目标为 setup-wizard 时改跳主页。set_route 是所有
+//        进入该路由的唯一漏斗，掐断后 new SetupWizard 永不成为活跃路由，
+//        构造器自推与 on_page_load 整页跳回都不会触发，循环彻底断开。
+(function () {
+	function isSetupComplete() {
+		try {
+			if (!frappe.boot) return false;
+			return !!(frappe.boot.setup_complete ||
+				(frappe.boot.sysdefaults && frappe.boot.sysdefaults.setup_complete));
+		} catch (e) { return false; }
+	}
+	function cleanStaleWizard() {
+		try {
+			if (!isSetupComplete()) return;
+			var slr = localStorage.getItem("session_last_route");
+			if (slr && slr.indexOf("setup-wizard") === 0) {
+				localStorage.removeItem("session_last_route");
+			}
+		} catch (e) {}
+	}
+	function patchSetRoute() {
+		if (typeof frappe.set_route !== "function" || frappe.set_route.__flashGuard) return true;
+		var orig = frappe.set_route;
+		var wrapped = function () {
+			try {
+				if (isSetupComplete()) {
+					var a = Array.prototype.slice.call(arguments);
+					var first = a[0];
+					var target = (typeof first === "string") ? first
+						: (Array.isArray(first) ? (first[0] || "") : "");
+					if (String(target).indexOf("setup-wizard") === 0) {
+						return orig.apply(this, [ [] ]); // 改跳主页，掐断循环
+					}
+				}
+			} catch (e) {}
+			return orig.apply(this, arguments);
+		};
+		wrapped.__flashGuard = true;
+		frappe.set_route = wrapped;
+		return true;
+	}
+	// ① 立即清种子
+	cleanStaleWizard();
+	// ② frappe.set_route 可能晚于本脚本就绪，轮询兜底（~5s 内挂上），期间周期再清种子
+	// 写法避免压缩器改名误伤（2026-08-29 复现过 tries 被截成 ries 的 bug）
+	var flashCount = 0;
+	var flashTimer = window.setInterval(function () {
+		var flashOk = patchSetRoute();
+		cleanStaleWizard();
+		flashCount = flashCount + 1;
+		if (flashOk || flashCount >= 50) {
+			window.clearInterval(flashTimer);
+		}
+	}, 100);
 })();
 
 // 客户表单"移交"按钮：变更负责人并留痕（Customer Follow Up 模块 whitelisted 方法）。
