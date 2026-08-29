@@ -15,11 +15,11 @@
  "modified": "2026-08-27 16:19:00.553431",
  "modified_by": "Administrator",
  "module": "General ERP",
- "name": "\u5458\u5de5\u5de5\u4f5c\u60c5\u51b5\u8868",
+ "name": "员工工作情况表",
  "owner": "Administrator",
  "prepared_report": 0,
  "ref_doctype": "User",
- "report_name": "\u5458\u5de5\u5de5\u4f5c\u60c5\u51b5\u8868",
+ "report_name": "员工工作情况表",
  "report_type": "Script Report",
  "roles": [
   {
@@ -27,6 +27,15 @@
   },
   {
    "role": "Sales Manager"
+  },
+  {
+   "role": "系统管理员"
+  },
+  {
+   "role": "外贸专员"
+  },
+  {
+   "role": "总经理"
   }
  ],
  "snapshot_report": 0,

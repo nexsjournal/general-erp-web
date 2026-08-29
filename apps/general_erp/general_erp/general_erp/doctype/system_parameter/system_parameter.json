@@ -61,6 +61,13 @@
    "role": "All",
    "share": 0,
    "write": 0
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
   }
  ],
  "sort_field": "modified",

@@ -97,6 +97,37 @@
    "report": 1,
    "role": "Stock User",
    "share": 0
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "销售",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  },
+  {
+   "role": "外贸专员",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  },
+  {
+   "role": "采购",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  },
+  {
+   "role": "库存",
+   "read": 1,
+   "write": 0,
+   "create": 0
   }
  ],
  "sort_field": "modified",

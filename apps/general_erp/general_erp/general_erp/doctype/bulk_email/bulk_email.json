@@ -44,6 +44,32 @@
    "print": 1,
    "report": 1,
    "share": 1
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "销售",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "外贸专员",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "总经理",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
   }
  ],
  "sort_field": "modified",

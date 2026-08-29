@@ -24,6 +24,13 @@
    "export": 1,
    "print": 1,
    "report": 1
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
   }
  ],
  "__py__": "import frappe\n\nfrom frappe.model.document import Document\n\n\nclass MailAccount(Document):\n\t\"\"\"邮箱账号：员工 IMAP/SMTP 邮箱配置，密码加密存储。\"\"\"\n",

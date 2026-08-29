@@ -15,11 +15,11 @@
  "modified": "2026-08-28 19:21:50.937346",
  "modified_by": "Administrator",
  "module": "General ERP",
- "name": "\u6279\u6b21\u7edf\u8ba1",
+ "name": "批次统计",
  "owner": "Administrator",
  "prepared_report": 0,
  "ref_doctype": "Item",
- "report_name": "\u6279\u6b21\u7edf\u8ba1",
+ "report_name": "批次统计",
  "report_type": "Script Report",
  "roles": [
   {
@@ -36,6 +36,21 @@
   },
   {
    "role": "Accounts Manager"
+  },
+  {
+   "role": "系统管理员"
+  },
+  {
+   "role": "外贸专员"
+  },
+  {
+   "role": "总经理"
+  },
+  {
+   "role": "库存"
+  },
+  {
+   "role": "财务"
   }
  ],
  "snapshot_report": 0,

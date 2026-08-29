@@ -66,7 +66,7 @@
    "fieldname": "shipment",
    "fieldtype": "Link",
    "label": "关联出运",
-   "options": "Shipment"
+   "options": "Export Shipment"
   },
   {
    "default": "草稿",
@@ -151,6 +151,35 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "销售",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "外贸专员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "总经理",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "delete": 1
   }
  ],
  "row_format": "Dynamic",

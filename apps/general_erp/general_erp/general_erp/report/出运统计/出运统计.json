@@ -18,7 +18,7 @@
  "name": "出运统计",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "Shipment",
+ "ref_doctype": "Export Shipment",
  "report_name": "出运统计",
  "report_type": "Script Report",
  "roles": [
@@ -36,6 +36,24 @@
   },
   {
    "role": "Accounts User"
+  },
+  {
+   "role": "系统管理员"
+  },
+  {
+   "role": "销售"
+  },
+  {
+   "role": "外贸专员"
+  },
+  {
+   "role": "总经理"
+  },
+  {
+   "role": "库存"
+  },
+  {
+   "role": "财务"
   }
  ],
  "snapshot_report": 0,

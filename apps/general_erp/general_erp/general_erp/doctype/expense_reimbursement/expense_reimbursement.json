@@ -43,7 +43,6 @@
    "reqd": 1
   },
   {
-   "default": "{{ session.user }}",
    "fieldname": "applicant",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -94,7 +93,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "审批状态",
-   "read_only": 1
+   "read_only": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "amended_from",
@@ -139,7 +139,9 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "All"
+   "role": "All",
+   "submit": 1,
+   "write": 1
   },
   {
    "create": 1,
@@ -158,6 +160,49 @@
    "report": 1,
    "role": "Accounts User",
    "share": 0
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "email": 0,
+   "share": 0,
+   "permlevel": 0
+  },
+  {
+   "role": "Sales Manager",
+   "read": 1,
+   "write": 1,
+   "email": 0,
+   "share": 0,
+   "permlevel": 0
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "delete": 1,
+   "amend": 1
+  },
+  {
+   "role": "财务",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  },
+  {
+   "role": "总经理",
+   "read": 1,
+   "write": 1,
+   "create": 0
+  },
+  {
+   "role": "外贸专员",
+   "read": 1,
+   "write": 1,
+   "create": 0
   }
  ],
  "row_format": "Dynamic",
