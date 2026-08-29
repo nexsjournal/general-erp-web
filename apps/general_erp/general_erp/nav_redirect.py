@@ -11,7 +11,7 @@ import frappe
 def get_home_page(user):
 	# 仅已登录用户；guest 返回 None 走 frappe 默认（登录页/404）
 	if user and user != "Guest":
-		return "/desk/%E9%A6%96%E9%A1%B5"
+		return "/desk/index"
 	return None
 
 
@@ -20,5 +20,5 @@ def website_redirect(path):
 	if path == "desk":
 		user = getattr(frappe.session, "user", None)
 		if user and user != "Guest":
-			return "/desk/%E9%A6%96%E9%A1%B5"
+			return "/desk/index"
 	return None

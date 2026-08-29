@@ -314,7 +314,7 @@
 // 2) 非超管用户直接访问 /desk 裸路由 -> 跳 首页（超管直访仍看老网格）
 // 3) 根地址 8002 的 301 由服务端 website_redirects hooks 处理（hooks.py）
 (function () {
-	const HOME = "/desk/%E9%A6%96%E9%A1%B5";
+	const HOME = "/desk/index";
 	document.addEventListener("click", function (e) {
 		const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
 		if (!a) return;
@@ -326,7 +326,7 @@
 			try {
 				location.replace(HOME);
 			} catch (err2) {
-				try { frappe.set_route("首页"); } catch (err3) { location.replace(HOME); }
+				try { frappe.set_route("index"); } catch (err3) { location.replace(HOME); }
 			}
 		}
 	}, true);
@@ -345,6 +345,15 @@
 		};
 		setTimeout(tryRedirect, 200);
 	}
+	// 返回防乱跳守卫：非超管用户浏览器"后退"落回旧 /desk 网格时，自动拉回 首页（index）。
+	// 功能页之间的前进/后退不受影响（守卫只在 pathname 变回 /desk 裸路由时生效）。
+	window.addEventListener("popstate", function () {
+		if (location.pathname !== "/desk" && location.pathname !== "/desk/") return;
+		const user = (window.frappe && frappe.session) ? frappe.session.user : null;
+		if (user && user !== "Guest" && user !== "Administrator") {
+			location.replace(HOME);
+		}
+	});
 })();
 
 // T-brand: 品牌名统一显示为 太康生物ERP（技术模块名 General ERP 保持不变，frappe 按它做 Python 导入）
@@ -393,6 +402,9 @@
 	const applyTitle = function () {
 		const t = document.title || "";
 		if (!t || t === "Login" || t === "login") return;
+		// T-url-zh: 首页路由名改为英文 index（防 URL 中文），标签文案仍显示"首页"
+		let core = t.indexOf("太康生物ERP - ") === 0 ? t.slice("太康生物ERP - ".length) : t;
+		if (core.trim() === "index") { document.title = "太康生物ERP - 首页"; return; }
 		if (t.indexOf("太康生物ERP") === -1) {
 			document.title = "太康生物ERP - " + t;
 		}

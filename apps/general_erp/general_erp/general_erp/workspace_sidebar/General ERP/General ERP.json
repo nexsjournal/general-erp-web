@@ -17,7 +17,7 @@
    "indent": 0,
    "keep_closed": 0,
    "label": "首页",
-   "link_to": "首页",
+   "link_to": "index",
    "link_type": "Workspace",
    "navigate_to_tab": null,
    "parentfield": "items",

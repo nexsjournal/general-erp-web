@@ -133,11 +133,11 @@ def sync_homepage_default():
     走 frappe 官方 User.default_workspace 机制（可后台随时改回，不改源码/不隐藏原生页面）。
     「首页」本身随 workspace/首页/首页.json 在 migrate 时同步（is_hidden=0 侧边栏可见）。
     """
-    if not frappe.db.exists("Workspace", "首页"):
+    if not frappe.db.exists("Workspace", "index"):
         return
     for u in frappe.get_all("User", filters={"enabled": 1, "user_type": "System User"}, fields=["name", "default_workspace"]):
-        if u["default_workspace"] != "首页":
-            frappe.db.set_value("User", u["name"], "default_workspace", "首页")
+        if u["default_workspace"] != "index":
+            frappe.db.set_value("User", u["name"], "default_workspace", "index")
     frappe.db.commit()
 
 

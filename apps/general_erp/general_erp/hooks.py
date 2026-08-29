@@ -78,6 +78,6 @@ on_logout = "general_erp.general_erp.doctype.login_log.login_log.on_logout"
 # 根地址 / 与 /desk 裸路由 301 到 /desk/首页；/desk/xxx 子路由不受影响；
 # 未登录访问会 301 到 /desk/首页 再弹回登录页，行为与原生一致
 website_redirects = [
-	{"source": "", "target": "/desk/%E9%A6%96%E9%A1%B5"},
-	{"source": "desk", "target": "/desk/%E9%A6%96%E9%A1%B5"},
+	{"source": "", "target": "/desk/index"},
+	{"source": "desk", "target": "/desk/index"},
 ]

@@ -18,7 +18,7 @@
  "link_type": "DocType",
  "links": [],
  "module": "General ERP",
- "name": "首页",
+ "name": "index",
  "number_cards": [
   {
    "doctype": "Workspace Number Card",
