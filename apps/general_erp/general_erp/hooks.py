@@ -80,4 +80,5 @@ on_logout = "general_erp.general_erp.doctype.login_log.login_log.on_logout"
 website_redirects = [
 	{"source": "", "target": "/desk/index"},
 	{"source": "desk", "target": "/desk/index"},
+	{"source": "index", "target": "/desk/index"},
 ]

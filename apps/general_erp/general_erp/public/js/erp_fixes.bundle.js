@@ -331,6 +331,11 @@
 		}
 	}, true);
 	// 已登录访问 /desk 裸路由 -> 首页（frappe.session 异步就绪，轮询等待，超管保留老网格）
+	// T-url-index: /index 短路径 -> 首页（frappe 把 /index 当网站路由返回登录页，这里拦截直达 desk 首页）
+	if (location.pathname === "/index") {
+		location.replace(HOME);
+		return;
+	}
 	if (location.pathname === "/desk" || location.pathname === "/desk/") {
 		const t0 = Date.now();
 		const tryRedirect = function () {
