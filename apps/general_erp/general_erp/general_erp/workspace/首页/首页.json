@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"header\", \"data\": {\"text\": \"今日概览\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售额\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"应收账款\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待办\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"今日汇率\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"业务模块\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"财务管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"产品管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"生产管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"外贸管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"组织管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"报表中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"系统设置\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"今日概览\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售额\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"应收账款\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待办\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"今日汇率\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"业务模块\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"财务管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"产品管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"生产管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"外贸管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"组织管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"报表中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"系统设置\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"业务流程\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,
@@ -276,6 +276,24 @@
    "stats_filter": null,
    "type": "URL",
    "url": "/desk/系统设置"
+  },
+  {
+   "color": null,
+   "doc_view": "List",
+   "doctype": "Workspace Shortcut",
+   "format": null,
+   "icon": "workflow",
+   "idx": 13,
+   "kanban_board": null,
+   "label": "业务流程",
+   "link_to": null,
+   "parentfield": "shortcuts",
+   "parenttype": "Workspace",
+   "report_ref_doctype": null,
+   "restrict_to_domain": null,
+   "stats_filter": null,
+   "type": "URL",
+   "url": "/desk/business-flow"
   }
  ],
  "title": "首页",

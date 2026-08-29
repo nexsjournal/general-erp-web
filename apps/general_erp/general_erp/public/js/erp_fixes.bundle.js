@@ -308,3 +308,41 @@
 		return r;
 	};
 })();
+
+// T-nav-fix: 导航统一回 首页（金蝶式两级；老 /desk 网格保留给超管维护用）——
+// 1) 功能页/模块页顶栏 logo（指向老 /desk 网格）点击 -> 改跳 首页
+// 2) 非超管用户直接访问 /desk 裸路由 -> 跳 首页（超管直访仍看老网格）
+// 3) 根地址 8002 的 301 由服务端 website_redirects hooks 处理（hooks.py）
+(function () {
+	const HOME = "/desk/%E9%A6%96%E9%A1%B5";
+	document.addEventListener("click", function (e) {
+		const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+		if (!a) return;
+		let href = null;
+		try { href = new URL(a.getAttribute("href"), location.href).pathname; } catch (err) { return; }
+		if (href === "/desk" || href === "/desk/") {
+			e.preventDefault();
+			e.stopPropagation();
+			try {
+				location.replace(HOME);
+			} catch (err2) {
+				try { frappe.set_route("首页"); } catch (err3) { location.replace(HOME); }
+			}
+		}
+	}, true);
+	// 已登录访问 /desk 裸路由 -> 首页（frappe.session 异步就绪，轮询等待，超管保留老网格）
+	if (location.pathname === "/desk" || location.pathname === "/desk/") {
+		const t0 = Date.now();
+		const tryRedirect = function () {
+			if (location.pathname !== "/desk" && location.pathname !== "/desk/") return;
+			const user = (window.frappe && frappe.session) ? frappe.session.user : null;
+			if (user && user !== "Guest" && user !== "Administrator") {
+				location.replace(HOME);
+				return;
+			}
+			if (Date.now() - t0 > 5000) return;
+			setTimeout(tryRedirect, 100);
+		};
+		setTimeout(tryRedirect, 200);
+	}
+})();

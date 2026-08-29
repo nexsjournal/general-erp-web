@@ -71,3 +71,13 @@ jinja = {
 # 登录/登出日志（安全审计，docs/feature-requirements.md 第 9 章）
 on_login = "general_erp.general_erp.doctype.login_log.login_log.on_login"
 on_logout = "general_erp.general_erp.doctype.login_log.login_log.on_logout"
+
+# T-nav-fix: 已登录用户访问根地址 / 与 /desk 裸路由时直达 首页 workspace（金蝶式两级首页），
+# 不影响 /desk/xxx 子路由与未登录访问（未登录仍走登录页）。
+# T-nav-fix: 登录落地导航统一（金蝶式两级首页，非侵入，不动 frappe/erpnext 源码）
+# 根地址 / 与 /desk 裸路由 301 到 /desk/首页；/desk/xxx 子路由不受影响；
+# 未登录访问会 301 到 /desk/首页 再弹回登录页，行为与原生一致
+website_redirects = [
+	{"source": "", "target": "/desk/%E9%A6%96%E9%A1%B5"},
+	{"source": "desk", "target": "/desk/%E9%A6%96%E9%A1%B5"},
+]
