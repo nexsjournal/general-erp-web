@@ -21,10 +21,12 @@ def execute(filters=None):
 		owner_filter = "AND so.owner = %(salesperson)s"
 	sql = (
 		"SELECT DATE_FORMAT(so.transaction_date, '%%Y-%%m') AS period, so.owner, so.customer AS customer, "
-		"COUNT(*) AS order_count, "
-		"SUM((SELECT COALESCE(SUM(si.qty), 0) FROM `tabSales Order Item` si WHERE si.parent = so.name)) AS qty, "
+		"COUNT(DISTINCT so.name) AS order_count, "
+		"COALESCE(SUM(si.subtotal_qty), 0) AS qty, "
 		"SUM(so.base_grand_total) AS amount "
-		"FROM `tabSales Order` so WHERE so.docstatus = 1 "
+		"FROM `tabSales Order` so "
+		"LEFT JOIN (SELECT parent, SUM(qty) AS subtotal_qty FROM `tabSales Order Item` GROUP BY parent) si ON si.parent = so.name "
+		"WHERE so.docstatus = 1 "
 		"AND so.transaction_date BETWEEN %(from_date)s AND %(to_date)s " + owner_filter + " "
 		"GROUP BY " + group_col + " ORDER BY " + group_col
 	)

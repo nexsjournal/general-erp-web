@@ -539,3 +539,37 @@
 		try { if (location.href.indexOf('/query-report/') !== -1) tryFill(); } catch (e) {}
 	}, 1500);
 })();
+
+// T-exchange-fmt: 「今日汇率」数字卡强制 2 位小数（6.718 → 6.72）。
+// 根因：Number Card show_full_number=1 时 frappe 用原值渲染，USD/CNY 原始汇率是 9 位小数，
+// 中文场景读起来像乱码。金额类卡片仍保持 2 位（toLocaleString 默认），汇率卡单独收敛到 2 位。
+(function () {
+	function fixExchangeCard() {
+		try {
+			document.querySelectorAll('[number_card_name="今日汇率"] .number, .number-card[data-number-card-name="今日汇率"] .number').forEach(function (el) {
+				const raw = (el.textContent || "").replace(/[^0-9.\-]/g, "");
+				if (!raw) return;
+				const v = parseFloat(raw);
+				if (isNaN(v)) return;
+				const txt = v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+				if (el.textContent.trim() !== txt) el.textContent = txt;
+			});
+		} catch (e) { /* ignore */ }
+	}
+	const startFmt = function () {
+		if (!document.body) { setTimeout(startFmt, 100); return; }
+		fixExchangeCard();
+		let tick = false;
+		const obs = new MutationObserver(function () {
+			if (tick) return;
+			tick = true;
+			setTimeout(function () { tick = false; fixExchangeCard(); }, 120);
+		});
+		obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+	};
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", function () { setTimeout(startFmt, 400); });
+	} else {
+		setTimeout(startFmt, 400);
+	}
+})();
