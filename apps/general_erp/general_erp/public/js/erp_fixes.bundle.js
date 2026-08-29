@@ -427,3 +427,72 @@
 		setTimeout(start, 400);
 	}
 })();
+
+// T-flow-config: 轻量流程配置——每个模块页顶部动态渲染后台可编辑的流程步骤
+// 数据源 Module Flow DocType（System Manager 可在 /desk/module-flow 里增删/调序/改链接）
+(function () {
+	var MODULES = ['销售管理','采购管理','库存管理','财务管理','客户管理','产品管理','邮件中心','外贸管理','生产管理','组织管理','报表中心','系统设置'];
+
+	function resolveModule() {
+		try {
+			var cp = localStorage.getItem('current_page');
+			if (cp && MODULES.indexOf(cp) !== -1) return cp;
+			var seg = decodeURIComponent(location.pathname.split('/').pop() || '');
+			if (MODULES.indexOf(seg) !== -1) return seg;
+			var segRaw = location.pathname.split('/').pop() || '';
+			if (frappe.workspace_map) {
+				var w = frappe.workspace_map[segRaw] || frappe.workspace_map[seg];
+				if (w && MODULES.indexOf(w.name) !== -1) return w.name;
+				// 遍历找 slug 匹配
+				for (var k in frappe.workspace_map) {
+					if (frappe.workspace_map[k] && frappe.workspace_map[k].name === segRaw) {
+						if (MODULES.indexOf(frappe.workspace_map[k].name) !== -1) return frappe.workspace_map[k].name;
+					}
+				}
+			}
+		} catch (e) {}
+		return null;
+	}
+
+	function inject() {
+		var mod = resolveModule();
+		if (!mod) return;
+		var workspaceRoot = document.querySelector('.page-body') || document.querySelector('.layout-main');
+		if (!workspaceRoot || workspaceRoot.querySelector('.tflow-bar')) return;
+		frappe.call({
+			method: 'general_erp.general_erp.api_backup.get_module_flow',
+			args: { module_name: mod },
+			callback: function (res) {
+				var data = res && res.message;
+				if (!data || !data.steps || !data.steps.length) return;
+				var bar = document.createElement('div');
+				bar.className = 'tflow-bar';
+				bar.style.cssText = 'display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:8px 0 4px;padding:10px 14px;background:rgba(41,128,185,.07);border:1px solid rgba(41,128,185,.18);border-radius:10px;';
+				var label = document.createElement('span');
+				label.textContent = '流程：';
+				label.style.cssText = 'font-size:13px;font-weight:600;color:#555;margin-right:4px;';
+				bar.appendChild(label);
+				data.steps.forEach(function (s, i) {
+					var chip = document.createElement('span');
+					chip.textContent = s.title;
+					chip.style.cssText = 'font-size:12.5px;padding:4px 10px;background:#fff;border:1px solid #e0e0e0;border-radius:14px;color:#333;' + (s.link ? 'cursor:pointer;text-decoration:underline;' : '');
+					if (s.link) {
+						chip.addEventListener('click', function () { frappe.set_route(s.link.replace(/^\//, '').split('/')); });
+					}
+					if (s.desc) chip.title = s.desc;
+					bar.appendChild(chip);
+					if (i < data.steps.length - 1) {
+						var arrow = document.createElement('span');
+						arrow.textContent = '→';
+						arrow.style.cssText = 'color:#999;font-size:13px;';
+						bar.appendChild(arrow);
+					}
+				});
+				workspaceRoot.insertBefore(bar, workspaceRoot.firstChild);
+			}
+		});
+	}
+
+	if (frappe.router && frappe.router.on) { frappe.router.on('route_change', function () { setTimeout(inject, 1200); }); }
+	setInterval(function () { if (location.pathname.indexOf('/desk/') === 0) inject(); }, 3000);
+})();

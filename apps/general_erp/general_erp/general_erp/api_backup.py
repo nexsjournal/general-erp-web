@@ -64,3 +64,23 @@ def download_backup(filename):
         content = fp.read()
     from frappe.utils.response import downloadfile
     downloadfile(filename, content)
+
+
+# ---------- 模块流程配置（轻量版：后台可编辑步骤+调序） ----------
+@frappe.whitelist()
+def get_module_flow(module_name):
+    """用户端读取某模块的流程步骤（所有登录用户可读）"""
+    if not module_name:
+        return None
+    name = frappe.db.get_value("Module Flow", {"module_name": module_name, "enabled": 1}, "name")
+    if not name:
+        return None
+    d = frappe.get_doc("Module Flow", name)
+    return {
+        "module_name": d.module_name,
+        "flow_title": d.flow_title,
+        "steps": [
+            {"title": s.step_title, "desc": s.step_desc, "link": s.link_to}
+            for s in d.steps
+        ],
+    }
