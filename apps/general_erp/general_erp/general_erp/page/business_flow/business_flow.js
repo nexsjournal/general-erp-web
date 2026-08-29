@@ -1,5 +1,5 @@
 /* 业务流程展示页（演示用）：按功能清单梳理核心业务流程，串联现有单据 */
-/* BF_PAGE_V6 */
+/* BF_PAGE_V7 */
 
 const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 
@@ -46,6 +46,23 @@ const ICONS = {
 /* ---------- 业务数据：功能清单 → 核心业务流程 ---------- */
 
 const LANES = [
+	{
+		title: __('标准销售主链路'),
+		desc: __('非外贸销售 · 客户 → 商机 → 报价 → 订单 → 交货 → 开票 → 收款 → 利润'),
+		color: '#fa8c16',
+		light: 'rgba(250, 140, 22, 0.12)',
+		steps: [
+			{ icon: 'user', label: __('客户'), sub: __('我的客户 · 公海 · 热点 · 移交'), route: ['desk', 'Customer'] },
+			{ icon: 'phone', label: __('客户跟进'), sub: __('电话/邮件/拜访 · 公海回收依据'), route: ['desk', 'customer-follow-up'], badge: 'General ERP' },
+			{ icon: 'target', label: __('商机'), sub: __('待批复 · 已批复 · 待回复 · 商机统计'), route: ['desk', 'Opportunity'] },
+			{ icon: 'file', label: __('报价单'), sub: __('报价管理'), route: ['desk', 'Quotation'] },
+			{ icon: 'clipboard', label: __('销售订单'), sub: __('内贸订单 · 不走出运/单证'), route: ['desk', 'Sales Order'] },
+			{ icon: 'box', label: __('交货单'), sub: __('Delivery Note · 销售出库'), route: ['desk', 'Delivery Note'] },
+			{ icon: 'file', label: __('销售发票'), sub: __('Sales Invoice · 开票'), route: ['desk', 'Sales Invoice'] },
+			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · Payment Entry'), route: ['desk', 'Payment Entry'] },
+			{ icon: 'trend', label: __('订单利润'), sub: __('订单维度利润分析'), route: ['desk', 'query-report', '订单利润'], report: true },
+		],
+	},
 	{
 		title: __('外贸销售主链路'),
 		desc: __('客户获取 → 商机 → 报价 → 订单 → 出运 → 单证 → 收款 → 利润'),
@@ -188,10 +205,11 @@ function makeHead() {
 	el.className = 'business-flow-head';
 	el.innerHTML = `
 		<div>
-			<div class="business-flow-title">${__("外贸业务流程总览")}</div>
+			<div class="business-flow-title">${__("业务流程总览")}</div>
 			<div class="business-flow-sub">${__("功能清单 → 核心业务流程地图 · 点击任意节点/卡片跳转到对应单据（虚线为报表/内置）")}</div>
 		</div>
 		<div class="business-flow-legend">
+			<span class="lg"><span class="dot" style="background: #fa8c16"></span>${__('标准销售')}</span>
 			<span class="lg"><span class="dot" style="background: var(--erp-info)"></span>${__('销售')}</span>
 			<span class="lg"><span class="dot" style="background: var(--erp-success)"></span>${__('采购检验')}</span>
 			<span class="lg"><span class="dot" style="background: #0fc6c2"></span>${__('库存')}</span>
