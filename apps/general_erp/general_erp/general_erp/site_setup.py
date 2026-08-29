@@ -114,10 +114,12 @@ def sync_role_profiles():
 
 
 def sync_currency_display():
-    """金额显示口径（T-currency，2026-08-29）：CNY 符号=元；数字卡默认全额显示（不缩写成"千"）。"""
+    """金额显示口径（T-currency，2026-08-29）：CNY 符号=元且显示在数字右侧（382,000.00 元）；数字卡默认全额显示（不缩写成"千"）。"""
     if frappe.db.exists("Currency", "CNY"):
         if not frappe.db.get_value("Currency", "CNY", "symbol"):
             frappe.db.set_value("Currency", "CNY", "symbol", "元")
+        if not frappe.db.get_value("Currency", "CNY", "symbol_on_right"):
+            frappe.db.set_value("Currency", "CNY", "symbol_on_right", 1)
     for c in frappe.get_all("Number Card", fields=["name", "show_full_number"]):
         if not c["show_full_number"]:
             frappe.db.set_value("Number Card", c["name"], "show_full_number", 1)
