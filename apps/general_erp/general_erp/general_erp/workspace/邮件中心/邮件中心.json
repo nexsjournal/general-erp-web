@@ -1,0 +1,44 @@
+{
+ "doctype": "Workspace",
+ "name": "邮件中心",
+ "label": "邮件中心",
+ "title": "邮件中心",
+ "module": "General ERP",
+ "icon": "mail",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 70.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "邮件工作台",
+   "link_type": "Page",
+   "link_to": "mail-center",
+   "idx": 1
+  },
+  {
+   "label": "邮件记录",
+   "link_type": "DocType",
+   "link_to": "Mail",
+   "idx": 2
+  },
+  {
+   "label": "邮箱账号",
+   "link_type": "DocType",
+   "link_to": "Mail Account",
+   "idx": 3
+  },
+  {
+   "label": "邮件模板",
+   "link_type": "DocType",
+   "link_to": "Email Template",
+   "idx": 4
+  },
+  {
+   "label": "邮件群发",
+   "link_type": "DocType",
+   "link_to": "Bulk Email",
+   "idx": 5
+  }
+ ]
+}

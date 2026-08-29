@@ -1,0 +1,38 @@
+{
+ "doctype": "Workspace",
+ "name": "产品管理",
+ "label": "产品管理",
+ "title": "产品管理",
+ "module": "General ERP",
+ "icon": "box",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 60.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "商品",
+   "link_type": "DocType",
+   "link_to": "Item",
+   "idx": 1
+  },
+  {
+   "label": "商品组",
+   "link_type": "DocType",
+   "link_to": "Item Group",
+   "idx": 2
+  },
+  {
+   "label": "计量单位",
+   "link_type": "DocType",
+   "link_to": "UOM",
+   "idx": 3
+  },
+  {
+   "label": "海关编码",
+   "link_type": "DocType",
+   "link_to": "HS Code",
+   "idx": 4
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "doctype": "Workspace",
+ "name": "库存管理",
+ "label": "库存管理",
+ "title": "库存管理",
+ "module": "General ERP",
+ "icon": "package",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 30.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "入库/出库单",
+   "link_type": "DocType",
+   "link_to": "Stock Entry",
+   "idx": 1
+  },
+  {
+   "label": "仓库",
+   "link_type": "DocType",
+   "link_to": "Warehouse",
+   "idx": 2
+  },
+  {
+   "label": "库存余额",
+   "link_type": "Page",
+   "link_to": "stock-balance",
+   "idx": 3
+  }
+ ]
+}

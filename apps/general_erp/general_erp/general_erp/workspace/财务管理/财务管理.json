@@ -1,0 +1,56 @@
+{
+ "doctype": "Workspace",
+ "name": "财务管理",
+ "label": "财务管理",
+ "title": "财务管理",
+ "module": "General ERP",
+ "icon": "credit-card",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 40.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "收款单",
+   "link_type": "DocType",
+   "link_to": "Payment Entry",
+   "idx": 1
+  },
+  {
+   "label": "付款单",
+   "link_type": "DocType",
+   "link_to": "Payment Entry",
+   "idx": 2
+  },
+  {
+   "label": "销售发票",
+   "link_type": "DocType",
+   "link_to": "Sales Invoice",
+   "idx": 3
+  },
+  {
+   "label": "采购发票",
+   "link_type": "DocType",
+   "link_to": "Purchase Invoice",
+   "idx": 4
+  },
+  {
+   "label": "费用报销",
+   "link_type": "DocType",
+   "link_to": "Expense Reimbursement",
+   "idx": 5
+  },
+  {
+   "label": "科目表",
+   "link_type": "DocType",
+   "link_to": "Account",
+   "idx": 6
+  },
+  {
+   "label": "会计期间",
+   "link_type": "DocType",
+   "link_to": "Fiscal Year",
+   "idx": 7
+  }
+ ]
+}

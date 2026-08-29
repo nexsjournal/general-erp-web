@@ -1,0 +1,32 @@
+{
+ "doctype": "Workspace",
+ "name": "生产管理",
+ "label": "生产管理",
+ "title": "生产管理",
+ "module": "General ERP",
+ "icon": "factory",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 80.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "生产计划",
+   "link_type": "DocType",
+   "link_to": "Production Plan",
+   "idx": 1
+  },
+  {
+   "label": "工单",
+   "link_type": "DocType",
+   "link_to": "Work Order",
+   "idx": 2
+  },
+  {
+   "label": "BOM 物料清单",
+   "link_type": "DocType",
+   "link_to": "BOM",
+   "idx": 3
+  }
+ ]
+}

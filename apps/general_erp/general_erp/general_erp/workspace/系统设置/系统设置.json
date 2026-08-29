@@ -1,0 +1,56 @@
+{
+ "doctype": "Workspace",
+ "name": "系统设置",
+ "label": "系统设置",
+ "title": "系统设置",
+ "module": "General ERP",
+ "icon": "setting",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 19.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "公司",
+   "link_type": "DocType",
+   "link_to": "Company",
+   "idx": 1
+  },
+  {
+   "label": "币种汇率",
+   "link_type": "DocType",
+   "link_to": "Currency Exchange Rate",
+   "idx": 2
+  },
+  {
+   "label": "系统参数",
+   "link_type": "DocType",
+   "link_to": "System Parameter",
+   "idx": 3
+  },
+  {
+   "label": "打印格式",
+   "link_type": "DocType",
+   "link_to": "Print Format",
+   "idx": 4
+  },
+  {
+   "label": "打印表头",
+   "link_type": "DocType",
+   "link_to": "Print Heading",
+   "idx": 5
+  },
+  {
+   "label": "用户",
+   "link_type": "DocType",
+   "link_to": "User",
+   "idx": 6
+  },
+  {
+   "label": "登录日志",
+   "link_type": "DocType",
+   "link_to": "Login Log",
+   "idx": 7
+  }
+ ]
+}

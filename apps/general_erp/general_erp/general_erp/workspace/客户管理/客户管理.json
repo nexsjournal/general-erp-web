@@ -1,0 +1,56 @@
+{
+ "doctype": "Workspace",
+ "name": "客户管理",
+ "label": "客户管理",
+ "title": "客户管理",
+ "module": "General ERP",
+ "icon": "users",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 50.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "客户",
+   "link_type": "DocType",
+   "link_to": "Customer",
+   "idx": 1
+  },
+  {
+   "label": "联系人",
+   "link_type": "DocType",
+   "link_to": "Contact",
+   "idx": 2
+  },
+  {
+   "label": "客户跟进",
+   "link_type": "DocType",
+   "link_to": "Customer Follow Up",
+   "idx": 3
+  },
+  {
+   "label": "客户360",
+   "link_type": "Page",
+   "link_to": "customer-360",
+   "idx": 4
+  },
+  {
+   "label": "线索",
+   "link_type": "DocType",
+   "link_to": "Lead",
+   "idx": 5
+  },
+  {
+   "label": "商机",
+   "link_type": "DocType",
+   "link_to": "Opportunity",
+   "idx": 6
+  },
+  {
+   "label": "线索分发记录",
+   "link_type": "DocType",
+   "link_to": "Lead Distribution Log",
+   "idx": 7
+  }
+ ]
+}

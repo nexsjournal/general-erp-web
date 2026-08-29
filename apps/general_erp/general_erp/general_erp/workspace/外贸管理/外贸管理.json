@@ -1,0 +1,50 @@
+{
+ "doctype": "Workspace",
+ "name": "外贸管理",
+ "label": "外贸管理",
+ "title": "外贸管理",
+ "module": "General ERP",
+ "icon": "globe",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 90.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "出运明细单",
+   "link_type": "DocType",
+   "link_to": "Export Shipment",
+   "idx": 1
+  },
+  {
+   "label": "单证制作",
+   "link_type": "DocType",
+   "link_to": "Trade Document",
+   "idx": 2
+  },
+  {
+   "label": "海关编码",
+   "link_type": "DocType",
+   "link_to": "HS Code",
+   "idx": 3
+  },
+  {
+   "label": "贸易术语",
+   "link_type": "DocType",
+   "link_to": "Incoterms",
+   "idx": 4
+  },
+  {
+   "label": "港口",
+   "link_type": "DocType",
+   "link_to": "Port",
+   "idx": 5
+  },
+  {
+   "label": "服务商",
+   "link_type": "DocType",
+   "link_to": "Service Provider",
+   "idx": 6
+  }
+ ]
+}

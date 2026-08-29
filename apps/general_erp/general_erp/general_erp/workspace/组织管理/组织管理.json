@@ -1,0 +1,50 @@
+{
+ "doctype": "Workspace",
+ "name": "组织管理",
+ "label": "组织管理",
+ "title": "组织管理",
+ "module": "General ERP",
+ "icon": "users",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 110.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "员工",
+   "link_type": "DocType",
+   "link_to": "Employee",
+   "idx": 1
+  },
+  {
+   "label": "部门",
+   "link_type": "DocType",
+   "link_to": "Department",
+   "idx": 2
+  },
+  {
+   "label": "角色",
+   "link_type": "DocType",
+   "link_to": "Role",
+   "idx": 3
+  },
+  {
+   "label": "岗位角色",
+   "link_type": "DocType",
+   "link_to": "Report Role",
+   "idx": 4
+  },
+  {
+   "label": "工作流",
+   "link_type": "DocType",
+   "link_to": "Workflow",
+   "idx": 5
+  },
+  {
+   "label": "审批任务",
+   "link_type": "DocType",
+   "link_to": "ToDo",
+   "idx": 6
+  }
+ ]
+}

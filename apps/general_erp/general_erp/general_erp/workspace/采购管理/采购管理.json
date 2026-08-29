@@ -1,0 +1,44 @@
+{
+ "doctype": "Workspace",
+ "name": "采购管理",
+ "label": "采购管理",
+ "title": "采购管理",
+ "module": "General ERP",
+ "icon": "shopping-cart",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 20.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "供应商",
+   "link_type": "DocType",
+   "link_to": "Supplier",
+   "idx": 1
+  },
+  {
+   "label": "采购订单",
+   "link_type": "DocType",
+   "link_to": "Purchase Order",
+   "idx": 2
+  },
+  {
+   "label": "采购收货",
+   "link_type": "DocType",
+   "link_to": "Purchase Receipt",
+   "idx": 3
+  },
+  {
+   "label": "采购发票",
+   "link_type": "DocType",
+   "link_to": "Purchase Invoice",
+   "idx": 4
+  },
+  {
+   "label": "验货单",
+   "link_type": "DocType",
+   "link_to": "Inspection Order",
+   "idx": 5
+  }
+ ]
+}

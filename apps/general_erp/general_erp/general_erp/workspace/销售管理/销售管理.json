@@ -1,0 +1,56 @@
+{
+ "doctype": "Workspace",
+ "name": "销售管理",
+ "label": "销售管理",
+ "title": "销售管理",
+ "module": "General ERP",
+ "icon": "cart",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 10.0,
+ "content": "[]",
+ "links": [
+  {
+   "label": "报价单",
+   "link_type": "DocType",
+   "link_to": "Quotation",
+   "idx": 1
+  },
+  {
+   "label": "销售订单",
+   "link_type": "DocType",
+   "link_to": "Sales Order",
+   "idx": 2
+  },
+  {
+   "label": "销售发票",
+   "link_type": "DocType",
+   "link_to": "Sales Invoice",
+   "idx": 3
+  },
+  {
+   "label": "交货单",
+   "link_type": "DocType",
+   "link_to": "Delivery Note",
+   "idx": 4
+  },
+  {
+   "label": "出运明细单",
+   "link_type": "DocType",
+   "link_to": "Export Shipment",
+   "idx": 5
+  },
+  {
+   "label": "单证制作",
+   "link_type": "DocType",
+   "link_to": "Trade Document",
+   "idx": 6
+  },
+  {
+   "label": "收款单",
+   "link_type": "DocType",
+   "link_to": "Payment Entry",
+   "idx": 7
+  }
+ ]
+}
