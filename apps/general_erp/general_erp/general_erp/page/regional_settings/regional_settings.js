@@ -48,7 +48,7 @@ function make(wrapper) {
 			</div>
 			<div class="rs-grid">
 				<div class="card">
-					<div class="rs-sec">${__('系统区域')}（System Settings，管理员生效）</div>
+					<div class="rs-sec">${__('系统区域')}（管理员全局生效）</div>
 					<div class="rs-field"><label>${__('界面语言')}</label><select id="rs-lang" class="rs-select"><option value="zh">中文</option><option value="en">English</option></select></div>
 					<div class="rs-field"><label>${__('时区')}</label><select id="rs-tz" class="rs-select"><option>Asia/Shanghai</option><option>UTC</option><option>Asia/Tokyo</option><option>Europe/Berlin</option><option>America/New_York</option></select></div>
 					<div class="rs-field"><label>${__('日期格式')}</label><select id="rs-df" class="rs-select"><option>YYYY-MM-DD</option><option>DD/MM/YYYY</option><option>MM/DD/YYYY</option><option>DD-MM-YYYY</option></select></div>
@@ -67,7 +67,7 @@ function make(wrapper) {
 					</div>
 				</div>
 				<div class="card">
-					<div class="rs-sec">${__('公司默认')}（Global Defaults）</div>
+					<div class="rs-sec">${__('公司默认')}</div>
 					<div class="rs-field"><label>${__('默认公司')}</label><span class="rs-val" id="rs-company">—</span></div>
 					<div class="rs-field"><label>${__('本位币')}</label><span class="rs-val" id="rs-currency">—</span></div>
 					<div class="rs-field"><label>${__('国家/地区')}</label><span class="rs-val" id="rs-country">—</span></div>

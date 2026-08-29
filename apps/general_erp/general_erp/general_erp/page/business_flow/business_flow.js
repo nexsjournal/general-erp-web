@@ -1,5 +1,5 @@
 /* 业务流程展示页（演示用）：按功能清单梳理核心业务流程，串联现有单据 */
-/* BF_PAGE_V7 */
+/* BF_PAGE_V8 */
 
 const I = (p) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 
@@ -57,9 +57,9 @@ const LANES = [
 			{ icon: 'target', label: __('商机'), sub: __('待批复 · 已批复 · 待回复 · 商机统计'), route: ['desk', 'Opportunity'] },
 			{ icon: 'file', label: __('报价单'), sub: __('报价管理'), route: ['desk', 'Quotation'] },
 			{ icon: 'clipboard', label: __('销售订单'), sub: __('内贸订单 · 不走出运/单证'), route: ['desk', 'Sales Order'] },
-			{ icon: 'box', label: __('交货单'), sub: __('Delivery Note · 销售出库'), route: ['desk', 'Delivery Note'] },
-			{ icon: 'file', label: __('销售发票'), sub: __('Sales Invoice · 开票'), route: ['desk', 'Sales Invoice'] },
-			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · Payment Entry'), route: ['desk', 'Payment Entry'] },
+			{ icon: 'box', label: __('交货单'), sub: __('交货单 · 销售出库'), route: ['desk', 'Delivery Note'] },
+			{ icon: 'file', label: __('销售发票'), sub: __('销售发票 · 开票'), route: ['desk', 'Sales Invoice'] },
+			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · 收付款单'), route: ['desk', 'Payment Entry'] },
 			{ icon: 'trend', label: __('订单利润'), sub: __('订单维度利润分析'), route: ['desk', 'query-report', '订单利润'], report: true },
 		],
 	},
@@ -78,7 +78,7 @@ const LANES = [
 			{ icon: 'clipboard', label: __('销售订单'), sub: __('外贸订单'), route: ['desk', 'Sales Order'] },
 			{ icon: 'anchor', label: __('出运明细单'), sub: __('装运港/卸货港 · 贸易术语 · 出运明细'), route: ['desk', 'Export Shipment'], badge: 'General ERP' },
 			{ icon: 'filecheck', label: __('外贸单证'), sub: __('单证制作 · 出口报关'), route: ['desk', 'Trade Document'], badge: 'General ERP' },
-			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · Payment Entry'), route: ['desk', 'Payment Entry'] },
+			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · 收付款单'), route: ['desk', 'Payment Entry'] },
 			{ icon: 'trend', label: __('订单利润'), sub: __('订单维度利润分析'), route: ['desk', 'query-report', '订单利润'], report: true },
 		],
 	},
@@ -101,10 +101,10 @@ const LANES = [
 		color: '#0fc6c2',
 		light: 'rgba(15, 198, 194, 0.12)',
 		steps: [
-			{ icon: 'box', label: __('入库'), sub: __('Stock Entry · 其他入库'), route: ['desk', 'Stock Entry'] },
-			{ icon: 'archive', label: __('库存余额'), sub: __('库存汇总 · Stock Summary'), route: ['desk', 'stock-balance'] },
-			{ icon: 'box', label: __('出库'), sub: __('Delivery Note · 销售出库'), route: ['desk', 'Delivery Note'] },
-			{ icon: 'chart', label: __('库存统计'), sub: __('Stock Balance 报表'), route: ['desk', 'query-report', 'Stock Balance'], report: true },
+			{ icon: 'box', label: __('入库'), sub: __('入库单 · 其他入库'), route: ['desk', 'Stock Entry'] },
+			{ icon: 'archive', label: __('库存余额'), sub: __('库存汇总'), route: ['desk', 'stock-balance'] },
+			{ icon: 'box', label: __('出库'), sub: __('交货单 · 销售出库'), route: ['desk', 'Delivery Note'] },
+			{ icon: 'chart', label: __('库存统计'), sub: __('库存余额报表'), route: ['desk', 'query-report', 'Stock Balance'], report: true },
 			{ icon: 'chart', label: __('库存预警'), sub: __('低于再订货点 · 库存预警报表'), route: ['desk', 'query-report', '库存预警'], report: true },
 		],
 	},
@@ -114,8 +114,8 @@ const LANES = [
 		color: '#722ed1',
 		light: 'rgba(114, 46, 209, 0.12)',
 		steps: [
-			{ icon: 'factory', label: __('生产任务单'), sub: 'Production Plan', route: ['desk', 'Production Plan'] },
-			{ icon: 'chart', label: __('生产汇总'), sub: 'Production Plan Summary', route: ['desk', 'query-report', 'Production Plan Summary'], report: true },
+			{ icon: 'factory', label: __('生产任务单'), sub: __('生产任务单'), route: ['desk', 'Production Plan'] },
+			{ icon: 'chart', label: __('生产汇总'), sub: __('生产汇总报表'), route: ['desk', 'query-report', 'Production Plan Summary'], report: true },
 		],
 	},
 	{
@@ -124,7 +124,7 @@ const LANES = [
 		color: 'var(--erp-error)',
 		light: 'var(--erp-error-light)',
 		steps: [
-			{ icon: 'banknote', label: __('收付款'), sub: __('Payment Entry · 收款/付款管理'), route: ['desk', 'Payment Entry'] },
+			{ icon: 'banknote', label: __('收付款'), sub: __('收款/付款管理'), route: ['desk', 'Payment Entry'] },
 			{ icon: 'doc', label: __('费用报销'), sub: __('费用管理 · 审批受控'), route: ['desk', 'Expense Reimbursement'], badge: 'General ERP' },
 			{ icon: 'file', label: __('发票管理'), sub: 'Sales Invoice', route: ['desk', 'Sales Invoice'] },
 			{ icon: 'trend', label: __('订单利润'), sub: __('订单利润报表'), route: ['desk', 'query-report', '订单利润'], report: true },
@@ -134,7 +134,7 @@ const LANES = [
 
 const MASTER = [
 	{ icon: 'anchor', label: __('港口'), note: __('出运明细单 · 装运港/卸货港'), route: ['desk', 'Port'], badge: 'General ERP' },
-	{ icon: 'globe', label: __('贸易术语'), note: __('Incoterms · 订单/出运用'), route: ['desk', 'Incoterms'], badge: 'General ERP' },
+	{ icon: 'globe', label: __('贸易术语'), note: __('国际贸易术语 · 订单/出运用'), route: ['desk', 'Incoterms'], badge: 'General ERP' },
 	{ icon: 'hash', label: __('HS 编码'), note: __('物料报关编码 · 海关商品'), route: ['desk', 'HS Code'], badge: 'General ERP' },
 	{ icon: 'sliders', label: __('系统参数'), note: __('全局行为参数'), route: ['desk', 'System Parameter'], badge: 'General ERP' },
 	{ icon: 'banknote', label: __('币种汇率'), note: __('今日汇率 · 工作台数字卡'), route: ['desk', 'currency-exchange-rate'], badge: 'General ERP' },
@@ -145,7 +145,7 @@ const MASTER = [
 
 const MARKETING = [
 	{ icon: 'target', label: __('商机'), note: __('商机统计 · 丢失商机'), route: ['desk', 'Opportunity'] },
-	{ icon: 'megaphone', label: __('营销活动'), note: __('Campaign · 营销计划'), route: ['desk', 'Campaign'] },
+	{ icon: 'megaphone', label: __('营销活动'), note: __('营销活动 · 营销计划'), route: ['desk', 'Campaign'] },
 	{ icon: 'megaphone', label: __('邮件群发'), note: __('客户群发 · 模板变量 · 发送统计'), route: ['desk', 'bulk-email'] },
 	{ icon: 'file', label: __('邮件模板'), note: __('营销主题 · {{customer_name}} 变量'), route: ['desk', 'email-template'], badge: 'General ERP' },
 	{ icon: 'share', label: __('线索分发'), note: __('分发记录 · 留痕追溯'), route: ['desk', 'lead-distribution-log'], badge: 'General ERP' },
@@ -153,9 +153,9 @@ const MARKETING = [
 ];
 
 const OA = [
-	{ icon: 'doc', label: __('文件管理'), note: __('OA 文档'), route: ['desk', 'Note'] },
+	{ icon: 'doc', label: __('文件管理'), note: __('文档管理'), route: ['desk', 'Note'] },
 	{ icon: 'bell', label: __('公告'), note: __('通知公告 · 置顶/有效期'), route: ['desk', 'announcement'], badge: 'General ERP' },
-	{ icon: 'building', label: __('部门'), note: __('HR 模块未启用 · 规划中'), noroute: true, badge: __('规划中') },
+	{ icon: 'building', label: __('部门'), note: __('组织模块未启用 · 规划中'), noroute: true, badge: __('规划中') },
 	{ icon: 'checkc', label: __('工作检查'), note: __('每日/每周自检 · 待办提醒'), route: ['desk', 'work-check'], badge: 'General ERP' },
 	{ icon: 'calendar', label: __('工作日历'), note: __('节假日 · 跟进 · 出运 · 检查'), route: ['desk', 'work-calendar'], badge: 'General ERP' },
 	{ icon: 'building', label: __('岗位'), note: __('岗位管理'), route: ['desk', 'Designation'] },
@@ -182,10 +182,10 @@ const REPORTS = [
 ];
 
 const PLATFORM = [
-	{ icon: 'home', label: __('工作台'), note: __('Desk 首页 · 业务数据'), route: ['desk', 'ERP工作台'] },
-	{ icon: 'clock', label: __('待处理任务'), note: 'ToDo', route: ['desk', 'ToDo'] },
+	{ icon: 'home', label: __('工作台'), note: __('工作台首页 · 业务数据'), route: ['desk', 'ERP工作台'] },
+	{ icon: 'clock', label: __('待处理任务'), note: __('待办事项'), route: ['desk', 'ToDo'] },
 	{ icon: 'search', label: __('全局搜索'), note: __('内置 · ⌘K 快捷键'), noroute: true, badge: __('内置') },
-	{ icon: 'mail', label: __('沟通记录'), note: 'Communication', route: ['desk', 'Communication'] },
+	{ icon: 'mail', label: __('沟通记录'), note: __('沟通记录'), route: ['desk', 'Communication'] },
 	{ icon: 'mail', label: __('邮件中心'), note: __('待处理 · 收件箱 · 草稿箱'), route: ['desk', 'mail-center'] },
 	{ icon: 'inbox', label: __('邮箱账号'), note: __('IMAP 接入 · 定时收信 · 打开/点击跟踪'), route: ['desk', 'mail-account'], badge: 'General ERP' },
 ];
@@ -274,7 +274,7 @@ function makeStep(s, lane) {
 
 function makeWorkflowCard() {
 	const card = makeCard(
-		'6', __('费用报销审批流'), __('费用报销单的状态机（Workflow：费用报销审批）'),
+		'6', __('费用报销审批流'), __('费用报销单的状态流转（工作流：费用报销审批）'),
 		'var(--erp-warning)', 'var(--erp-warning-light)'
 	);
 	const g = document.createElement('div');
