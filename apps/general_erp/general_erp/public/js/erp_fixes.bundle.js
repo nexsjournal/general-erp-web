@@ -346,3 +346,67 @@
 		setTimeout(tryRedirect, 200);
 	}
 })();
+
+// T-brand: 品牌名统一显示为 太康生物ERP（技术模块名 General ERP 保持不变，frappe 按它做 Python 导入）
+(function () {
+	const BRAND_OLD = "General ERP";
+	const BRAND_NEW = "太康生物ERP";
+	const applyRebrand = function () {
+		// 1) 文案节点替换（侧边栏头/面包屑/表格等）
+		try {
+			const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+			const nodes = [];
+			while (walker.nextNode()) {
+				if (walker.currentNode.nodeValue && walker.currentNode.nodeValue.indexOf(BRAND_OLD) !== -1) nodes.push(walker.currentNode);
+			}
+			for (const n of nodes) {
+				n.nodeValue = n.nodeValue.split(BRAND_OLD).join(BRAND_NEW);
+			}
+		} catch (e) { /* ignore */ }
+		// 2) title/placeholder 属性
+		try {
+			document.querySelectorAll('[title="' + BRAND_OLD + '"]').forEach(function (el) { el.setAttribute("title", BRAND_NEW); });
+			document.querySelectorAll('[placeholder="' + BRAND_OLD + '"]').forEach(function (el) { el.setAttribute("placeholder", BRAND_NEW); });
+		} catch (e) { /* ignore */ }
+	};
+	// boot 完成后对已渲染内容做一次，并用 MutationObserver 持续覆盖动态渲染
+	const start = function () {
+		if (!document.body) { setTimeout(start, 100); return; }
+		applyRebrand();
+		let tick = false;
+		const obs = new MutationObserver(function () {
+			if (tick) return;
+			tick = true;
+			setTimeout(function () { tick = false; applyRebrand(); }, 80);
+		});
+		obs.observe(document.body, { childList: true, subtree: true });
+	};
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 300); });
+	} else {
+		setTimeout(start, 300);
+	}
+})();
+
+// T-brand: 浏览器标签页标题带品牌前缀（太康生物ERP - 页面名）
+(function () {
+	const applyTitle = function () {
+		const t = document.title || "";
+		if (!t || t === "Login" || t === "login") return;
+		if (t.indexOf("太康生物ERP") === -1) {
+			document.title = "太康生物ERP - " + t;
+		}
+	};
+	const start = function () {
+		if (!document.body) { setTimeout(start, 100); return; }
+		applyTitle();
+		const obs = new MutationObserver(function () { setTimeout(applyTitle, 120); });
+		obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+		setInterval(applyTitle, 2000);
+	};
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 400); });
+	} else {
+		setTimeout(start, 400);
+	}
+})();

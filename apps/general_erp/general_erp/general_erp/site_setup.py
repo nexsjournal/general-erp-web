@@ -141,6 +141,20 @@ def sync_homepage_default():
     frappe.db.commit()
 
 
+def sync_brand():
+    """品牌统一（T-brand，2026-08-29）：Module Def 显示名 = 太康生物ERP。
+
+    技术模块名（Module Def.name / 各表 module 字段 / modules.txt）保持 ASCII
+    "General ERP" 不变（frappe 按它做 Python 模块导入，中文会导入失败）；
+    用户可见显示走 module_name + hooks app_title + 前端 erp_fixes T-brand 补丁。
+    """
+    if frappe.db.exists("Module Def", "General ERP"):
+        cur = frappe.db.get_value("Module Def", "General ERP", "module_name")
+        if cur != "太康生物ERP":
+            frappe.db.set_value("Module Def", "General ERP", "module_name", "太康生物ERP")
+    frappe.db.commit()
+
+
 def sync_user_login_settings():
     """国内习惯建号（T-user-login）：允许用户名登录 + 邮箱改非必填。
 
@@ -660,6 +674,7 @@ def sync_site_setup(with_seed=False):
     sync_role_profiles()
     sync_currency_display()
     sync_user_login_settings()
+    sync_brand()
     sync_homepage_default()
     sync_website_lead_form()
     sync_opportunity_fields()

@@ -6,7 +6,7 @@
 # ============================================================
 
 app_name = "general_erp"
-app_title = "ERP"
+app_title = "太康生物ERP"
 app_publisher = "general-erp-web"
 app_description = "general-erp-web 自定义 ERP 功能"
 app_email = "dev@local"
