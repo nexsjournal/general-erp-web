@@ -10,7 +10,7 @@
    "label": "采购订单趋势"
   }
  ],
- "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>业务总览</b></span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售额\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"应收账款\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售订单\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"今日汇率\", \"col\": 3}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"销售订单趋势\", \"col\": 6}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"采购订单趋势\", \"col\": 6}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>待我处理</b></span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待审批\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"未收款发票\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待跟进客户\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待办\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>我的常用</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件群发\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"币种汇率\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运统计\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存预警\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户跟进\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"公告\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"员工业绩排行\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作日历\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户 360\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作检查\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮箱账号\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>业务总览</b></span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售额\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"应收账款\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售订单\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"今日汇率\", \"col\": 3}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"销售订单趋势\", \"col\": 6}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"采购订单趋势\", \"col\": 6}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>待我处理</b></span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待审批\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"未收款发票\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待跟进客户\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待办\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>我的常用</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件群发\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"币种汇率\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运统计\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存预警\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户跟进\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"公告\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"员工业绩排行\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作日历\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户 360\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作检查\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮箱账号\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>模块导航</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块销售管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块采购管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块库存管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块财务管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块客户管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块产品管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块邮件中心\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块生产管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块外贸管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块报表中心\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块组织管理\", \"col\": 4}}]",
  "creation": "2026-08-26 23:45:34.263128",
  "custom_blocks": [],
  "docstatus": 0,
@@ -879,102 +879,188 @@
  "sequence_id": 0.0,
  "shortcuts": [
   {
-   "type": "Page",
-   "link_to": "mail-center",
    "label": "邮件中心",
+   "type": "Page",
+   "url": null,
    "icon": "mail",
    "color": "#2563eb",
-   "idx": 1
+   "doc_view": null
   },
   {
-   "type": "DocType",
-   "link_to": "Bulk Email",
    "label": "邮件群发",
+   "type": "DocType",
+   "url": null,
    "icon": "send",
    "color": "#eb2f96",
-   "idx": 2
+   "doc_view": null
   },
   {
-   "type": "DocType",
-   "link_to": "Currency Exchange Rate",
    "label": "币种汇率",
+   "type": "DocType",
+   "url": null,
    "icon": "currency",
    "color": "#0fc6c2",
-   "idx": 3
+   "doc_view": null
   },
   {
-   "type": "Report",
-   "link_to": "出运统计",
    "label": "出运统计",
+   "type": "Report",
+   "url": null,
    "icon": "bar",
    "color": "#722ed1",
-   "idx": 4
+   "doc_view": null
   },
   {
-   "type": "Report",
-   "link_to": "库存预警",
    "label": "库存预警",
+   "type": "Report",
+   "url": null,
    "icon": "warning",
    "color": "#f53f3f",
-   "idx": 5
+   "doc_view": null
   },
   {
-   "type": "DocType",
-   "link_to": "Customer Follow Up",
    "label": "客户跟进",
+   "type": "DocType",
+   "url": null,
    "icon": "clock",
    "color": "#059669",
-   "idx": 6,
-   "link_type": "DocType"
+   "doc_view": null
   },
   {
-   "type": "DocType",
-   "link_to": "Announcement",
    "label": "公告",
+   "type": "DocType",
+   "url": null,
    "icon": "bell",
    "color": "#d97706",
-   "idx": 7,
-   "link_type": "DocType"
+   "doc_view": null
   },
   {
-   "type": "Report",
-   "link_to": "员工业绩排行",
    "label": "员工业绩排行",
+   "type": "Report",
+   "url": null,
    "icon": "award",
    "color": "#7c3aed",
-   "idx": 8
+   "doc_view": null
   },
   {
-   "type": "Page",
-   "link_to": "work-calendar",
    "label": "工作日历",
+   "type": "Page",
+   "url": null,
    "icon": "calendar",
    "color": "#0ea5e9",
-   "idx": 9
+   "doc_view": null
   },
   {
-   "type": "Page",
-   "link_to": "customer-360",
    "label": "客户 360",
+   "type": "Page",
+   "url": null,
    "icon": "user",
    "color": "#16a34a",
-   "idx": 10
+   "doc_view": null
   },
   {
-   "type": "DocType",
-   "link_to": "Work Check",
    "label": "工作检查",
+   "type": "DocType",
+   "url": null,
    "icon": "check-circle",
    "color": "#d97706",
-   "idx": 11
+   "doc_view": null
   },
   {
-   "type": "DocType",
-   "link_to": "Mail Account",
    "label": "邮箱账号",
+   "type": "DocType",
+   "url": null,
    "icon": "at-sign",
    "color": "#6366f1",
-   "idx": 12
+   "doc_view": null
+  },
+  {
+   "label": "模块销售管理",
+   "type": "URL",
+   "url": "/desk/销售管理",
+   "icon": "cart",
+   "color": "#2563eb",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块采购管理",
+   "type": "URL",
+   "url": "/desk/采购管理",
+   "icon": "shopping-cart",
+   "color": "#0d9488",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块库存管理",
+   "type": "URL",
+   "url": "/desk/库存管理",
+   "icon": "package",
+   "color": "#4f46e5",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块财务管理",
+   "type": "URL",
+   "url": "/desk/财务管理",
+   "icon": "credit-card",
+   "color": "#059669",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块客户管理",
+   "type": "URL",
+   "url": "/desk/客户管理",
+   "icon": "users",
+   "color": "#d97706",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块产品管理",
+   "type": "URL",
+   "url": "/desk/产品管理",
+   "icon": "box",
+   "color": "#7c3aed",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块邮件中心",
+   "type": "URL",
+   "url": "/desk/邮件中心",
+   "icon": "mail",
+   "color": "#db2777",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块生产管理",
+   "type": "URL",
+   "url": "/desk/生产管理",
+   "icon": "factory",
+   "color": "#6b7280",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块外贸管理",
+   "type": "URL",
+   "url": "/desk/外贸管理",
+   "icon": "globe",
+   "color": "#0ea5e9",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块报表中心",
+   "type": "URL",
+   "url": "/desk/报表中心",
+   "icon": "bar-chart",
+   "color": "#2563eb",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块组织管理",
+   "type": "URL",
+   "url": "/desk/组织管理",
+   "icon": "team",
+   "color": "#b45309",
+   "doc_view": "List"
   }
  ],
  "title": "ERP工作台",
