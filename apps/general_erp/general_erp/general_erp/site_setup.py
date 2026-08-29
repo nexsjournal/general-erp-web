@@ -113,6 +113,18 @@ def sync_role_profiles():
     frappe.db.commit()
 
 
+def sync_currency_display():
+    """金额显示口径（T-currency，2026-08-29）：CNY 符号=元；数字卡默认全额显示（不缩写成"千"）。"""
+    if frappe.db.exists("Currency", "CNY"):
+        if not frappe.db.get_value("Currency", "CNY", "symbol"):
+            frappe.db.set_value("Currency", "CNY", "symbol", "元")
+    for c in frappe.get_all("Number Card", fields=["name", "show_full_number"]):
+        if not c["show_full_number"]:
+            frappe.db.set_value("Number Card", c["name"], "show_full_number", 1)
+    frappe.db.commit()
+    frappe.clear_cache()
+
+
 def sync_user_login_settings():
     """国内习惯建号（T-user-login）：允许用户名登录 + 邮箱改非必填。
 
@@ -630,6 +642,7 @@ def sync_site_setup(with_seed=False):
     sync_sales_stages()
     sync_roles()
     sync_role_profiles()
+    sync_currency_display()
     sync_user_login_settings()
     sync_website_lead_form()
     sync_opportunity_fields()

@@ -271,3 +271,40 @@
 		},
 	});
 })();
+
+// 金额显示口径统一（T-currency，2026-08-29）：
+// frappe 图表坐标轴默认走 shorten_number（382,000 → "382 千"），中文场景难读。
+// 覆盖 format_chart_axis_number：直接用千分位全称，不再缩写。
+(function () {
+	const _origAxis = frappe.utils.format_chart_axis_number;
+	frappe.utils.format_chart_axis_number = function (label, country) {
+		const v = parseFloat(label);
+		if (isNaN(v)) return label;
+		try {
+			return v.toLocaleString("en-US", { maximumFractionDigits: 0 });
+		} catch (e) {
+			return _origAxis.call(frappe.utils, label, country);
+		}
+	};
+})();
+
+// 数字卡兜底：show_full_number 已数据层开启（site_setup 幂等同步），
+// 此处防御旧卡片/未来新增卡片仍走缩写时，shorten_number 不再产出"千/百万"。
+(function () {
+	const _origShort = frappe.utils.shorten_number;
+	frappe.utils.shorten_number = function (number, country, min_length, max_no_of_decimals) {
+		const r = _origShort.call(frappe.utils, number, country, min_length, max_no_of_decimals);
+		// 结果带中文缩写单位（千/百万/万亿/万/亿）时退回千分位全称
+		if (typeof r === "string" && /[千万亿]/.test(r)) {
+			const v = parseFloat(number);
+			if (!isNaN(v)) {
+				try {
+					return v.toLocaleString("en-US", { maximumFractionDigits: 2 });
+				} catch (e) {
+					return r;
+				}
+			}
+		}
+		return r;
+	};
+})();
