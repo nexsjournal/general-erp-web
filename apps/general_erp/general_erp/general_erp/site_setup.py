@@ -666,6 +666,39 @@ def sync_report_workspace():
     frappe.db.commit()
 
 
+def sync_user_privacy():
+    """用户隐私权限收紧（T13-D1，2026-08-30 用户拍板）：
+    ① 普通 desk 用户（Desk User）收回 User 单据 read/select —— 用户列表页只能看到自己，
+       不能再拉全量激活用户姓名+邮箱（frappe 上游默认 select=1 的隐私收紧）。
+    ② 「流程设计」角色保留 User read/select + Workflow/Module Flow 读写 —— 流程/审批设计者
+       与管理员仍可见全员并维护流程。
+    ③ 超管(System Manager)不受影响（原生全权）。
+    走 Custom DocPerm（标准 DocType 免开发模式），migrate 幂等回补。"""
+    if not frappe.db.exists("Role", "流程设计"):
+        frappe.get_doc({"doctype": "Role", "role_name": "流程设计", "desk_access": 1}).insert(ignore_permissions=True)
+
+    def _cdp(dt, role, **kw):
+        # Custom DocPerm 主键=parent+role，存在则更新（防 migrate 重跑 insert 出重复行）
+        existing = frappe.db.get_value("Custom DocPerm", {"parent": dt, "role": role}, "name")
+        doc = frappe.get_doc("Custom DocPerm", existing) if existing else frappe.new_doc("Custom DocPerm")
+        doc.update({
+            "parent": dt, "role": role,
+            "read": kw.get("read", 0), "write": kw.get("write", 0),
+            "create": 0, "delete": 0, "export": 0,
+            "report": kw.get("report", 0), "select": kw.get("select", 0),
+            "submit": 0, "cancel": 0, "amend": 0,
+        })
+        doc.save()
+
+    _cdp("User", "Desk User", read=0, select=0)
+    _cdp("User", "流程设计", read=1, select=1, report=1)
+    for dt in ("Workflow", "Module Flow", "Module Flow Step"):
+        if frappe.db.exists("DocType", dt):
+            _cdp(dt, "流程设计", read=1, write=1, report=1)
+    frappe.db.commit()
+    frappe.clear_cache()
+
+
 def sync_site_setup(with_seed=False):
     """总入口：after_install 与 after_migrate 调用，幂等。"""
     sync_customer_fields()
@@ -690,6 +723,7 @@ def sync_site_setup(with_seed=False):
     sync_lead_fields()
     sync_expense_workflow()
     sync_report_workspace()
+    sync_user_privacy()
     if with_seed:
         from general_erp.seed_data import seed_base_data
         if frappe.db.exists("DocType", "Port"):

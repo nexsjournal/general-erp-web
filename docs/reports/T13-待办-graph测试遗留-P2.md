@@ -4,7 +4,7 @@
 
 | 卡 | 状态 | 级别 | 问题 | 处置建议 |
 |---|---|---|---|---|
-| D1 | 待做 | P2 | sales1 等所有 desk 用户可看全量激活用户姓名+邮箱（Frappe 上游默认：Desk User 对 User 单据 select=1） | 生产交付前评估：Custom DocPerm 覆盖 User 单据 select=0（注意可能影响 desk "负责人"下拉渲染），或接受现状（基础通讯录） |
+| D1 | 已做(销项) | P2 | sales1 等所有 desk 用户可看全量激活用户姓名+邮箱（Frappe 上游默认：Desk User 对 User 单据 select=1） | **2026-08-30 用户拍板收紧，已实施**：①Custom DocPerm 收回 Desk User 对 User 的 read/select——普通用户用户列表页只看到自己（浏览器实测 sales1=1 行，截图 d1_sales1_self.png）②新建「流程设计」角色（User read+select、Workflow/Module Flow 读写）授予 boss1+salesm1——流程设计者与管理员可见全员可维护流程 ③超管 System Manager 原生全权不受影响 ④普通用户仍可改自己资料/密码（自己详情页可开），读他人详情 403 ⑤site_setup.sync_user_privacy 幂等固化（连跑3次不产生重复 CDP，_cdp 改存在则更新）⑥回归 33/33 全绿 |
 | D2 | 待做 | P2 | frappe serve 开发服务器 500 响应泄露 Python 堆栈+绝对路径 | 生产部署检查单必项：生产 WSGI（gunicorn/nginx）部署 + 确认响应无 exc 字段；本地演示环境可接受 |
 | D3 | 已做(销项) | ~~P2~~误报 | 登录无失败锁定/限流 | 2026-08-30 复测：frappe 默认锁定生效（allow_consecutive_login_attempts=10，实测 11 连败后正确密码被拒"locked and will resume after 60 seconds"，清 redis login_failed_count/login_failed_time 解锁）。**注意**：锁定 key 是来源 IP 不是用户名，生产多人同 NAT 出口时一人连败会锁全公司，生产部署建议确认 lockout 粒度或 nginx 层按用户限流 |
 | D4 | 待做 | P2 | 付款单并发双击败方返回 500 死锁报错（数据安全，仅报错不友好） | 体验优化：前端提交按钮防抖 + 后端捕获 Deadlock 重试/友好报错；优先级低 |
@@ -18,3 +18,13 @@
 - 环境漂移检查：web 进程启动晚于 wave1 最后一次改动且期间无 .py 变更 → 无漂移，测试有效
 - 回归 33/33 PASS；83 页全扫 0 真实问题（24 个 EMPTY? 均为已定性误报：报表类走 desk/报表名 错误 URL）
 - D3 误报销项（见上表）；D1/D2/D4 维持待做
+## 2026-08-30 D1 权限收紧验证矩阵
+| 场景 | 预期 | 实测 |
+|---|---|---|
+| sales1 打开 /desk/User 列表 | 只见自己 | ✓ 1 行（张伟 sales1@demo.com） |
+| sales1 打开自己用户详情 | 可看可改（含改自己密码） | ✓ |
+| sales1 打开 boss1 用户详情 | 拦截 | ✓ 无"刘老板"数据 |
+| boss1（流程设计）打开 /desk/User | 全量 | ✓ 7 行 |
+| boss1 打开 /desk/Module Flow | 可读可改 | ✓ 12 条 |
+| sales1 打开 /desk/Module Flow | 拦截 | ✓ 无权限 |
+| 回归 33 项 | 全绿 | ✓ 33/33 |
