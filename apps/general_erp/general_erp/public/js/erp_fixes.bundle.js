@@ -215,3 +215,28 @@
 		return _origWarn.apply(console, arguments);
 	};
 })();
+
+// 工作区改名兼容别名（2026-08-29，T-rename 收口）：
+// 「外贸工作台」→「ERP工作台」改名后，用户书签/旧标签/外部链接里的
+// /desk/外贸工作台 查不到工作区，页面空/404。router.convert_to_standard_route
+// 是 route 解析的唯一漏斗（workspace 查找发生在其内部 line ~176），
+// 在漏斗入口把旧名段替换为新名，旧链接自动落到新工作台。仅存在该映射
+// 且目标真实存在时生效，不影响其他路由。
+(function () {
+	const WORKSPACE_ALIASES = { "外贸工作台": "ERP工作台" };
+	const key = "__wsAliasGuard";
+	const _orig = frappe.router.convert_to_standard_route;
+	const _wrapped = async function (route) {
+		try {
+			if (route && route.length && route[0] && WORKSPACE_ALIASES[route[0]]) {
+				const target = frappe.router.slug(WORKSPACE_ALIASES[route[0]]);
+				if (frappe.workspaces && frappe.workspaces[target]) {
+					route = [target].concat(Array.prototype.slice.call(route, 1));
+				}
+			}
+		} catch (e) {}
+		return _orig.call(this, route);
+	};
+	_wrapped[key] = true;
+	frappe.router.convert_to_standard_route = _wrapped;
+})();
