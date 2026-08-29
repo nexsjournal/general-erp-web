@@ -308,21 +308,3 @@
 		return r;
 	};
 })();
-
-// 登录后落地页直达工作台（T-landing，2026-08-29）：
-// /desk 模块网格对用户无意义，统一重定向到「ERP工作台」（含数字卡/待办/模块导航）。
-(function () {
-	const HOME_ROUTE = "erp%E5%B7%A5%E4%BD%9C%E5%8F%B0";
-	function onRoute() {
-		const route = (frappe.router && frappe.router.current_route) || [];
-		// desk 裸路由（登录后默认落地）或 desk 后无子路由时跳转
-		if (route.length === 0 || (route[0] === "desk" && route.length === 1)) {
-			try {
-				frappe.set_route(HOME_ROUTE);
-			} catch (e) { /* 忽略路由未就绪 */ }
-		}
-	}
-	if (frappe.router && frappe.router.on) {
-		frappe.router.on("change", onRoute);
-	}
-})();
