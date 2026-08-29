@@ -53,7 +53,7 @@ const LANES = [
 		light: 'rgba(250, 140, 22, 0.12)',
 		steps: [
 			{ icon: 'user', label: __('客户'), sub: __('我的客户 · 公海 · 热点 · 移交'), route: ['desk', 'Customer'] },
-			{ icon: 'phone', label: __('客户跟进'), sub: __('电话/邮件/拜访 · 公海回收依据'), route: ['desk', 'customer-follow-up'], badge: 'General ERP' },
+			{ icon: 'phone', label: __('客户跟进'), sub: __('电话/邮件/拜访 · 公海回收依据'), route: ['desk', 'customer-follow-up'], badge: 'ERP' },
 			{ icon: 'target', label: __('商机'), sub: __('待批复 · 已批复 · 待回复 · 商机统计'), route: ['desk', 'Opportunity'] },
 			{ icon: 'file', label: __('报价单'), sub: __('报价管理'), route: ['desk', 'Quotation'] },
 			{ icon: 'clipboard', label: __('销售订单'), sub: __('内贸订单 · 不走出运/单证'), route: ['desk', 'Sales Order'] },
@@ -71,13 +71,13 @@ const LANES = [
 		steps: [
 			{ icon: 'user', label: __('线索'), sub: __('网站询盘 · 分发跟踪 · 转客户'), route: ['desk', 'Lead'] },
 		{ icon: 'user', label: __('客户'), sub: __('我的客户 · 公海 · 热点 · 移交'), route: ['desk', 'Customer'] },
-		{ icon: 'phone', label: __('客户跟进'), sub: __('电话/邮件/拜访 · 公海回收依据'), route: ['desk', 'customer-follow-up'], badge: 'General ERP' },
-			{ icon: 'user', label: __('客户 360'), sub: __('全景视图 · 共享 · 合并 · 移交'), route: ['desk', 'customer-360'], badge: 'General ERP' },
+		{ icon: 'phone', label: __('客户跟进'), sub: __('电话/邮件/拜访 · 公海回收依据'), route: ['desk', 'customer-follow-up'], badge: 'ERP' },
+			{ icon: 'user', label: __('客户 360'), sub: __('全景视图 · 共享 · 合并 · 移交'), route: ['desk', 'customer-360'], badge: 'ERP' },
 			{ icon: 'target', label: __('商机'), sub: __('待批复 · 已批复 · 待回复 · 商机统计'), route: ['desk', 'Opportunity'] },
 			{ icon: 'file', label: __('报价单'), sub: __('报价管理'), route: ['desk', 'Quotation'] },
 			{ icon: 'clipboard', label: __('销售订单'), sub: __('外贸订单'), route: ['desk', 'Sales Order'] },
-			{ icon: 'anchor', label: __('出运明细单'), sub: __('装运港/卸货港 · 贸易术语 · 出运明细'), route: ['desk', 'Export Shipment'], badge: 'General ERP' },
-			{ icon: 'filecheck', label: __('外贸单证'), sub: __('单证制作 · 出口报关'), route: ['desk', 'Trade Document'], badge: 'General ERP' },
+			{ icon: 'anchor', label: __('出运明细单'), sub: __('装运港/卸货港 · 贸易术语 · 出运明细'), route: ['desk', 'Export Shipment'], badge: 'ERP' },
+			{ icon: 'filecheck', label: __('外贸单证'), sub: __('单证制作 · 出口报关'), route: ['desk', 'Trade Document'], badge: 'ERP' },
 			{ icon: 'banknote', label: __('收款'), sub: __('收款管理 · 收付款单'), route: ['desk', 'Payment Entry'] },
 			{ icon: 'trend', label: __('订单利润'), sub: __('订单维度利润分析'), route: ['desk', 'query-report', '订单利润'], report: true },
 		],
@@ -91,7 +91,7 @@ const LANES = [
 			{ icon: 'users', label: __('供应商'), sub: __('供应商主数据'), route: ['desk', 'Supplier'] },
 			{ icon: 'clipboardcheck', label: __('采购订单'), sub: __('下达 PO'), route: ['desk', 'Purchase Order'] },
 			{ icon: 'package', label: __('采购入库'), sub: 'Purchase Receipt', route: ['desk', 'Purchase Receipt'] },
-			{ icon: 'searchcheck', label: __('来料验货单'), sub: __('检验人 · 验货明细 · 结论'), route: ['desk', 'Inspection Order'], badge: 'General ERP' },
+			{ icon: 'searchcheck', label: __('来料验货单'), sub: __('检验人 · 验货明细 · 结论'), route: ['desk', 'Inspection Order'], badge: 'ERP' },
 			{ icon: 'box', label: __('物料'), sub: __('产品库 · HS 编码'), route: ['desk', 'Item'] },
 		],
 	},
@@ -125,7 +125,7 @@ const LANES = [
 		light: 'var(--erp-error-light)',
 		steps: [
 			{ icon: 'banknote', label: __('收付款'), sub: __('收款/付款管理'), route: ['desk', 'Payment Entry'] },
-			{ icon: 'doc', label: __('费用报销'), sub: __('费用管理 · 审批受控'), route: ['desk', 'Expense Reimbursement'], badge: 'General ERP' },
+			{ icon: 'doc', label: __('费用报销'), sub: __('费用管理 · 审批受控'), route: ['desk', 'Expense Reimbursement'], badge: 'ERP' },
 			{ icon: 'file', label: __('发票管理'), sub: 'Sales Invoice', route: ['desk', 'Sales Invoice'] },
 			{ icon: 'trend', label: __('订单利润'), sub: __('订单利润报表'), route: ['desk', 'query-report', '订单利润'], report: true },
 		],
@@ -133,31 +133,31 @@ const LANES = [
 ];
 
 const MASTER = [
-	{ icon: 'anchor', label: __('港口'), note: __('出运明细单 · 装运港/卸货港'), route: ['desk', 'Port'], badge: 'General ERP' },
-	{ icon: 'globe', label: __('贸易术语'), note: __('国际贸易术语 · 订单/出运用'), route: ['desk', 'Incoterms'], badge: 'General ERP' },
-	{ icon: 'hash', label: __('HS 编码'), note: __('物料报关编码 · 海关商品'), route: ['desk', 'HS Code'], badge: 'General ERP' },
-	{ icon: 'sliders', label: __('系统参数'), note: __('全局行为参数'), route: ['desk', 'System Parameter'], badge: 'General ERP' },
-	{ icon: 'banknote', label: __('币种汇率'), note: __('今日汇率 · 工作台数字卡'), route: ['desk', 'currency-exchange-rate'], badge: 'General ERP' },
-	{ icon: 'truck', label: __('服务商'), note: __('货代 · 船公司 · 报关行'), route: ['desk', 'service-provider'], badge: 'General ERP' },
-	{ icon: 'sliders', label: __('统计设置'), note: __('公海天数 · 报表订阅 · 权限矩阵'), route: ['desk', 'statistics-settings'], badge: 'General ERP' },
-	{ icon: 'globe', label: __('区域设置'), note: __('语言/时区/日期 · 中英文切换'), route: ['desk', 'regional-settings'], badge: 'General ERP' },
+	{ icon: 'anchor', label: __('港口'), note: __('出运明细单 · 装运港/卸货港'), route: ['desk', 'Port'], badge: 'ERP' },
+	{ icon: 'globe', label: __('贸易术语'), note: __('国际贸易术语 · 订单/出运用'), route: ['desk', 'Incoterms'], badge: 'ERP' },
+	{ icon: 'hash', label: __('HS 编码'), note: __('物料报关编码 · 海关商品'), route: ['desk', 'HS Code'], badge: 'ERP' },
+	{ icon: 'sliders', label: __('系统参数'), note: __('全局行为参数'), route: ['desk', 'System Parameter'], badge: 'ERP' },
+	{ icon: 'banknote', label: __('币种汇率'), note: __('今日汇率 · 工作台数字卡'), route: ['desk', 'currency-exchange-rate'], badge: 'ERP' },
+	{ icon: 'truck', label: __('服务商'), note: __('货代 · 船公司 · 报关行'), route: ['desk', 'service-provider'], badge: 'ERP' },
+	{ icon: 'sliders', label: __('统计设置'), note: __('公海天数 · 报表订阅 · 权限矩阵'), route: ['desk', 'statistics-settings'], badge: 'ERP' },
+	{ icon: 'globe', label: __('区域设置'), note: __('语言/时区/日期 · 中英文切换'), route: ['desk', 'regional-settings'], badge: 'ERP' },
 ];
 
 const MARKETING = [
 	{ icon: 'target', label: __('商机'), note: __('商机统计 · 丢失商机'), route: ['desk', 'Opportunity'] },
 	{ icon: 'megaphone', label: __('营销活动'), note: __('营销活动 · 营销计划'), route: ['desk', 'Campaign'] },
 	{ icon: 'megaphone', label: __('邮件群发'), note: __('客户群发 · 模板变量 · 发送统计'), route: ['desk', 'bulk-email'] },
-	{ icon: 'file', label: __('邮件模板'), note: __('营销主题 · {{customer_name}} 变量'), route: ['desk', 'email-template'], badge: 'General ERP' },
-	{ icon: 'share', label: __('线索分发'), note: __('分发记录 · 留痕追溯'), route: ['desk', 'lead-distribution-log'], badge: 'General ERP' },
-	{ icon: 'globe', label: __('网站留言'), note: __('官网表单 → 线索 · 嵌入代码'), route: ['desk', 'website-lead-code'], badge: 'General ERP' },
+	{ icon: 'file', label: __('邮件模板'), note: __('营销主题 · {{customer_name}} 变量'), route: ['desk', 'email-template'], badge: 'ERP' },
+	{ icon: 'share', label: __('线索分发'), note: __('分发记录 · 留痕追溯'), route: ['desk', 'lead-distribution-log'], badge: 'ERP' },
+	{ icon: 'globe', label: __('网站留言'), note: __('官网表单 → 线索 · 嵌入代码'), route: ['desk', 'website-lead-code'], badge: 'ERP' },
 ];
 
 const OA = [
 	{ icon: 'doc', label: __('文件管理'), note: __('文档管理'), route: ['desk', 'Note'] },
-	{ icon: 'bell', label: __('公告'), note: __('通知公告 · 置顶/有效期'), route: ['desk', 'announcement'], badge: 'General ERP' },
+	{ icon: 'bell', label: __('公告'), note: __('通知公告 · 置顶/有效期'), route: ['desk', 'announcement'], badge: 'ERP' },
 	{ icon: 'building', label: __('部门'), note: __('组织模块未启用 · 规划中'), noroute: true, badge: __('规划中') },
-	{ icon: 'checkc', label: __('工作检查'), note: __('每日/每周自检 · 待办提醒'), route: ['desk', 'work-check'], badge: 'General ERP' },
-	{ icon: 'calendar', label: __('工作日历'), note: __('节假日 · 跟进 · 出运 · 检查'), route: ['desk', 'work-calendar'], badge: 'General ERP' },
+	{ icon: 'checkc', label: __('工作检查'), note: __('每日/每周自检 · 待办提醒'), route: ['desk', 'work-check'], badge: 'ERP' },
+	{ icon: 'calendar', label: __('工作日历'), note: __('节假日 · 跟进 · 出运 · 检查'), route: ['desk', 'work-calendar'], badge: 'ERP' },
 	{ icon: 'building', label: __('岗位'), note: __('岗位管理'), route: ['desk', 'Designation'] },
 	{ icon: 'shield', label: __('角色权限'), note: __('岗位与权限'), route: ['desk', 'Role'] },
 	{ icon: 'user', label: __('用户参数'), note: 'User', route: ['desk', 'User'] },
@@ -187,7 +187,7 @@ const PLATFORM = [
 	{ icon: 'search', label: __('全局搜索'), note: __('内置 · ⌘K 快捷键'), noroute: true, badge: __('内置') },
 	{ icon: 'mail', label: __('沟通记录'), note: __('沟通记录'), route: ['desk', 'Communication'] },
 	{ icon: 'mail', label: __('邮件中心'), note: __('待处理 · 收件箱 · 草稿箱'), route: ['desk', 'mail-center'] },
-	{ icon: 'inbox', label: __('邮箱账号'), note: __('IMAP 接入 · 定时收信 · 打开/点击跟踪'), route: ['desk', 'mail-account'], badge: 'General ERP' },
+	{ icon: 'inbox', label: __('邮箱账号'), note: __('IMAP 接入 · 定时收信 · 打开/点击跟踪'), route: ['desk', 'mail-account'], badge: 'ERP' },
 ];
 
 
