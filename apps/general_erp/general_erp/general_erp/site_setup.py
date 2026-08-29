@@ -49,6 +49,20 @@ ROLES = [
 ]
 
 
+# 岗位角色体系（T-roles，2026-08-29）：岗位 -> 背后原生角色
+# 管理员建用户时选岗位（role_profiles），自动带整套原生角色；
+# 自研单据/报表权限在 doctype json 里双写到岗位角色上。
+ROLE_PROFILES = [
+    ("销售", ["Sales", "Sales User", "Desk User"]),
+    ("外贸专员", ["Sales", "Sales User", "Sales Manager", "Stock User", "Desk User"]),
+    ("采购", ["Purchase User", "Purchase Manager", "Desk User"]),
+    ("库存", ["Stock User", "Stock Manager", "Desk User"]),
+    ("财务", ["Accounts User", "Accounts Manager", "Desk User"]),
+    ("总经理", ["Sales Manager", "Purchase Manager", "Stock Manager", "Accounts Manager", "Desk User"]),
+    ("系统管理员", ["System Manager", "Desk User"]),
+]
+
+
 SALES_STAGES = [
     ("Prospecting", "初步接触"),
     ("Qualification", "资质确认"),
@@ -78,6 +92,55 @@ def sync_roles():
             r.description = desc
             r.insert(ignore_permissions=True)
     frappe.db.commit()
+
+
+def sync_role_profiles():
+    """岗位角色 + Role Profile 幂等同步（T-roles）。"""
+    for name, native in ROLE_PROFILES:
+        if not frappe.db.exists("Role", name):
+            r = frappe.new_doc("Role")
+            r.role_name = name
+            r.description = "岗位角色（选此岗位自动带对应权限）"
+            r.desk_access = 1
+            r.insert(ignore_permissions=True)
+        if frappe.db.exists("Role Profile", name):
+            frappe.delete_doc("Role Profile", name, force=True)
+        frappe.get_doc({
+            "doctype": "Role Profile",
+            "role_profile": name,
+            "roles": [{"role": rn} for rn in [name] + native],
+        }).insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+def sync_user_login_settings():
+    """国内习惯建号（T-user-login）：允许用户名登录 + 邮箱改非必填。
+
+    邮箱在 frappe 是身份锚点且 meta reqd=1（_validate_mandatory 层拦截，
+    早于 validate()）。这里用 Property Setter 把 User.email.reqd 降 0（非侵入、落库），
+    配合 overwrite/user/user.py 的无邮箱分支（name 取 username）实现纯用户名建号。
+    有邮箱用户行为不受影响（validate 内仍走 email=name 同步与格式校验）。
+    """
+    # 1. 用户名登录开关（frappe 原生，auth.find_by_credentials 读此值）
+    ss = frappe.get_doc("System Settings")
+    if not ss.allow_login_using_user_name:
+        ss.allow_login_using_user_name = 1
+        ss.save(ignore_permissions=True)
+    # 2. 邮箱非必填（Property Setter，幂等）
+    ps_name = "User-email-reqd-zero"
+    if not frappe.db.exists("Property Setter", ps_name):
+        frappe.get_doc({
+            "doctype": "Property Setter",
+            "property_setter": ps_name,
+            "doc_type": "User",
+            "doctype_or_field": "DocField",
+            "field_name": "email",
+            "property": "reqd",
+            "property_type": "Check",
+            "value": "0",
+        }).insert(ignore_permissions=True)
+    frappe.db.commit()
+    frappe.clear_cache("User")
 
 
 def sync_website_lead_form():
@@ -144,6 +207,140 @@ def sync_company_fields():
         cf.translatable = 1
         cf.insert(ignore_permissions=True)
     frappe.db.commit()
+
+
+# ============================================================
+# 多公司 company 字段（T2-10）：自定义业务单据支持多公司部署
+# ============================================================
+COMPANY_FIELD_DOCTYPES = [
+    "Bulk Email",
+    "Customer Follow Up",
+    "Expense Reimbursement",
+    "Inspection Order",
+    "Mail",
+    "Export Shipment",
+    "Trade Document",
+]
+
+
+def sync_multi_company_fields():
+    """给 app 自定义业务单据加 company Link 字段（幂等，Link→Company，非必填）。"""
+    for dt in COMPANY_FIELD_DOCTYPES:
+        if not frappe.db.exists("DocType", dt):
+            continue
+        if frappe.db.get_value("Custom Field", {"dt": dt, "fieldname": "company"}):
+            continue
+        cf = frappe.new_doc("Custom Field")
+        cf.dt = dt
+        cf.fieldname = "company"
+        cf.label = "公司"
+        cf.fieldtype = "Link"
+        cf.options = "Company"
+        cf.reqd = 0
+        cf.in_list_view = 1
+        cf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+# ============================================================
+# 生产任务单审批流（T2-14）：Production Plan 复用 app 审批模式
+# 草稿→审批中→已审批（docstatus 0→0→1），驳回→已驳回
+# ============================================================
+PP_WORKFLOW_STATES = [
+    ("草稿", "0", "Stock Manager"),
+    ("审批中", "0", "Purchase Manager"),
+    ("已审批", "1", "Purchase Manager"),
+    ("已驳回", "0", "Stock Manager"),
+]
+PP_WORKFLOW_TRANSITIONS = [
+    ("草稿", "提交审批", "审批中", "Stock Manager"),
+    ("审批中", "审批", "已审批", "Purchase Manager"),
+    ("审批中", "驳回", "已驳回", "Purchase Manager"),
+    ("已驳回", "重新提交", "审批中", "Stock Manager"),
+]
+
+
+def sync_production_plan_workflow():
+    """生产任务单（Production Plan）审批流，与采购/费用审批同一模式。"""
+    if not frappe.db.exists("DocType", "Production Plan"):
+        return
+    _ensure_pp_permissions()
+    wf_name = "生产任务单审批"
+    if frappe.db.exists("Workflow", wf_name):
+        wf = frappe.get_doc("Workflow", wf_name)
+        changed = False
+        for s in wf.states:
+            want = dict((x[0], x[2]) for x in PP_WORKFLOW_STATES).get(s.state)
+            if want and s.allow_edit != want:
+                s.allow_edit = want
+                changed = True
+        for t in wf.transitions:
+            want = dict((x[0], x[3]) for x in PP_WORKFLOW_TRANSITIONS).get(t.state)
+            if want and t.allowed != want:
+                t.allowed = want
+                changed = True
+        if changed:
+            wf.flags.ignore_permissions = True
+            wf.save()
+            frappe.db.commit()
+        return
+    _ensure_workflow_states(PP_WORKFLOW_STATES)
+    _ensure_workflow_actions([t[1] for t in PP_WORKFLOW_TRANSITIONS])
+    wf = frappe.new_doc("Workflow")
+    wf.workflow_name = wf_name
+    wf.document_type = "Production Plan"
+    wf.workflow_state_field = "workflow_state"
+    wf.is_active = 1
+    wf.override_status = 0
+    wf.send_email_alert = 0
+    for state_name, doc_status, role in PP_WORKFLOW_STATES:
+        wf.append("states", {
+            "state": state_name, "doc_status": doc_status,
+            "allow_edit": role, "avoid_status_override": 0, "send_email": 0,
+            "is_optional_state": 0, "evaluate_as_expression": 0,
+        })
+    for state_name, action, next_state, allowed in PP_WORKFLOW_TRANSITIONS:
+        wf.append("transitions", {
+            "state": state_name, "action": action, "next_state": next_state,
+            "allowed": allowed, "allow_self_approval": 1, "send_email_to_creator": 0,
+        })
+    wf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+def _ensure_pp_permissions():
+    """Production Plan 权限：现有业务角色接入（走 CDP 全量拷贝语义，不塌 base）。
+    仓库=建单/提交，采购经理=审批/驳回，系统管理=全权。"""
+    from frappe.permissions import setup_custom_perms, add_permission
+    setup_custom_perms("Production Plan")
+    for role, perms in [
+        ("Stock Manager", {"write": 1, "create": 1, "submit": 1}),
+        ("Purchase Manager", {"write": 1, "submit": 1, "cancel": 1, "amend": 1}),
+        ("System Manager", {"write": 1, "create": 1, "delete": 1, "submit": 1, "cancel": 1, "amend": 1}),
+    ]:
+        row = frappe.db.get_value(
+            "Custom DocPerm",
+            {"parent": "Production Plan", "role": role, "permlevel": 0, "if_owner": 0},
+            "name",
+        )
+        if not row:
+            add_permission("Production Plan", role, 0, ptype="read")
+            row = frappe.db.get_value(
+                "Custom DocPerm",
+                {"parent": "Production Plan", "role": role, "permlevel": 0, "if_owner": 0},
+                "name",
+            )
+        if not row:
+            continue
+        for k, v in perms.items():
+            frappe.db.set_value("Custom DocPerm", row, k, v)
+    frappe.db.commit()
+    frappe.clear_cache(doctype="Production Plan")
+
+
+def _ensure_pp_workflow_roles():
+    """生产任务单权限同步（与 _ensure_pp_permissions 同体，入口拆分便于阅读）。"""
+    _ensure_pp_permissions()
 
 
 # ============================================================
@@ -241,6 +438,31 @@ def sync_opportunity_quick_lists():
 
 
 @frappe.whitelist()
+def sync_customer_list_filters():
+    """客户三视图（T2-09）：我的客户 / 公海客户 / 热点客户（List Filter，与商机三视图同机制）。"""
+    for title, filters in [
+        ("我的客户", [{"fieldname": "sales_owner", "operator": "=", "value": "me"}]),
+        ("公海客户", [{"fieldname": "is_public_pool", "operator": "=", "value": 1}]),
+        ("热点客户", [{"fieldname": "is_starred", "operator": "=", "value": 1}]),
+    ]:
+        if frappe.db.exists("List Filter", {"filter_name": title, "reference_doctype": "Customer"}):
+            continue
+        lf = frappe.new_doc("List Filter")
+        lf.filter_name = title
+        lf.reference_doctype = "Customer"
+        lf.for_user = ""
+        lf.filters = frappe.as_json(filters)
+        lf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+def sync_opportunity_defaults():
+    """商机默认值（T2-02）：opportunity_from=Customer、opportunity_type=Sales，避免新建首崩。"""
+    frappe.db.sql("update tabDocField set `default`='Customer' where parent='Opportunity' and fieldname='opportunity_from' and (ifnull(`default`,'')='')")
+    frappe.db.sql("update tabDocField set `default`='Sales' where parent='Opportunity' and fieldname='opportunity_type' and (ifnull(`default`,'')='')")
+    frappe.db.commit()
+
+
 def set_opportunity_approval_status(name, status):
     """商机批复状态切换（待批复→已批复→待回复），留痕。"""
     if status not in ("待批复", "已批复", "待回复"):
@@ -281,11 +503,18 @@ def sync_mail_account_rate_limits():
 
 
 def sync_mail_fields():
-    """Mail 增强字段：分发/归档客户/审批规则（T04）。"""
+    """Mail 增强字段：分发/归档客户/审批规则（T04）+ 发送跟踪（T08）。"""
     specs = [
         ("distributed_to", "已分发给", "Link", "User", 0),
         ("archive_customer", "归档客户", "Link", "Customer", 0),
         ("approval_rule", "审批规则命中", "Data", None, 0),
+        ("track", "发送跟踪", "Check", None, 0),
+        ("tracking_id", "跟踪ID", "Data", None, 0),
+        ("opened", "已打开", "Check", None, 0),
+        ("clicked", "已点击", "Check", None, 0),
+        ("opened_at", "打开时间", "Datetime", None, 0),
+        ("clicked_at", "点击时间", "Datetime", None, 0),
+        ("from_address", "发件地址", "Data", None, 0),
     ]
     for name, label, ftype, options, in_list in specs:
         if frappe.db.get_value("Custom Field", {"dt": "Mail", "fieldname": name}):
@@ -303,20 +532,121 @@ def sync_mail_fields():
     frappe.db.commit()
 
 
+def sync_lead_fields():
+    """线索被分发人字段（线索统计报表 / assign_lead 分发逻辑依赖）。"""
+    specs = [
+        ("assigned_to", "被分发人", "Link", "User", 1),
+        ("assigned_at", "分发时间", "Datetime", None, 0),
+    ]
+    for name, label, ftype, options, in_list in specs:
+        if frappe.db.get_value("Custom Field", {"dt": "Lead", "fieldname": name}):
+            continue
+        cf = frappe.new_doc("Custom Field")
+        cf.dt = "Lead"
+        cf.fieldname = name
+        cf.label = label
+        cf.fieldtype = ftype
+        cf.options = options
+        cf.in_list_view = in_list
+        cf.reqd = 0
+        cf.translatable = 1
+        cf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+EXPENSE_WORKFLOW_STATES = [
+    ("草稿", "0", "System Manager"),
+    ("审批中", "0", "System Manager"),
+    ("已审批", "1", "System Manager"),
+    ("已驳回", "0", "System Manager"),
+]
+EXPENSE_WORKFLOW_TRANSITIONS = [
+    ("草稿", "提交审批", "审批中", "System Manager"),
+    ("审批中", "审批", "已审批", "System Manager"),
+    ("审批中", "驳回", "已驳回", "System Manager"),
+    ("已驳回", "重新提交", "审批中", "System Manager"),
+]
+
+
+def sync_expense_workflow():
+    """费用报销审批流（草稿→审批中→已审批/已驳回，与 app 内 workflow JSON 一致）。"""
+    wf_name = "费用报销审批"
+    if frappe.db.exists("Workflow", wf_name):
+        return
+    _ensure_workflow_states(EXPENSE_WORKFLOW_STATES)
+    _ensure_workflow_actions([t[1] for t in EXPENSE_WORKFLOW_TRANSITIONS])
+    wf = frappe.new_doc("Workflow")
+    wf.workflow_name = wf_name
+    wf.document_type = "Expense Reimbursement"
+    wf.workflow_state_field = "workflow_state"
+    wf.is_active = 1
+    wf.override_status = 0
+    wf.send_email_alert = 0
+    for state_name, doc_status, role in EXPENSE_WORKFLOW_STATES:
+        wf.append("states", {
+            "state": state_name, "doc_status": doc_status,
+            "allow_edit": role, "avoid_status_override": 0, "send_email": 0,
+            "is_optional_state": 0, "evaluate_as_expression": 0,
+        })
+    for state_name, action, next_state, allowed in EXPENSE_WORKFLOW_TRANSITIONS:
+        wf.append("transitions", {
+            "state": state_name, "action": action, "next_state": next_state,
+            "allowed": allowed, "allow_self_approval": 1, "send_email_to_creator": 0,
+        })
+    wf.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+
+
+def sync_report_workspace():
+    """报表中心 Workspace 同步（幂等）：保证 7 个业务报表挂在"经营与运营"卡片下。"""
+    import os
+    import json
+    ws_name = "报表中心"
+    if not frappe.db.exists("Workspace", ws_name):
+        return
+    base = os.path.join(os.path.dirname(__file__), "..", "workspace", ws_name, ws_name + ".json")
+    base = os.path.normpath(base)
+    if not os.path.exists(base):
+        return
+    with open(base, encoding="utf-8") as f:
+        spec = json.load(f)
+    doc = frappe.get_doc("Workspace", ws_name)
+    # 按 spec 顺序重建 links（spec 是事实源；DB 里多出的旧链接删除）
+    spec_links = spec.get("links", [])
+    for i in range(len(doc.links) - 1, -1, -1):
+        doc.links[i].remove()
+    for l in spec_links:
+        doc.append("links", l)
+    doc.flags.ignore_permissions = True
+    doc.flags.ignore_version = True
+    doc.save()
+    frappe.db.commit()
+
+
 def sync_site_setup(with_seed=False):
     """总入口：after_install 与 after_migrate 调用，幂等。"""
     sync_customer_fields()
     sync_sales_stages()
     sync_roles()
+    sync_role_profiles()
+    sync_user_login_settings()
     sync_website_lead_form()
     sync_opportunity_fields()
     sync_company_fields()
+    sync_multi_company_fields()
+    sync_production_plan_workflow()
     sync_po_workflow()
     sync_opportunity_quick_lists()
+    sync_customer_list_filters()
+    sync_opportunity_defaults()
     sync_mail_account_rate_limits()
     sync_mail_fields()
+    sync_lead_fields()
+    sync_expense_workflow()
+    sync_report_workspace()
     if with_seed:
-        from general_erp.general_erp.seed_data import seed_base_data
+        from general_erp.seed_data import seed_base_data
         if frappe.db.exists("DocType", "Port"):
             seed_base_data()
 

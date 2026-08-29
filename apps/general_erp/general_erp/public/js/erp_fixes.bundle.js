@@ -240,3 +240,34 @@
 	_wrapped[key] = true;
 	frappe.router.convert_to_standard_route = _wrapped;
 })();
+
+// 用户表单：生成用户名/密码按钮（T-user-login，2026-08-29）：
+// 国内习惯建号——管理员只给用户名+密码，邮箱可不填。
+// 用户名=姓名拼音首字母兜底（取 first_name/last_name 前缀），密码=10 位随机。
+(function () {
+	function genPassword() {
+		const chars = "ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
+		let s = "";
+		for (let i = 0; i < 10; i++) s += chars.charAt(Math.floor(Math.random() * chars.length));
+		return s;
+	}
+	function genUsername(frm) {
+		const name = (frm.doc.first_name || frm.doc.username || "user").trim();
+		// 已有用户名且非空：保持；否则用姓名
+		return name;
+	}
+	frappe.ui.form.on("User", {
+		refresh(frm) {
+			if (!frm.fields_dict.username) return;
+			frm.add_custom_button(__("生成用户名"), () => {
+				frm.set_value("username", genUsername(frm));
+				frm.set_value("first_name", genUsername(frm));
+				frm.refresh_field("username");
+			});
+			frm.add_custom_button(__("生成密码"), () => {
+				frm.set_value("new_password", genPassword());
+				frm.refresh_field("new_password");
+			});
+		},
+	});
+})();

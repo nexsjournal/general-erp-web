@@ -19,6 +19,12 @@ required_apps = []
 app_include_css = ["erp_theme.bundle.css"]
 app_include_js = "erp_fixes.bundle.js"
 
+# DocType 控制器覆盖（数据隔离等，不动 erpnext 源码）
+override_doctype_class = {
+	"Customer": "general_erp.general_erp.overwrite.customer.customer.Customer",
+	# 无邮箱账号（T-user-login）：name 取 username，登录走用户名
+	"User": "general_erp.general_erp.overwrite.user.user.User",
+}
 # 数据库 fixtures（预置数据，migrate 时自动同步）
 # fixtures = []
 
@@ -41,11 +47,12 @@ scheduler_events = {
 }
 
 # 监听官方 DocType 事件（扩展 ERPNext 单据行为的标准方式，不改官方代码）
-# doc_events = {
-#     "Sales Invoice": {
-#         "on_submit": "general_erp.general_erp.doctype.demo_note.demo_note.on_sales_invoice_submit",
-#     }
-# }
+doc_events = {
+    "Lead": {
+        # 网站留言频控（T2-18）：同 IP 每小时最多 5 条
+        "before_insert": "general_erp.general_erp.crm_utils.website_lead_rate_limit",
+    }
+}
 
 # 工作台入口（在 Desk 首页展示自定义页面，可选）
 # workspace_items = ...
