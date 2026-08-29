@@ -59,7 +59,7 @@ ROLE_PROFILES = [
     ("库存", ["Stock User", "Stock Manager", "Desk User"]),
     ("财务", ["Accounts User", "Accounts Manager", "Desk User"]),
     ("总经理", ["Sales Manager", "Purchase Manager", "Stock Manager", "Accounts Manager", "Desk User"]),
-    ("系统管理员", ["System Manager", "Desk User"]),
+    ("系统管理员", ["Academics User", "Accounts Manager", "Accounts User", "Analytics", "Auditor", "Customer", "Dashboard Manager", "Delivery Manager", "Delivery User", "Desk User", "Employee", "Fleet Manager", "Fulfillment User", "HR Manager", "HR User", "Inbox User", "Item Manager", "Knowledge Base Contributor", "Knowledge Base Editor", "Maintenance Manager", "Maintenance User", "Manufacturing Manager", "Manufacturing User", "Marketing Manager", "Newsletter Manager", "Prepared Report User", "Projects Manager", "Projects User", "Purchase Manager", "Purchase Master Manager", "Purchase User", "Quality Manager", "Report Manager", "Sales", "Sales Manager", "Sales Master Manager", "Sales User", "Script Manager", "Stock Manager", "Stock User", "Supplier", "Support Team", "System Manager", "Translator", "Website Manager", "Workspace Manager"]),  # 超管=全套原生角色,维护人员(T-superadmin)
 ]
 
 

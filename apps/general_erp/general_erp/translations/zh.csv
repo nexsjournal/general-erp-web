@@ -184,3 +184,7 @@ Quotation,报价单
 Sales Order,销售订单
 Production Plan,生产任务单
 Export Shipment,出运明细单
+Cash,现金
+Creditors,贷方科目
+Debtors,借方科目
+Delivered,已交货
