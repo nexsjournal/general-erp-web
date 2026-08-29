@@ -496,3 +496,46 @@
 	if (frappe.router && frappe.router.on) { frappe.router.on('route_change', function () { setTimeout(inject, 1200); }); }
 	setInterval(function () { if (location.pathname.indexOf('/desk/') === 0) inject(); }, 3000);
 })();
+
+
+// T-fin-fy: 三张原生财务报表(资产负债表/利润表/现金流量表)自动预填当前会计年度
+// 背景: filter_based_on 默认 Fiscal Year, from_fiscal_year/to_fiscal_year 无默认值, 首次打开报"必填"
+// 做法: 报表加载后检测过滤器, 若按会计年度且未填, 调后端取当前会计年度预填并刷新一次(幂等)
+(function () {
+	var TARGETS = ['Balance Sheet', 'Profit and Loss Statement', 'Cash Flow'];
+	var _busy = {};
+
+	function tryFill() {
+		var qr = frappe.query_report;
+		if (!qr || !qr.filters || !qr.filters.length) return;
+		var name = qr.report_name;
+		if (TARGETS.indexOf(name) === -1) return;
+		if (qr.get_filter('filter_based_on').get_value() !== 'Fiscal Year') return;
+		if (qr.get_filter('from_fiscal_year').get_value() || qr.get_filter('to_fiscal_year').get_value()) return;
+		if (_busy[name]) return;
+		_busy[name] = true;
+		frappe.call({
+			method: 'general_erp.general_erp.api_reports.get_current_fiscal_year',
+			callback: function (res) {
+				_busy[name] = false;
+				var fy = res && res.message;
+				if (!fy || !fy.name) return;
+				// 仅在仍是目标报表且未填时生效(防路由已切走)
+				if (frappe.query_report && frappe.query_report.report_name === name &&
+				    !frappe.query_report.get_filter_value('from_fiscal_year')) {
+					frappe.query_report.set_filter_value({ from_fiscal_year: fy.name, to_fiscal_year: fy.name });
+					setTimeout(function () {
+						if (frappe.query_report && frappe.query_report.report_name === name &&
+						    frappe.query_report.get_filter_value('from_fiscal_year')) {
+							frappe.query_report.refresh();
+						}
+					}, 300);
+				}
+			}
+		});
+	}
+
+	setInterval(function () {
+		try { if (location.href.indexOf('/query-report/') !== -1) tryFill(); } catch (e) {}
+	}, 1500);
+})();
