@@ -1,0 +1,126 @@
+{
+ "doctype": "Workspace",
+ "name": "首页",
+ "label": "首页",
+ "title": "首页",
+ "module": "General ERP",
+ "icon": "home",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 0,
+ "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"ERP工作台\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"待办\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"财务管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"产品管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"外贸管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"生产管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"组织管理\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"报表中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"系统设置\", \"col\": 3}}]",
+ "shortcuts": [
+  {
+   "label": "ERP工作台",
+   "type": "URL",
+   "url": "/desk/ERP工作台",
+   "icon": "ship",
+   "color": "gray",
+   "doc_view": "List"
+  },
+  {
+   "label": "待办",
+   "type": "URL",
+   "url": "/desk/ToDo",
+   "icon": "clipboard",
+   "color": "red",
+   "doc_view": "List"
+  },
+  {
+   "label": "销售管理",
+   "type": "URL",
+   "url": "/desk/销售管理",
+   "icon": "cart",
+   "color": "blue",
+   "doc_view": "List"
+  },
+  {
+   "label": "采购管理",
+   "type": "URL",
+   "url": "/desk/采购管理",
+   "icon": "shopping-cart",
+   "color": "blue",
+   "doc_view": "List"
+  },
+  {
+   "label": "库存管理",
+   "type": "URL",
+   "url": "/desk/库存管理",
+   "icon": "package",
+   "color": "blue",
+   "doc_view": "List"
+  },
+  {
+   "label": "财务管理",
+   "type": "URL",
+   "url": "/desk/财务管理",
+   "icon": "credit-card",
+   "color": "green",
+   "doc_view": "List"
+  },
+  {
+   "label": "客户管理",
+   "type": "URL",
+   "url": "/desk/客户管理",
+   "icon": "users",
+   "color": "blue",
+   "doc_view": "List"
+  },
+  {
+   "label": "产品管理",
+   "type": "URL",
+   "url": "/desk/产品管理",
+   "icon": "box",
+   "color": "orange",
+   "doc_view": "List"
+  },
+  {
+   "label": "邮件中心",
+   "type": "URL",
+   "url": "/desk/邮件中心",
+   "icon": "mail",
+   "color": "purple",
+   "doc_view": "List"
+  },
+  {
+   "label": "外贸管理",
+   "type": "URL",
+   "url": "/desk/外贸管理",
+   "icon": "globe",
+   "color": "teal",
+   "doc_view": "List"
+  },
+  {
+   "label": "生产管理",
+   "type": "URL",
+   "url": "/desk/生产管理",
+   "icon": "factory",
+   "color": "gray",
+   "doc_view": "List"
+  },
+  {
+   "label": "组织管理",
+   "type": "URL",
+   "url": "/desk/组织管理",
+   "icon": "team",
+   "color": "orange",
+   "doc_view": "List"
+  },
+  {
+   "label": "报表中心",
+   "type": "URL",
+   "url": "/desk/报表中心",
+   "icon": "bar-chart",
+   "color": "blue",
+   "doc_view": "List"
+  },
+  {
+   "label": "系统设置",
+   "type": "URL",
+   "url": "/desk/系统设置",
+   "icon": "settings",
+   "color": "gray",
+   "doc_view": "List"
+  }
+ ]
+}

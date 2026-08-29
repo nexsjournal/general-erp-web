@@ -127,6 +127,20 @@ def sync_currency_display():
     frappe.clear_cache()
 
 
+def sync_homepage_default():
+    """金蝶式登录首页（T-homepage，2026-08-29）：所有系统用户登录后直达「首页」workspace。
+
+    走 frappe 官方 User.default_workspace 机制（可后台随时改回，不改源码/不隐藏原生页面）。
+    「首页」本身随 workspace/首页/首页.json 在 migrate 时同步（is_hidden=0 侧边栏可见）。
+    """
+    if not frappe.db.exists("Workspace", "首页"):
+        return
+    for u in frappe.get_all("User", filters={"enabled": 1, "user_type": "System User"}, fields=["name", "default_workspace"]):
+        if u["default_workspace"] != "首页":
+            frappe.db.set_value("User", u["name"], "default_workspace", "首页")
+    frappe.db.commit()
+
+
 def sync_user_login_settings():
     """国内习惯建号（T-user-login）：允许用户名登录 + 邮箱改非必填。
 
@@ -646,6 +660,7 @@ def sync_site_setup(with_seed=False):
     sync_role_profiles()
     sync_currency_display()
     sync_user_login_settings()
+    sync_homepage_default()
     sync_website_lead_form()
     sync_opportunity_fields()
     sync_company_fields()
