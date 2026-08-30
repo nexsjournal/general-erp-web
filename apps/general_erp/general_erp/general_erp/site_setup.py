@@ -168,6 +168,11 @@ def sync_user_login_settings():
     if not ss.allow_login_using_user_name:
         ss.allow_login_using_user_name = 1
         ss.save(ignore_permissions=True)
+    # 1b. 会话超时 8 小时（T-session，2026-08-30）：闲置超 8 小时需重新输账号密码
+    #     （frappe 默认 170:00 ≈ 7 天，客户反馈"过段时间再登录不用输密码"的根因）
+    if str(ss.session_expiry) != "8:00":
+        ss.session_expiry = "8:00"
+        ss.save(ignore_permissions=True)
     # 2. 邮箱非必填（Property Setter，幂等）
     ps_name = "User-email-reqd-zero"
     if not frappe.db.exists("Property Setter", ps_name):
