@@ -60,9 +60,34 @@ general-erp-web/
 # 浏览器打开 http://localhost:8002，登录 **Administrator（或 admin@example.com）/ Erp@Demo-2026**
 # 说明：frappe 登录框标注「邮件」，实际按用户名匹配（普通用户用户名即邮箱）；
 # 已开启 allow_login_using_user_name 并把 Administrator 的 username 设为邮箱，两种写法均可
+#
+# 新装站点初始 admin 密码 = scripts/setup_bench.sh 顶部 ADMIN_PASSWORD（admin123），
+# 当前演示站点已改为 Erp@Demo-2026；可随时改：
+#   cd bench && bench --site general.erp.local set-admin-password Erp@Demo-2026
 ```
 
 换电脑/复制代码后：复制整个项目目录 → 跑 `./scripts/setup_bench.sh`（venv 和站点数据库会自动重建）。
+
+## 演示账号与演示数据
+
+演示业务账号（由 `scripts/seed_demo_data.py` 幂等创建，重复执行无副作用）：
+
+| 账号 | 角色 |
+|---|---|
+| `sales1@demo.com` | 销售 |
+| `salesm1@demo.com` | 销售经理 |
+| `purchase1@demo.com` | 采购 |
+| `stock1@demo.com` | 库存 |
+| `accounts1@demo.com` | 财务 |
+| `boss1@demo.com` | 总经理 |
+
+统一密码：`Demo@2026`。
+
+演示前补齐演示数据（客户/物料/库存/用户等，幂等）：
+
+```bash
+cd bench && ./env/bin/python ../scripts/seed_demo_data.py general.erp.local
+```
 
 ## 端口与服务
 
@@ -107,7 +132,7 @@ bench --site general.erp.local reset-permissions --force    # 重置权限
 ### 回归测试（改动后必跑）
 
 ```bash
-./scripts/regression.sh   # 33 项：金额链守恒 / 原生+自定义报表跑数 / 全模块 CRUD / 角色权限矩阵 / 审批工作流
+./scripts/regression.sh   # 44 项：金额链守恒 / 原生+自定义报表跑数 / 全模块 CRUD / 角色权限矩阵 / 审批防绕过 / 审批向导
 ```
 
 测试数据带「回归测试」前缀，跑完自动清理；环境自愈前置（站点/服务检查），约 20 秒。
