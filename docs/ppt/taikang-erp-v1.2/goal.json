@@ -1,0 +1,648 @@
+{
+  "title": "太康生物ERP 功能总览",
+  "goal": "$SR/output/taikang-erp/goal.json",
+  "themePack": "theme01",
+  "pageCount": 14,
+  "slides": [
+    {
+      "layout": "theme01_page001",
+      "props": {
+        "kicker": "太康生物ERP",
+        "titleTop": "企业级",
+        "titleBottom": "外贸ERP系统",
+        "en": "TAIKANG BIO ERP",
+        "lead": "从线索到回款、从采购到入库，一套系统管全流程",
+        "chips": [
+          "13 大功能域",
+          "25 张报表",
+          "中文化体验"
+        ],
+        "panelIndex": "01",
+        "panelEn": "OVERVIEW",
+        "meta": [
+          {
+            "label": "版本",
+            "value": "v1.2"
+          },
+          {
+            "label": "回归测试",
+            "value": "48 项"
+          },
+          {
+            "label": "严重缺陷",
+            "value": "0 个"
+          }
+        ],
+        "footnote": "基于 ERPNext v16 二次开发 · 2026-08-30",
+        "metaCount": 3,
+        "chipCount": 3
+      }
+    },
+    {
+      "layout": "theme01_page009",
+      "props": {
+        "kicker": "功能导览",
+        "title": "七大板块",
+        "en": "MODULES",
+        "cn": "左侧导航 · 右侧功能",
+        "chapters": [
+          {
+            "no": "01",
+            "label": "销售管理",
+            "en": "SALES",
+            "desc": "报价/订单/交货/发票/收款/出运"
+          },
+          {
+            "no": "02",
+            "label": "客户与营销",
+            "en": "CRM",
+            "desc": "客户/跟进/360/线索/商机/邮件群发"
+          },
+          {
+            "no": "03",
+            "label": "采购库存",
+            "en": "SUPPLY",
+            "desc": "供应商/订单/收货/验货/余额/预警"
+          },
+          {
+            "no": "04",
+            "label": "财务与报表",
+            "en": "FINANCE",
+            "desc": "收付款/发票/报销/账表/25张报表"
+          },
+          {
+            "no": "05",
+            "label": "外贸与产品",
+            "en": "EXPORT",
+            "desc": "出运/单证/HS码/港口/商品档案"
+          },
+          {
+            "no": "06",
+            "label": "组织与权限",
+            "en": "ORG",
+            "desc": "8岗位/审批流/员工部门/隐私隔离"
+          },
+          {
+            "no": "07",
+            "label": "系统与生产",
+            "en": "SYSTEM",
+            "desc": "公司/汇率/备份/生产计划工单BOM"
+          }
+        ],
+        "caption": "登录后默认进首页，点左侧模块名切换；每个模块顶部有流程条提示操作顺序",
+        "chapterCount": 7
+      }
+    },
+    {
+      "layout": "theme01_page006",
+      "props": {
+        "kicker": "系统体量一览",
+        "value": "13",
+        "unit": "大功能域",
+        "sub": "覆盖外贸企业从获客到回款的全部日常业务",
+        "highlightWord": "全流程",
+        "secondaries": [
+          {
+            "value": "25",
+            "unit": "张",
+            "label": "经营与财务报表"
+          },
+          {
+            "value": "8",
+            "unit": "岗位",
+            "label": "一套岗位=整套权限"
+          },
+          {
+            "value": "2",
+            "unit": "条",
+            "label": "销售主链路(标准+外贸)"
+          }
+        ],
+        "caption": "金额统一显示「数字+元」；中/英全量切换不混排",
+        "secondaryCount": 3
+      }
+    },
+    {
+      "layout": "theme01_page040",
+      "props": {
+        "kicker": "核心业务",
+        "title": "销售：两条主线一条链",
+        "en": "SALES PIPELINE",
+        "cn": "客户到回款全自动联动",
+        "phases": [
+          {
+            "period": "标准销售",
+            "step": "STEP 1",
+            "heading": "内销主链路",
+            "points": [
+              "客户→商机→报价单",
+              "订单→交货→发票→收款"
+            ],
+            "verdict": "库存应收自动联动"
+          },
+          {
+            "period": "外贸销售",
+            "step": "STEP 2",
+            "heading": "出运主链路",
+            "points": [
+              "线索→客户→跟进→360",
+              "订单→出运明细→单证→收款"
+            ],
+            "verdict": "出运状态机防跳级"
+          },
+          {
+            "period": "联动机制",
+            "step": "STEP 3",
+            "heading": "系统自动做",
+            "points": [
+              "交货=库存自动减",
+              "发票=应收自动增"
+            ],
+            "verdict": "报表中心看订单利润"
+          }
+        ],
+        "caption": "报价单可一键生成订单，订单可一键生成交货单/出运单，减少重复录入",
+        "itemCount": 3
+      }
+    },
+    {
+      "layout": "theme01_page058",
+      "props": {
+        "kicker": "外贸能力",
+        "title": "外贸专属功能",
+        "en": "EXPORT ONLY",
+        "cn": "区别于通用ERP的部分",
+        "events": [
+          {
+            "date": "01",
+            "title": "线索自动入池",
+            "desc": "官网留言自动生成线索，分配业务员，留痕可查"
+          },
+          {
+            "date": "02",
+            "title": "客户360全景",
+            "desc": "联系人+订单+发票+回款+沟通，一页看全"
+          },
+          {
+            "date": "03",
+            "title": "出运明细单",
+            "desc": "船期/港口/贸易术语，状态逐级前进"
+          },
+          {
+            "date": "04",
+            "title": "单证制作",
+            "desc": "按出运单生成外贸单据，支持打印格式"
+          },
+          {
+            "date": "05",
+            "title": "基础资料",
+            "desc": "HS海关编码/贸易术语/港口/服务商，建一次处处选"
+          },
+          {
+            "date": "06",
+            "title": "邮件营销",
+            "desc": "群发+模板+频率限制+打开/点击跟踪"
+          }
+        ],
+        "note": "出运状态机：草稿→已订舱→已出运→已清关→已交付，不可跳级不可倒退",
+        "caption": "内销企业不需要海关编码也可正常使用，外贸资料按需维护",
+        "itemCount": 6
+      }
+    },
+    {
+      "layout": "theme01_page069",
+      "props": {
+        "kicker": "客户与营销",
+        "headChunks": [
+          {
+            "text": "客户管理"
+          },
+          {
+            "text": "公海机制"
+          },
+          {
+            "text": "营销触达"
+          }
+        ],
+        "sub": "从陌生线索到老客户复购，全程留痕",
+        "meta": "7 个核心功能",
+        "tags": [
+          {
+            "term": "我的客户",
+            "note": "归属隔离，只看自己的",
+            "big": true
+          },
+          {
+            "term": "公海客户",
+            "note": "长期无跟进自动回收，可认领",
+            "big": true
+          },
+          {
+            "term": "热点客户",
+            "note": "最近有动态的优先跟",
+            "big": false
+          },
+          {
+            "term": "客户跟进",
+            "note": "电话/邮件/拜访逐条记录",
+            "big": true
+          },
+          {
+            "term": "客户360",
+            "note": "全景视图一键查",
+            "big": true
+          },
+          {
+            "term": "线索分发",
+            "note": "自动分配+留痕",
+            "big": false
+          },
+          {
+            "term": "商机三态",
+            "note": "待批复/已批复/待回复",
+            "big": false
+          },
+          {
+            "term": "邮件群发",
+            "note": "模板+频率限制防封号",
+            "big": true
+          },
+          {
+            "term": "发送跟踪",
+            "note": "打开/点击有记录",
+            "big": false
+          },
+          {
+            "term": "网站留言",
+            "note": "IP每小时限5条防刷",
+            "big": false
+          }
+        ],
+        "takeaway": "业务员之间",
+        "takeawayHighlight": "客户不互相可见",
+        "caption": "公海回收天数在系统参数里可调；跟进是公海回收的判定依据",
+        "itemCount": 10
+      }
+    },
+    {
+      "layout": "theme01_page021",
+      "props": {
+        "kicker": "供应链与资金",
+        "title": "采购 · 库存 · 财务",
+        "en": "SUPPLY & FUNDS",
+        "cn": "三个域的关键单据",
+        "columns": [
+          "功能域",
+          "关键单据",
+          "自动联动"
+        ],
+        "textCols": [
+          1
+        ],
+        "rows": [
+          [
+            "采购",
+            "订单/收货/发票/验货",
+            "收货=库存自动增"
+          ],
+          [
+            "库存",
+            "出入库/余额/预警/盘点",
+            "交货=库存自动减"
+          ],
+          [
+            "收付款",
+            "收款单/付款单/冲销",
+            "应收应付自动减"
+          ],
+          [
+            "发票",
+            "销售发票/采购发票",
+            "应收应付自动增"
+          ],
+          [
+            "报销",
+            "费用报销单/审批流",
+            "审批通过入费用"
+          ],
+          [
+            "报表",
+            "利润表/账表/应收应付",
+            "点开即有数"
+          ]
+        ],
+        "caption": "钱货联动全部系统自动完成，人工只录单和审批；验货不合格自动拦截入库",
+        "rowCount": 6
+      }
+    },
+    {
+      "layout": "theme01_page039",
+      "props": {
+        "kicker": "组织与权限",
+        "title": "人进来就能用",
+        "en": "ORG & PERMISSIONS",
+        "cn": "建号选岗位自动带权限",
+        "bullish": {
+          "label": "岗位即权限包",
+          "en": "ROLES",
+          "items": [
+            {
+              "h": "8 个岗位",
+              "d": "销售/外贸/采购/库存/财务/总经理/超管/流程设计"
+            },
+            {
+              "h": "一人多岗",
+              "d": "权限叠加，不够再加，无需逐条勾"
+            },
+            {
+              "h": "隐私隔离",
+              "d": "普通用户列表只见自己，读他人403"
+            }
+          ]
+        },
+        "cautious": {
+          "label": "审批不绕过",
+          "en": "WORKFLOW",
+          "items": [
+            {
+              "h": "自助配置",
+              "d": "三问向导：哪些单据/谁批/多少免批"
+            },
+            {
+              "h": "最多3级",
+              "d": "审批1/2/3独立状态，小额免批"
+            },
+            {
+              "h": "超时催办",
+              "d": "超时没批自动提醒"
+            }
+          ]
+        },
+        "timeline": [
+          {
+            "period": "建号",
+            "text": "系统设置→用户→选岗位→发初始密码（邮箱可留空）"
+          },
+          {
+            "period": "加权限",
+            "text": "管理员给他再加一个岗位即可叠加，随时可调"
+          },
+          {
+            "period": "审批",
+            "text": "组织管理→审批任务，同意/驳回，留痕可查"
+          }
+        ],
+        "caption": "审批中的单据任何人（含提交人）不能直接提交，防绕过",
+        "itemCount": 3
+      }
+    },
+    {
+      "layout": "theme01_page066",
+      "props": {
+        "kicker": "质量与安全",
+        "title": "不是能跑，是敢用",
+        "en": "QUALITY",
+        "cn": "交付前全部验证",
+        "cornerLabel": "维度/结论",
+        "dims": [
+          "功能",
+          "金额",
+          "越权",
+          "并发",
+          "回归"
+        ],
+        "rows": [
+          {
+            "name": "全模块导航",
+            "tag": "14/14 可达",
+            "scores": [
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "金额链路",
+            "tag": "数字+元",
+            "scores": [
+              0,
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "角色隔离",
+            "tag": "8 岗位",
+            "scores": [
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "10 并发",
+            "tag": "核心接口",
+            "scores": [
+              0,
+              0,
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "name": "全量回归",
+            "tag": "48 项",
+            "scores": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ],
+        "legend": [
+          "1 = 该维度验证通过",
+          "0 P0 / 0 P1 缺陷"
+        ],
+        "caption": "两轮 graph 全角度测试（功能/数据/安全/UI），详见测试报告",
+        "rowCount": 5,
+        "dimCount": 5
+      }
+    },
+    {
+      "layout": "theme01_page047",
+      "props": {
+        "kicker": "为什么好用",
+        "quote": "老板打开就能看到今天的销售额、应收账款、待办、汇率",
+        "contrastWord": "不用培训",
+        "highlightWord": "按流程条点",
+        "attribution": "金蝶式首页 + 模块流程条",
+        "notes": [
+          {
+            "label": "首页数字卡：今日概览一眼看完"
+          },
+          {
+            "label": "帮助中心：13模块分步教程随时查"
+          }
+        ],
+        "caption": "配套《操作手册》15章+常用速查表，新人半天上手",
+        "noteCount": 2
+      }
+    },
+    {
+      "layout": "theme01_page074",
+      "props": {
+        "kicker": "数据资产",
+        "title": "数据不丢、可还原",
+        "en": "DATA SAFETY",
+        "cn": "备份与恢复",
+        "gauges": [
+          {
+            "value": 1,
+            "label": "每日自动备份",
+            "sub": "凌晨03:00，DB+文件+配置"
+          },
+          {
+            "value": 14,
+            "label": "备份保留天数",
+            "sub": "超期自动清理"
+          },
+          {
+            "value": 1,
+            "label": "键手动备份",
+            "sub": "系统设置→数据与备份，可下载"
+          }
+        ],
+        "unit": "次",
+        "caption": "系统重装/换机器：下载备份→新环境恢复，数据完整还原（已做恢复演练）",
+        "itemCount": 3
+      }
+    },
+    {
+      "layout": "theme01_page050",
+      "props": {
+        "kicker": "实测场景",
+        "title": "这些流程真的跑通过",
+        "en": "VERIFIED",
+        "cn": "不是演示数据，是真实单据链路",
+        "subject": "端到端验证",
+        "grade": "全绿",
+        "gradeKicker": "GRADE",
+        "gradeNote": "测试数据全部取消清理",
+        "criteria": [
+          {
+            "name": "标准销售",
+            "en": "SALES",
+            "score": 5,
+            "verdict": "5000元金额守恒"
+          },
+          {
+            "name": "外贸销售",
+            "en": "EXPORT",
+            "score": 5,
+            "verdict": "状态机逐级前进"
+          },
+          {
+            "name": "采购链路",
+            "en": "BUYING",
+            "score": 5,
+            "verdict": "1500元+验货拦截"
+          },
+          {
+            "name": "审批流",
+            "en": "FLOW",
+            "score": 5,
+            "verdict": "审批中不可绕过"
+          },
+          {
+            "name": "权限隔离",
+            "en": "PERM",
+            "score": 5,
+            "verdict": "越权读全部403"
+          }
+        ],
+        "caption": "graph 四路并行 + 独立验证，详见 docs/reports 测试报告",
+        "criterionCount": 5
+      }
+    },
+    {
+      "layout": "theme01_page028",
+      "props": {
+        "kicker": "部署与下一步",
+        "title": "上线四步",
+        "en": "GO LIVE",
+        "cn": "从测试环境到正式环境",
+        "events": [
+          {
+            "date": "STEP 1",
+            "round": "合并 PR#1",
+            "amount": "v1.2",
+            "unit": "打 tag",
+            "note": "bugfix 分支合入 main，版本固化"
+          },
+          {
+            "date": "STEP 2",
+            "round": "正式部署",
+            "amount": "80",
+            "unit": "端口+WSGI",
+            "note": "gunicorn+socket.io，消除本地环境项"
+          },
+          {
+            "date": "STEP 3",
+            "round": "数据迁移",
+            "amount": "1",
+            "unit": "次导入",
+            "note": "主数据/历史单据导入，备份机制接管"
+          },
+          {
+            "date": "STEP 4",
+            "round": "团队上线",
+            "amount": "8",
+            "unit": "岗位建号",
+            "note": "按岗位发号，配操作手册培训一遍"
+          }
+        ],
+        "caption": "遗留 P2 均为部署/体验类，不阻断上线；SMTP 配真实邮箱后群发即通",
+        "itemCount": 4
+      }
+    },
+    {
+      "layout": "theme01_page083",
+      "props": {
+        "kicker": "结语",
+        "title": "功能齐了，用起来",
+        "en": "TAKEAWAYS",
+        "cn": "太康生物ERP v1.2",
+        "takeaways": [
+          {
+            "tag": "上手",
+            "en": "START",
+            "text": "登录→首页→点模块按流程条走，操作手册15章逐步教"
+          },
+          {
+            "tag": "权限",
+            "en": "ROLE",
+            "text": "建号选岗位自动带权限，不够管理员加岗位即可"
+          },
+          {
+            "tag": "数据",
+            "en": "SAFE",
+            "text": "每日凌晨自动备份保留14天，重装可完整还原"
+          }
+        ],
+        "summary": "从线索到回款、从采购到入库，一套系统管全流程。中文习惯、岗位权限、审批防绕过、数据不丢——该做的都做完了。",
+        "bandLabel": "太康生物ERP",
+        "caption": "祝生意兴隆",
+        "takeawayCount": 3
+      }
+    }
+  ]
+}

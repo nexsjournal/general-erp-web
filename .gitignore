@@ -21,3 +21,7 @@ apps/general_erp/general_erp/public/dist/
 
 # ===== playwright-cli 会话产物 =====
 .playwright-cli/
+
+# PPT 渲染产物（7.9M 运行时，源文件 goal.json 已入库，可用 dashi-ppt 重新渲染）
+docs/ppt/*.html
+docs/ppt/assets/
