@@ -2,6 +2,21 @@
 
 格式：日期倒序，每轮交付一节，含功能 / 修复 / 测试结论 / 提交号。
 
+## 2026-08-30（v1.2，会话/首页体验 + 第二轮 graph 复测）
+
+### 修复（用户报修项）
+- **会话超时机制**：闲置超 8 小时强制重新输账号密码。根因=frappe 默认 session_expiry=170:00（≈7 天），客户反馈过段时间再登录不用输密码。现 System Settings.session_expiry=8:00，site_setup.sync_user_login_settings 幂等固化（after_migrate 兜底防回滚）。`7d6d817` `94585d9`
+  - 说明：`7d6d817` 误提交到顶层 stray 副本 apps/general_erp/general_erp/site_setup.py（未被 hooks import），`94585d9` 将固化落到实际加载的 general_erp.general_erp.site_setup（嵌套）。DB 值已在线验证 8:00。
+- **登录后首页落地验证**：干净会话实测裸 IP → 登录页 → 登录后落 /desk/index（金蝶式首页）；所有系统用户 default_workspace=index，普通用户侧栏不显示 ERP工作台。用户此前看到的 12 格磁贴墙（frappe 内置 Home 工作区）为浏览器旧会话残留，非功能缺失。
+
+### 补记（PR#2 已合入但文档漏记）
+- **审批流程自助设置向导**：组织管理→审批设置（流程清单/待我审批/三问式向导）；API api_approval_wizard.py 生成标准 frappe Workflow；最多 3 级审批（审批1/2/3 独立状态）；小额免批（金额阈值 condition 开关）；超时催办（daily scheduler + redis 去重）；approval_guard 中间态判定改 DB 状态（修 v16 apply_workflow 合法首提交被误拦）。`572fd6e` `916c6e5`
+
+### 测试与质量
+- **graph 第二轮全量复测**（4 路并行 + 独立验证）：功能 A 14/14 模块可达无空白页 + 销售订单深层链走通返回不丢态；数据 B 30+ 单据接口全 200 有数 + 10 并发 P95=586ms（<2s 达标）；安全 C 越权矩阵正确（sales1 用户列表只见自己、财务/采购/跨角色单据 403、admin 全量）；UI D ERP工作台对业务员正确隐藏、死按钮/图标探针误报复测无实锤。**0 P0 / 0 P1**。报告 docs/reports/graph测试报告-2026-08-30.md（第二轮节）。`91a640f`
+- **回归基线升级 33→44 项**：chain 2/2 + fin_reports 4/4 + modules 15/15 + permissions 12/12 + approval_guard 7/7 = 44/44 PASS。
+- **环境项（非代码缺陷）**：本地 bench serve(werkzeug) 不带 socket.io 代理，/socket.io 轮询 404（正式 bench start/gunicorn 部署才有）；影响实时通知实时性，核心 CRUD/报表/审批全走 HTTP 不受影响。
+
 ## 2026-08-30（v1.1）
 
 ### 用户与权限
