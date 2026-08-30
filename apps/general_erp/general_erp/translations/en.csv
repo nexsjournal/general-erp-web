@@ -564,4 +564,49 @@ Stock Entry · 其他入库,Stock Entry · other receipt
 采购与库存,Purchasing & Inventory
 外贸基础数据,Foreign Trade Master Data
 审核设置,Workflow Settings
-外贸工作台,Foreign Trade Workbench
+ERP工作台,ERP Workbench
+360 视图,360 View
+一键出 PDF,One-click PDF
+下属邮件,Subordinates' Mail
+下属邮件（本部门，只读）,"Subordinates' Mail (dept, read-only)"
+业务流程总览,Business Flow Overview
+交货单 · 销售出库,Delivery Note · Outbound
+从订单生成,Generate from Order
+入库单 · 其他入库,Stock Entry · Other Inbound
+内贸订单 · 不走出运/单证,Domestic Order · No shipping/docs
+分发,Distribute
+分发失败,Distribution failed
+分发成功，已写入分发记录。,Distributed; log written.
+分发线索,Distribute Lead
+分发给,Distribute to
+分发邮件,Distribute Mail
+创建,Create
+国际贸易术语 · 订单/出运用,Incoterms · for orders/shipment
+审批通过,Approved
+导出,Export
+导出失败,Export failed
+工作台首页 · 业务数据,Desk Home · Business Data
+库存余额报表,Stock Balance Report
+库存汇总,Stock Summary
+建档,Create Profile
+建档失败,Profile creation failed
+开始日期,Start Date
+归档,Archive
+待办事项,To-do
+收款/付款管理,Payment Mgmt
+收款管理 · 收付款单,Payment Mgmt · Payment Entry
+文档管理,Document Mgmt
+标准销售,Domestic Sales
+标准销售主链路,Domestic Sales Pipeline
+正在生成 PDF…,Generating PDF…
+生产汇总报表,Production Summary Report
+移交成功，已留痕。,Handover done; log written.
+组织模块未启用 · 规划中,Org module not enabled · planned
+结束日期,End Date
+营销活动 · 营销计划,Campaign · Marketing Plan
+费用报销单的状态流转（工作流：费用报销审批）,Expense claim state flow (Workflow: Expense Reimbursement Approval)
+邮件建档到客户,File mail to Customer
+部门暂无邮件,No mail in dept
+销售发票 · 开票,Sales Invoice · Billing
+非外贸销售 · 客户 → 商机 → 报价 → 订单 → 交货 → 开票 → 收款 → 利润,Non-trade sales · Customer → Opportunity → Quotation → Order → Delivery → Invoicing → Payment → Profit
+（单据受控不可再改）,(document is locked)

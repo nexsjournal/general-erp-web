@@ -169,3 +169,22 @@ Work Check Item,工作检查项
 Statistics Settings,统计设置
 Report Subscription,报表订阅
 Report Role,报表角色
+ERPNext Settings,ERP系统设置
+Payment Entry,收付款单
+Sales Invoice,销售发票
+Delivery Note,交货单
+Stock Entry,入库单
+Stock Balance,库存余额
+Stock Summary,库存汇总
+Campaign,营销活动
+Workflow,工作流
+Purchase Receipt,采购入库单
+Purchase Order,采购订单
+Quotation,报价单
+Sales Order,销售订单
+Production Plan,生产任务单
+Export Shipment,出运明细单
+Cash,现金
+Creditors,贷方科目
+Debtors,借方科目
+Delivered,已交货

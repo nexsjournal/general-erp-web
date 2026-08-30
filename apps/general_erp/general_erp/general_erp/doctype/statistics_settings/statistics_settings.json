@@ -6,6 +6,12 @@
    "role": "System Manager",
    "read": 1,
    "write": 1
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 0
   }
  ],
  "fields": [

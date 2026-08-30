@@ -8,7 +8,7 @@ def execute(filters=None):
 	check_report_access("商机统计")
 	"""商机按批复状态统计：数量、金额、赢单率。"""
 	rows = frappe.db.sql(
-		"SELECT coalesce(o.review_status, '（未设置）') AS stage, count(*) AS total, "
+		"SELECT coalesce(o.approval_status, '（未设置）') AS stage, count(*) AS total, "
 		"coalesce(sum(o.opportunity_amount), 0) AS amount, "
 		"sum(case when o.status = 'Converted' then 1 else 0 end) AS converted "
 		"FROM `tabOpportunity` o WHERE o.docstatus = 0 "

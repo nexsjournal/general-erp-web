@@ -31,7 +31,7 @@ function make(wrapper) {
 					</div>
 					<div class="card wlc-note">
 						<div class="wlc-sec">${__('安全说明')}</div>
-						<div class="wlc-note-body">${__('表单仅暴露提交入口（Web Form 发布页），不暴露任何列表查询接口；字段白名单固定（姓名/公司/邮箱/电话/留言），提交自动生成线索并标记来源。')}</div>
+						<div class="wlc-note-body">${__('表单仅暴露提交入口（Web Form 发布页），不暴露任何列表查询接口；字段白名单固定（姓名/公司/邮箱/电话/留言），提交自动生成线索并标记来源；频控：同一 IP 每小时最多 5 条，超限提示「提交过于频繁，请 1 小时后再试」。')}</div>
 					</div>
 				</div>
 			</div>

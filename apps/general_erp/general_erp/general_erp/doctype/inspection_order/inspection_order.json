@@ -20,7 +20,8 @@
   "result_details",
   "attachment",
   "items_sb",
-  "items"
+  "items",
+  "amended_from"
  ],
  "fields": [
   {
@@ -105,12 +106,23 @@
    "label": "检验项目",
    "options": "Inspection Item",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Inspection Order",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-08-27 14:30:00.000000",
+ "modified": "2026-08-28 18:01:00.296339",
  "modified_by": "Administrator",
  "module": "General ERP",
  "name": "Inspection Order",
@@ -139,20 +151,17 @@
   },
   {
    "create": 1,
-   "email": 0,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Purchase User",
-   "share": 0,
    "submit": 1,
    "write": 1
   },
   {
    "create": 1,
    "delete": 1,
-   "email": 0,
    "export": 1,
    "print": 1,
    "read": 1,
@@ -163,11 +172,37 @@
    "write": 1
   },
   {
-   "email": 0,
    "read": 1,
    "report": 1,
-   "role": "Stock User",
-   "share": 0
+   "role": "Stock User"
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "采购",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1
+  },
+  {
+   "role": "总经理",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "delete": 1
+  },
+  {
+   "role": "库存",
+   "read": 1,
+   "write": 0,
+   "create": 0
   }
  ],
  "row_format": "Dynamic",

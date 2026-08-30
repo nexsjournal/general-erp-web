@@ -95,8 +95,32 @@ def get_pixel(m=None):
 	)
 
 
+def _is_safe_redirect_target(url):
+	"""防开放重定向：仅允许站内相对路径或白名单域（当前站点域）。"""
+	if not url:
+		return False
+	u = url.strip()
+	if u.startswith(("/", "#")) and not u.startswith("//"):
+		return True
+	try:
+		parts = urllib.parse.urlsplit(u)
+	except ValueError:
+		return False
+	if parts.scheme not in ("http", "https") or not parts.hostname:
+		return False
+	from frappe.utils import get_url
+	try:
+		local_host = urllib.parse.urlsplit(get_url()).hostname
+	except Exception:
+		return False
+	return parts.hostname == local_host
+
+
 @frappe.whitelist(allow_guest=True)
 def track_click(m=None, u=None):
-	"""点击跟踪端点：标记邮件链接已点击，302 跳转目标地址。"""
+	"""点击跟踪端点：标记邮件链接已点击，302 跳转目标地址（限站内/本域名）。"""
 	_mark(m, opened=False)
-	return redirect(urllib.parse.unquote(u or "/"), code=302)
+	target = urllib.parse.unquote(u or "/")
+	if not _is_safe_redirect_target(target):
+		target = "/"
+	return redirect(target, code=302)

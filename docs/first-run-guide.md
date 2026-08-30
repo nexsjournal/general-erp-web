@@ -6,7 +6,7 @@
 
 | 元素 | 作用 | 为什么要有 |
 |---|---|---|
-| 邮件/用户名输入框 | 登录标识 | frappe 按**用户名（doc name）**匹配登录标识，默认管理员是 `Administrator`（全大写），邮箱 `admin@example.com` 无效。多用户体系下每个用户是一个 User 文档，标识即文档名 |
+| 邮件/用户名输入框 | 登录标识 | frappe 按**用户名（doc name）**匹配登录标识，默认管理员是 `Administrator`（全大写）；本环境已开启 `allow_login_using_user_name` 且 Administrator 的 username 为 `admin@example.com`，两种写法均可登录。普通用户用户名即其邮箱 |
 | 密码输入框 | 凭据 | 密码加盐哈希存储（bcrypt），配合 frappe 的 Session 机制维持登录态 |
 | 忘记密码？ | 邮件重置 | 向账号绑定邮箱发送一次性重置链接。本地开发若无邮件服务，可用 `bench --site <site> set-admin-password` 重置 |
 | 继续（主按钮） | 提交登录 | 成功后建立 Session（cookie 维持），跳转到 Desk |
@@ -82,7 +82,7 @@
 
 | 项 | 值 |
 |---|---|
-| 公司 | Qiyuan |
+| 公司 | 外贸演示公司 |
 | 默认货币 | CNY |
 | 界面语言 | 中文（System Settings 全局默认 + Administrator 用户语言均为 zh） |
 | 登录账号 | `Administrator`（或 `admin@example.com`）/ `Erp@Demo-2026` |

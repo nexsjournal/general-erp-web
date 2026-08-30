@@ -1,0 +1,236 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:naming_series",
+ "creation": "2026-08-27 00:39:49.587516",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "section_main",
+  "customer",
+  "sales_order",
+  "incoterms",
+  "port_of_loading",
+  "port_of_discharge",
+  "transport_mode",
+  "vessel_voyage",
+  "container_no",
+  "bl_no",
+  "etd",
+  "eta",
+  "status",
+  "remark_sb",
+  "remark",
+  "items_sb",
+  "items"
+ ],
+ "fields": [
+  {
+   "default": "SH-.YYYY.-.###",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "系列",
+   "options": "SH-.YYYY.-.###",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_main",
+   "fieldtype": "Section Break",
+   "label": "出运信息"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "客户",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "外销订单",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "incoterms",
+   "fieldtype": "Link",
+   "label": "贸易术语",
+   "options": "Incoterms"
+  },
+  {
+   "fieldname": "port_of_loading",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "装运港",
+   "options": "Port"
+  },
+  {
+   "fieldname": "port_of_discharge",
+   "fieldtype": "Link",
+   "label": "目的港",
+   "options": "Port"
+  },
+  {
+   "fieldname": "transport_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "运输方式",
+   "options": "海运\n空运\n铁路\n公路\n快递"
+  },
+  {
+   "fieldname": "vessel_voyage",
+   "fieldtype": "Data",
+   "label": "船名航次"
+  },
+  {
+   "fieldname": "container_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "柜号"
+  },
+  {
+   "fieldname": "bl_no",
+   "fieldtype": "Data",
+   "label": "提单号"
+  },
+  {
+   "fieldname": "etd",
+   "fieldtype": "Date",
+   "label": "预计开船"
+  },
+  {
+   "fieldname": "eta",
+   "fieldtype": "Date",
+   "label": "预计到港"
+  },
+  {
+   "default": "草稿",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "状态",
+   "options": "草稿\n已订舱\n已出运\n已清关\n已交付"
+  },
+  {
+   "fieldname": "remark_sb",
+   "fieldtype": "Section Break",
+   "label": "备注"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "备注"
+  },
+  {
+   "fieldname": "items_sb",
+   "fieldtype": "Section Break",
+   "label": "出运明细"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "明细",
+   "options": "Export Shipment Item",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-28 17:39:47.669867",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "Export Shipment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All"
+  },
+  {
+   "create": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Stock User"
+  },
+  {
+   "role": "系统管理员",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "销售",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "外贸专员",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "总经理",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "库存",
+   "read": 1,
+   "write": 0,
+   "create": 0
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

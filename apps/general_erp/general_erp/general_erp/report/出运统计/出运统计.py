@@ -24,7 +24,7 @@ def execute(filters=None):
 		"s.transport_mode AS transport_mode, COUNT(DISTINCT s.name) AS shipment_count, "
 		"COALESCE(SUM(si.qty), 0) AS qty, COALESCE(SUM(si.gross_weight), 0) AS gross_weight, "
 		"COALESCE(SUM(si.volume), 0) AS volume "
-		"FROM `tabShipment` s LEFT JOIN `tabShipment Item` si ON si.parent = s.name "
+		"FROM `tabExport Shipment` s LEFT JOIN `tabExport Shipment Item` si ON si.parent = s.name "
 	"LEFT JOIN `tabPort` p ON p.name = s.port_of_discharge "
 	"LEFT JOIN `tabIncoterms` i ON i.name = s.incoterms "
 		"WHERE DATE(COALESCE(s.etd, s.creation)) BETWEEN %(from_date)s AND %(to_date)s " + customer_filter + " "

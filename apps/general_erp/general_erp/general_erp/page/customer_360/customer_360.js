@@ -17,7 +17,7 @@ const C360 = {
 		if (!doc) { wrap.innerHTML = `<div class="c360-loading">${__('客户不存在或无权查看')}</div>`; return; }
 		const stats = await Promise.all([
 			frappe.db.get_list('Customer Follow Up', { filters: { customer: c }, fields: ['name', 'follow_type', 'follow_date', 'content', 'next_follow_date', 'followed_by'], order_by: 'follow_date desc', limit: 30 }),
-			frappe.db.get_list('Opportunity', { filters: { customer_name: c }, fields: ['name', 'title', 'status', 'opportunity_amount', 'currency', 'review_status'], limit: 20 }),
+			frappe.db.get_list('Opportunity', { filters: { customer_name: c }, fields: ['name', 'title', 'status', 'opportunity_amount', 'currency', 'approval_status'], limit: 20 }),
 			frappe.db.get_list('Quotation', { filters: { customer_name: c }, fields: ['name', 'transaction_date', 'grand_total', 'currency', 'status'], limit: 20 }),
 			frappe.db.get_list('Sales Order', { filters: { customer: c }, fields: ['name', 'transaction_date', 'grand_total', 'currency', 'status'], limit: 20 }),
 			frappe.db.get_list('Mail', { filters: { related_doctype: 'Customer', related_name: c }, fields: ['name', 'subject', 'folder', 'sent_at'], order_by: 'sent_at desc', limit: 20 }),
@@ -72,7 +72,7 @@ const C360 = {
 
 				<div class="card">
 					<div class="c360-sec-title">${__("商机")}</div>
-					${this.listRows(doc.opps, o => [o.title || o.name, o.status, frappe.format(o.opportunity_amount, { fieldtype: 'Currency', currency: o.currency || undefined })], o => o.review_status ? `<span class="tag">${o.review_status}</span>` : '') || `<div class="c360-empty">${__('暂无商机')}</div>`}
+					${this.listRows(doc.opps, o => [o.title || o.name, o.status, frappe.format(o.opportunity_amount, { fieldtype: 'Currency', currency: o.currency || undefined })], o => o.approval_status ? `<span class="tag">${o.approval_status}</span>` : '') || `<div class="c360-empty">${__('暂无商机')}</div>`}
 				</div>
 				<div class="card">
 					<div class="c360-sec-title">${__("报价")}</div>
@@ -140,7 +140,7 @@ const C360 = {
 		d.show();
 		frappe.db.get_list('Customer', { filters: { name: ['!=', this.customer], merged_into: ['', null], disabled: 0 }, fields: ['name', 'customer_name', 'email_id'], limit: 50 })
 			.then(list => {
-				d.get_field('html').wrap.innerHTML = list.length
+				d.get_field('html').wrapper.innerHTML = list.length
 					? `<div class="c360-merge-list">${list.map(c => `<label><input type="checkbox" value="${c.name}"> ${c.customer_name} <span class="c360-sub">${c.email_id || ''}</span></label>`).join('')}</div>`
 					: __('没有可合并的客户');
 			});

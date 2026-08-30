@@ -1,0 +1,1085 @@
+{
+ "app": "general_erp",
+ "charts": [
+  {
+   "chart_name": "Sales Order Trends",
+   "label": "销售订单趋势"
+  },
+  {
+   "chart_name": "Purchase Order Trends",
+   "label": "采购订单趋势"
+  }
+ ],
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>业务总览</b></span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售额\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"应收账款\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"销售订单\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"今日汇率\", \"col\": 3}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"销售订单趋势\", \"col\": 6}}, {\"type\": \"chart\", \"data\": {\"chart_name\": \"采购订单趋势\", \"col\": 6}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>待我处理</b></span>\", \"col\": 12}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待审批\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"未收款发票\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待跟进客户\", \"col\": 3}}, {\"type\": \"number_card\", \"data\": {\"number_card_name\": \"待办\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>我的常用</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件中心\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件群发\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"币种汇率\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运统计\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存预警\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户跟进\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"公告\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"员工业绩排行\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作日历\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户 360\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作检查\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮箱账号\", \"col\": 3}}, {\"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>模块导航</b></span>\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块销售管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块采购管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块库存管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块财务管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块客户管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块产品管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块邮件中心\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块生产管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块外贸管理\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块报表中心\", \"col\": 4}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"模块组织管理\", \"col\": 4}}]",
+ "creation": "2026-08-26 23:45:34.263128",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "home",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "ERP工作台",
+ "link_type": "DocType",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "工作台",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "待办",
+   "link_count": 0,
+   "link_to": "ToDo",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "通知",
+   "link_count": 0,
+   "link_to": "Notification",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "汇率",
+   "link_count": 0,
+   "link_to": "Currency Exchange",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "节假日",
+   "link_count": 0,
+   "link_to": "Holiday",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "登录日志",
+   "link_count": 0,
+   "link_to": "Login Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "线索",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "线索",
+   "link_count": 0,
+   "link_to": "Lead",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "邮件",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "邮件队列",
+   "link_count": 0,
+   "link_to": "Email Queue",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "客户",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "客户",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "联系人",
+   "link_count": 0,
+   "link_to": "Contact",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "营销",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "自动邮件报告",
+   "link_count": 0,
+   "link_to": "Auto Email Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "商机",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "商机",
+   "link_count": 0,
+   "link_to": "Opportunity",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "产品",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "商品",
+   "link_count": 0,
+   "link_to": "Item",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "商品组",
+   "link_count": 0,
+   "link_to": "Item Group",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "单位",
+   "link_count": 0,
+   "link_to": "UOM",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "销售管理",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "报价单",
+   "link_count": 0,
+   "link_to": "Quotation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "出运明细单",
+   "link_count": 0,
+   "link_to": "Export Shipment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "销售订单",
+   "link_count": 0,
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "外贸单证",
+   "link_count": 0,
+   "link_to": "Trade Document",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "出运",
+   "link_count": 0,
+   "link_to": "Export Shipment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "交货单",
+   "link_count": 0,
+   "link_to": "Delivery Note",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "采购",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "供应商",
+   "link_count": 0,
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "采购订单",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "采购收货",
+   "link_count": 0,
+   "link_to": "Purchase Receipt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "来料验货单",
+   "link_count": 0,
+   "link_to": "Inspection Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "质检",
+   "link_count": 0,
+   "link_to": "Quality Inspection",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "生产",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "生产计划",
+   "link_count": 0,
+   "link_to": "Production Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "工单",
+   "link_count": 0,
+   "link_to": "Work Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "BOM 物料清单",
+   "link_count": 0,
+   "link_to": "BOM",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "onboard": 0,
+   "dependencies": "",
+   "label": "生产任务单",
+   "link_to": "Work Order",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "财务",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "收付款",
+   "link_count": 0,
+   "link_to": "Payment Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "销售发票",
+   "link_count": 0,
+   "link_to": "Sales Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "采购发票",
+   "link_count": 0,
+   "link_to": "Purchase Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "日记账",
+   "link_count": 0,
+   "link_to": "Journal Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "费用报销",
+   "link_count": 0,
+   "link_to": "Expense Reimbursement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "库存",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "出入库",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "盘点",
+   "link_count": 0,
+   "link_to": "Stock Reconciliation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "仓库",
+   "link_count": 0,
+   "link_to": "Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "OA",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "文件",
+   "link_count": 0,
+   "link_to": "File",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "onboard": 0,
+   "dependencies": "",
+   "label": "文件管理",
+   "link_to": "File",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "统计",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "销售分析",
+   "link_count": 0,
+   "link_to": "Sales Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "采购分析",
+   "link_count": 0,
+   "link_to": "Purchase Analytics",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "应收款",
+   "link_count": 0,
+   "link_to": "Accounts Receivable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "应付款",
+   "link_count": 0,
+   "link_to": "Accounts Payable",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "库存余额",
+   "link_count": 0,
+   "link_to": "Stock Balance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "外销统计",
+   "link_count": 0,
+   "link_to": "外销统计",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "库存流水",
+   "link_count": 0,
+   "link_to": "Stock Ledger",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "订单利润",
+   "link_count": 0,
+   "link_to": "订单利润",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "设置",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "产品统计",
+   "link_count": 0,
+   "link_to": "产品统计",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "公司",
+   "link_count": 0,
+   "link_to": "Company",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "收款统计",
+   "link_count": 0,
+   "link_to": "收款统计",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "员工",
+   "link_count": 0,
+   "link_to": "Employee",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "付款统计",
+   "link_count": 0,
+   "link_to": "付款统计",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "部门",
+   "link_count": 0,
+   "link_to": "Department",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "费用统计",
+   "link_count": 0,
+   "link_to": "费用统计",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "角色",
+   "link_count": 0,
+   "link_to": "Role",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "采购统计",
+   "link_count": 0,
+   "link_to": "采购统计",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "工作流",
+   "link_count": 0,
+   "link_to": "Workflow",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "条款",
+   "link_count": 0,
+   "link_to": "Terms and Conditions",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "币种",
+   "link_count": 0,
+   "link_to": "Currency",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "打印格式",
+   "link_count": 0,
+   "link_to": "Print Format",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "link_count": 0,
+   "onboard": 0,
+   "dependencies": "",
+   "label": "用户参数",
+   "link_to": "User",
+   "link_type": "DocType",
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-08-27 18:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "General ERP",
+ "name": "ERP工作台",
+ "number_cards": [
+  {
+   "label": "销售订单",
+   "number_card_name": "销售订单",
+   "idx": 1
+  },
+  {
+   "label": "销售额",
+   "number_card_name": "销售额",
+   "idx": 2
+  },
+  {
+   "label": "待办",
+   "number_card_name": "待办",
+   "idx": 3
+  },
+  {
+   "label": "应收账款",
+   "number_card_name": "应收账款",
+   "idx": 4
+  },
+  {
+   "label": "今日汇率",
+   "number_card_name": "今日汇率",
+   "idx": 5
+  },
+  {
+   "number_card_name": "待审批"
+  },
+  {
+   "number_card_name": "待跟进客户"
+  },
+  {
+   "number_card_name": "未收款发票"
+  }
+ ],
+ "owner": "Administrator",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [
+  {
+   "role": "系统管理员",
+   "parent": "ERP工作台",
+   "parenttype": "Workspace",
+   "parentfield": "roles",
+   "doctype": "Has Role",
+   "name": "ERP工作台-系统管理员"
+  },
+  {
+   "role": "流程设计",
+   "parent": "ERP工作台",
+   "parenttype": "Workspace",
+   "parentfield": "roles",
+   "doctype": "Has Role",
+   "name": "ERP工作台-流程设计"
+  }
+ ],
+ "sequence_id": 0.0,
+ "shortcuts": [
+  {
+   "label": "邮件中心",
+   "type": "Page",
+   "url": null,
+   "icon": "mail",
+   "color": "#2563eb",
+   "doc_view": null
+  },
+  {
+   "label": "邮件群发",
+   "type": "DocType",
+   "url": null,
+   "icon": "send",
+   "color": "#eb2f96",
+   "doc_view": null
+  },
+  {
+   "label": "币种汇率",
+   "type": "DocType",
+   "url": null,
+   "icon": "currency",
+   "color": "#0fc6c2",
+   "doc_view": null
+  },
+  {
+   "label": "出运统计",
+   "type": "Report",
+   "url": null,
+   "icon": "bar",
+   "color": "#722ed1",
+   "doc_view": null
+  },
+  {
+   "label": "库存预警",
+   "type": "Report",
+   "url": null,
+   "icon": "warning",
+   "color": "#f53f3f",
+   "doc_view": null
+  },
+  {
+   "label": "客户跟进",
+   "type": "DocType",
+   "url": null,
+   "icon": "clock",
+   "color": "#059669",
+   "doc_view": null
+  },
+  {
+   "label": "公告",
+   "type": "DocType",
+   "url": null,
+   "icon": "bell",
+   "color": "#d97706",
+   "doc_view": null
+  },
+  {
+   "label": "员工业绩排行",
+   "type": "Report",
+   "url": null,
+   "icon": "award",
+   "color": "#7c3aed",
+   "doc_view": null
+  },
+  {
+   "label": "工作日历",
+   "type": "Page",
+   "url": null,
+   "icon": "calendar",
+   "color": "#0ea5e9",
+   "doc_view": null
+  },
+  {
+   "label": "客户 360",
+   "type": "Page",
+   "url": null,
+   "icon": "user",
+   "color": "#16a34a",
+   "doc_view": null
+  },
+  {
+   "label": "工作检查",
+   "type": "DocType",
+   "url": null,
+   "icon": "check-circle",
+   "color": "#d97706",
+   "doc_view": null
+  },
+  {
+   "label": "邮箱账号",
+   "type": "DocType",
+   "url": null,
+   "icon": "at-sign",
+   "color": "#6366f1",
+   "doc_view": null
+  },
+  {
+   "label": "模块销售管理",
+   "type": "URL",
+   "url": "/desk/销售管理",
+   "icon": "cart",
+   "color": "#2563eb",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块采购管理",
+   "type": "URL",
+   "url": "/desk/采购管理",
+   "icon": "shopping-cart",
+   "color": "#0d9488",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块库存管理",
+   "type": "URL",
+   "url": "/desk/库存管理",
+   "icon": "package",
+   "color": "#4f46e5",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块财务管理",
+   "type": "URL",
+   "url": "/desk/财务管理",
+   "icon": "credit-card",
+   "color": "#059669",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块客户管理",
+   "type": "URL",
+   "url": "/desk/客户管理",
+   "icon": "users",
+   "color": "#d97706",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块产品管理",
+   "type": "URL",
+   "url": "/desk/产品管理",
+   "icon": "box",
+   "color": "#7c3aed",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块邮件中心",
+   "type": "URL",
+   "url": "/desk/邮件中心",
+   "icon": "mail",
+   "color": "#db2777",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块生产管理",
+   "type": "URL",
+   "url": "/desk/生产管理",
+   "icon": "factory",
+   "color": "#6b7280",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块外贸管理",
+   "type": "URL",
+   "url": "/desk/外贸管理",
+   "icon": "globe",
+   "color": "#0ea5e9",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块报表中心",
+   "type": "URL",
+   "url": "/desk/报表中心",
+   "icon": "bar-chart",
+   "color": "#2563eb",
+   "doc_view": "List"
+  },
+  {
+   "label": "模块组织管理",
+   "type": "URL",
+   "url": "/desk/组织管理",
+   "icon": "team",
+   "color": "#b45309",
+   "doc_view": "List"
+  }
+ ],
+ "title": "ERP工作台",
+ "type": "Workspace"
+}

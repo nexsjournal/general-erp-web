@@ -36,6 +36,18 @@
   },
   {
    "role": "Item Manager"
+  },
+  {
+   "role": "系统管理员"
+  },
+  {
+   "role": "库存"
+  },
+  {
+   "role": "总经理"
+  },
+  {
+   "role": "采购"
   }
  ],
  "snapshot_report": 0,

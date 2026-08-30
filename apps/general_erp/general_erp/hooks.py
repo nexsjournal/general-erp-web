@@ -6,7 +6,7 @@
 # ============================================================
 
 app_name = "general_erp"
-app_title = "General ERP"
+app_title = "太康生物ERP"
 app_publisher = "general-erp-web"
 app_description = "general-erp-web 自定义 ERP 功能"
 app_email = "dev@local"
@@ -19,6 +19,12 @@ required_apps = []
 app_include_css = ["erp_theme.bundle.css"]
 app_include_js = "erp_fixes.bundle.js"
 
+# DocType 控制器覆盖（数据隔离等，不动 erpnext 源码）
+override_doctype_class = {
+	"Customer": "general_erp.general_erp.overwrite.customer.customer.Customer",
+	# 无邮箱账号（T-user-login）：name 取 username，登录走用户名
+	"User": "general_erp.general_erp.overwrite.user.user.User",
+}
 # 数据库 fixtures（预置数据，migrate 时自动同步）
 # fixtures = []
 
@@ -31,6 +37,8 @@ scheduler_events = {
         "general_erp.general_erp.doctype.work_check.work_check.remind_work_checks",
         # 报表订阅推送：按频率/星期发送报表 CSV 邮件（4.11 统计设置）
         "general_erp.general_erp.doctype.statistics_settings.statistics_settings.send_report_subscriptions",
+        # 审批超时催办：停留超时的审批单发系统通知（T-approval-wizard）
+        "general_erp.general_erp.approval_reminder.remind_approval_timeout",
     ],
     "cron": {
         # IMAP 收件同步：每 5 分钟拉取启用邮箱的未读邮件（4.3 邮箱设置）
@@ -41,11 +49,43 @@ scheduler_events = {
 }
 
 # 监听官方 DocType 事件（扩展 ERPNext 单据行为的标准方式，不改官方代码）
-# doc_events = {
-#     "Sales Invoice": {
-#         "on_submit": "general_erp.general_erp.doctype.demo_note.demo_note.on_sales_invoice_submit",
-#     }
-# }
+doc_events = {
+    "Lead": {
+        # 网站留言频控（T2-18）：同 IP 每小时最多 5 条
+        "before_insert": "general_erp.general_erp.crm_utils.website_lead_rate_limit",
+    },
+    # T14: 审批工作流防绕过（frappe v16 无 doc_status=1 的"审批中"映射时，
+    # 原生 Submit 会把状态跳到"已审批"绕过审批人；收货链路不查 workflow_state 可让
+    # 未审批 PO 过账库存）——守卫实现在 general_erp.approval_guard
+    "Purchase Order": {
+        # guard_before_submit 内部已含重复提交检查（_check_resubmit）
+        "before_submit": "general_erp.general_erp.approval_guard.guard_before_submit",
+        "before_save": "general_erp.general_erp.approval_guard.guard_before_save",
+    },
+    "Production Plan": {
+        "before_submit": "general_erp.general_erp.approval_guard.guard_before_submit",
+        "before_save": "general_erp.general_erp.approval_guard.guard_before_save",
+    },
+    "Purchase Receipt": {
+        "validate": "general_erp.general_erp.approval_guard.guard_purchase_receipt",
+    },
+    # T14/D5: 已提交单据禁止重复 submit（v16 静默返回成功，语义误导）
+    "Sales Order": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Sales Invoice": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Purchase Invoice": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Delivery Note": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Payment Entry": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+}
 
 # 工作台入口（在 Desk 首页展示自定义页面，可选）
 # workspace_items = ...
@@ -64,3 +104,14 @@ jinja = {
 # 登录/登出日志（安全审计，docs/feature-requirements.md 第 9 章）
 on_login = "general_erp.general_erp.doctype.login_log.login_log.on_login"
 on_logout = "general_erp.general_erp.doctype.login_log.login_log.on_logout"
+
+# T-nav-fix: 已登录用户访问根地址 / 与 /desk 裸路由时直达 首页 workspace（金蝶式两级首页），
+# 不影响 /desk/xxx 子路由与未登录访问（未登录仍走登录页）。
+# T-nav-fix: 登录落地导航统一（金蝶式两级首页，非侵入，不动 frappe/erpnext 源码）
+# 根地址 / 与 /desk 裸路由 301 到 /desk/首页；/desk/xxx 子路由不受影响；
+# 未登录访问会 301 到 /desk/首页 再弹回登录页，行为与原生一致
+website_redirects = [
+	{"source": "", "target": "/desk/index"},
+	{"source": "desk", "target": "/desk/index"},
+	{"source": "index", "target": "/desk/index"},
+]

@@ -1,5 +1,7 @@
 import frappe
 
+from frappe import _
+
 from frappe.model.document import Document
 
 
@@ -9,7 +11,11 @@ class CustomerFollowUp(Document):
 
 @frappe.whitelist()
 def handover_customer(name, to_user, remark=None):
-	"""客户移交：变更负责人并留痕（Comment）。"""
+	"""客户移交：变更负责人并留痕（Comment）。需要客户写权限。"""
+	if not frappe.has_permission("Customer", ptype="write"):
+		frappe.throw(_("无客户移交权限"), frappe.PermissionError)
+	if not frappe.db.exists("User", to_user):
+		frappe.throw(_("目标用户不存在"))
 	doc = frappe.get_doc("Customer", name)
 	old = doc.get("sales_owner") or doc.owner
 	doc.db_set("sales_owner", to_user)

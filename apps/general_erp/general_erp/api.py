@@ -73,3 +73,19 @@ def money_in_words_cn(amount, currency="CNY"):
 	else:
 		text = f"{currency} " + text
 	return "负" + text if negative else text
+
+
+
+@frappe.whitelist()
+def safe_call(method, *args, **kwargs):
+    """T2-08：统一错误出口——业务异常转 422 + 脱敏文案，不回显堆栈（前端 xcall 包装用）。"""
+    try:
+        fn = frappe.get_attr(method)
+        return fn(*args, **kwargs)
+    except frappe.exceptions.PermissionError as e:
+        frappe.throw(str(e) or _("无权限"), frappe.exceptions.PermissionError)
+    except frappe.exceptions.ValidationError:
+        raise
+    except Exception as e:
+        frappe.log_error(title="safe_call: " + method)
+        frappe.throw(_("操作失败，请稍后重试"), frappe.ValidationError)

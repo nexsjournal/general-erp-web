@@ -22,7 +22,7 @@ def execute(filters=None):
 	sql = (
 		"SELECT DATE_FORMAT(pe.posting_date, '%%Y-%%m') AS period, pe.party_name AS supplier, pe.owner, "
 		"COUNT(*) AS entry_count, SUM(pe.base_paid_amount) AS amount "
-		"FROM `tabPayment Entry` pe WHERE pe.docstatus = 1 AND pe.payment_type = 'Payment' "
+		"FROM `tabPayment Entry` pe WHERE pe.docstatus = 1 AND pe.payment_type = 'Pay' "
 		"AND pe.posting_date BETWEEN %(from_date)s AND %(to_date)s " + supplier_filter + " "
 		"GROUP BY " + group_col + " ORDER BY " + group_col
 	)

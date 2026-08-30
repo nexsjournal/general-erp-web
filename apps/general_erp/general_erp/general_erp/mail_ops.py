@@ -9,6 +9,15 @@ from frappe.utils import now_datetime
 
 QUOTE_KEYWORDS = ("报价", "价格", "PI", "quote", "price", "USD", "美元")
 
+APPROVE_ROLES = ("Sales Manager", "System Manager")
+MANAGER_ROLES = ("Sales Manager", "System Manager")
+EXPORT_ROLES = ("Accounts Manager", "Sales Manager", "System Manager")
+
+
+def _require_roles(roles, action):
+    if not set(roles) & set(frappe.get_roles()):
+        frappe.throw(_("无{0}权限").format(action), frappe.PermissionError)
+
 
 def _company_email_domains():
     """公司邮箱域名（用于判断内发/外发）。"""
@@ -27,7 +36,9 @@ def should_require_approval(subject, body, recipients):
     external = False
     if recipients:
         r = (recipients or "").strip().lower()
-        if "@" in r:
+        # 内部用户之间互发不算外发（内部协作邮件）
+        is_internal_user = frappe.db.exists("User", {"name": r, "enabled": 1})
+        if not is_internal_user and "@" in r:
             domain = r.split("@")[-1]
             if domain and domains and domain not in domains:
                 external = True
@@ -62,7 +73,8 @@ def auto_approval_check(name):
 
 @frappe.whitelist()
 def approve_mail(name):
-    """审批通过：待审批 → 已处理。"""
+    """审批通过：待审批 → 已处理。仅限销售主管/系统管理员。"""
+    _require_roles(APPROVE_ROLES, "邮件审批")
     m = frappe.get_doc("Mail", name)
     if m.status != "待审批":
         frappe.throw(_("仅待审批邮件可审批"))
@@ -78,6 +90,7 @@ def approve_mail(name):
 @frappe.whitelist()
 def distribute_mail(name, to_user):
     """邮件分发给同事处理：复制一条待处理收件到对方收件箱，留痕。"""
+    _require_roles(MANAGER_ROLES, "邮件分发")
     if not frappe.db.exists("User", to_user):
         frappe.throw(_("目标用户不存在"))
     m = frappe.get_doc("Mail", name)
@@ -136,14 +149,16 @@ def archive_mail(name, folder="已归档"):
 
 @frappe.whitelist()
 def export_mails(folder=None, status=None, limit=500):
-    """邮件列表导出 CSV，返回下载 URL。"""
+    """邮件列表导出 CSV，返回下载 URL。仅限财务/主管/管理员，上限 5000 条。"""
+    _require_roles(EXPORT_ROLES, "邮件导出")
+    limit = min(int(limit or 500), 5000)
     rows = frappe.get_all(
         "Mail",
         filters={k: v for k, v in (("folder", folder), ("status", status)) if v},
         fields=["name", "subject", "folder", "status", "sender", "recipient",
                 "sent_at", "creation", "archive_customer"],
         order_by="modified desc",
-        limit_page_length=int(limit or 500),
+        limit_page_length=limit,
     )
     out = io.StringIO()
     w = csv.writer(out)
@@ -154,10 +169,11 @@ def export_mails(folder=None, status=None, limit=500):
         w.writerow([r.subject, r.folder, r.status, r.sender, r.recipient or "", ts,
                     r.archive_customer or ""])
     fname = "mails-export-{}.csv".format(frappe.utils.nowdate())
+    content = "\\ufeff" + out.getvalue()
     fdoc = frappe.get_doc({
         "doctype": "File",
         "file_name": fname,
-        "content": out.getvalue().encode("utf-8"),
+        "content": content.encode("utf-8"),
         "is_private": 1,
     })
     fdoc.save(ignore_permissions=True)
@@ -167,20 +183,28 @@ def export_mails(folder=None, status=None, limit=500):
 
 @frappe.whitelist()
 def get_subordinate_mails(limit=100):
-    """主管查看本部门下属的邮件（只读）：按 Department 下属用户聚合。"""
+    """主管查看本部门下属的邮件（只读）：按 User.erp_department 下属用户聚合。"""
     user = frappe.session.user
-    my_dept = frappe.db.get_value("User", user, "department")
+    # 仅主管可见下属邮件；非主管返回空（防止下属看到上级邮件）
+    manager_roles = {"Sales Manager", "Purchase Manager", "Stock Manager", "Accounts Manager", "System Manager"}
+    if frappe.session.user != "Administrator" and not (set(frappe.get_roles()) & manager_roles):
+        return []
+    my_dept = frappe.db.get_value("User", user, "erp_department")
     if not my_dept:
         return []
-    return frappe.db.sql("""
+    try:
+        return frappe.db.sql("""
         SELECT m.name, m.subject, m.folder, m.status, m.sender, m.recipient,
                m.sent_at, u.full_name AS sender_name
         FROM `tabMail` m
         LEFT JOIN `tabUser` u ON u.name = m.sender
         WHERE m.sender IN (
             SELECT u2.name FROM `tabUser` u2
-            WHERE u2.department = %s AND u2.enabled = 1
+            WHERE u2.erp_department = %s AND u2.enabled = 1
         )
         ORDER BY m.modified DESC
         LIMIT %s
-    """, (my_dept, int(limit or 100)), as_dict=True)
+        """, (my_dept, int(limit or 100)), as_dict=True)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "get_subordinate_mails")
+        frappe.throw(_("加载下属邮件失败，请联系管理员"))
