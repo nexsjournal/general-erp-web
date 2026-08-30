@@ -38,6 +38,24 @@ def main():
 	except AssertionError as e:
 		r.fail("数据隔离-sales1", e)
 
+	# 销售新建客户: 建得进去 + 读自己 + 他人私有隔离(修复前新建后被 User Permission 误拒 403)
+	frappe.set_user("sales1@demo.com")
+	frappe.clear_cache(user="sales1@demo.com")
+	cname = TAG + "-我的客户"
+	if frappe.db.exists("Customer", cname):
+		frappe.db.set_value("Customer", cname, "docstatus", 0)
+		frappe.delete_doc("Customer", cname, force=True)
+	c = frappe.new_doc("Customer")
+	c.update(dict(customer_name=cname, customer_type="Company", territory="China"))
+	c.insert()
+	frappe.clear_cache(user="sales1@demo.com")
+	self_new = frappe.get_doc("Customer", cname).has_permission("read")
+	try:
+		assert self_new is True, "sales1 读自己新建客户被拒"
+		r.ok("数据隔离-销售新建客户可读自己", cname)
+	except AssertionError as e:
+		r.fail("数据隔离-销售新建客户可读自己", e)
+
 	# 工作流: 采购/生产/费用 审批链路存在且角色非空
 	frappe.set_user("Administrator")
 	for wf in ["采购订单审批", "生产任务单审批", "费用报销审批"]:

@@ -29,6 +29,12 @@ class Customer(_BaseCustomer):
 		# 管理角色不受隔离限制
 		if roles & {"System Manager", "Sales Manager"}:
 			return super().has_permission(ptype)
+		# 本人创建的客户（与列表层 if_owner 语义对齐）：放行。
+		# 注意不能走 super()——原生 has_permission 里 User Permission 白名单会拦
+		# owner 自己的新单据（种子建的 User Permission 未带 if_owner），
+		# 导致销售建完客户却打不开自己的客户。
+		if self.get("owner") and self.get("owner") == user:
+			return True
 		# 普通销售：该客户必须在自己的 User Permission 内
 		if frappe.db.exists("User Permission", {"user": user, "allow": "Customer", "for_value": self.name}):
 			return super().has_permission(ptype)
