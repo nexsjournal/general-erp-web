@@ -37,6 +37,8 @@ scheduler_events = {
         "general_erp.general_erp.doctype.work_check.work_check.remind_work_checks",
         # 报表订阅推送：按频率/星期发送报表 CSV 邮件（4.11 统计设置）
         "general_erp.general_erp.doctype.statistics_settings.statistics_settings.send_report_subscriptions",
+        # 审批超时催办：停留超时的审批单发系统通知（T-approval-wizard）
+        "general_erp.general_erp.approval_reminder.remind_approval_timeout",
     ],
     "cron": {
         # IMAP 收件同步：每 5 分钟拉取启用邮箱的未读邮件（4.3 邮箱设置）

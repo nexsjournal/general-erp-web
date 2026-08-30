@@ -699,6 +699,37 @@ def sync_user_privacy():
     frappe.clear_cache()
 
 
+def sync_approval_wizard():
+    """T-approval-wizard 固化（幂等）：
+    ① Workflow 自定义字段（min_approval_amount / approval_timeout_hours）
+    ② 多级审批所需的 Workflow State + Workflow Action Master 记录"""
+    # ① Workflow 自定义字段
+    for fieldname, label, ftype, options in (
+        ("min_approval_amount", "小额免批阈值(元)", "Float", None),
+        ("approval_timeout_hours", "审批超时提醒(小时)", "Int", None),
+    ):
+        if frappe.db.get_value("Custom Field", {"dt": "Workflow", "fieldname": fieldname}):
+            continue
+        cf = frappe.new_doc("Custom Field")
+        cf.update({
+            "dt": "Workflow",
+            "fieldname": fieldname,
+            "label": label,
+            "fieldtype": ftype,
+            "options": options,
+            "read_only": 1,
+            "insert_after": "is_active",
+        })
+        cf.insert(ignore_permissions=True)
+    # ② 多级审批 Workflow State + Action Master（幂等）
+    for state_name in ("审批1", "审批2", "审批3"):
+        if not frappe.db.exists("Workflow State", state_name):
+            frappe.get_doc({"doctype": "Workflow State", "workflow_state_name": state_name}).insert(ignore_permissions=True)
+    for action_name in ("审批通过", "免批通过"):
+        if not frappe.db.exists("Workflow Action Master", action_name):
+            frappe.get_doc({"doctype": "Workflow Action Master", "workflow_action_name": action_name}).insert(ignore_permissions=True)
+
+
 def sync_erp_workbench_roles():
     """ERP工作台 Workspace 角色固化（T-workbench-viz，2026-08-30）：
     roles = 系统管理员 + 流程设计 —— 超管/管理员可见，业务员隐藏。
@@ -747,6 +778,7 @@ def sync_site_setup(with_seed=False):
     sync_report_workspace()
     sync_user_privacy()
     sync_erp_workbench_roles()
+    sync_approval_wizard()
     if with_seed:
         from general_erp.seed_data import seed_base_data
         if frappe.db.exists("DocType", "Port"):

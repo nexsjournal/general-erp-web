@@ -45,6 +45,11 @@ def _current_state(doc):
     return wf, state
 
 
+def _is_middle_state(state):
+	"""审批中 / 审批1 / 审批2 …（向导多级审批状态）都算审批链中间态"""
+	return bool(state) and state.startswith("审批") and state != "已审批"
+
+
 def _allowed_roles_for_next(wf, state):
     """当前状态可执行动作（下一跳）的允许角色并集"""
     roles = set()
@@ -68,7 +73,7 @@ def _has_transition_completed_by_user(doctype, docname, user):
             "reference_doctype": doctype,
             "reference_name": docname,
             "completed_by": user,
-            "workflow_state": ["in", list(MIDDLE_STATES)],
+            "workflow_state": ("like", "审批%"),
         },
     )
 
@@ -77,8 +82,14 @@ def guard_before_submit(doc, method=None):
     """审批中单据禁止提交人自己 Submit 绕过审批"""
     if not doc.get("name"):
         return
-    wf, state = _current_state(doc)
-    if not wf or state not in MIDDLE_STATES:
+    wf = _get_workflow(doc.doctype)
+    if not wf:
+        return
+    # 以【数据库里的】工作流状态判别：
+    # 合法首次提交（草稿→审批1）时库里还是草稿 → 放行；
+    # 库里已是审批中间态（单据已提交进审批链）再 submit/改态 → 需要审批角色。
+    db_state = frappe.db.get_value(doc.doctype, doc.get("name"), wf.workflow_state_field)
+    if not _is_middle_state(db_state):
         return
     # Workflow Action 发起的保存（审批动作本身）放行
     if getattr(doc.flags, "in_workflow_action", False):
@@ -93,7 +104,7 @@ def guard_before_submit(doc, method=None):
     if _has_transition_completed_by_user(doc.doctype, doc.get("name"), user):
         return
     # 用户具备"下一跳"审批角色（如经理）——允许其 Submit 推进
-    next_roles = _allowed_roles_for_next(wf, state)
+    next_roles = _allowed_roles_for_next(wf, db_state)
     if next_roles and next_roles.isdisjoint(roles):
         frappe.throw(
             _("该单据正在审批中，无法直接提交。请等待审批人处理。"),
@@ -117,7 +128,7 @@ def guard_before_save(doc, method=None):
     if not wf:
         return
     db_state = frappe.db.get_value(doc.doctype, doc.get("name"), wf.workflow_state_field)
-    if db_state not in MIDDLE_STATES:
+    if not _is_middle_state(db_state):
         return
     user = frappe.session.user
     if user == "Administrator":
