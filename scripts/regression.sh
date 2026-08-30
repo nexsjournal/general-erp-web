@@ -19,7 +19,7 @@ print('site OK, GL Entry:', frappe.db.count('GL Entry'))
 echo "==> [1/6] 清理旧测试数据"
 (cd "$BENCH" && $PY "$T/cleanup.py") || RC=1
 
-for t in test_chain.py test_fin_reports.py test_modules.py test_permissions.py test_approval_guard.py; do
+for t in test_chain.py test_fin_reports.py test_modules.py test_permissions.py test_approval_guard.py test_approval_wizard.py; do
   echo "==> 跑 $t"
   (cd "$BENCH" && $PY "$T/$t") || RC=1
 done
