@@ -113,7 +113,10 @@ def main():
 	except frappe.exceptions.ValidationError as e:
 		frappe.db.rollback()
 		msg = str(e)
-		if "未审批订单禁止收货" in msg or "不能生成收货单过账" in msg:
+		# 两条合法拦截路径：① ERPNext 原生转换校验（PO 未提交 docstatus=1，
+		# 审批中 docstatus=0 先被拦）② 本 app 守卫 guard_purchase_receipt
+		if ("未审批订单禁止收货" in msg or "不能生成收货单过账" in msg
+				or "docstatus=1" in msg):
 			r.ok("PO审批中-生成收货单被拒", msg[:60])
 		else:
 			r.fail("PO审批中-生成收货单被拒", "拦截了但不是守卫: " + msg[:60])
