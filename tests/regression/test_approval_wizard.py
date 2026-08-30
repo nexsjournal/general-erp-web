@@ -124,6 +124,23 @@ def main():
     except Exception as e:
         r.fail("向导-e2e审批链", e)
 
+    # ⑥ 审批待办/催办 API 回归（防 permitted_roles 子表被当字符串列读 → Unknown column）
+    frappe.set_user("Administrator")
+    try:
+        aw.get_my_approvals()  # 不应抛 Unknown column
+        frappe.set_user("boss1@demo.com"); frappe.clear_cache()
+        aw.get_my_approvals()
+        r.ok("待我审批-API可调用(子表permitted_roles)", "Administrator+boss1 均返回")
+    except Exception as e:
+        frappe.set_user("Administrator")
+        r.fail("待我审批-API可调用(子表permitted_roles)", e)
+    try:
+        from general_erp.general_erp.approval_reminder import remind_approval_timeout
+        remind_approval_timeout()  # 不应抛 Unknown column
+        r.ok("审批超时催办-API可调用", "未抛列错误")
+    except Exception as e:
+        r.fail("审批超时催办-API可调用", e)
+
     # 清理：删测试流程 + 恢复预置 采购订单审批 active
     for n in frappe.get_all("Workflow", filters={"name": ["like", "审批-%"]}, pluck="name"):
         try:

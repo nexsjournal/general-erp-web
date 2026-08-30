@@ -244,21 +244,39 @@ def delete_workflow(wf_name):
 	return {"deleted": wf_name}
 
 
+def _wa_permitted_roles(action_names):
+	"""批量取 Workflow Action 的 permitted_roles。
+
+	frappe v16 的 permitted_roles 是 Table MultiSelect（子表
+	Workflow Action Permitted Role），主表没有该列——直接 get_all 取会
+	报 Unknown column。这里按 parent 批量查子表，返回 {action_name: set(roles)}。
+	"""
+	if not action_names:
+		return {}
+	rows = frappe.get_all("Workflow Action Permitted Role",
+		filters={"parenttype": "Workflow Action", "parent": ["in", list(action_names)]},
+		fields=["parent", "role"])
+	m = {}
+	for x in rows:
+		m.setdefault(x.parent, set()).add(x.role)
+	return m
+
+
 @frappe.whitelist()
 def get_my_approvals():
 	"""待我审批（所有登录用户可见；按等待时长倒序，超 24h 标 urgent）。"""
 	rows = frappe.get_all("Workflow Action",
-		filters={"status": "Open"},
+		filters={"status": "Open", "workflow_state": ["like", "审批%"]},
 		fields=["name", "reference_doctype", "reference_name",
-		        "workflow_state", "permitted_roles", "creation"],
+		        "workflow_state", "creation"],
 		order_by="creation asc", limit=200)
 	my_roles = set(frappe.get_roles())
+	roles_map = _wa_permitted_roles([r.name for r in rows])
 	out = []
 	for r in rows:
 		if not r.workflow_state or not r.workflow_state.startswith("审批"):
 			continue
-		permitted = {x.strip() for x in (r.permitted_roles or "").split(",") if x.strip()}
-		if not (permitted & my_roles):
+		if not (roles_map.get(r.name, set()) & my_roles):
 			continue
 		try:
 			doc = frappe.get_doc(r.reference_doctype, r.reference_name)

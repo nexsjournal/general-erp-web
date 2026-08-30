@@ -13,7 +13,7 @@ def _backup_dir():
 
 # 与 api_approval_wizard._check_design_permission 同一口径：
 # 原生 System Manager 或 本系统「系统管理员」岗位角色（boss1 持岗位角色而非原生 SM）
-ADMIN_ROLES = ("System Manager", "系统管理员")
+ADMIN_ROLES = ("System Manager", "系统管理员", "总经理")
 
 
 def _check_permission():
