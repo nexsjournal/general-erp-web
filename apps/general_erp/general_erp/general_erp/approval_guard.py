@@ -59,21 +59,38 @@ def _allowed_roles_for_next(wf, state):
     return roles
 
 
-def _has_transition_completed_by_user(doctype, docname, user):
-    """该用户是否在"审批中间态"完成过 Workflow Action（合法审批留痕）
+def _has_transition_completed_by_user(doctype, docname, user, current_state):
+    """该用户是否以"合法审批动作"把单据推进到了当前状态（留痕收紧版）。
 
-    注意：提交人自己完成"提交审批"（草稿→审批中）也留有 Workflow Action，
-    因此必须限定 workflow_state 在中间态内，才算审批动作留痕。
+    frappe v16 语义：action 完成后被置 Completed，其 workflow_state 保留
+    【动作发生时的源状态】（见 workflow_action.update_completed_workflow_actions：
+    按 next_state=当前状态 反查 from_states 定位 completed_by）。
+    因此合法留痕 = 存在本用户完成的 action，且其 workflow_state ∈
+    {转入 current_state 的、且【源状态本身是审批中间态】的 transition 源状态}。
+    两个收紧点：
+    ① 原实现 like "审批%" 查留痕偏宽（单据内任何中间态历史 action 都放行）；
+    ② 排除源状态=草稿的一跳（那是发起人自己的"提交审批"，不算审批）。
     """
-    if not docname:
+    if not docname or not current_state:
+        return False
+    from_states = [
+        r.state for r in frappe.get_all(
+            "Workflow Transition",
+            filters={"next_state": current_state},
+            fields=["state"],
+        )
+        if r.state and _is_middle_state(r.state)
+    ]
+    if not from_states:
         return False
     return frappe.db.exists(
         "Workflow Action",
         {
             "reference_doctype": doctype,
             "reference_name": docname,
+            "status": "Completed",
             "completed_by": user,
-            "workflow_state": ("like", "审批%"),
+            "workflow_state": ("in", from_states),
         },
     )
 
@@ -98,10 +115,8 @@ def guard_before_submit(doc, method=None):
     if user == "Administrator":
         return
     roles = set(frappe.get_roles(user))
-    if not roles:
-        return
-    # 已执行过 Workflow Action 的用户（合法审批人）放行
-    if _has_transition_completed_by_user(doc.doctype, doc.get("name"), user):
+    # 已执行过审批动作（把单据推进到当前状态）的用户放行
+    if _has_transition_completed_by_user(doc.doctype, doc.get("name"), user, db_state):
         return
     # 用户具备"下一跳"审批角色（如经理）——允许其 Submit 推进
     next_roles = _allowed_roles_for_next(wf, db_state)
@@ -133,8 +148,8 @@ def guard_before_save(doc, method=None):
     user = frappe.session.user
     if user == "Administrator":
         return
-    # 有该用户在中间态完成的 Workflow Action 留痕 = 合法审批
-    if _has_transition_completed_by_user(doc.doctype, doc.get("name"), user):
+    # 有该用户把单据推进到当前状态的 Workflow Action 留痕 = 合法审批
+    if _has_transition_completed_by_user(doc.doctype, doc.get("name"), user, db_state):
         return
     # 用户在中间态"下一跳"允许角色并集内（合法审批人）放行
     roles = set(frappe.get_roles(user))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""数据备份 API：仅 System Manager 可操作。备份文件在 sites/<site>/private/backups"""
+"""数据备份 API：仅系统管理员（System Manager / 系统管理员岗位）可操作。备份文件在 sites/<site>/private/backups"""
 import frappe
 import os
 import glob
@@ -11,8 +11,13 @@ def _backup_dir():
     return os.path.abspath(frappe.get_site_path("private", "backups"))
 
 
+# 与 api_approval_wizard._check_design_permission 同一口径：
+# 原生 System Manager 或 本系统「系统管理员」岗位角色（boss1 持岗位角色而非原生 SM）
+ADMIN_ROLES = ("System Manager", "系统管理员")
+
+
 def _check_permission():
-    if "System Manager" not in frappe.get_roles():
+    if not set(frappe.get_roles()) & set(ADMIN_ROLES):
         frappe.throw(_("仅系统管理员可操作备份"), frappe.PermissionError)
 
 

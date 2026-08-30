@@ -3,7 +3,8 @@
 # 用法: bash scripts/regression.sh  (项目根目录执行)
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-BENCH="$ROOT/bench"
+BENCH="${BENCH:-$ROOT/bench}"
+SITE_NAME="${ERP_SITE:-general.erp.local}"
 PY="$BENCH/env/bin/python"
 T="$ROOT/tests/regression"
 RC=0
@@ -11,7 +12,7 @@ RC=0
 echo "==> [0/6] 环境自愈: 站点/服务检查"
 (cd "$BENCH" && $PY -c "
 import frappe
-frappe.init(site='general.erp.local', sites_path='sites'); frappe.connect()
+frappe.init(site='$SITE_NAME', sites_path='sites'); frappe.connect()
 assert frappe.db.count('GL Entry') >= 0
 print('site OK, GL Entry:', frappe.db.count('GL Entry'))
 ") 2>/dev/null || { echo 'FAIL: 站点不可用, 先修环境再回归(禁带病测试)'; exit 2; }

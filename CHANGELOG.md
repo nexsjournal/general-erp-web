@@ -2,6 +2,34 @@
 
 格式：日期倒序，每轮交付一节，含功能 / 修复 / 测试结论 / 提交号。
 
+## 2026-08-30（PR#1 审核修复）
+
+### 修复
+- **Export Shipment / Export Shipment Item 补 Python 文件**（P0）：此前只有 JSON 无 `__init__.py`/控制器，
+  模块导入必 500；被 5 处 workspace、2 报表、trade_document Link 引用。补 pass 类控制器。
+- **3 张任务数字卡固化**（P0）：「待审批/未收款发票/待跟进客户」此前仅存在于 DB，
+  ERP工作台 workspace JSON 引用它们 → 干净站点 migrate 必崩。新增 `site_setup.sync_number_cards`
+  按 workspace 口径幂等固化（migrate 实测通过，3 卡出数正常）。
+- **备份/回归脚本硬编码路径**（P0）：`scripts/backup_daily.sh`、`scripts/regression.sh`、
+  `tests/regression/common.py` 的 bench 路径/站点名改环境变量（`BENCH_DIR` / `ERP_SITE`），保留原默认值。
+- **备份 API 权限口径**（P1）：`api_backup._check_permission` 由仅认原生 System Manager
+  放宽为 `System Manager / 系统管理员` 岗位角色（与审批向导口径一致，boss1 可用数据备份页）。
+- **审批防绕过守卫收紧**（P1）：`approval_guard` ① 无角色用户由"放行"改为"拒绝"；
+  ② 留痕判定由 `workflow_state like "审批%"` 收紧为"本用户完成、且源状态∈转入当前状态
+  的审批中间态 transition"（排除发起人自己的提交跳、排除非中间态来源）。
+
+### 改进
+- **前端常驻轮询改事件驱动**（P2）：`erp_fixes.bundle.js` 移除 3 处全局 setInterval
+  （品牌标题 2s / 流程条 3s / 财年预填 1.5s）改 `route_change` 事件驱动；
+  今日汇率卡 Observer 无目标时自动 disconnect。
+- **User 覆盖体指纹检查**（P2）：`site_setup.check_user_overwrite_sync` 比对 frappe 原生
+  `User.validate` 源码指纹（baseline `25535e50`），变化时 log_error 提醒 diff 同步
+  `overwrite/user/user.py`（无邮箱账号 T-user-login 维护约定）。
+
+### 验证
+- `bench migrate` 干净链路通过（含 after_migrate 全同步）；Export Shipment/Item 落库；
+  3 张数字卡 SQL 口径出数正常。全量 33 项回归依赖演示数据站点（外贸演示公司），在演示站点上执行。
+
 ## 2026-08-30（v1.1）
 
 ### 用户与权限
