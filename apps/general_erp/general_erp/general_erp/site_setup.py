@@ -699,6 +699,28 @@ def sync_user_privacy():
     frappe.clear_cache()
 
 
+def sync_erp_workbench_roles():
+    """ERP工作台 Workspace 角色固化（T-workbench-viz，2026-08-30）：
+    roles = 系统管理员 + 流程设计 —— 超管/管理员可见，业务员隐藏。
+    背景：Workspace roles 只覆盖角色持有者，"管理员"boss1 实际持「流程设计」
+    而非「系统管理员」，仅限系统管理员会把管理员挡在外面。"""
+    ws_name = "ERP工作台"
+    if not frappe.db.exists("Workspace", ws_name):
+        return
+    doc = frappe.get_doc("Workspace", ws_name)
+    for r in list(doc.get("roles")):
+        if r.role not in ("系统管理员", "流程设计"):
+            doc.remove(r)
+    existing = {r.role for r in doc.get("roles")}
+    for role in ("系统管理员", "流程设计"):
+        if role not in existing:
+            doc.append("roles", {"role": role})
+    doc.flags.ignore_permissions = True
+    doc.flags.ignore_version = True
+    doc.save()
+    frappe.db.commit()
+
+
 def sync_site_setup(with_seed=False):
     """总入口：after_install 与 after_migrate 调用，幂等。"""
     sync_customer_fields()
@@ -724,6 +746,7 @@ def sync_site_setup(with_seed=False):
     sync_expense_workflow()
     sync_report_workspace()
     sync_user_privacy()
+    sync_erp_workbench_roles()
     if with_seed:
         from general_erp.seed_data import seed_base_data
         if frappe.db.exists("DocType", "Port"):

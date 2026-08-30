@@ -883,6 +883,14 @@
    "parentfield": "roles",
    "doctype": "Has Role",
    "name": "ERP工作台-系统管理员"
+  },
+  {
+   "role": "流程设计",
+   "parent": "ERP工作台",
+   "parenttype": "Workspace",
+   "parentfield": "roles",
+   "doctype": "Has Role",
+   "name": "ERP工作台-流程设计"
   }
  ],
  "sequence_id": 0.0,
