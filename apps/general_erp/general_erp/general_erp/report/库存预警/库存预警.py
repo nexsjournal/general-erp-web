@@ -8,11 +8,13 @@ def execute(filters=None):
 	check_report_access("库存预警")
 	"""可用库存低于再订货点的物料（按仓库维度），用于库存预警。"""
 	sql = (
-		"SELECT i.item_code, i.item_name, b.warehouse, b.projected_qty, "
-		"i.reorder_level, (i.reorder_level - b.projected_qty) AS shortage "
-		"FROM `tabBin` b JOIN `tabItem` i ON i.name = b.item_code "
-		"WHERE i.reorder_level > 0 AND b.projected_qty < i.reorder_level "
-		"ORDER BY shortage DESC"
+	"SELECT i.item_code, i.item_name, COALESCE(b.warehouse, '') AS warehouse, "
+		"COALESCE(b.projected_qty, 0) AS projected_qty, "
+		"i.safety_stock, (i.safety_stock - COALESCE(b.projected_qty, 0)) AS shortage "
+	"FROM `tabItem` i LEFT JOIN `tabBin` b ON b.item_code = i.name "
+		"WHERE i.safety_stock > 0 AND COALESCE(b.projected_qty, 0) < i.safety_stock "
+		"AND i.disabled = 0 "
+	"ORDER BY shortage DESC"
 	)
 	rows = frappe.db.sql(sql, as_dict=True)
 	columns = [

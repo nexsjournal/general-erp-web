@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"报价单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售订单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"交货单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运明细单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"单证制作\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"收款单\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"标准销售：客户→商机→报价→订单→交货→开票→收款→利润；外贸销售：线索→客户→跟进→360→商机→报价→订单→出运→单证→收款→利润\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"报价单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售订单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"交货单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运明细单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"单证制作\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"收款单\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

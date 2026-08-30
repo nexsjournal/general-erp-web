@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"入库/出库单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"仓库\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存余额\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"入库→库存余额→出库→统计/预警\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"入库/出库单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"仓库\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"库存余额\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

@@ -16,8 +16,8 @@ def get_home_page(user):
 
 
 def website_redirect(path):
-	# 只处理 /desk 裸路由；返回 None = 不重定向
-	if path == "desk":
+	# 处理 /desk 与 /index 裸路由 -> 首页；返回 None = 不重定向
+	if path in ("desk", "index"):
 		user = getattr(frappe.session, "user", None)
 		if user and user != "Guest":
 			return "/desk/index"

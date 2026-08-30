@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"联系人\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户跟进\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户360\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"线索\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"商机\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"线索分发记录\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"客户→联系人→跟进→360→线索→商机\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"联系人\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户跟进\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"客户360\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"线索\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"商机\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"线索分发记录\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

@@ -67,3 +67,41 @@ class _TrendsMonthPatcher:
 import sys as _sys
 
 _sys.meta_path.insert(0, _TrendsMonthPatcher())
+
+
+# ============================================================
+# 错误码统一 422（T2-08 / T2-12 加固）
+# frappe 默认 ValidationError.http_status_code = 417。
+# 产品对外统一为 422（业务校验失败语义更清晰），脱敏由前端/safe_call 负责。
+# 不改 frappe 源码，仅运行期改类属性；带版本断言：frappe 大版本变化时告警。
+# ============================================================
+
+EXPECTED_FRAPPE_VERSION_PREFIX = "16."
+
+
+_runtime_version_guard_done = False
+
+
+def _version_guard(patch_name):
+	global _runtime_version_guard_done
+	if _runtime_version_guard_done:
+		return
+	_runtime_version_guard_done = True
+	version = getattr(frappe, "__version__", "unknown")
+	if not str(version).startswith(EXPECTED_FRAPPE_VERSION_PREFIX):
+		try:
+			frappe.logger().warning(
+				"general_erp runtime patches loaded against frappe "
+				+ str(version) + " (expected " + EXPECTED_FRAPPE_VERSION_PREFIX
+				+ "x). Verify patches still work after upgrade: [" + patch_name + "]"
+			)
+		except Exception:
+			pass
+
+
+try:
+	if getattr(frappe.exceptions.ValidationError, "http_status_code", None) != 422:
+		frappe.exceptions.ValidationError.http_status_code = 422
+	_version_guard("ValidationError->422")
+except Exception:
+	pass

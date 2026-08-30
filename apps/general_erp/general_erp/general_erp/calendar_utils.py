@@ -13,7 +13,12 @@ def get_calendar_events(year, month):
 	end = ("%d-%02d-01" % (year, month + 1)) if month < 12 else ("%d-01-01" % (year + 1))
 	events = []
 
-	holidays = frappe.get_all("Holiday", filters={"holiday_date": ["between", (start, end)]}, fields=["name", "holiday_date", "description"])
+	# T2-15: 节假日按公司默认 Holiday List 过滤（演示：中国法定节假日-2026）
+	company = frappe.db.get_single_value("Global Defaults", "default_company") or frappe.db.get_value("Company", {"disabled": 0}, "name")
+	holiday_list = frappe.db.get_value("Company", company, "default_holiday_list") if company else None
+	holidays = []
+	if holiday_list:
+		holidays = frappe.get_all("Holiday", filters={"parent": holiday_list, "holiday_date": ["between", (start, end)]}, fields=["name", "holiday_date", "description"])
 	for h in holidays:
 		events.append({"date": cstr(h.holiday_date), "type": "holiday", "label": h.description or "节假日", "doctype": "Holiday", "name": h.name})
 
@@ -22,10 +27,10 @@ def get_calendar_events(year, month):
 		cname = frappe.db.get_value("Customer", f.customer, "customer_name") or f.customer
 		events.append({"date": cstr(f.next_follow_date), "type": "follow", "label": "跟进 " + cname + "（" + (f.follow_type or "") + "）", "doctype": "Customer Follow Up", "name": f.name})
 
-	if frappe.db.exists("DocType", "Shipment"):
-		shipments = frappe.get_all("Shipment", filters={"etd": ["between", (start, end)]}, fields=["name", "etd", "bl_no"])
+	if frappe.db.exists("DocType", "Export Shipment"):
+		shipments = frappe.get_all("Export Shipment", filters={"etd": ["between", (start, end)]}, fields=["name", "etd", "bl_no"])
 		for s in shipments:
-			events.append({"date": cstr(s.etd), "type": "shipment", "label": "出运 " + (s.bl_no or s.name) + "（ETD）", "doctype": "Shipment", "name": s.name})
+			events.append({"date": cstr(s.etd), "type": "shipment", "label": "出运 " + (s.bl_no or s.name) + "（ETD）", "doctype": "Export Shipment", "name": s.name})
 
 	opps = frappe.get_all("Opportunity", filters={"expected_closing": ["between", (start, end)], "status": ["not in", ("Lost", "Converted", "Closed")]}, fields=["name", "expected_closing", "title", "customer_name"])
 	for o in opps:

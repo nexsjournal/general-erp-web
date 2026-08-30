@@ -155,3 +155,42 @@ def guard_purchase_receipt(doc, method=None):
                 f"采购订单 {po} 当前状态为{state}（未审批完成），不能生成收货单过账。请先完成审批。",
                 title="未审批订单禁止收货",
             )
+
+
+def _submit_called_in_stack() -> bool:
+    """调用栈里是否存在 Document._submit 帧（判断本次保存是否由 .submit() 触发）"""
+    import inspect
+
+    try:
+        for frame in inspect.stack():
+            if frame.function == "_submit":
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def guard_resubmit(doc, method=None):
+    """已提交单据禁止重复 submit（D5）——挂在 before_update_after_submit
+
+    frappe v16 对已提交(docstatus=1)单据再调 .submit() 时，_action 被设成
+    update_after_submit（而非 submit），会静默返回成功，前端/集成方误以为又
+    提交了一次（实际无副作用但语义误导）。
+
+    精确区分：
+    - 调用栈经过 Document._submit → 是"重复 submit" → 拦截
+    - 合法 update-after-submit（打开已提交单据改字段保存）→ 栈里无 _submit → 放行
+    Administrator 放行（超管/脚本/回归处理需要）。
+    """
+    if method and method != "before_update_after_submit":
+        return
+    before = getattr(doc, "_doc_before_save", None)
+    if not before or not doc.get("name"):
+        return
+    if getattr(before, "docstatus", 0) != 1:
+        return
+    if not _submit_called_in_stack():
+        return
+    if frappe.session.user == "Administrator":
+        return
+    frappe.throw("该单据已提交，无需重复提交。", title="重复提交")

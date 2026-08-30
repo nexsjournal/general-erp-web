@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运明细单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"单证制作\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"海关编码\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"贸易术语\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"港口\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"服务商\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"出运明细单→外贸单证→海关编码→贸易术语→港口→服务商\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"出运明细单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"单证制作\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"海关编码\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"贸易术语\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"港口\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"服务商\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

@@ -56,6 +56,7 @@ doc_events = {
     # 原生 Submit 会把状态跳到"已审批"绕过审批人；收货链路不查 workflow_state 可让
     # 未审批 PO 过账库存）——守卫实现在 general_erp.approval_guard
     "Purchase Order": {
+        # guard_before_submit 内部已含重复提交检查（_check_resubmit）
         "before_submit": "general_erp.general_erp.approval_guard.guard_before_submit",
         "before_save": "general_erp.general_erp.approval_guard.guard_before_save",
     },
@@ -65,6 +66,22 @@ doc_events = {
     },
     "Purchase Receipt": {
         "validate": "general_erp.general_erp.approval_guard.guard_purchase_receipt",
+    },
+    # T14/D5: 已提交单据禁止重复 submit（v16 静默返回成功，语义误导）
+    "Sales Order": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Sales Invoice": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Purchase Invoice": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Delivery Note": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
+    },
+    "Payment Entry": {
+        "before_update_after_submit": "general_erp.general_erp.approval_guard.guard_resubmit",
     },
 }
 

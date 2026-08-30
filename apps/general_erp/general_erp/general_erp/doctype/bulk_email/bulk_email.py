@@ -60,7 +60,8 @@ def send_bulk_email(name):
 	_enforce_rate_limits(doc)
 	ok = fail = 0
 	tpl = frappe.get_doc("Email Template", doc.template) if doc.template else None
-	company = frappe.db.get_single_value("Global Defaults", "company") or ""
+	company_row = frappe.db.get_single_value("Global Defaults", "default_company") or frappe.db.get_value("Company", {"disabled": 0}, "name")
+	company = frappe.db.get_value("Company", company_row, "company_name") if company_row else ""
 	for row in doc.customers:
 		email = frappe.db.get_value("Customer", row.customer, "email_id")
 		if not email:

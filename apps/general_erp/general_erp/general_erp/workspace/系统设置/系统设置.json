@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"公司\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"币种汇率\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"系统参数\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"打印格式\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"打印表头\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"用户\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"登录日志\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"公司·币种·参数·打印·用户\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"公司\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"币种汇率\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"系统参数\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"打印格式\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"打印表头\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"用户\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"登录日志\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

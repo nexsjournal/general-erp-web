@@ -10,10 +10,24 @@ class StatisticsSettings(Document):
 	"""统计设置：公海回收规则 + 报表订阅（定时邮件推送）+ 报表可见角色。"""
 
 
+def get_sys_param(key, default=None):
+	"""统一系统参数读取（T2-19）：System Parameter 表 param_key 驱动，替代硬编码。"""
+	row = frappe.db.get_value("System Parameter", {"param_key": key}, "param_value")
+	if row is None or row == "":
+		return default
+	try:
+		return int(row)
+	except (ValueError, TypeError):
+		return row
+
+
 def get_pool_days():
-	"""公海回收天数（默认 30 天）。"""
+	"""公海回收天数（默认 30 天）；Statistics Settings.pool_days 优先，回退 System Parameter。"""
 	d = frappe.db.get_single_value("Statistics Settings", "pool_days")
-	return int(d) if d else 30
+	if d:
+		return int(d)
+	v = get_sys_param("public_pool_reclaim_days", 30)
+	return int(v) if v else 30
 
 
 @frappe.whitelist()

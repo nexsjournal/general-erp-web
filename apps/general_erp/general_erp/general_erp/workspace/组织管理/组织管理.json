@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"员工\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"部门\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"角色\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"岗位角色\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作流\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"审批任务\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"员工→部门→角色→岗位→工作流→审批\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"员工\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"部门\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"角色\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"岗位角色\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工作流\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"审批任务\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

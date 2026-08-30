@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件工作台\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件记录\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮箱账号\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件模板\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件群发\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"邮件工作台→邮件记录→邮箱账号→邮件模板→群发\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件工作台\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件记录\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮箱账号\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件模板\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"邮件群发\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

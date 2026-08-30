@@ -17,6 +17,8 @@ def create_mail(subject, folder, sender, recipient=None, body=None, status="已�
 	if folder == "已发送" and track:
 		tracking_id = make_tracking_id("mail-" + subject + "-" + str(frappe.utils.now_datetime()))
 		body = inject_tracking(frappe.utils.get_url(), tracking_id, body)
+	# 安全：发件人强制为当前登录用户，防止伪造
+	sender = frappe.session.user
 	m = frappe.new_doc("Mail")
 	m.update({
 		"subject": subject,
@@ -52,26 +54,64 @@ def create_mail(subject, folder, sender, recipient=None, body=None, status="已�
 
 
 @frappe.whitelist()
-def get_mails(folder=None, status=None, limit=100):
-	filters = []
-	if folder:
-		filters.append(["Mail", "folder", "=", folder])
-	if status:
-		filters.append(["Mail", "status", "=", status])
-	rows = frappe.get_all(
-		"Mail",
-		filters=filters,
-		fields=["name", "subject", "folder", "status", "sender", "recipient", "sent_at", "creation", "related_doctype", "related_name", "restore_folder", "restore_status", "track", "opened", "clicked", "from_address"],
-		order_by="modified desc",
-		limit_page_length=int(limit or 100),
-	)
-	for r in rows:
-		r["sender_name"] = frappe.db.get_value("User", r.sender, "full_name") or r.sender
-		r["recipient_name"] = frappe.db.get_value("User", r.recipient, "full_name") or r.recipient if r.recipient else ""
-	return rows
+def _mail_scope_users():
+	"""主管可见发送人集合：本人 + 本部门下属；非主管仅本人。"""
+	me = frappe.session.user
+	users = {me}
+	roles = set(frappe.get_roles())
+	if roles & {"Sales Manager", "Purchase Manager", "Stock Manager", "Accounts Manager", "System Manager"}:
+		dept = frappe.db.get_value("User", me, "erp_department")
+		if dept:
+			sub = frappe.get_all("User", filters={"erp_department": dept, "enabled": 1}, fields=["name"])
+			users.update(x.name for x in sub)
+	return users
 
 
 @frappe.whitelist()
+def get_mails(folder=None, status=None, limit=100):
+	"""邮件列表：本人发的 + 发给我的 + （主管）本部门下属发的。"""
+	base_filters = []
+	if folder:
+		base_filters.append(["Mail", "folder", "=", folder])
+	if status:
+		base_filters.append(["Mail", "status", "=", status])
+	me = frappe.session.user
+	senders = list(_mail_scope_users())
+
+	def _collect(sender_filter, recipient_filter):
+		f = list(base_filters)
+		f.append(["Mail", "sender", "in", senders]) if sender_filter else None
+		f.append(["Mail", "recipient", "=", me]) if recipient_filter else None
+		return frappe.get_all(
+			"Mail",
+			filters=f,
+			fields=["name", "subject", "folder", "status", "sender", "recipient", "sent_at", "creation", "related_doctype", "related_name", "restore_folder", "restore_status", "track", "opened", "clicked", "from_address"],
+			order_by="modified desc",
+			limit_page_length=int(limit or 100),
+		)
+
+	rows = _collect(True, False)
+	extra = _collect(False, True)
+	seen = set(r.name for r in rows)
+	for r in extra:
+		if r.name not in seen:
+			rows.append(r)
+	# 批量查用户姓名（去 N+1，T2-07）
+	users = set()
+	for r in rows:
+		users.add(r.sender)
+		if r.recipient:
+			users.add(r.recipient)
+	name_map = {}
+	if users:
+		for u in frappe.get_all("User", filters={"name": ["in", list(users)]}, fields=["name", "full_name"]):
+			name_map[u.name] = u.full_name or u.name
+	for r in rows:
+		r["sender_name"] = name_map.get(r.sender, r.sender)
+		r["recipient_name"] = name_map.get(r.recipient, r.recipient) if r.recipient else ""
+	return rows
+
+
 def update_mail(name, folder=None, status=None):
 	"""更新邮件文件夹/状态（标记已处理、待审批、删除、恢复等）。"""
 	doc = frappe.get_doc("Mail", name)

@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"收款单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"付款单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"费用报销\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"科目表\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"会计期间\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"收付款→费用报销→发票管理→订单利润\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"收款单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"付款单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"销售发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"费用报销\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"科目表\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"会计期间\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

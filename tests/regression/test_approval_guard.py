@@ -140,6 +140,36 @@ def main():
 		frappe.db.rollback()
 		r.fail("PO已审批-生成收货单放行", e)
 
+	# 6. D5: 已提交销售订单重复 submit(sales1) → 拒；提交后修改(改标题) → 放行
+	frappe.set_user("Administrator")
+	so = frappe.new_doc("Sales Order")
+	so.update(dict(customer="上海远航贸易有限公司", customer_name="上海远航贸易有限公司",
+		company=COMPANY, title=TAG, currency="CNY", transaction_date=TODAY,
+		order_type="Sales", naming_series="S-.FWS.-.#####.", delivery_date=TODAY))
+	so.append("items", dict(item_code=ITEM, qty=1, rate=500, warehouse=WH))
+	so.insert(); frappe.db.commit()
+	frappe.set_user("sales1@demo.com")
+	frappe.get_doc("Sales Order", so.name).submit(); frappe.db.commit()
+	try:
+		frappe.get_doc("Sales Order", so.name).submit()
+		frappe.db.rollback()
+		r.fail("D5重复submit被拒", "未被拦截")
+	except frappe.exceptions.ValidationError as e:
+		frappe.db.rollback()
+		r.ok("D5重复submit被拒", str(e)[:40])
+	except Exception as e:
+		frappe.db.rollback()
+		r.fail("D5重复submit被拒", "非预期异常 " + str(e)[:40])
+	# 合法提交后修改(改标题)应放行
+	try:
+		d = frappe.get_doc("Sales Order", so.name)
+		d.title = TAG + "-修改"
+		d.save(); frappe.db.commit()
+		r.ok("D5提交后修改放行", so.name)
+	except Exception as e:
+		frappe.db.rollback()
+		r.fail("D5提交后修改放行", str(e)[:50])
+
 	return r.summary()
 
 

@@ -89,6 +89,153 @@ def seed_base_data():
     frappe.db.commit()
 
 
+DEMO_CUSTOMER_EMAILS = [
+    ("深圳星辰科技有限公司", "sales@shenzhenxingchen.com"),
+    ("上海远航贸易有限公司", "info@shanghaiyuanhang.com"),
+    ("汉堡机械设备 GmbH", "einkauf@hamburg-maschinen.de"),
+    ("Tokyo Electronics Co", "purchase@tokyo-electronics.jp"),
+    ("Dubai Global Import FZ", "procurement@dubai-global.ae"),
+    ("New York Trading LLC", "ap@nytrading.com"),
+]
+
+DEMO_SERVICE_PROVIDERS = [
+    ("DHL 国际快递", "船公司"),
+    ("顺丰国际", "船公司"),
+    ("COSCO 中远海运", "货代"),
+    ("Maersk 马士基", "船公司"),
+]
+
+DEMO_SUPPLIERS = ["东莞电子配件厂", "宁波五金制品公司"]
+
+DEMO_ANNOUNCEMENTS = [
+    ("系统上线通知", "外贸 ERP 系统已完成部署，请使用统一门户登录。如遇问题请联系管理员。"),
+    ("9 月出货高峰预警", "9 月为出货高峰，请销售与物流提前确认船期与订舱，避免出运延误。"),
+]
+
+DEMO_EMPLOYEES = [
+    ("张伟", "Male", "sales1@demo.com"),
+    ("李娜", "Female", "purchase1@demo.com"),
+    ("王芳", "Female", "accounts1@demo.com"),
+]
+
+
+def seed_demo_data():
+    """演示种子数据（幂等）：服务商/供应商/公告/客户邮箱/群发示例/员工。
+
+    每项独立 try/commit，单条失败不阻断其余；员工依赖 Gender 主数据，
+    Gender 缺失时先建 Male/Female 再建员工，仍失败仅跳过员工不影响其他项。
+    """
+    # 1) 客户补邮箱
+    for cname, email in DEMO_CUSTOMER_EMAILS:
+        try:
+            if frappe.db.exists("Customer", cname) and not frappe.db.get_value("Customer", cname, "email_id"):
+                frappe.db.set_value("Customer", cname, "email_id", email)
+            frappe.db.commit()
+        except Exception as e:
+            frappe.db.rollback()
+            frappe.log_error(f"demo seed customer email {cname}: {e}", "seed_demo_data")
+
+    # 2) 服务商
+    try:
+        for name, ptype in DEMO_SERVICE_PROVIDERS:
+            if not frappe.db.exists("Service Provider", {"provider_name": name}):
+                d = frappe.new_doc("Service Provider")
+                d.update({"provider_name": name, "provider_type": ptype})
+                d.insert(ignore_permissions=True)
+        frappe.db.commit()
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error("demo seed service providers: " + str(e), "seed_demo_data")
+
+    # 3) 供应商
+    try:
+        for name in DEMO_SUPPLIERS:
+            if not frappe.db.exists("Supplier", name):
+                d = frappe.new_doc("Supplier")
+                d.update({"supplier_name": name, "supplier_group": "Local",
+                          "territory": "China", "default_currency": "CNY"})
+                d.insert(ignore_permissions=True)
+        frappe.db.commit()
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error("demo seed suppliers: " + str(e), "seed_demo_data")
+
+    # 4) 公告
+    try:
+        for title, content in DEMO_ANNOUNCEMENTS:
+            if not frappe.db.exists("Announcement", {"title": title}):
+                a = frappe.new_doc("Announcement")
+                a.update({"title": title, "content": content, "is_pinned": 0})
+                a.insert(ignore_permissions=True)
+        frappe.db.commit()
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error("demo seed announcements: " + str(e), "seed_demo_data")
+
+    # 5) 群发示例（带收件人 + 打开/点击数，供"群发效果"报表演示）
+    try:
+        if not frappe.db.exists("Bulk Email", {"subject": "新品目录推送"}):
+            b = frappe.new_doc("Bulk Email")
+            b.update({"subject": "新品目录推送",
+                      "message_body": "<p>各位客户好，本季新品目录已更新，请查收附件。</p>",
+                      "send_status": "已发送",
+                      "sent_at": "2026-08-25 10:00:00"})
+            custs = frappe.get_all("Customer", fields=["name", "customer_name", "email_id"],
+                                   filters={"email_id": ["like", "%@%"]})[:3]
+            for c in custs:
+                b.append("customers", {"customer": c["name"],
+                                        "customer_name": c["customer_name"],
+                                        "email_id": c["email_id"]})
+            b.insert(ignore_permissions=True)
+            b.total_count = len(custs)
+            b.success_count = len(custs)
+            b.fail_count = 0
+            b.opened_count = max(1, len(custs) - 1)
+            b.clicked_count = 1
+            b.save(ignore_permissions=True)
+        frappe.db.commit()
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error("demo seed bulk email: " + str(e), "seed_demo_data")
+
+    # 6) 员工（依赖 Gender / Designation 主数据；缺失先建）
+    try:
+        for g in ("Male", "Female"):
+            if not frappe.db.exists("Gender", g):
+                gd = frappe.new_doc("Gender")
+                gd.gender = g
+                gd.insert(ignore_permissions=True)
+        for desig in ("销售专员", "采购专员", "财务专员"):
+            if not frappe.db.exists("Designation", desig):
+                dd = frappe.new_doc("Designation")
+                dd.designation_name = desig
+                dd.insert(ignore_permissions=True)
+        frappe.db.commit()
+        dept_map = {"sales1@demo.com": ("Sales - 外", "销售专员"),
+                    "purchase1@demo.com": ("Purchase - 外", "采购专员"),
+                    "accounts1@demo.com": ("Accounts - 外", "财务专员")}
+        companies = frappe.get_all("Company", pluck="name")
+        company = companies[0] if companies else None
+        for first, gender, user in DEMO_EMPLOYEES:
+            if not frappe.db.exists("Employee", {"user_id": user}):
+                dept, desig = dept_map[user]
+                e = frappe.new_doc("Employee")
+                e.update({"first_name": first, "gender": gender,
+                          "date_of_birth": "1990-05-01", "date_of_joining": "2024-03-01",
+                          "status": "Active", "company": company,
+                          "department": dept, "designation": desig, "user_id": user})
+                e.insert(ignore_permissions=True)
+        frappe.db.commit()
+    except Exception as e:
+        frappe.db.rollback()
+        frappe.log_error("demo seed employees: " + str(e), "seed_demo_data")
+
+    frappe.clear_cache()
+
+
+
 def after_install():
     if frappe.db.exists("DocType", "Port"):
         seed_base_data()
+    if frappe.db.exists("DocType", "Service Provider"):
+        seed_demo_data()

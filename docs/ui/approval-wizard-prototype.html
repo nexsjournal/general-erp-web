@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>审批设置 - 原型 v1</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:"PingFang SC","Microsoft YaHei",sans-serif; }
+  body { background:#f2f3f5; color:#1f2937; font-size:14px; }
+  .topbar { height:48px; background:#fff; border-bottom:1px solid #e5e7eb; display:flex; align-items:center; padding:0 16px; gap:12px; }
+  .topbar .logo { width:28px; height:28px; border-radius:8px; background:#2563eb; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .topbar h1 { font-size:15px; font-weight:600; }
+  .topbar .crumb { color:#9ca3af; font-size:13px; }
+  .container { max-width:1080px; margin:20px auto; padding:0 16px; }
+  .card { background:#fff; border-radius:12px; padding:20px; margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .card h2 { font-size:16px; margin-bottom:4px; }
+  .card .sub { color:#6b7280; font-size:13px; margin-bottom:16px; }
+  .btn { display:inline-flex; align-items:center; gap:6px; padding:8px 16px; border-radius:8px; border:1px solid #d1d5db; background:#fff; cursor:pointer; font-size:14px; }
+  .btn.primary { background:#2563eb; border-color:#2563eb; color:#fff; }
+  .btn:hover { filter:brightness(.97); }
+  table { width:100%; border-collapse:collapse; }
+  th { text-align:left; font-weight:500; color:#6b7280; font-size:13px; padding:10px 12px; border-bottom:1px solid #e5e7eb; }
+  td { padding:12px; border-bottom:1px solid #f3f4f6; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:99px; font-size:12px; }
+  .tag.on { background:#dcfce7; color:#166534; }
+  .tag.off { background:#f3f4f6; color:#6b7280; }
+  .steps { display:flex; gap:8px; margin-bottom:20px; }
+  .step { flex:1; text-align:center; padding:10px; border-radius:8px; background:#f3f4f6; color:#9ca3af; font-size:13px; }
+  .step.active { background:#dbeafe; color:#1d4ed8; font-weight:600; }
+  .step.done { background:#dcfce7; color:#166534; }
+  .field { margin-bottom:18px; }
+  .field label { display:block; font-weight:500; margin-bottom:6px; }
+  .field .hint { color:#9ca3af; font-size:12px; margin-top:4px; }
+  select, input[type=text], input[type=number] { width:100%; max-width:420px; padding:9px 12px; border:1px solid #d1d5db; border-radius:8px; font-size:14px; }
+  .node-row { display:flex; align-items:center; gap:12px; padding:14px; border:1px solid #e5e7eb; border-radius:10px; margin-bottom:10px; }
+  .node-num { width:32px; height:32px; border-radius:50%; background:#2563eb; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; flex-shrink:0; }
+  .node-num.start { background:#10b981; }
+  .node-arrow { text-align:center; color:#9ca3af; margin:2px 0 10px 14px; }
+  .switch-row { display:flex; align-items:center; gap:10px; padding:12px 14px; background:#f9fafb; border-radius:10px; margin-bottom:10px; }
+  .switch { position:relative; width:40px; height:22px; flex-shrink:0; }
+  .switch input { opacity:0; width:0; height:0; }
+  .slider { position:absolute; inset:0; background:#d1d5db; border-radius:99px; cursor:pointer; transition:.2s; }
+  .slider:before { content:""; position:absolute; width:18px; height:18px; left:2px; top:2px; background:#fff; border-radius:50%; transition:.2s; }
+  input:checked + .slider { background:#2563eb; }
+  input:checked + .slider:before { transform:translateX(18px); }
+  .switch-row .txt { flex:1; }
+  .switch-row .txt b { font-weight:500; }
+  .switch-row .txt .d { color:#9ca3af; font-size:12px; }
+  .amount-input { width:120px; }
+  .flow-preview { background:#f9fafb; border:1px dashed #d1d5db; border-radius:10px; padding:16px; }
+  .flow-line { display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .fp-node { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:6px 12px; font-size:13px; }
+  .fp-node b { display:block; font-size:12px; color:#6b7280; font-weight:400; }
+  .fp-arrow { color:#2563eb; font-weight:700; }
+  .actions { display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+  .banner { background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; border-radius:10px; padding:12px 16px; font-size:13px; margin-bottom:16px; }
+  .mock-tag { position:fixed; top:12px; right:12px; background:#fef3c7; color:#92400e; border-radius:8px; padding:6px 12px; font-size:12px; z-index:99; }
+</style>
+</head>
+<body>
+<div class="mock-tag">可点击原型 · 数据为演示 · 非真实系统</div>
+<div class="topbar">
+  <div class="logo">G</div>
+  <h1>太康生物ERP</h1>
+  <span class="crumb">/ 组织管理 / 审批设置</span>
+</div>
+<div class="container">
+
+  <!-- 视图1: 流程清单 -->
+  <div id="view-list">
+    <div class="card">
+      <h2>审批流程</h2>
+      <div class="sub">谁发起、谁审批，一眼看清。点"编辑"修改流程，点"停用"临时关闭。</div>
+      <table>
+        <tr><th>流程名称</th><th>适用单据</th><th>发起</th><th>审批链</th><th>免批条件</th><th>状态</th><th>操作</th></tr>
+        <tr>
+          <td>采购订单审批</td><td>采购订单</td><td>采购 / 采购经理</td>
+          <td><span class="tag on">销售经理</span> 或 <span class="tag on">采购经理</span></td>
+          <td>—</td><td><span class="tag on">启用中</span></td>
+          <td><button class="btn" onclick="openWizard('edit')">编辑</button></td>
+        </tr>
+        <tr>
+          <td>生产任务单审批</td><td>生产计划</td><td>库存经理</td>
+          <td><span class="tag on">采购经理</span></td>
+          <td>—</td><td><span class="tag on">启用中</span></td>
+          <td><button class="btn" onclick="openWizard('edit')">编辑</button></td>
+        </tr>
+        <tr>
+          <td>费用报销审批</td><td>费用报销</td><td>员工</td>
+          <td><span class="tag on">销售经理</span> 或 <span class="tag on">财务经理</span></td>
+          <td>—</td><td><span class="tag on">启用中</span></td>
+          <td><button class="btn" onclick="openWizard('edit')">编辑</button></td>
+        </tr>
+        <tr>
+          <td>销售订单审批</td><td>销售订单</td><td>销售</td>
+          <td><span class="tag on">销售经理</span> → <span class="tag on">总经理</span></td>
+          <td>5000 元以下免批</td><td><span class="tag on">启用中</span></td>
+          <td><button class="btn" onclick="openWizard('edit')">编辑</button></td>
+        </tr>
+      </table>
+      <div class="actions" style="justify-content:flex-start; margin-top:16px;">
+        <button class="btn primary" onclick="openWizard('new')">＋ 新建审批流程</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>待我审批 <span class="tag on">3</span></h2>
+      <div class="sub">按等待时长排序，超 24 小时标红提醒。（审批人登录后显示）</div>
+      <table>
+        <tr><th>单据</th><th>金额</th><th>发起人</th><th>等待时长</th><th>操作</th></tr>
+        <tr><td>采购订单 PO-FWS-00088</td><td>12,000 元</td><td>采购员 张三</td><td style="color:#dc2626">2 天 3 小时 ⚠</td><td><button class="btn primary">通过</button> <button class="btn">驳回</button></td></tr>
+        <tr><td>销售订单 S-FWS-00041</td><td>8,600 元</td><td>销售 李四</td><td>5 小时</td><td><button class="btn primary">通过</button> <button class="btn">驳回</button></td></tr>
+        <tr><td>费用报销 EX-0012</td><td>356 元</td><td>员工 王五</td><td>1 小时</td><td><button class="btn primary">通过</button> <button class="btn">驳回</button></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 视图2: 新建/编辑向导 -->
+  <div id="view-wizard" style="display:none">
+    <div class="card">
+      <h2 id="wizard-title">新建审批流程</h2>
+      <div class="sub">三步搞定：选单据 → 定审批链 → 智能选项。保存后立即生效。</div>
+      <div class="steps">
+        <div class="step done">① 选单据</div>
+        <div class="step done">② 定审批链</div>
+        <div class="step active">③ 智能选项（可跳过）</div>
+      </div>
+
+      <div class="field">
+        <label>适用单据</label>
+        <select id="f-doctype">
+          <option>销售订单</option><option>销售发票</option><option>采购订单</option>
+          <option>采购发票</option><option>付款单</option><option>收款单</option>
+          <option>费用报销</option><option>生产计划</option><option>交货单</option>
+        </select>
+        <div class="hint">只有单据类型，不需要你关心字段。</div>
+      </div>
+
+      <div class="field">
+        <label>审批链（最多 3 级，点"添加一级"追加）</label>
+        <div class="node-row">
+          <div class="node-num start">起</div>
+          <div style="flex:1">
+            <b>谁发起</b>
+            <div class="hint" style="margin-bottom:6px">这些人新建单据并点"提交审批"</div>
+            <select id="f-start"><option>销售</option><option>采购</option><option>库存</option><option>财务</option><option>外贸专员</option><option>员工（所有人）</option></select>
+          </div>
+        </div>
+        <div class="node-arrow">↓ 提交审批</div>
+        <div class="node-row">
+          <div class="node-num">1</div>
+          <div style="flex:1">
+            <b>第 1 级审批</b>
+            <div class="hint" style="margin-bottom:6px">通过后进入下一级；驳回则退回发起人修改</div>
+            <select id="f-l1"><option>销售经理</option><option>采购经理</option><option>库存经理</option><option>财务经理</option><option>总经理</option><option>指定个人：boss1@demo.com</option></select>
+          </div>
+        </div>
+        <div class="node-arrow">↓ 通过</div>
+        <div class="node-row" style="border-style:dashed">
+          <div class="node-num" style="background:#9ca3af">2</div>
+          <div style="flex:1">
+            <b>第 2 级审批（可选）</b>
+            <div class="hint" style="margin-bottom:6px">大额单据可以加第二道把关；不需要就留空</div>
+            <select id="f-l2"><option value="">（不启用第 2 级）</option><option>总经理</option><option>财务经理</option><option>销售经理</option></select>
+          </div>
+        </div>
+        <button class="btn" style="margin-top:6px">＋ 添加一级审批</button>
+      </div>
+
+      <div class="field">
+        <label>智能选项（都有合理默认值，直接保存也行）</label>
+        <div class="switch-row">
+          <label class="switch"><input type="checkbox" id="sw-amount" checked onchange="toggleAmount()"><span class="slider"></span></label>
+          <div class="txt">
+            <b>小额免批</b>：金额低于设定值时，提交后自动通过，不进入审批
+            <div class="d" id="amount-line">金额低于 <input class="amount-input" id="f-amount" type="number" value="5000"> 元免批（留空=不限制）</div>
+          </div>
+        </div>
+        <div class="switch-row">
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          <div class="txt"><b>驳回后可修改重提</b><div class="d">驳回的单据，发起人修改后能重新走审批（默认开）</div></div>
+        </div>
+        <div class="switch-row">
+          <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+          <div class="txt"><b>超时催办</b><div class="d">超过 <input class="amount-input" id="f-timeout" type="number" value="24"> 小时没审批，自动提醒审批人（系统铃铛 + 邮件，如已配置邮箱）</div></div>
+        </div>
+      </div>
+
+      <div class="flow-preview">
+        <b style="font-size:13px;color:#6b7280">流程预览（保存后就是这样跑的）</b>
+        <div class="flow-line" id="fp-line">
+          <span class="fp-node">销售<b>发起</b></span><span class="fp-arrow">→</span>
+          <span class="fp-node">销售经理<b>第1级审批</b></span><span class="fp-arrow">→</span>
+          <span class="fp-node" style="border-color:#f59e0b">总经理<b>第2级审批</b></span><span class="fp-arrow">→</span>
+          <span class="fp-node" style="background:#dcfce7">完成</span>
+        </div>
+        <div class="flow-line" id="fp-cond" style="margin-top:10px; color:#6b7280; font-size:12px">条件：金额 ≥ 5000 元才走审批，低于 5000 元直接生效</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="back()">返回</button>
+        <button class="btn primary" onclick="save()">保存并启用</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openWizard(mode){
+  document.getElementById('view-list').style.display='none';
+  document.getElementById('view-wizard').style.display='block';
+  document.getElementById('wizard-title').textContent = mode==='edit' ? '编辑审批流程' : '新建审批流程';
+}
+function back(){
+  document.getElementById('view-wizard').style.display='none';
+  document.getElementById('view-list').style.display='block';
+}
+function save(){ alert('【原型演示】真实系统里点击后：生成标准 Workflow + 固化到 site_setup（防升级丢失），全员刷新即生效。'); back(); }
+function toggleAmount(){
+  const on = document.getElementById('sw-amount').checked;
+  document.getElementById('amount-line').style.visibility = on ? 'visible' : 'hidden';
+}
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"商品\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"商品组\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"计量单位\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"海关编码\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"商品→商品组→计量单位→海关编码\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"商品\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"商品组\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"计量单位\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"海关编码\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

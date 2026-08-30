@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"生产计划\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"BOM 物料清单\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"生产任务单→生产进度\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"生产计划\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"工单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"BOM 物料清单\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

@@ -1,7 +1,7 @@
 {
  "app": "general_erp",
  "charts": [],
- "content": "[{\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"供应商\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购订单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购收货\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"验货单\", \"col\": 3}}]",
+ "content": "[{\"type\": \"header\", \"data\": {\"text\": \"供应商→采购订单→采购入库→来料检验\", \"col\": 12}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"供应商\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购订单\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购收货\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"采购发票\", \"col\": 3}}, {\"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"验货单\", \"col\": 3}}]",
  "creation": null,
  "custom_blocks": [],
  "docstatus": 0,

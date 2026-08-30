@@ -331,8 +331,8 @@ TO ORDER OF ISSUING BANK</p>
 
 FORMATS = [
     ("CI 商业发票 中英对照", "Sales Order", CI_HTML),
-    ("PL 装箱单 中英对照", "Shipment", PL_HTML),
-    ("BL 提单副本 中英对照", "Shipment", BL_HTML),
+    ("PL 装箱单 中英对照", "Export Shipment", PL_HTML),
+    ("BL 提单副本 中英对照", "Export Shipment", BL_HTML),
 ]
 
 
