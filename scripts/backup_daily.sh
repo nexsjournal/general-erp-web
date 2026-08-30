@@ -2,9 +2,10 @@
 # general-erp 每日数据备份（DB dump + 私有文件 + 站点配置）
 # 备份到项目外的 ~/erp-backups/<时间戳>/，保留 14 天。
 # launchd 每日 03:00 触发：~/Library/LaunchAgents/com.generalerp.daily-backup.plist
+# 环境变量：BENCH_DIR=bench 目录（默认取原作者机器路径），ERP_SITE=站点名（默认 general.erp.local）
 set -e
-BENCH_DIR="/Users/god/Desktop/项目/github/general-erp/bench"
-SITE="general.erp.local"
+BENCH_DIR="${BENCH_DIR:-/Users/god/Desktop/项目/github/general-erp/bench}"
+SITE="${ERP_SITE:-general.erp.local}"
 BACKUP_ROOT="$HOME/erp-backups"
 RETAIN_DAYS=14
 STAMP=$(date +%Y%m%d-%H%M%S)

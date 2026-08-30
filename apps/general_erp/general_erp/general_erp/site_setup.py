@@ -6,6 +6,7 @@
 约定：所有此类结构统一经本模块同步，挂 after_install + after_migrate 钩子，幂等可重复。
 """
 import frappe
+import json
 
 CUSTOMER_FIELDS = [
     ("is_public_pool", "公海客户", "Check", 1),
@@ -111,6 +112,52 @@ def sync_role_profiles():
             "roles": [{"role": rn} for rn in [name] + native],
         }).insert(ignore_permissions=True)
     frappe.db.commit()
+
+
+
+# 工作台任务数字卡（T-workbench，2026-08-29 commit df2b8c2 引入、此前仅存在于 DB 未固化）：
+# ERP工作台 workspace JSON 引用这 3 张卡，干净站点 migrate 时缺失会 Link 校验失败——
+# 这里按 workspace 口径幂等固化（存在则只对齐 show_full_number，不覆盖口径）。
+TASK_NUMBER_CARDS = [
+    ("待审批", {
+        "type": "Document Type",
+        "document_type": "Workflow Action",
+        "function": "Count",
+        "filters_json": json.dumps([["status", "=", "Open"], ["workflow_state", "like", "审批%"]]),
+        "color": "orange",
+    }),
+    ("未收款发票", {
+        "type": "Document Type",
+        "document_type": "Sales Invoice",
+        "function": "Sum",
+        "aggregate_function_based_on": "outstanding_amount",
+        "filters_json": json.dumps([["outstanding_amount", ">", 0]]),
+        "color": "red",
+    }),
+    ("待跟进客户", {
+        "type": "Document Type",
+        "document_type": "Customer",
+        "function": "Count",
+        "filters_json": json.dumps([["disabled", "=", 0], ["name", "not in",
+            ["select", "customer", "from", "tabCustomer Follow Up"]]]),
+        "color": "blue",
+    }),
+]
+
+
+def sync_number_cards():
+    """任务数字卡幂等固化（见 TASK_NUMBER_CARDS 注释）。"""
+    for name, spec in TASK_NUMBER_CARDS:
+        if frappe.db.exists("Number Card", name):
+            if not frappe.db.get_value("Number Card", name, "show_full_number"):
+                frappe.db.set_value("Number Card", name, "show_full_number", 1)
+            continue
+        card = frappe.new_doc("Number Card")
+        card.update({"label": name, "show_full_number": 1})
+        card.update(spec)
+        card.insert(ignore_permissions=True)
+    frappe.db.commit()
+    frappe.clear_cache()
 
 
 def sync_currency_display():
@@ -671,6 +718,31 @@ def sync_report_workspace():
     frappe.db.commit()
 
 
+
+# overwrite/user/user.py 覆盖体基于 frappe v16 user.py 复制（含 _User__new_password 私有名）。
+# frappe 升级后原生 validate 流程可能变化，这里比对源码指纹，变化时 log 警告提醒 diff 同步。
+_USER_OVERWRITE_BASELINE_HASH = "25535e50"  # 2026-08-30, 本机 frappe 的 User.validate 段 sha1[:8]; frappe 升级后需重新计算并 diff 同步覆盖体
+
+
+def check_user_overwrite_sync():
+    """无邮箱账号覆盖体 vs frappe 原生 user.py 指纹检查（T-user-login 维护约定）。"""
+    try:
+        import hashlib
+        import inspect
+        from frappe.core.doctype.user.user import User as _NativeUser
+        src = inspect.getsource(_NativeUser.validate)
+        h = hashlib.sha1(src.encode("utf-8")).hexdigest()[:8]
+        if h != _USER_OVERWRITE_BASELINE_HASH:
+            frappe.log_error(
+                "frappe 原生 User.validate 源码指纹变化（%s != baseline %s），"
+                "overwrite/user/user.py 覆盖体需 diff 同步（无邮箱账号 T-user-login）"
+                % (h, _USER_OVERWRITE_BASELINE_HASH),
+                title="User 覆盖体同步检查",
+            )
+    except Exception:
+        pass
+
+
 def sync_user_privacy():
     """用户隐私权限收紧（T13-D1，2026-08-30 用户拍板）：
     ① 普通 desk 用户（Desk User）收回 User 单据 read/select —— 用户列表页只能看到自己，
@@ -704,6 +776,37 @@ def sync_user_privacy():
     frappe.clear_cache()
 
 
+def sync_approval_wizard():
+    """T-approval-wizard 固化（幂等）：
+    ① Workflow 自定义字段（min_approval_amount / approval_timeout_hours）
+    ② 多级审批所需的 Workflow State + Workflow Action Master 记录"""
+    # ① Workflow 自定义字段
+    for fieldname, label, ftype, options in (
+        ("min_approval_amount", "小额免批阈值(元)", "Float", None),
+        ("approval_timeout_hours", "审批超时提醒(小时)", "Int", None),
+    ):
+        if frappe.db.get_value("Custom Field", {"dt": "Workflow", "fieldname": fieldname}):
+            continue
+        cf = frappe.new_doc("Custom Field")
+        cf.update({
+            "dt": "Workflow",
+            "fieldname": fieldname,
+            "label": label,
+            "fieldtype": ftype,
+            "options": options,
+            "read_only": 1,
+            "insert_after": "is_active",
+        })
+        cf.insert(ignore_permissions=True)
+    # ② 多级审批 Workflow State + Action Master（幂等）
+    for state_name in ("审批1", "审批2", "审批3"):
+        if not frappe.db.exists("Workflow State", state_name):
+            frappe.get_doc({"doctype": "Workflow State", "workflow_state_name": state_name}).insert(ignore_permissions=True)
+    for action_name in ("审批通过", "免批通过"):
+        if not frappe.db.exists("Workflow Action Master", action_name):
+            frappe.get_doc({"doctype": "Workflow Action Master", "workflow_action_name": action_name}).insert(ignore_permissions=True)
+
+
 def sync_erp_workbench_roles():
     """ERP工作台 Workspace 角色固化（T-workbench-viz，2026-08-30）：
     roles = 系统管理员 + 流程设计 —— 超管/管理员可见，业务员隐藏。
@@ -733,6 +836,7 @@ def sync_site_setup(with_seed=False):
     sync_roles()
     sync_role_profiles()
     sync_currency_display()
+    sync_number_cards()
     sync_user_login_settings()
     sync_brand()
     sync_homepage_default()
@@ -750,8 +854,10 @@ def sync_site_setup(with_seed=False):
     sync_lead_fields()
     sync_expense_workflow()
     sync_report_workspace()
+    check_user_overwrite_sync()
     sync_user_privacy()
     sync_erp_workbench_roles()
+    sync_approval_wizard()
     if with_seed:
         from general_erp.seed_data import seed_base_data
         if frappe.db.exists("DocType", "Port"):

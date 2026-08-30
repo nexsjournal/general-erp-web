@@ -419,7 +419,8 @@
 		applyTitle();
 		const obs = new MutationObserver(function () { setTimeout(applyTitle, 120); });
 		obs.observe(document.body, { childList: true, subtree: true, characterData: true });
-		setInterval(applyTitle, 2000);
+		// 路由切换兜底（原 2s 全局 interval 已移除）
+		if (frappe.router && frappe.router.on) frappe.router.on('route_change', function () { setTimeout(applyTitle, 200); });
 	};
 	if (document.readyState === "loading") {
 		document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 400); });
@@ -493,8 +494,8 @@
 		});
 	}
 
+	// 事件驱动：路由切换后等 workspace 渲染完再注入（原 3s 全局 interval 已移除）
 	if (frappe.router && frappe.router.on) { frappe.router.on('route_change', function () { setTimeout(inject, 1200); }); }
-	setInterval(function () { if (location.pathname.indexOf('/desk/') === 0) inject(); }, 3000);
 })();
 
 
@@ -535,9 +536,18 @@
 		});
 	}
 
-	setInterval(function () {
-		try { if (location.href.indexOf('/query-report/') !== -1) tryFill(); } catch (e) {}
-	}, 1500);
+	// 事件驱动（原 1500ms 全局 interval 已移除）：进 query-report 路由后短重试几次，
+	// 等过滤器异步就绪；填成功即停（tryFill 内 _busy + 已填检查天然幂等）
+	function onRoute() {
+		if (location.href.indexOf('/query-report/') === -1) return;
+		var tries = 0;
+		var t = setInterval(function () {
+			try { tryFill(); } catch (e) {}
+			if (++tries >= 6) clearInterval(t);
+		}, 800);
+	}
+	if (frappe.router && frappe.router.on) frappe.router.on('route_change', onRoute);
+	onRoute();
 })();
 
 // T-exchange-fmt: 「今日汇率」数字卡强制 2 位小数（6.718 → 6.72）。
@@ -563,7 +573,14 @@
 		const obs = new MutationObserver(function () {
 			if (tick) return;
 			tick = true;
-			setTimeout(function () { tick = false; fixExchangeCard(); }, 120);
+			setTimeout(function () {
+				tick = false;
+				fixExchangeCard();
+				// 目标卡片不存在（已离开含该卡片的页面）→ 断开 Observer 省资源
+				if (!document.querySelector('[number_card_name="今日汇率"], .number-card[data-number-card-name="今日汇率"]')) {
+					obs.disconnect();
+				}
+			}, 120);
 		});
 		obs.observe(document.body, { childList: true, subtree: true, characterData: true });
 	};

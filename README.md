@@ -112,6 +112,18 @@ bench --site general.erp.local reset-permissions --force    # 重置权限
 
 测试数据带「回归测试」前缀，跑完自动清理；环境自愈前置（站点/服务检查），约 20 秒。
 
+### 环境变量（多机器/多站点部署）
+
+| 变量 | 默认值 | 用途 |
+|---|---|---|
+| `BENCH` | `<仓库根>/bench` | regression.sh 的 bench 目录 |
+| `ERP_SITE` | `general.erp.local` | regression.sh / 回归测试用的站点名 |
+| `BENCH_DIR` | 原作者机器路径（见脚本内注释） | backup_daily.sh 的 bench 目录 |
+| `ERP_SITE` | `general.erp.local` | backup_daily.sh 的站点名 |
+
+例：`BENCH=/opt/erp/bench ERP_SITE=erp.example.com ./scripts/regression.sh`
+
+
 ### 用户、岗位与权限
 
 - 建号在「组织管理 → 员工/用户」，**岗位（Role Profile）自动带整套角色**：销售 / 外贸专员 / 采购 / 库存 / 财务 / 总经理 / 系统管理员（超管=全套原生角色）。
