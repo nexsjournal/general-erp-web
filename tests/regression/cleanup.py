@@ -4,7 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from common import *  # noqa
 
-CHAIN = ["Payment Entry", "Sales Invoice", "Purchase Invoice", "Delivery Note", "Purchase Receipt", "Sales Order", "Purchase Order", "Quotation"]
+CHAIN = ["Payment Entry", "Sales Invoice", "Purchase Invoice", "Delivery Note", "Purchase Receipt", "Sales Order", "Purchase Order", "Quotation", "Production Plan"]
 MISC = ["Export Shipment", "Trade Document", "Work Check", "Bulk Email", "Announcement", "Mail", "Customer Follow Up", "Opportunity", "Lead", "Expense Reimbursement", "Work Order", "BOM", "Employee", "Customer", "HS Code", "Incoterms", "Service Provider", "Item"]
 
 

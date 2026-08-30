@@ -51,7 +51,21 @@ doc_events = {
     "Lead": {
         # 网站留言频控（T2-18）：同 IP 每小时最多 5 条
         "before_insert": "general_erp.general_erp.crm_utils.website_lead_rate_limit",
-    }
+    },
+    # T14: 审批工作流防绕过（frappe v16 无 doc_status=1 的"审批中"映射时，
+    # 原生 Submit 会把状态跳到"已审批"绕过审批人；收货链路不查 workflow_state 可让
+    # 未审批 PO 过账库存）——守卫实现在 general_erp.approval_guard
+    "Purchase Order": {
+        "before_submit": "general_erp.general_erp.approval_guard.guard_before_submit",
+        "before_save": "general_erp.general_erp.approval_guard.guard_before_save",
+    },
+    "Production Plan": {
+        "before_submit": "general_erp.general_erp.approval_guard.guard_before_submit",
+        "before_save": "general_erp.general_erp.approval_guard.guard_before_save",
+    },
+    "Purchase Receipt": {
+        "validate": "general_erp.general_erp.approval_guard.guard_purchase_receipt",
+    },
 }
 
 # 工作台入口（在 Desk 首页展示自定义页面，可选）
